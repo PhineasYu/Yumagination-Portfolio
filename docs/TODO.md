@@ -26,6 +26,8 @@
 
 ## Phase 0 · 先让它活着（10 分钟）
 
+- [ ] **0.0 打开 GitHub Pages（只有你能点，1 分钟）**：浏览器打开 https://github.com/PhineasYu/Yumagination-Portfolio/settings/pages → 「Build and deployment」下的 Source 选 **GitHub Actions**（不用选别的，不用保存按钮）。然后打开 https://github.com/PhineasYu/Yumagination-Portfolio/actions ，点最新一条失败的 “Deploy portfolio to GitHub Pages” → 右上角 **Re-run all jobs**。一两分钟后变绿。做完的标志：下面 0.1 的链接能打开。
+
 - [ ] **0.1** 打开上面的线上地址，用手机也打开一次。做完的标志：你能在手机上看到首页。
 - [ ] **0.2** 把链接发给自己（微信/邮件均可）。做完的标志：链接在你收件箱里。 *（先不给别人。）*
 
