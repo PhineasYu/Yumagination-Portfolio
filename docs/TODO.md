@@ -81,12 +81,12 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 每项只做一件事。
 
 - [ ] **3.1 Sushi Jerash**：给 Claude 线上网址 + 手机截图 3–5 张（菜单、购物车、结账、Telegram 通知、后台）。
-- [ ] **3.2 Dossier**：登录后的主界面截图 2 张（时间线、档案）。只用虚构孩子的数据，不要出现真实孩子。
+- [ ] **3.2 Dossier**：登录后的主界面截图 2 张（时间线、档案）或一段录屏。只用虚构孩子的数据，不要出现真实孩子。另外：Dossier 的 Lovable 已发布网址现在显示 “Build incomplete”，需要在 Lovable 里重新发布一次。
 - [ ] **3.3 Collaboration Canvas**：原型链接 + 4–6 张图。
 - [ ] **3.4 Voi**：头盔概念图 / App 流程截图（先确认 Voi 允许公开，不确定就跳过）。
 - [ ] **3.5 头像/照片**：要不要在关于页放一张照片？（可选）
 
-放图方法（Claude 来做）：图放进 `assets/shots/`，在 `data.js` 对应项目里写 `shot: "assets/shots/xxx.png"`。
+放图方法（Claude 来做）：图放进 `assets/shots/`，在 `assets/js/projects.js` 对应项目的 `sections` 里用 `IMG("assets/shots/xxx.png", "描述", { frame: "browser" })`；录屏放 `assets/media/`，用 `V("名字")`。有 Sushi Jerash 线上网址时，可以直接加一个 `embed` 或用 `scripts/record-demos.mjs` 录一段。
 
 ## Phase 4 · 定稿（30 分钟）
 

@@ -9,10 +9,11 @@ python3 -m http.server 8000   # 然后打开 http://localhost:8000
 加 `?draft` 可以看到「分享前待确认」的红色虚线提示：`http://localhost:8000/?draft`
 
 ## 改内容
-- 加/改项目：只改 `assets/js/data.js`。每个项目一个对象，中英文各写一份。
-- 换封面：把截图放进 `assets/shots/`，在项目里写 `shot: "assets/shots/xxx.png"`；没有截图就用 `cover:` 的生成封面（`assets/js/covers.js`）。
-- 改审美：`assets/css/style.css` 顶部的 `:root` 变量（颜色、字体、间距）。
-- 首页 hero 文案、工具列表、获奖、方法论、关于：都在 `data.js` 顶部几段。
+- 加/改项目：只改 `assets/js/projects.js`。每个项目一个对象：首页卡片（`tile`）、案例页标题/导语/首图（`hero`）、按「短文字 + 一张图/视频」交替的 `sections`。中英文各写一份。
+- 媒体类型：`video`（录屏）、`img`、`embed`（内嵌在线应用，装进浏览器/手机框）、`motion`（示意动画，见 `assets/js/motions.js`）、`stats`、`steps`。每个媒体都会自动打上「录自运行的应用 / 示意图 / 在线可玩」标签，保证诚实。
+- 录新的演示视频：`scripts/record-demos.mjs`（Playwright 录真实应用 + ffmpeg 压缩）。
+- 换主题色/字体：`assets/css/style.css` 顶部 `:root`；首屏丝绸背景配色在 `assets/js/silk.js` 的着色器里。
+- 首页文案、获奖、方法论、关于、工具：`assets/js/data.js`。
 
 ## 免费上线（先用免费网址，最后再换你自己的域名）
 **GitHub Pages（推荐，已配好）**
