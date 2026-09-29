@@ -1,0 +1,33 @@
+# Yumagination Portfolio
+
+纯静态网站（HTML / CSS / JS，无构建步骤），中英双语，内容全部来自 `assets/js/data.js`。
+
+## 本地预览
+```bash
+python3 -m http.server 8000   # 然后打开 http://localhost:8000
+```
+加 `?draft` 可以看到「分享前待确认」的红色虚线提示：`http://localhost:8000/?draft`
+
+## 改内容
+- 加/改项目：只改 `assets/js/data.js`。每个项目一个对象，中英文各写一份。
+- 换封面：把截图放进 `assets/shots/`，在项目里写 `shot: "assets/shots/xxx.png"`；没有截图就用 `cover:` 的生成封面（`assets/js/covers.js`）。
+- 改审美：`assets/css/style.css` 顶部的 `:root` 变量（颜色、字体、间距）。
+- 首页 hero 文案、工具列表、获奖、方法论、关于：都在 `data.js` 顶部几段。
+
+## 免费上线（先用免费网址，最后再换你自己的域名）
+**GitHub Pages（推荐，已配好）**
+1. 把这个分支合并进 `main`。
+2. 仓库 Settings → Pages → Source 选 **GitHub Actions**。
+3. 几分钟后得到 `https://phineasyu.github.io/Yumagination-Portfolio/`，这就是可分享的链接。
+
+备选：Netlify Drop（把文件夹拖进 app.netlify.com/drop）或 Cloudflare Pages（连接仓库，无构建命令，输出目录 `/`）。
+
+## 之后接自己的域名
+买域名 → 在托管平台的 Domains 里添加 → 按提示在域名注册商处加一条 CNAME/A 记录 → 等 DNS 生效。三家都自动配 HTTPS。
+
+## 自动盘点 Claude Code 项目
+在**你自己的电脑**上运行（云端读不到你本机的会话记录）：
+```bash
+node scripts/harvest-claude-code.mjs
+```
+生成 `harvest-output/claude-code-projects.md`，列出每个项目的路径、仓库、会话数、时间范围、首条提示词。输出已被 `.gitignore`，分享前请自己先看一遍。
