@@ -12,7 +12,8 @@ python3 -m http.server 8000   # 然后打开 http://localhost:8000
 - 加/改项目：只改 `assets/js/projects.js`。每个项目一个对象：首页卡片（`tile`）、案例页标题/导语/首图（`hero`）、按「短文字 + 一张图/视频」交替的 `sections`。中英文各写一份。
 - 媒体类型：`video`（录屏）、`img`、`embed`（内嵌在线应用，装进浏览器/手机框）、`motion`（示意动画，见 `assets/js/motions.js`）、`stats`、`steps`。每个媒体都会自动打上「录自运行的应用 / 示意图 / 在线可玩」标签，保证诚实。
 - 录新的演示视频：`scripts/record-demos.mjs`（Playwright 录真实应用 + ffmpeg 压缩）。
-- 换主题色/字体：`assets/css/style.css` 顶部 `:root`；首屏丝绸背景配色在 `assets/js/silk.js` 的着色器里。
+- 换主题色/字体：`assets/css/style.css` 顶部 `:root`（现在是 Tiffany Blue）；首屏「呼吸光圈」动效在 `assets/js/breath.js`（一次呼吸 10 秒，可改）。
+- 摄影 Gallery：`gallery.html` 是独立页面。把照片放进 `assets/gallery/originals/<展厅名>/`，运行 `node scripts/add-photos.mjs`（需要 `npm i -D sharp`）就会生成缩略图和 `assets/js/gallery-data.js`；`gallery.html?demo` 可预览版式。
 - 首页文案、获奖、方法论、关于、工具：`assets/js/data.js`。
 
 ## 免费上线（先用免费网址，最后再换你自己的域名）

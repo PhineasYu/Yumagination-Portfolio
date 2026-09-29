@@ -13,7 +13,7 @@
   const arr = (o) => (o && (o[lang] || o.en)) || [];
   const STR = {
     letsTalk: { en: "Let's talk", zh: "聊一聊" }, viewWork: { en: "View work", zh: "看作品" },
-    work: { en: "Work", zh: "作品" }, workLede: { en: "A selection of work across AI-native products, hackathon prototypes, and research-led design. Most of them run: watch them move, or open them.", zh: "AI 原生产品、黑客松原型和研究型设计的精选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
+    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "A selection of work across AI-native products, hackathon prototypes, and research-led design. Most of them run: watch them move, or open them.", zh: "AI 原生产品、黑客松原型和研究型设计的精选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
     method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" },
     recog: { en: "Recognition", zh: "获奖与认可" }, tools: { en: "Working with", zh: "常用工具" },
     all: { en: "All", zh: "全部" },
@@ -84,7 +84,7 @@
     const P = D.projects, h = D.person.headline[lang];
     return `
     <section class="hero" id="top">
-      <canvas class="silk" aria-hidden="true"></canvas>
+      <canvas class="breath" aria-hidden="true"></canvas>
       <div class="hero-grid">
         <p class="kick mono"><span>${esc(t(D.person.role))}</span><span>${esc(t(D.person.location))}</span><span>Portfolio 2026</span></p>
         <h1><span class="l1">${esc(h[0])}</span><span class="l2">${esc(h[1])}</span></h1>
@@ -107,6 +107,8 @@
       </div>
     </section>
 
+    ${galleryTeaser()}
+
     <div class="tools mono" aria-label="${esc(s("tools"))}"><div class="tools-track">${[...D.tools, ...D.tools].map((x) => `<span>${esc(x)}</span>`).join("")}</div></div>
 
     <section class="section" id="recognition">
@@ -118,6 +120,20 @@
     ${moreBlock()}
     ${aboutBlock()}
     ${contactBlock()}`;
+  }
+
+  function galleryTeaser() {
+    const G = window.GALLERY, ph = G && G.series ? G.series.flatMap((r) => r.photos) : [];
+    if (ph.length < 3) return "";
+    const pick = ph.slice(0, 4);
+    return `
+    <section class="section" id="gallery">
+      <div class="sec-head"><h2 class="sec-title">${esc(t(G.title))}</h2><p class="sec-lede">${esc(t(G.statement))}</p></div>
+      <a class="teaser" href="gallery.html" aria-label="${esc(t(G.title))}">
+        ${pick.map((p) => `<span class="tz"><img src="${esc(p.thumb || p.file)}" alt="" loading="lazy"></span>`).join("")}
+      </a>
+      <p style="margin-top:18px"><a class="btn-text" href="gallery.html"><span class="arrow">↳</span> ${esc(t(D.person.role) && (lang === "zh" ? "进入摄影展厅" : "Enter the gallery"))}</a></p>
+    </section>`;
   }
 
   function methodBlock() {
@@ -233,7 +249,7 @@
       $$(".chip").forEach((x) => x.setAttribute("aria-pressed", x === c));
       $$(".proj").forEach((r) => (r.hidden = !(c.dataset.cat === "all" || r.dataset.cats.split(" ").includes(c.dataset.cat))));
     }));
-    if (window.startSilk) window.startSilk($("canvas.silk"));
+    if (window.startBreath) window.startBreath($("canvas.breath"));
 
     // reveal on scroll
     io && io.disconnect(); vio && vio.disconnect();

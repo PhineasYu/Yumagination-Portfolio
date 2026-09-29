@@ -82,11 +82,18 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 
 每项只做一件事。
 
+- [ ] **3.0 摄影 Gallery 的照片（这是你最重视的一页，优先做）**：Gallery 页面已经做好了（`gallery.html`，顶栏「Gallery」），现在缺的只有你的照片。任选一种给 Claude：
+  1. 把 20–40 张最满意的照片放进 Google Drive 的一个文件夹，告诉 Claude 文件夹名，Claude 用 Drive 下载并处理（先试 1 张确认能下载）；
+  2. 直接在 Claude 对话里发照片；
+  3. 自己电脑上：把照片放进 `assets/gallery/originals/<展厅名>/`（展厅名前加 01-、02- 决定顺序），运行 `node scripts/add-photos.mjs`，再提交推送。
+  Claude 之后问你三件小事：每个展厅叫什么名字（例如「城市」「人」「光」）；有没有想写的说明牌（标题/地点/年份，可以全部留空）；Gallery 页顶部那句话是否满意（现在是：「摄影是我坚持最久的爱好。这里是多年来随身带着相机拍下的照片。」）。
+  说明：脚本会把照片缩小成网页尺寸并去掉定位等隐私信息，原图不会上传；预览版式可打开 `gallery.html?demo`。
+
 - [ ] **3.1 Sushi Jerash**：给 Claude 线上网址 + 手机截图 3–5 张（菜单、购物车、结账、Telegram 通知、后台）。
 - [ ] **3.2 Dossier**：登录后的主界面截图 2 张（时间线、档案）或一段录屏。只用虚构孩子的数据，不要出现真实孩子。另外：Dossier 的 Lovable 已发布网址现在显示 “Build incomplete”，需要在 Lovable 里重新发布一次。
 - [ ] **3.3 Collaboration Canvas**：原型链接 + 4–6 张图。
 - [ ] **3.4 Voi**：头盔概念图 / App 流程截图（先确认 Voi 允许公开，不确定就跳过）。
-- [ ] **3.5 头像/照片**：要不要在关于页放一张照片？（可选）
+- [ ] **3.5 头像/个人照片**：要不要在关于页放一张照片？（可选）
 
 放图方法（Claude 来做）：图放进 `assets/shots/`，在 `assets/js/projects.js` 对应项目的 `sections` 里用 `IMG("assets/shots/xxx.png", "描述", { frame: "browser" })`；录屏放 `assets/media/`，用 `V("名字")`。有 Sushi Jerash 线上网址时，可以直接加一个 `embed` 或用 `scripts/record-demos.mjs` 录一段。
 
