@@ -1,0 +1,470 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revive · Multi-purchase Cart & Checkout</title>
+<style>
+  :root{
+    --ink:#2b3330; --muted:#7a8784; --line:#e6eaec; --line2:#eef1f3;
+    --page:#eef1f4; --card:#ffffff;
+    --teal-btn:#3f7d79; --teal-btn-h:#346a66; --teal:#3b5754;
+    --green:#4ea36a; --green-soft:#ecf5ee; --green-deep:#9bcf76; --green-pill:#bfe39a;
+    --badge:#e8338a; --del:#d6455c; --strike:#9aa3a0; --surface:#f3f5f6;
+    --bezel:#1c2625;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--page);-webkit-font-smoothing:antialiased;min-height:100vh}
+
+  /* prototype harness bar */
+  .harness{display:flex;align-items:center;gap:14px;background:#1f2a29;color:#cfd9d6;font-size:12.5px;padding:7px 18px}
+  .harness .tag{font-weight:800;letter-spacing:.04em;color:#9fb3af}
+  .harness .sp{flex:1}
+  .htoggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-weight:600}
+  .switch{width:34px;height:20px;border-radius:20px;background:#46544f;position:relative;transition:background .2s}
+  .switch::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .2s}
+  .htoggle.on .switch{background:var(--green-deep)}
+  .htoggle.on .switch::after{transform:translateX(14px)}
+  .hbtn{border:1px solid #3c4a47;background:transparent;color:#cfd9d6;font-weight:600;font-size:12px;padding:5px 12px;border-radius:16px;cursor:pointer}
+  .hbtn:hover{border-color:#6f827e;color:#fff}
+
+  /* faithful revive header */
+  .topbar{background:#fff;border-bottom:1px solid var(--line);position:relative}
+  .topbar .inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;padding:14px 24px;position:relative}
+  .logo{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .logo .row{display:flex;align-items:center;gap:9px;font-weight:800;font-size:26px;letter-spacing:-.02em;color:#1c2625}
+  .logo .mark{width:30px;height:30px;border-radius:50%;background:var(--bezel);display:grid;place-items:center}
+  .logo .mark svg{width:17px;height:17px}
+  .logo .dot{width:7px;height:7px;border-radius:50%;background:var(--green-deep);margin-left:-7px;margin-bottom:13px}
+  .logo .sub{font-size:12px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+  .topbar .right{position:absolute;right:24px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:18px}
+  .cart-ic{position:relative;font-size:20px;color:#2b3330}
+  .cart-ic .b{position:absolute;top:-7px;right:-9px;background:var(--badge);color:#fff;font-size:11px;font-weight:700;width:18px;height:18px;border-radius:50%;display:grid;place-items:center}
+  .burger{font-size:22px;color:#2b3330}
+
+  /* stage */
+  .stage{max-width:1280px;margin:0 auto;padding:28px 24px 70px}
+  .grid{display:grid;grid-template-columns:1fr 340px;gap:26px;align-items:start}
+  .card{background:var(--card);border-radius:6px;padding:34px 38px}
+  @media(max-width:920px){ .grid{grid-template-columns:1fr} .card{padding:24px 22px} }
+
+  h1.cart-title{font-size:30px;font-weight:800;margin:0 0 22px;letter-spacing:-.01em}
+
+  .notice{display:flex;gap:11px;align-items:flex-start;background:var(--green-soft);border-radius:10px;padding:14px 16px;margin-bottom:20px}
+  .notice .i{flex:0 0 auto;width:20px;height:20px;border-radius:50%;border:1.6px solid var(--green);color:var(--green);display:grid;place-items:center;font-size:12px;font-weight:800;font-style:italic;margin-top:1px}
+  .notice .t{font-size:14.5px;line-height:1.5}
+  .notice .t b{font-weight:800}
+  .notice.plain{background:transparent;padding:14px 0;border-bottom:1px solid var(--line)}
+
+  .seller-h{font-size:22px;font-weight:800;margin:26px 0 14px}
+  .row-item{display:flex;gap:20px;padding:6px 0 16px;position:relative}
+  .thumb{width:150px;height:160px;border-radius:8px;flex:0 0 auto;display:grid;place-items:center;background:var(--surface)}
+  .thumb.sm{width:96px;height:104px}
+  .thumb svg{width:54px;height:54px;opacity:.65}
+  .thumb.sm svg{width:38px;height:38px}
+  .it-main{flex:1;min-width:0}
+  .it-nm{font-size:19px;font-weight:800;margin:2px 0 8px}
+  .it-pr{font-size:15px}
+  .it-pr .now{font-weight:700}
+  .it-pr .was{color:var(--strike);text-decoration:line-through;margin-left:8px}
+  .it-cond{font-size:14px;color:var(--ink);margin-top:9px;display:flex;align-items:center;gap:7px}
+  .it-cond .ci{width:17px;height:17px;border-radius:50%;border:1.5px solid #3b82c4;color:#3b82c4;display:grid;place-items:center;font-size:10px;font-style:italic;font-weight:800}
+  .del{position:absolute;top:6px;right:2px;color:var(--del);background:none;border:0;cursor:pointer;font-size:18px;line-height:1}
+  .del:hover{opacity:.7}
+
+  .ship-box{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border-radius:8px;padding:15px 18px;font-size:15px;margin:8px 0 16px}
+  .ship-box b{font-weight:800}
+
+  .btn{display:block;width:100%;text-align:center;background:var(--teal-btn);color:#fff;border:0;border-radius:26px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;font-family:inherit}
+  .btn:hover{background:var(--teal-btn-h)}
+  .btn.dark{background:var(--bezel);border-radius:12px}
+  .btn.dark:hover{background:#000}
+  .seller-sep{border:0;border-top:1px solid var(--line);margin:24px 0}
+  .linkbtn{background:none;border:0;color:var(--teal-btn);font-weight:700;font-size:14px;cursor:pointer;font-family:inherit;padding:12px;width:100%}
+  .back{background:none;border:0;color:var(--muted);font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;padding:0 0 14px;display:inline-flex;gap:6px;align-items:center}
+  .back:hover{color:var(--ink)}
+
+  /* order summary */
+  .summary h2{font-size:24px;font-weight:800;margin:0 0 18px}
+  .sum-row{display:flex;justify-content:space-between;font-size:15px;padding:7px 0;color:var(--ink)}
+  .sum-row .lbl{color:#4a5552}
+  .sum-div{border:0;border-top:1px solid var(--line);margin:12px 0}
+  .sum-total{display:flex;justify-content:space-between;font-size:19px;font-weight:800;padding-top:6px}
+  .sum-note{font-size:12.5px;color:var(--muted);margin-top:14px;line-height:1.5}
+
+  /* progress (the signature addition) */
+  .prog{display:flex;align-items:center;gap:14px;margin:0 0 22px}
+  .chip{background:var(--surface);color:var(--teal);font-weight:800;font-size:14px;padding:7px 15px;border-radius:22px;white-space:nowrap}
+  .dots{display:flex;gap:7px;align-items:center}
+  .dots i{width:10px;height:10px;border-radius:50%;background:#cdd7d3;transition:.25s}
+  .dots i.done{background:var(--green-deep)}
+  .dots i.now{background:var(--teal);transform:scale(1.3)}
+  .prog .rest{font-size:13px;color:var(--muted);margin-left:auto}
+
+  .pay-row{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--line);border-radius:12px;padding:15px 18px;font-size:15px;font-weight:600;margin:18px 0 6px}
+  .pay-row .bid{display:flex;align-items:center;gap:11px}
+  .pay-row .bid .b{width:28px;height:28px;border-radius:7px;background:#193e4d;color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+
+  .flash{display:flex;gap:11px;align-items:flex-start;background:#fbf3e8;border:1px solid #e7c79d;color:#8a5a22;border-radius:10px;padding:13px 15px;font-size:14px;line-height:1.5;margin-bottom:18px}
+  .fail{background:#fbecec;border:1px solid #e3aeae;color:#8e3a3a;border-radius:10px;padding:15px 16px;font-size:15px;line-height:1.55;margin:6px 0 18px}
+  .fail b{display:block;margin-bottom:3px}
+
+  /* transition + done (centered) */
+  .center-wrap{max-width:620px;margin:0 auto}
+  .check{width:74px;height:74px;border-radius:50%;background:var(--green-pill);color:var(--teal);display:grid;place-items:center;margin:6px auto 18px;animation:pop .4s cubic-bezier(.2,1.4,.4,1)}
+  .check svg{width:36px;height:36px}
+  @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+  .ct{text-align:center}
+  .ct h2{font-size:27px;font-weight:800;margin:0}
+  .ct p{font-size:15px;color:var(--muted);margin:8px 0 22px}
+  .remain{background:var(--surface);border-radius:12px;padding:8px 18px;margin-bottom:22px;text-align:left}
+  .remain .r{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .remain .r:last-child{border-bottom:0}
+  .remain .r .nm{font-weight:700;font-size:15px}
+  .remain .r .sl{font-size:13px;color:var(--muted)}
+  .remain .r .pr{margin-left:auto;font-weight:700}
+
+  .sumcard{background:var(--surface);border-radius:12px;padding:6px 20px;margin:6px 0 6px;text-align:left}
+  .sline{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .sline:last-child{border-bottom:0}
+  .sline .k b{font-weight:800}
+  .sline .k span{color:var(--muted);font-size:12.5px;margin-left:8px}
+  .sline .v{font-weight:800;color:var(--teal)}
+  .thanks{text-align:center;color:var(--muted);font-size:14px;margin:18px 0 6px}
+
+  /* BankID overlay */
+  .overlay{position:fixed;inset:0;background:rgba(28,38,37,.5);display:none;align-items:center;justify-content:center;z-index:40}
+  .overlay.show{display:flex;animation:fade .2s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .sheet{background:#fff;width:340px;max-width:90vw;border-radius:18px;padding:28px 26px 26px;text-align:center;animation:up .3s cubic-bezier(.2,.8,.2,1)}
+  @keyframes up{from{transform:translateY(24px)}to{transform:translateY(0)}}
+  .sheet .b{width:52px;height:52px;border-radius:13px;background:#193e4d;color:#fff;font-weight:800;font-size:15px;display:grid;place-items:center;margin:0 auto 14px}
+  .sheet h4{margin:0 0 5px;font-size:18px}
+  .sheet p{margin:0 0 20px;font-size:14px;color:var(--muted)}
+  .spinner{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--teal);border-radius:50%;margin:0 auto 10px;animation:spin .8s linear infinite;display:none}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* presenter note */
+  .note{position:fixed;right:20px;bottom:20px;width:340px;max-width:calc(100vw - 40px);background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 18px 40px -16px rgba(28,38,37,.4);z-index:30}
+  .note.hidden{display:none}
+  .note .eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-btn)}
+  .note h3{font-size:16px;margin:7px 0 0;letter-spacing:-.01em}
+  .note .b{font-size:13px;line-height:1.55;color:#3b4746;margin-top:9px}
+  .note .b b{color:var(--ink)}
+  .note .heur{font-size:11.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:11px;margin-top:12px}
+  .note .heur b{color:var(--ink)}
+  .note .sim{border-top:1px dashed var(--line);margin-top:12px;padding-top:11px}
+  .note .sim .lbl{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  .note .sim button{display:block;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:12px;color:var(--ink);cursor:pointer;margin-bottom:7px;font-family:inherit}
+  .note .sim button:hover{border-color:#b06a2c;color:#b06a2c}
+  .note .rail{display:flex;gap:5px;margin-top:13px}
+  .note .rail i{flex:1;height:4px;border-radius:3px;background:var(--line)}
+  .note .rail i.active{background:var(--teal-btn)}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="harness">
+  <span class="tag">PROTOTYPE</span><span>Revive multi-purchase · cart + stepped checkout</span>
+  <span class="sp"></span>
+  <div class="htoggle on" id="noteToggle"><span>Design notes</span><span class="switch"></span></div>
+  <button class="hbtn" id="restart">Start over</button>
+</div>
+
+<div class="topbar">
+  <div class="inner">
+    <div class="logo">
+      <div class="row"><span class="mark"><svg viewBox="0 0 24 24" fill="none"><path d="M6 17V9a3 3 0 0 1 6 0v6a3 3 0 0 0 6 0V7" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg></span>revive<span class="dot"></span></div>
+      <div class="sub">SECONDHAND</div>
+    </div>
+    <div class="right">
+      <span class="cart-ic">&#128722;<span class="b" id="cartBadge">3</span></span>
+      <span class="burger">&#9776;</span>
+    </div>
+  </div>
+</div>
+
+<div class="stage" id="stage"></div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet">
+    <div class="spinner" id="spin"></div>
+    <div class="b">BID</div>
+    <h4 id="sheeth">Confirm with BankID</h4>
+    <p id="sheetp">Open the BankID app to sign this purchase.</p>
+    <button class="btn dark" id="bidConfirm">Open BankID</button>
+  </div>
+</div>
+
+<div class="note" id="note">
+  <div class="eyebrow" id="nEye">Touchpoint</div>
+  <h3 id="nTitle"></h3>
+  <div class="b" id="nBody"></div>
+  <div class="heur" id="nHeur"></div>
+  <div class="sim" id="nSim"></div>
+  <div class="rail" id="rail"><i data-s="cart"></i><i data-s="checkout"></i><i data-s="transition"></i><i data-s="done"></i></div>
+</div>
+
+<script>
+(function(){
+  var goblet='<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h12l-1.5 7a4.5 4.5 0 0 1-9 0L6 3zM12 14v5M8 21h8" stroke="#5d6f6b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var mug='<svg viewBox="0 0 24 24" fill="none"><path d="M4 6h12v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V6zM16 8h2.5a2.5 2.5 0 0 1 0 5H16" stroke="#5d6f6b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  function glyph(t){return t==="mug"?mug:goblet;}
+
+  var SELLERS;
+  function seed(){
+    SELLERS=[
+      {name:"anette", status:"pending", ship:50, ref:null, items:[
+        {id:"a1", nm:"Amazon trophy", g:"goblet", tint:"#dfe3f5", price:699, was:899}
+      ]},
+      {name:"Monica", status:"pending", ship:50, ref:null, items:[
+        {id:"m1", nm:"Arabia – Paradise Mug 35 cl", g:"mug", tint:"#efe7da", price:218, was:335},
+        {id:"m2", nm:"Kosta Boda bowl", g:"goblet", tint:"#e4ece4", price:699, was:899}
+      ]}
+    ];
+  }
+  var state;
+  function reset(){ seed(); state={screen:"cart", cur:0, flash:null, fail:false}; render(); }
+
+  function money(n){ return n.toLocaleString("en-US")+" SEK"; }
+  function activeSellers(){ return SELLERS.filter(function(s){return s.status!=="removed";}); }
+  function pendingSellers(){ return SELLERS.filter(function(s){return s.status==="pending";}); }
+  function doneSellers(){ return SELLERS.filter(function(s){return s.status==="done";}); }
+  function sItems(s){ return s.items.filter(function(i){return !i.removed;}); }
+  function sSub(s){ return sItems(s).reduce(function(a,b){return a+b.price;},0); }
+  function sTotal(s){ return sSub(s)+s.ship; }
+  function N(){ return activeSellers().length; }
+  function X(){ return doneSellers().length+1; }
+  function badge(){ return activeSellers().reduce(function(a,s){return a+sItems(s).length;},0); }
+  function refOf(i){ var h="ABCDEF0123456789"; var r="#"; for(var k=0;k<4;k++) r+=h[(i*7+k*3)%16]; return r; }
+
+  // ---------- CART ----------
+  function cart(){
+    var sub=activeSellers().reduce(function(a,s){return a+sSub(s);},0);
+    var shipTot=activeSellers().reduce(function(a,s){return a+s.ship;},0);
+    var n=N();
+    var blocks=activeSellers().map(function(s){
+      var its=sItems(s).map(function(it){
+        return '<div class="row-item">'+
+          '<div class="thumb" style="background:'+it.tint+'">'+glyph(it.g)+'</div>'+
+          '<div class="it-main"><div class="it-nm">'+it.nm+'</div>'+
+          '<div class="it-pr"><span class="now">'+money(it.price)+'</span><span class="was">'+money(it.was)+'</span></div>'+
+          '<div class="it-cond"><span>Condition: A - Mint condition</span><span class="ci">i</span></div></div>'+
+          '<button class="del" data-act="rm" data-it="'+it.id+'">&#128465;</button></div>';
+      }).join("");
+      return '<div class="seller-h">Seller: '+s.name+'</div>'+its+
+        '<div class="ship-box"><span>Shipping cost for this seller</span><b>'+money(s.ship)+'</b></div>'+
+        '<button class="btn" data-act="checkout" data-seller="'+s.name+'">Go to checkout</button>'+
+        '<hr class="seller-sep">';
+    }).join("");
+
+    var left='<div class="card"><h1 class="cart-title">Your shopping cart</h1>'+
+      '<div class="notice"><span class="i">i</span><span class="t">You&#39;re buying from <b>'+n+' sellers</b>, so this will be <b>'+n+' separate purchases</b> &mdash; we&#39;ll guide you through each one, one at a time.</span></div>'+
+      blocks+'</div>';
+
+    var right='<div class="card summary"><h2>Order summary</h2>'+
+      '<div class="sum-row"><span class="lbl">Subtotal</span><span>'+money(sub)+'</span></div>'+
+      '<div class="sum-row"><span class="lbl">Shipping x '+n+' sellers</span><span>'+money(shipTot)+'</span></div>'+
+      '<hr class="sum-div">'+
+      '<div class="sum-total"><span>Total</span><span>'+money(sub+shipTot)+'</span></div>'+
+      '<div class="sum-note">You&#39;ll complete '+n+' purchases (one per seller). The total above is what you&#39;ll pay across all of them.</div></div>';
+
+    return '<div class="grid">'+left+right+'</div>';
+  }
+
+  // ---------- CHECKOUT (one seller = one purchase) ----------
+  function checkout(){
+    var s=activeSellers()[ activeSellers().findIndex(function(x){return x.name===state.cur;}) ] || pendingSellers()[0];
+    if(!s){ state.screen= doneSellers().length? "done":"cart"; return state.screen==="done"?done():cart(); }
+    state.cur=s.name;
+    var n=N(), x=X();
+    var dots="";
+    for(var k=1;k<=n;k++){ dots+='<i class="'+(k<x?"done":(k===x?"now":""))+'"></i>'; }
+    var its=sItems(s).map(function(it){
+      return '<div class="row-item"><div class="thumb sm" style="background:'+it.tint+'">'+glyph(it.g)+'</div>'+
+        '<div class="it-main"><div class="it-nm">'+it.nm+'</div>'+
+        '<div class="it-pr"><span class="now">'+money(it.price)+'</span></div>'+
+        '<div class="it-cond"><span>Condition: A - Mint condition</span><span class="ci">i</span></div></div></div>';
+    }).join("");
+
+    var flash = state.flash? '<div class="flash"><span class="i" style="border:0;color:#b06a2c">&#9888;</span><span>'+state.flash+'</span></div>':"";
+
+    var body;
+    if(state.fail){
+      body='<div class="fail"><b>Purchase '+x+' (Seller: '+s.name+') didn&#39;t go through.</b>Your other purchases are unaffected. Want to try this one again?</div>'+
+        its+
+        '<button class="btn dark" data-act="retry">Try again</button>'+
+        '<button class="linkbtn" data-act="skipseller">Skip this seller for now</button>';
+    } else {
+      body=its+
+        '<div class="pay-row"><span class="bid"><span class="b">BID</span>Pay with BankID</span><span style="color:var(--teal-btn)">&#9679;</span></div>'+
+        '<button class="btn dark" data-act="pay">Pay '+money(sTotal(s))+' with BankID</button>';
+    }
+
+    var left='<div class="card">'+
+      '<button class="back" data-act="tocart">&#8592; Back to cart</button>'+
+      '<div class="prog"><span class="chip">Purchase '+x+' of '+n+'</span><span class="dots">'+dots+'</span><span class="rest">'+(n-x)+' more after this</span></div>'+
+      '<h1 class="cart-title" style="margin-bottom:6px">Checkout</h1>'+
+      '<div class="seller-h" style="margin-top:4px">Seller: '+s.name+'</div>'+
+      flash+ body +'</div>';
+
+    var right='<div class="card summary"><h2>This purchase</h2>'+
+      '<div class="sum-row"><span class="lbl">Items ('+sItems(s).length+')</span><span>'+money(sSub(s))+'</span></div>'+
+      '<div class="sum-row"><span class="lbl">Shipping</span><span>'+money(s.ship)+'</span></div>'+
+      '<hr class="sum-div">'+
+      '<div class="sum-total"><span>To pay now</span><span>'+money(sTotal(s))+'</span></div>'+
+      '<div class="sum-note">This is purchase '+x+' of '+n+'. The other '+(n-x>0?(n-x):0)+' will follow as separate payments.</div></div>';
+
+    return '<div class="grid">'+left+right+'</div>';
+  }
+
+  // ---------- TRANSITION ----------
+  function transition(){
+    var n=N(), done=doneSellers().length, left=pendingSellers();
+    var next=left[0];
+    var rows=left.map(function(s){
+      return '<div class="r"><div><div class="nm">Seller: '+s.name+'</div><div class="sl">'+sItems(s).length+' item'+(sItems(s).length>1?"s":"")+'</div></div><div class="pr">'+money(sTotal(s))+'</div></div>';
+    }).join("");
+    return '<div class="card"><div class="center-wrap">'+
+      '<div class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#3b5754" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+      '<div class="ct"><h2>Purchase '+done+' of '+n+' complete</h2><p>'+left.length+' '+(left.length===1?"purchase":"purchases")+' left &middot; your items are saved</p></div>'+
+      '<div class="remain">'+rows+'</div>'+
+      '<button class="btn" data-act="continue">Continue to next purchase (Seller: '+next.name+') &rarr;</button>'+
+      '<button class="linkbtn" data-act="finishhere">I&#39;m done for now</button>'+
+      '</div></div>';
+  }
+
+  // ---------- DONE ----------
+  function done(){
+    var ds=doneSellers();
+    var rows=ds.map(function(s,i){
+      return '<div class="sline"><div class="k"><b>Purchase '+(i+1)+'</b><span>'+s.ref+' &middot; Seller: '+s.name+' &middot; '+sItems(s).length+' item'+(sItems(s).length>1?"s":"")+'</span></div><div class="v">'+money(sTotal(s))+' &#10003;</div></div>';
+    }).join("");
+    var grand=ds.reduce(function(a,s){return a+sTotal(s);},0);
+    var stillPending=pendingSellers().length;
+    var head = stillPending? (ds.length+" of "+N()+" purchases complete") : ("All "+ds.length+" purchases complete");
+    return '<div class="card"><div class="center-wrap">'+
+      '<div class="check"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#3b5754" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'+
+      '<div class="ct"><h2>'+(stillPending?"Done for now":"Done!")+'</h2><p>'+head+'</p></div>'+
+      '<div class="sumcard">'+rows+
+        '<div class="sline" style="border-top:2px solid var(--line)"><div class="k"><b>Total paid</b></div><div class="v" style="color:var(--ink)">'+money(grand)+'</div></div></div>'+
+      '<div class="thanks">Thanks for your purchase! You&#39;ll get a separate order confirmation by email for each purchase.</div>'+
+      (stillPending? '<button class="btn" data-act="tocart">Back to cart ('+stillPending+' purchase'+(stillPending>1?"s":"")+' left)</button>' : '<button class="btn dark" data-act="again">Back to the shop</button>')+
+      '</div></div>';
+  }
+
+  // ---------- notes ----------
+  var NOTES={
+    cart:{e:"Touchpoint 1",t:"Before checkout — reset expectations",
+      b:"Your real notice (&ldquo;separate payment to each seller&rdquo;) is good but vague. This version <b>names the count</b> (&ldquo;2 sellers &rarr; 2 purchases&rdquo;) and promises guidance &mdash; turning a warning into a plan. The seller grouping already in the product makes the count feel earned, not arbitrary.",
+      h:"<b>Nielsen:</b> Match with real world &middot; Recognition over recall"},
+    checkout:{e:"Touchpoint 2",t:"During each purchase — persistent progress",
+      b:"&ldquo;Purchase X of N&rdquo; + dots turn unbounded repetition into a <b>bounded, countable task</b>. One payment per seller (their items merged), so <b>3 items / 2 sellers = 2 purchases</b> &mdash; the count matches the cart&#39;s seller groups exactly.",
+      h:"<b>Nielsen:</b> Visibility of system status"},
+    transition:{e:"Touchpoint 3",t:"Between purchases — highest abandonment risk",
+      b:"After purchase 1, the instinct is &ldquo;checkout done = finished.&rdquo; This screen contradicts it: confirms progress, shows what&#39;s left, makes <b>Continue</b> obvious. &ldquo;I&#39;m done for now&rdquo; respects buyers who only wanted one seller. No thank-you here.",
+      h:"<b>Nielsen:</b> Error prevention &middot; User control &amp; freedom"},
+    done:{e:"Touchpoint 4",t:"Confirmation — reassemble the fragments",
+      b:"The flow forced fragmentation; the end reassembles it &mdash; one line per purchase with its own order reference, plus a grand total reconciling N payments and N emails. The thank-you appears only here.",
+      h:"<b>Nielsen:</b> Visibility of status (closure) &middot; Recognition over recall"}
+  };
+  var SIM='<div class="lbl">Simulate edge cases</div>'+
+    '<button data-act="soldout">An item in this purchase sells out &rarr; recalculates (count may drop)</button>'+
+    '<button data-act="failsim">This purchase fails &rarr; others stay complete</button>';
+
+  function renderNote(){
+    var n=NOTES[state.screen];
+    document.getElementById("nEye").textContent=n.e;
+    document.getElementById("nTitle").textContent=n.t;
+    document.getElementById("nBody").innerHTML=n.b;
+    document.getElementById("nHeur").innerHTML=n.h;
+    document.getElementById("nSim").innerHTML=(state.screen==="checkout"&&!state.fail)?SIM:"";
+    document.querySelectorAll("#rail i").forEach(function(el){el.classList.toggle("active",el.dataset.s===state.screen);});
+  }
+
+  function render(){
+    var html=state.screen==="cart"?cart():state.screen==="checkout"?checkout():state.screen==="transition"?transition():done();
+    document.getElementById("stage").innerHTML=html;
+    document.getElementById("cartBadge").textContent=badge();
+    renderNote();
+    window.scrollTo({top:0,behavior:"auto"});
+  }
+
+  function afterPay(){
+    state.flash=null; state.fail=null;
+    if(pendingSellers().length>0){ state.screen="transition"; } else { state.screen="done"; }
+    render();
+  }
+
+  document.addEventListener("click",function(e){
+    var b=e.target.closest("[data-act]"); if(!b) return;
+    var a=b.dataset.act;
+
+    if(a==="checkout"){ state.cur=b.dataset.seller; state.fail=false; state.flash=null; state.screen="checkout"; render(); }
+    else if(a==="tocart"){ state.fail=false; state.flash=null; state.screen="cart"; render(); }
+    else if(a==="pay"){ openBID(); }
+    else if(a==="continue"){ state.flash=null; state.fail=false; state.cur=pendingSellers()[0].name; state.screen="checkout"; render(); }
+    else if(a==="finishhere"){ state.screen="done"; render(); }
+    else if(a==="again"){ reset(); }
+
+    else if(a==="rm"){
+      var id=b.dataset.it;
+      SELLERS.forEach(function(s){ var it=s.items.find(function(i){return i.id===id;}); if(it) it.removed=true; });
+      SELLERS.forEach(function(s){ if(s.status!=="removed" && sItems(s).length===0) s.status="removed"; });
+      if(activeSellers().length===0){ reset(); return; }
+      render();
+    }
+
+    else if(a==="soldout"){
+      var s=activeSellers().find(function(x){return x.name===state.cur;});
+      if(s){ var it=sItems(s)[0]; if(it) it.removed=true; }
+      if(s && sItems(s).length===0){
+        s.status="removed";
+        state.flash="The last item from "+s.name+" was just sold and removed. This purchase is gone — you now have "+N()+" purchases.";
+        if(pendingSellers().length>0){ state.cur=pendingSellers()[0].name; state.screen="checkout"; }
+        else { state.flash=null; state.screen= doneSellers().length?"done":"cart"; if(!doneSellers().length) seed(); }
+      } else {
+        state.flash="One item from "+s.name+" was just sold and removed. This purchase recalculated to "+money(sTotal(s))+".";
+        state.screen="checkout";
+      }
+      render();
+    }
+
+    else if(a==="failsim"){ state.fail=true; state.flash=null; render(); }
+    else if(a==="retry"){ state.fail=false; render(); }
+    else if(a==="skipseller"){
+      var s2=activeSellers().find(function(x){return x.name===state.cur;});
+      if(s2) s2.status="removed";
+      state.fail=false; state.flash="Seller "+(s2?s2.name:"")+" skipped. You now have "+N()+" purchases.";
+      afterPay();
+    }
+  });
+
+  function openBID(){
+    document.getElementById("overlay").classList.add("show");
+    document.getElementById("spin").style.display="none";
+    document.getElementById("bidConfirm").style.display="";
+    document.getElementById("sheeth").textContent="Confirm with BankID";
+    document.getElementById("sheetp").textContent="Open the BankID app to sign this purchase.";
+  }
+  document.getElementById("bidConfirm").addEventListener("click",function(){
+    document.getElementById("spin").style.display="block";
+    this.style.display="none";
+    document.getElementById("sheeth").textContent="Signing\u2026";
+    document.getElementById("sheetp").textContent="Waiting for BankID.";
+    setTimeout(function(){
+      document.getElementById("overlay").classList.remove("show");
+      var s=activeSellers().find(function(x){return x.name===state.cur;});
+      if(s){ s.status="done"; s.ref=refOf(doneSellers().length); }
+      afterPay();
+    },1100);
+  });
+
+  document.getElementById("restart").addEventListener("click",reset);
+  document.getElementById("noteToggle").addEventListener("click",function(){
+    this.classList.toggle("on");
+    document.getElementById("note").classList.toggle("hidden",!this.classList.contains("on"));
+  });
+
+  reset();
+})();
+</script>

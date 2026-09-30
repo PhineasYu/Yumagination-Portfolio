@@ -226,106 +226,198 @@
 
     /* ------------------------------------------------------------ 06 */
     {
-      id: "kodiak-hub", orgs: ["kodiak"], num: "06", year: "2025", when: "Jun–Sep 2025", zones: ["ux"], tags: [],
+      id: "kodiak-hub", orgs: ["kodiak"], num: "06", year: "2025", when: "Jun–Sep 2025", zones: ["ux", "ai"], tags: ["built-with-ai"],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
-      cap: L("Design work inside a live B2B SaaS design system", "在真实 B2B SaaS 设计系统里做设计"),
-      h1: L("Designing inside a live B2B design system, and leaving a usability-testing process behind", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程"),
-      lead: L("A summer as UI/UX design intern at a supplier-relationship-management platform of about 200 people in Stockholm.", "在斯德哥尔摩一家约 200 人的供应商关系管理平台做 UI/UX 设计实习的一个夏天。"),
+      cap: L("Design work inside a live B2B SaaS design system, and a first AI workflow for the team", "在真实 B2B SaaS 设计系统里做设计，以及给团队的第一套 AI 工作流"),
+      h1: L("Designing inside a live B2B design system, and leaving behind a usability-testing process and an AI prompting guide", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程和一份 AI 提示指南"),
+      lead: L("A summer as UI/UX design intern at a supplier-relationship-management platform of about 200 people in Stockholm. I designed two features end to end, audited the design system, backed a breakpoint decision with real usage data, set up the company's first structured usability test, and learned prompt engineering well enough to write the team a guide.", "在斯德哥尔摩一家约 200 人的供应商关系管理平台做 UI/UX 设计实习的一个夏天。我端到端设计了两个功能，审计了设计系统，用真实使用数据支撑了一个断点决策，建立了公司第一套结构化可用性测试，还把 AI 提示工程学到足以给团队写一份指南。"),
       role: L("UI/UX Design Intern", "UI/UX 设计实习生"),
       status: L("Jun–Sep 2025, Stockholm", "2025 年 6–9 月，斯德哥尔摩"),
-      stack: ["Figma", "Design systems", "Usability testing", "Jira"],
+      stack: ["Figma", "Design systems", "Usability testing", "Jira", "AI prompting", "Figma Make", "Lovable", "Uizard"],
       links: [],
-      verify: L("Company work: check with Kodiak what visuals are publishable before adding screenshots.", "公司项目：放截图前，先确认 Kodiak 允许公开的范围。"),
+      verify: L("Company work: check with Kodiak what may be published (all screens here use demo data such as Material 1 and Violet Panda). The AI prompt guide you wrote for the team is not in the folder you gave me: send it and I will add it. The AI workflow design you mention: send a screenshot or a few lines.", "公司项目：放之前和 Kodiak 确认能公开什么（这里的界面都是演示数据，比如 Material 1、Violet Panda）。你给团队写的 AI 提示指南不在你给我的文件夹里：发给我，我来加。你提到的 AI 工作流设计：发一张截图或几行文字。"),
       shape: "wide",
-      tile: { motion: "breakpoints" },
-      hero: { type: "motion", id: "breakpoints", cap: L("Illustration of the breakpoint decision: evidence from 1,000+ real users set a desktop-first strategy.", "断点决策示意：1,000+ 真实用户的数据支撑了桌面优先的策略。"), tag: "ill" },
+      tile: { img: "assets/shots/kh-bom.jpg" },
+      hero: IMG("assets/shots/kh-bom.jpg", "A Bill of Materials page in Kodiak Hub: a table of materials with status colour bars, import, export and request buttons, and a documents table below", { frame: "browser", cap: L("The Bill of Materials page I designed. Demo data.", "我设计的物料清单（BOM）页面。演示数据。") }),
       sections: [
         { h: L("Overview — Two features, end to end", "概述 — 两个功能，端到端")  ,
           p: L(["I designed two features inside the existing design system: a bill of materials (BOM) and login/authentication.", "The BOM broke into five development tickets and was delivered before the sprint boundary."], ["我在现有设计系统内端到端设计了两个功能：物料清单（BOM）和登录/认证。", "BOM 被拆成五张开发工单，在 sprint 结束前交付。"]),
           media: { type: "stats", items: [["2", L("features, end to end", "个功能端到端")], ["5", L("dev tickets, on time", "张开发工单，按时交付")], ["4", L("modules audited", "个模块审计")], ["1,000+", L("users' data analysed", "用户数据分析")]] } },
+        { h: L("Login — From a landing page to a password reset", "登录 — 从落地页到重置密码")  ,
+          p: L(["The login work covered a landing page, sign-in (with email, Google, Microsoft or SSO), and a reset flow with its states: request a link, check your inbox, set a new password, done. The landing page is a mountain photograph under a short promise, \u201cSupplier Relationships Reimagined\u201d.", "The password screen lists what a valid password needs and ticks each rule as you meet it, so nobody has to guess why Save is greyed out."], ["登录部分包括落地页、登录（邮箱、Google、Microsoft 或 SSO），以及带各个状态的重置流程：申请链接、查看邮箱、设置新密码、完成。落地页是山景照片配一句短短的承诺：「Supplier Relationships Reimagined」。", "密码页会列出有效密码需要满足的条件，并在你满足时逐条打勾，这样没有人需要猜「保存」为什么是灰的。"]),
+          media: IMG("assets/shots/kh-reset.jpg", "The reset password screen: a mountain panel on the left and a form listing password rules", { narrow: true }) },
+        { h: L("Login — The whole flow on one page", "登录 — 整条流程放在一页上")  ,
+          p: L(["I laid out sign-in, reset request, check-your-inbox, new password and success next to each other, so a developer could read the entire flow at once, and the states in between."], ["我把登录、申请重置、查看邮箱、设置新密码和成功页并排放在一起，让开发者可以一眼读完整个流程以及中间的各个状态。"]),
+          media: IMG("assets/shots/kh-login-flow.jpg", "All login and reset states laid out side by side, with two landing-page layouts underneath", { frame: "browser" }) },
+        { h: L("BOM — Reading a material list, and asking for more", "BOM — 读一张物料清单，也能向别人要数据")  ,
+          p: L(["The bill of materials is a table you can add to, import, export, or send as a request to the supplier, and it sits beside the commodity's properties and documents. I designed the request flow from both sides: a template for the person asking, and what the recipient sees, combined with the original data."], ["物料清单是一张可以新增、导入、导出、或作为请求发给供应商的表，旁边是这个商品的属性和文档。我从两端设计了请求流程：发请求的人用的模板，以及收到请求的人看到的页面，并与原始数据结合。"]),
+          media: IMG("assets/shots/kh-bom.jpg", "Bill of Materials table with Add new, Import, Export and Request buttons", { frame: "browser" }) },
         { h: L("System — Audit four modules, write the pattern rules down", "系统 — 审计四个模块，把模式规则写下来")  ,
-          p: L(["I audited four product modules and documented reusable rules: table types, column standards, filter behaviour, destructive actions.", "I also built a six-state supplier-lifecycle indicator and extended the badge system."], ["我审计了四个产品模块，并记录下可复用的规则：表格类型、列规范、筛选行为、破坏性操作。", "还做了一个六状态的供应商生命周期指示器，并扩展了徽标体系。"]) },
-        { h: L("Login — A landing page and a forgot-password flow", "登录 — 落地页与忘记密码流程")  ,
-          p: L(["The login work covered the landing page redesign and the forgot-password flow: a card over a mountain photograph, with a short promise (\u201cSupplier Relationships Reimagined\u201d) and a clear path back in for people who lost their password."], ["登录部分包括落地页的重新设计和忘记密码流程：山景照片上的一张卡片，一句简短的承诺（「Supplier Relationships Reimagined」），以及给忘记密码的人一条清楚的回路。"]),
-          media: IMG("assets/shots/kh-login.jpg", "The redesigned landing page, and the forgot-password screens", { frame: "browser" }) },
-        { h: L("Components — A process bar and a way to file badges", "组件 — 进度条，和给徽标归档的办法")  ,
-          p: L(["I designed a process bar with variants for different states, and a badge filing system: a simple labelled grid that tells a developer which component is which, what a valid and an invalid use looks like, and what is local and what belongs to the design system."], ["我设计了带不同状态变体的进度条，以及一套徽标归档系统：一张带标签的简单网格，告诉开发者哪个是哪个组件、合法和不合法的用法长什么样、哪些是局部组件、哪些属于设计系统。"]),
-          media: IMG("assets/shots/kh-system.jpg", "Process bar variants and the badge filing system", { frame: "browser" }) },
+          p: L(["I audited four product modules and documented reusable rules: table types, column standards, filter behaviour, destructive actions.", "I also built a six-state supplier-lifecycle indicator and extended the badge system."], ["我审计了四个产品模块，并记录下可复用的规则：表格类型、列规范、筛选行为、破坏性操作。", "还做了一个六状态的供应商生命周期指示器，并扩展了徽标体系。"]),
+          media: IMG("assets/shots/kh-process.jpg", "Process bar designs: step indicators with new, ongoing, approval and done states in many variants") },
+        { h: L("System — A badge filing system", "系统 — 一套徽标归档规则")  ,
+          p: L(["A set of labelled badges that tells a developer which component is which: a component, a use example, a valid or invalid use, a local component, or a design-system component. It is a small thing, but it is what lets a design system stay a system."], ["一套带标签的徽标，告诉开发者每个东西是什么：组件、使用示例、合法或不合法的用法、局部组件、还是设计系统组件。这是件小事，但设计系统能一直保持「系统」的样子，靠的就是它。"]),
+          media: IMG("assets/shots/kh-badges.jpg", "Badge-component filing system: labelled, colour-coded tabs", { narrow: true }) },
         { h: L("Evidence — Breakpoints from real usage data", "证据 — 用真实使用数据定断点")  ,
-          p: L(["Instead of assuming, I analysed responsive usage from more than 1,000 real users to set the product's breakpoint strategy: desktop-first, on evidence.", "Assumptions about mobile use were tested against what people actually did."], ["我没有凭感觉，而是分析了 1,000 多名真实用户的响应式使用数据，来确定产品的断点策略：桌面优先，且有证据。", "关于移动端使用的假设，被拿去和人们实际的行为对照。"]),
-          media: { type: "motion", id: "breakpoints" } },
+          p: L(["Instead of assuming, I analysed responsive usage from more than 1,000 real users, across 2024 and 2025, to set the product's breakpoint strategy: desktop-first, on evidence. XL and LG together are all known users, phones are at 0%, and the larger sizes are growing."], ["我没有凭感觉，而是分析了 2024 和 2025 年超过 1,000 名真实用户的响应式使用数据，来确定产品的断点策略：桌面优先，且有证据。XL 加 LG 就是所有已知用户，手机是 0%，更大的尺寸还在增长。"]),
+          media: IMG("assets/shots/kh-breakpoints.jpg", "Usage by breakpoint for 2024 and 2025: XS/SM 0%, MD under 1%, LG about a quarter, XL about three quarters") },
         { h: L("Process — The company's first structured usability test", "流程 — 公司第一套结构化可用性测试")  ,
           p: L(["With my design mentor I set up the company's first structured usability-testing process for an unreleased AI document-management feature: think-aloud sessions, the layout iterated between rounds, key recommendations adopted.", "The process was embedded into the team's Jira workflow and outlived the internship."], ["我与设计导师一起，为一个尚未发布的 AI 文档管理功能建立了公司第一套结构化可用性测试流程：出声思考、轮次间迭代布局、关键建议被采纳。", "这套流程被嵌入团队的 Jira 工作流，在实习结束后仍在使用。"]) },
-        { h: L("AI tools — Evaluating Figma Make, Lovable and Uizard", "AI 工具 — 评估 Figma Make、Lovable、Uizard")  ,
-          p: L(["I compared them on output quality, prompt cost, stability and how well they fit the design system, and shared the resulting workflow, which the design team adopted.", "In my tests Figma Make gave the most polished UI that respected the design system; Uizard was the fastest for ideation but the least detailed; Lovable gave the deepest code and one-click deploy but needed extra polish to meet enterprise standards."], ["我从输出质量、提示成本、稳定性以及与设计系统的契合度来比较它们，并分享了由此得出的工作流，设计团队采用了它。", "在我的测试里，Figma Make 给出的界面最精致、最符合设计系统；Uizard 做构想最快，但细节最少；Lovable 的代码最深入、能一键部署，但要达到企业级标准还需要额外打磨。"]) }
+        { h: L("AI — Learning prompt engineering, and teaching it", "AI — 学会提示工程，也教给团队")  ,
+          p: L(["I learned prompt engineering during the internship, and wrote what I learned into an AI prompt guide that I shared with the team. I also worked on the design of a whole AI workflow for design work, and tested three tools against it: Figma Make, Uizard and Lovable."], ["实习期间我学习了 AI 提示工程，并把学到的东西写成一份 AI 提示指南，分享给团队。我还参与设计了一套完整的、用在设计工作里的 AI 工作流，并拿三个工具来测试它：Figma Make、Uizard 和 Lovable。"]),
+          media: IMG("assets/shots/kh-tools.jpg", "Three AI prototyping tools side by side: Figma Make, Uizard Autodesigner and Lovable, each with what it does and how it did in my tests") }
       ]
     },
 
     /* ------------------------------------------------------------ 07 */
     {
-      id: "revive-automation", orgs: ["revive"], num: "07", year: "2026", when: "May–Aug 2026", zones: ["build", "ai"], tags: ["automation", "built-with-ai"],
-      title: "Revive report automation", meta: "Revive · internship · 2026",
-      cap: L("Automating a commission reconciliation during an internship", "实习期间把佣金对账自动化"),
-      h1: L("Turning a manual commission reconciliation into a script that checks every row", "把手工佣金对账变成一个逐行核对的脚本"),
-      lead: L("During my UX internship at Revive, the business side needed each retailer's private-sale commission worked out and checked. I directed Claude Code on the company computer to automate it.", "在 Revive 做 UX 实习时，业务方需要算出并核对每个零售商的私人销售佣金。我在公司电脑上指挥 Claude Code 把它自动化。"),
-      role: L("UX intern; framed the task, directed Claude Code, reported back", "UX 实习生；定义任务、指挥 Claude Code、向业务方汇报"),
-      status: L("Delivered internally: script, reconciliation tables, 7-page report", "内部交付：脚本、对账表、7 页汇报"),
-      stack: ["Python", "Claude Code"],
-      links: [],
-      verify: L("Confirm Revive is fine with being named here. How much time or how many errors did it save? Two or three independent sources?", "确认 Revive 同意在这里出现名字；节省了多少时间或减少了多少错误；对照的是 2 个还是 3 个独立来源。"),
-      shape: "square",
-      tile: { text: L("Every row, checked", "逐行核对"), sub: L("Internship · text only", "实习 · 仅文字") },
+      id: "revive-automation", orgs: ["revive"], num: "07", year: "2026", when: "May–Aug 2026", zones: ["ux", "build", "ai"], tags: ["automation", "built-with-ai"],
+      title: "Revive", sub: L("UX audit, checkout redesign and report automation", "UX 审计、结账流程重设计与报表自动化"), meta: "Revive · UX internship · 2026",
+      cap: L("A UX internship: auditing a live secondhand platform, redesigning its checkout, and automating a payout reconciliation", "UX 实习：审计一个在线二手平台、重设计它的结账流程，并把对账自动化"),
+      h1: L("Auditing a live secondhand platform, fixing its multi-seller checkout, and automating a monthly payout reconciliation", "审计一个在线二手平台、修它的多卖家结账流程，并把每月的佣金对账自动化"),
+      lead: L("During my UX internship at Revive, a resale platform that runs secondhand stores for retail brands, I did three kinds of work: a UX audit of the buyer and seller flows, a redesign of the cart and checkout where an order contains items from several sellers, and, from the business side, an automated payout reconciliation that I directed Claude Code to build.", "在 Revive 做 UX 实习期间，我做了三类事。Revive 是一个为零售品牌运营二手店的转售平台。我做了买家和卖家流程的 UX 审计；重设计了一个订单里含有多个卖家商品时的购物车与结账；还有业务方提出的一项需求：我指挥 Claude Code 做了一个自动化的佣金对账。"),
+      role: L("UX intern. Audit, annotated findings, redesign proposals in Figma; framed and directed the reconciliation automation with Claude Code.", "UX 实习生。在 Figma 里做审计、标注问题、提出重设计；定义对账自动化的任务并指挥 Claude Code。"),
+      status: L("Delivered internally: Figma boards, reconciliation script and tables, 7-page report", "内部交付：Figma 画板、对账脚本与表格、7 页汇报"),
+      stack: ["Figma", "UX audit", "Interaction design", "Python", "Claude Code"],
+      links: [{ label: L("Open the checkout prototype", "打开结账原型"), url: "demos/revive-multipurchase/index.html" }],
+      verify: L("Company work on a staging site: confirm with Revive that these screenshots may be public, and that Revive, Cervera and Bubbleroom may be named. Say which of these boards were yours alone (the promo cards? the filter drawer?). Which fixes shipped? Reconciliation: how much time or how many errors did it save?", "公司项目，截图来自测试环境：确认 Revive 允许公开这些截图，以及能否出现 Revive、Cervera、Bubbleroom 的名字。说明哪些画板完全是你做的（推广卡片？筛选抽屉？）；哪些修改已经上线；对账节省了多少时间或减少了多少错误。"),
+      shape: "wide",
+      tile: { video: "revive-checkout", poster: "revive-checkout-poster" },
+      hero: { type: "embed", src: "demos/revive-multipurchase/index.html", frame: "browser", ratio: "16/10", open: "demos/revive-multipurchase/index.html", cap: L("A clickable prototype of the multi-seller checkout, with my design notes beside each step (toggle Design notes). Try Go to checkout, then pay with BankID. Demo items and prices.", "多卖家结账的可点击原型，每一步旁边有我的设计说明（可用 Design notes 开关）。试试 Go to checkout，再用 BankID 付款。商品和价格是演示用的。") },
       sections: [
-        { h: L("Overview — A request from the business side", "概述 — 来自业务方的需求"),
-          p: L(["This one wasn't a design task. The business side asked for each retailer's private-sale commission, calculated from the listings export and checked against independent sources.", "This page is text only. The data belongs to the company, so there are no screenshots and no figures here."], ["这不是一个设计任务。业务方需要从 Listings 导出里算出每个零售商的私人销售佣金，并和独立来源交叉核对。", "这一页只有文字。数据属于公司，所以这里没有截图，也没有数字。"]) },
-        { h: L("What I made — Calculate, cross-check, flag", "我做了什么 — 计算、交叉核对、标记"),
-          p: L(["A script that calculates the commission per retailer, cross-checks it automatically against the independent sources and flags every row that doesn't match. I ran it for three months of data and presented the result in a seven-page report."], ["一个脚本：按零售商计算佣金，自动和独立来源交叉核对，并逐行标记对不上的地方。我用它跑了三个月的数据，并做成一份 7 页的汇报。"]),
-          media: { type: "steps", items: [["01", L("Listings export", "Listings 导出")], ["02", L("Commission per retailer", "按零售商计算佣金")], ["03", L("Cross-check with independent sources", "与独立来源交叉核对")], ["04", L("Flag every mismatched row", "逐行标记不一致")], ["05", L("Report to the business side", "向业务方汇报")]] } },
+        { h: L("Overview — Three jobs in one internship", "概述 — 一次实习里的三件事"),
+          p: L(["Revive's platform lets retail brands run their own secondhand store: customers sell their used items back to a brand, and other customers buy them. Each brand's store is skinned as that brand. Buyers, sellers and retailers all use it, and each has their own flows.", "I spent most of my time inside those flows as a designer, and some of it as the person who could turn a business request into a working script."], ["Revive 的平台让零售品牌运营自己的二手店：顾客把旧物卖回给品牌，其他顾客来买。每个品牌的店都套上品牌自己的样子。买家、卖家、零售商都在用，各有各的流程。", "我大部分时间以设计师的身份待在这些流程里，也有一部分时间，是那个能把业务需求变成可运行脚本的人。"]),
+          media: { type: "steps", items: [["01", L("Audit the buyer and seller flows", "审计买家与卖家流程")], ["02", L("Redesign the multi-seller cart and checkout", "重设计多卖家购物车与结账")], ["03", L("Design the retailer and seller tools", "设计零售商与卖家工具")], ["04", L("Automate a payout reconciliation", "自动化佣金对账")]] } },
+        { h: L("UX audit — Testing the live site, writing it down", "UX 审计 — 测试线上站点，把问题写下来")  ,
+          p: L(["I went through the buyer and seller journeys on the staging site as a first-time user and logged what broke or confused: an empty-search message shown before any search, product photos that do not load on one brand's store, mixed upper and lower case in a dropdown, a page that crashes when Chrome translates it from Swedish, a Log in button hidden inside a sidebar although the whole service requires it, and \u201ckr\u201d and \u201cSEK\u201d used side by side.", "Every finding has a screenshot, a number, and a suggested fix. Two of them are pure UX judgement: Buy and Sell pages that look the same, for which I suggested dark green for Seller mode and light green for Buyer mode, and an earnings line that reads 0 SEK while you are still typing the price."], ["我在测试环境里，以第一次使用的用户的身份走完买家和卖家的路径，记下哪里坏了、哪里让人困惑：还没搜索就显示「无结果」的提示；某个品牌店里商品图片加载不出来；下拉菜单里大小写混用；用 Chrome 把瑞典语翻译成英文时页面崩溃；整个服务都需要登录，「Log in」却藏在侧边栏里；「kr」和「SEK」并用。", "每一条都有截图、编号和修改建议。其中两条是纯粹的 UX 判断：买、卖两个页面长得一样，我建议卖家模式用深绿、买家模式用浅绿；以及输入价格时，「你的收入」一行一直显示 0 SEK。"]),
+          media: IMG("assets/shots/rv-audit-1.jpg", "An annotated audit page with nine numbered findings and screenshots") },
+        { h: L("UX audit — A second round, in the checkout", "UX 审计 — 第二轮，在结账里")  ,
+          p: L(["The second round followed a purchase from the brand dropdown to checkout. It found a page that shows the wrong brand name after selecting another, no way to search for a product directly, broken thumbnails, sizes in the wrong order (S, L, XS), a checkout button sitting under an order summary whose total makes it look like it pays for everything, and missing validation on the phone-number field while other fields show an error."], ["第二轮从品牌下拉菜单一路走到结账。发现：选了另一个品牌后，页面显示的却是错的品牌名；不能直接搜商品；缩略图损坏；尺码顺序不对（S、L、XS）；订单汇总下面的结账按钮，配上那个总价，看起来像是一次付清所有卖家；手机号字段缺少校验，而其他字段都有报错。"]),
+          media: IMG("assets/shots/rv-audit-2.jpg", "A second annotated audit page with six numbered findings") },
+        { h: L("A bug as a flow — Losing the brand halfway through the cart", "把一个 bug 画成流程 — 购物车里丢了品牌")  ,
+          p: L(["One finding mattered more than the rest: a shopper who enters through a retailer's storefront sees that retailer's logo on the product page, but the cart shows Revive's logo, and the link at the top takes them to Revive's platform instead of back to the store. I drew it as a flow, with the expected path dashed, so that an engineer could see it in ten seconds."], ["有一条比其他更重要：顾客从零售商的店铺进入，商品页上是零售商的 logo，购物车里却变成了 Revive 的 logo，购物车顶部的链接还把人带去了 Revive 的平台，而不是回到这家店。我把它画成流程图，把预期的路径用虚线画出来，让工程师十秒钟就能看懂。"]),
+          media: IMG("assets/shots/rv-bugflow.jpg", "A flow from entering via a retailer's storefront to a cart that loses the brand, with the expected path dashed") },
+        { h: L("Redesign — One cart, three payments", "重设计 — 一个购物车，三次付款")  ,
+          p: L(["Because each seller is paid directly, an order with items from three sellers is three payments, and the old cart did not say so. A total and a single button suggested one payment. The redesign opens with a clear statement that the order is paid in three separate payments, lists them, and then walks the shopper through each with a step indicator. Delivery details are asked once and reused, and each step says what has been paid and what is next.", "It also says what did not happen: \u201cNothing was re-charged, this is a new payment to a different seller.\u201d"], ["因为每个卖家是直接收款的，一个含有三个卖家商品的订单，就是三次付款，而旧的购物车没有说明。一个总价加一个按钮，会让人以为是一次付清。重设计一开始就明确告诉顾客：这个订单分三次付款，并逐一列出；然后用步骤指示带着顾客走完每一次。收货信息只问一次、之后沿用，每一步都说明已经付了什么、接下来是什么。", "它还说明了「没发生什么」：「没有被重复扣款，这是对另一个卖家的新付款。」"]),
+          media: IMG("assets/shots/rv-checkout.jpg", "Seven Figma frames: the cart, payments one, two and three, and a final confirmation", { frame: "browser" }), cap: L("The Figma frames. I then built the same flow as a clickable prototype (top of this page), with a design note for each step and the usability principle behind it.", "Figma 画板。之后我把同一条流程做成了可点击的原型（本页顶部），每一步都配了设计说明，以及背后的可用性原则。") },
+        { h: L("Retailer and seller tools — Filters, statuses, and one bug", "零售商与卖家工具 — 筛选、状态，和一个 bug")  ,
+          p: L(["For retailers, I added a filter button and a drawer with status groups, and mapped the platform's many delivery statuses into four that a retailer can understand: not shipped, outgoing, delivered, and at the service point. I also proposed a \u201cDelivered\u201d label and date under the existing \u201cSold\u201d date, and noted the font should match the text above it.", "For sellers, I traced a bug in \u201cMy ads\u201d with a sequence diagram: hiding an ad and then filtering by Active still showed the hidden ad, because the query ignored visibility. Then I drew the filter as a drawer and as tabs to compare."], ["对零售商，我加了一个筛选按钮和一个带状态分组的抽屉，并把平台里很多种配送状态归并成零售商看得懂的四种：未发货、发出中、已送达、在服务点。我还建议在已有的「已售」日期下面加一个「已送达」标签和日期，并注明字体要和上面的文字一致。", "对卖家，我用一张时序图追查「我的广告」里的一个 bug：把一条广告设为隐藏，再按「在售」筛选，隐藏的广告仍然出现，因为查询没有考虑可见性。然后我把筛选画成抽屉和标签页两种方案做比较。"]),
+          media: IMG("assets/shots/rv-seller.jpg", "Retailer listings with a filter drawer and annotated status groups") },
+        { h: L("Seller tools — The hide-ad bug as a sequence", "卖家工具 — 把隐藏广告的 bug 画成时序图")  ,
+          p: L(["Wrong state, wrong query, wrong list: drawn as four actors and five messages, the cause is visible at a glance and the fix is obvious."], ["状态错了、查询错了、列表错了：画成四个角色、五条消息，原因一眼可见，修法也就明显了。"]),
+          media: IMG("assets/shots/rv-ads-a.jpg", "Seller dashboard states and a sequence diagram showing a hidden ad appearing in the Active list") },
+        { h: L("Marketing — Five cards for a circular-returns feature", "营销 — 给循环退货功能做的五张卡片")  ,
+          p: L(["I also designed five explainer cards for a circular-returns idea: skip the warehouse and let customers ship returns straight to the next buyer, relisted in four minutes, with store credit as the obvious choice, a label that is ready before you ask, and a setup that goes live in under an hour."], ["我还为一个循环退货的想法做了五张说明卡片：跳过仓库，让顾客把退货直接寄给下一个买家；四分钟内重新上架；让店铺积分成为显而易见的选择；标签在你开口之前就准备好；不到一小时就能上线。"]),
+          media: IMG("assets/shots/rv-promo.jpg", "Five green explainer cards: Circular Returns, Relisted in 4 Minutes, Keep the revenue, Label ready, Live in under 1 hour") },
+        { h: L("Automation — A request from the business side", "自动化 — 来自业务方的需求")  ,
+          p: L(["This one was not a design task. The business side asked for each retailer's private-sale commission, calculated from the listings export and checked against independent sources, for three months. Doing it by hand each month was slow, hard to audit, and easy to get wrong.", "I turned the request into a task Claude Code could carry out and directed it through the build. The logic is fixed and small: private sellers only, sold in the target month, gift cards excluded, commission per item and then summed by retailer. The interesting part is the check. Each retailer is compared with two other sources, the payment provider's bill and the manual ledger, read live from a Google Sheet. Every row gets a flag. The April result is kept as a regression test that runs every time."], ["这不是设计任务。业务方需要每个零售商的私人销售佣金：从 Listings 导出里算出来，和独立来源核对，要做三个月。每月手工做，慢、难审计、也容易错。", "我把需求变成 Claude Code 能执行的任务，并指挥它完成。计算逻辑固定而且很小：只看私人卖家、目标月份卖出、排除礼品卡，逐笔算佣金再按零售商求和。有意思的部分是核对：每个零售商要和另外两个来源比，一个是支付服务商的账单，一个是人工总账（实时读取 Google 表格）。每一行都有一个标记。4 月的结果被留作回归测试，每次运行都会重跑。"]),
+          media: IMG("assets/shots/rv-pipeline.jpg", "Four steps: filter, compute, reconcile, report, and a table of invented retailers with MATCH, DRIFT, GIFTCARD and REVIEW flags"), cap: L("Illustration of the method. The retailers and numbers are invented; the real data belongs to the company.", "方法示意。零售商和数字都是虚构的，真实数据属于公司。") },
+        { h: L("Automation — What the flags mean", "自动化 — 标记是什么意思")  ,
+          p: L(["MATCH: all three sources agree. DRIFT: the script differs, but the provider and the ledger agree, which usually means a later refund or removal. GIFTCARD: a known layer the script does not model yet. REVIEW: nothing explains the difference, so a person looks. Across the three months, every row was either a match or explained, and nothing ended up in REVIEW.", "I presented the result to the business side in a seven-page report, with the next steps: model the gift-card layer, add business sales, and roll forward monthly by adding one month to a list."], ["MATCH：三个来源一致。DRIFT：脚本不同，但服务商和人工总账一致，通常是后来的退款或下架。GIFTCARD：一个已知、脚本还没建模的环节。REVIEW：没有任何解释，需要人来看。这三个月里，每一行要么一致、要么有解释，没有一行落进 REVIEW。", "我把结果做成 7 页的汇报给业务方，并给出下一步：把礼品卡环节建模、加入企业销售、以及每月往一个列表里加一个月份就能滚动下去。"]) },
         { h: L("Where AI comes in — Claude Code wrote it, I directed it", "AI 在哪里 — Claude Code 写，我指挥"),
-          p: L(["Claude Code wrote the code. My part was turning the business request into a task it could carry out, directing it through the build, and reporting the result back to the people who asked."], ["代码由 Claude Code 编写。我的部分是把业务需求翻译成它能执行的任务，指挥它完成，再把结果汇报给提出需求的人。"]) }
+          p: L(["Claude Code wrote the code, on the company's own account. My part was the framing, the rules for the check, and reading the result critically: why a row drifted, and whether the explanation was real. The data belongs to the company, so there are no figures here."], ["代码由 Claude Code 编写，用的是公司自己的账号。我的部分是：定义问题、定核对规则、批判地读结果：为什么某一行会漂移、解释是否成立。数据属于公司，所以这里没有数字。"]) }
       ]
     },
 
     /* ------------------------------------------------------------ 08 */
     {
-      id: "voi", orgs: ["voi"], num: "08", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
-      title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
-      cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
-      h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
-      lead: L("A KTH course project with Voi Technology. The assumed cause was price. The field research said otherwise.", "与 Voi Technology 合作的 KTH 课程项目。原本假设的原因是价格，田野研究给出了不同答案。"),
-      role: L("Co-led research, in-app flow design, business case", "联合带领研究、App 内流程设计、商业测算"),
-      status: L("KTH × Voi, Aug–Dec 2025", "KTH × Voi，2025 年 8–12 月"),
-      stack: ["Field research", "Surveys", "Service + UI design", "Business case"],
+      id: "dove-bottle", orgs: ["unilever"], num: "08", year: "2024", when: "Nov 2023 – Apr 2024", zones: ["build", "ux"], tags: [],
+      title: "Dove serum bottle", meta: "Unilever Global R&D Center, Shanghai · 2023–24",
+      cap: L("A bottle I helped take from sketches to a shelf in China", "我参与的一个瓶子：从草图到中国货架"),
+      h1: L("Taking a hair-serum bottle from sketches to a shelf in China, in about five months", "用大约五个月，把一支护发精华瓶从草图做到中国货架"),
+      lead: L("A new Dove hair-care serum for the Chinese market: glass bottle, pump and carton. I did the market and design research, the sketches, the 3D models and renders, the 3D-printed prototypes, and the drop, compatibility and function tests. It launched in April 2024.", "多芬为中国市场做的一款新护发精华：玻璃瓶、泵头和纸盒。我负责市场与设计调研、手绘、3D 建模与渲染、3D 打印原型，以及跌落、兼容性和功能测试。产品于 2024 年 4 月上市。"),
+      role: L("Packaging Laboratory Assistant. Research, sketches, 3D models and renders, 3D-printed prototypes, transport and function testing.", "包装实验室助理。调研、手绘、3D 建模与渲染、3D 打印原型、运输与功能测试。"),
+      status: L("Launched in China in April 2024", "2024 年 4 月在中国上市"),
+      stack: ["Sketching", "3D modelling and rendering", "3D printing", "ISTA drop testing", "Supplier feedback"],
       links: [],
-      verify: L("Add visuals (helmet concept, flow screens) if Voi allows publication.", "如 Voi 允许公开，请补头盔概念与流程截图。"),
+      verify: L("Company work, confidential material left out on purpose (an internal reference slide marked Confidential is not used). Unknown: team size, research method, which modelling software, dent-acceptance standard, sales. Check with your manager that the bottle and carton photos are fine to publish.", "公司项目，机密材料有意没放（标着 Confidential 的内部参考页没有使用）。未知：团队人数、调研方法、建模软件、凹痕的放行标准、销量。确认瓶子和纸盒照片可以公开。"),
       shape: "wide",
-      tile: { motion: "voi-flow" },
-      hero: { type: "motion", id: "voi-flow", cap: L("Illustration of the helmet flow: unlock, wear, ride, return.", "头盔流程示意：解锁、佩戴、骑行、归还。"), tag: "ill" },
+      tile: { img: "assets/shots/dv-final.jpg" },
+      hero: IMG("assets/shots/dv-final.jpg", "Two rendered glass bottles with gold and white pumps, and the matching line drawing"),
       sections: [
-        { h: L("Overview — Ridership among Gen-Y women was low", "概述 — Gen-Y 女性的使用率偏低")  ,
-          p: L(["The obvious hypothesis was price. We went to the street instead.", "Thirty-seven street interviews and 47 branching surveys traced the gap to perceived safety, which reframed the whole project."], ["最直接的假设是价格。我们选择走到街上去问。", "37 场街头访谈和 47 份分支问卷，把差距追溯到「感知安全」，整个项目因此被重新定义。"]),
-          media: { type: "stats", items: [["37", L("street interviews", "场街头访谈")], ["47", L("branching surveys", "份分支问卷")], ["+645k", L("SEK / month, projected", "SEK/月（预测）")]] } },
-        { h: L("Concept — A helmet built into the basket", "概念 — 与车筐集成的智能头盔")  ,
-          p: L(["The team designed a smart helmet integrated with the scooter's basket, and iterated on feedback from Voi.", "My part was the end-to-end in-app flow, inside Voi's existing design language."], ["团队设计了与滑板车车筐集成的智能头盔，并根据 Voi 的反馈迭代。", "我负责端到端的 App 内流程，并且必须落在 Voi 现有的设计语言里。"]) },
-        { h: L("Flow — Unlock sequencing, wear confirmation, return detection", "流程 — 解锁顺序、佩戴确认、归还检测")  ,
-          p: L(["The flow covers unlock sequencing, wear confirmation and return detection, so that a helmet is a natural part of starting a ride and not an extra chore.", "Where it touches Voi's existing patterns, I used them instead of inventing new ones."], ["这个流程覆盖解锁顺序、佩戴确认和归还检测，目的是让头盔成为开始骑行的自然一步，而不是额外的负担。", "凡是碰到 Voi 现有的模式，我都直接沿用，而不是另造新的。"]) },
-        { h: L("Business case — Grounded in a real supplier quote", "商业测算 — 基于真实供应商报价")  ,
-          p: L(["I contributed a business case projecting +645k SEK per month, built on a real supplier quote for the helmet.", "It is a projection, and I present it as one."], ["我参与了商业测算：预计每月 +645k SEK，基于头盔的真实供应商报价。", "它是预测，我也只把它当预测来讲。"]) }
+        { h: L("Overview — A lab assistant who asked to design", "概述 — 一个想做设计的实验室助理"),
+          p: L(["I started as a packaging laboratory assistant, running transport tests. When my manager saw that I could learn fast and cared about design, he gave me design work: slide templates, posters, front-end dimension sketches, and then the most complete project I was part of, this bottle.", "Mechanical modelling was done by engineers, and supplier contact and sample production were handled by the packaging development manager. My part was everything from research to prototypes and testing."], ["我一开始是包装实验室助理，做运输测试。经理看到我学得快、也在意设计，就分配给我设计方面的工作：幻灯片模板、海报、包装正面的尺寸手绘，然后是我参与最完整的这个项目：这支瓶子。", "机械建模由工程师完成，供应商对接和样品生产由包装开发经理负责。我的部分，是从调研到原型和测试的所有环节。"]),
+          media: { type: "stats", items: [["~5", L("months, Nov 2023 to Apr 2024", "个月，2023.11 到 2024.04")], ["4", L("printed versions in two weeks", "两周内打印 4 个版本")], ["3–4", L("rounds of drop tests on the carton", "轮纸盒跌落测试")], ["1", L("bottle on the shelf, still on sale", "支瓶子上架，至今在售")]] } },
+        { h: L("Research — Looking at what was already on the shelf", "调研 — 先看货架上已经有什么"),
+          p: L(["I studied the market and the design language of the Dove family, and used the brand's body-lotion bottle as a reference for continuity. The aim was a bottle that looks like part of the family and still feels right in the hand."], ["我研究了市场，也研究了多芬产品家族的设计语言，并参考品牌的身体乳瓶来保持连续性。目标是：一个看起来属于这个家族、拿在手里也舒服的瓶子。"]) },
+        { h: L("Sketches — Shoulders, curves, and pump heads", "手绘 — 肩线、曲线和泵头"),
+          p: L(["I drew the bottle many times: rounder or straighter shoulders, slimmer or fuller bodies, and different pump heads and caps, then put the label and the gold collar on the sketches to see how each would read."], ["我把这支瓶子画了很多遍：肩线更圆还是更直、瓶身更瘦还是更饱满，以及不同的泵头和盖子；然后把标签和金色饰圈加到草图上，看每一种看起来怎么样。"]),
+          media: IMG("assets/shots/dv-sketch-a.jpg", "Sketch rows of bottle silhouettes with Dove labels and gold pump collars") },
+        { h: L("Options — Narrowing down", "方案 — 收窄"),
+          p: L(["Silhouettes were compared side by side, then reduced to a handful of options, each numbered. Then came 3D models and renders."], ["外形并排比较，收窄到几个编了号的方案，然后进入 3D 建模与渲染。"]),
+          media: IMG("assets/shots/dv-sketch-b.jpg", "Numbered bottle options drawn in pencil, with notes") },
+        { h: L("Renders — Seeing the glass", "渲染 — 看到玻璃的样子"),
+          p: L(["I modelled and rendered the bottle in glass, with white and gold pumps, to judge proportions and how the light would sit on it. The best options went to the engineers for mechanical modelling."], ["我把瓶子建模并渲染成玻璃质感，配白色和金色泵头，来判断比例和光线落在上面的样子。最好的几个方案交给工程师做机械建模。"]),
+          media: IMG("assets/shots/dv-renders.jpg", "Two rendered clear glass bottles with white pumps", { narrow: true }) },
+        { h: L("Prototypes — Four printed versions in two weeks", "原型 — 两周打印四个版本"),
+          p: L(["I 3D-printed four versions, taller, shorter, slimmer and fuller, and held them to judge how each felt and whether they still looked like one family. Here they sit next to two competitors' oil bottles, for scale and for comparison."], ["我 3D 打印了四个版本：更高、更矮、更瘦、更饱满，拿在手里判断手感，以及它们是否仍然像一家人。这里它们和两款竞品的精油瓶放在一起，用来对比尺寸。"]),
+          media: IMG("assets/shots/dv-3dprint.jpg", "Two competitor serum bottles next to two white 3D-printed prototype bottles with gold pumps") },
+        { h: L("Pumps — Trying the small part that decides the feel", "泵头 — 试那个决定手感的小部件"),
+          p: L(["The pump was a supplier part and fixed, so my job was to try many heads and collars against the bottle: how they sit, how they press, and how they look in white, silver and gold."], ["泵头是供应商的采购件，是固定的，所以我的工作是拿很多泵头和饰圈去试配这个瓶子：怎么装、怎么按，以及白色、银色、金色各是什么样子。"]),
+          media: IMG("assets/shots/dv-pumps.jpg", "Six close-ups of different pump heads and collars on a black background") },
+        { h: L("Testing — The carton cracked", "测试 — 纸盒裂了"),
+          p: L(["In the ISTA drop test, the glass bottle survived, but the outer carton dented badly and even cracked. I sent the results back to the supplier through my manager. The supplier changed the carton structure and re-made samples, and I ran the drop tests again: three or four rounds, until the dents were acceptable and nothing cracked. Some of those days I worked overtime to catch up on schedule."], ["在 ISTA 跌落测试里，玻璃瓶完好，但外层纸盒严重凹陷，甚至开裂。我把结果经由经理反馈给供应商。供应商换了纸盒结构，重新打样，我再做跌落测试：三四轮，直到凹痕可以接受、不再开裂。其中有几天我加班，把进度赶回来。"]),
+          media: IMG("assets/shots/dv-carton.jpg", "A sample carton with a bottle inside, and a finished carton held in a hand") },
+        { h: L("What I took from it — Keeping the intent through many hands", "我学到的 — 在很多人手里传递时，不丢掉意图"),
+          p: L(["A bottle passes through sketches, models, engineers, suppliers and tests, and every handover can lose a little of the original idea. My work was to keep the intent alive through all of them, and to show what a problem looked like with a photo and a test result.", "I kept a bottle my manager gave me. I have no sales data, because I left for my master's in Sweden and did not follow the product afterwards."], ["一支瓶子要经过草图、模型、工程师、供应商和测试，每次交接都可能丢掉一点最初的想法。我的工作，是让这份意图在所有环节里都活着，并用照片和测试结果把问题摆给大家看。", "经理送了我一瓶留念。我没有销量数据，因为我之后去瑞典读硕士，没有继续跟踪这个产品。"]) }
       ]
     },
 
     /* ------------------------------------------------------------ 09 */
     {
-      id: "community-viewfinder", num: "09", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service", "ux"], tags: ["award"],
+      id: "voi", orgs: ["voi"], num: "09", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
+      title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
+      cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
+      h1: L("Finding that women ride shared e-bikes less because of safety, not price, then designing a helmet into the bike and the app", "发现女性少骑共享电单车是因为安全感而不是价格，再把头盔设计进车和 App"),
+      lead: L("A KTH course project with Voi Technology, in a team of four. The obvious guess was price. The field research said the barrier was the lack of a helmet at the moment you want to ride. Our answer is a lockable helmet in the bike's front basket, unlocked from the Voi app.", "与 Voi Technology 合作的 KTH 课程项目，四人小组。最直接的猜测是价格。田野研究给出的答案是：想骑的那一刻手边没有头盔。我们的方案是：在车的前筐里放一个可上锁的头盔，由 Voi 的 App 解锁。"),
+      role: L("Co-led the research; designed the end-to-end in-app helmet flow inside Voi's design language; contributed to the business case", "联合带领调研；在 Voi 现有设计语言里设计端到端的 App 内头盔流程；参与商业测算"),
+      status: L("KTH × Voi, Aug–Dec 2025. A concept, not shipped.", "KTH × Voi，2025 年 8–12 月。概念方案，未上线。"),
+      stack: ["Field research", "Surveys", "Service blueprint", "Figma", "UI design", "Business case"],
+      links: [],
+      verify: L("Check that Voi allows publication of these screens and the business plan pages. Team names appear in the plan: confirm you are happy to show them. The +645k SEK per month is a projection. Interview and survey detail is on Miro, not yet added.", "确认 Voi 允许公开这些界面和商业计划书页面。计划书里有队友的名字，确认是否展示。每月 +645k SEK 是预测数字。访谈和问卷的细节在 Miro 上，还没有加入。"),
+      shape: "wide",
+      tile: { video: "voi-flow", poster: "voi-flow-poster" },
+      hero: V("voi-flow", { tag: "ill", cap: L("The helmet flow, from the screens I designed in Figma, played in order. This is an animation of static screens, not the running app.", "头盔流程，来自我在 Figma 里设计的界面，按顺序播放。这是静态界面做成的动画，不是在运行的 App。") }),
+      sections: [
+        { h: L("Overview — Ridership among Gen-Y women was low", "概述 — Gen-Y 女性的使用率偏低")  ,
+          p: L(["The obvious hypothesis was price. We went to the street instead.", "Thirty-seven street interviews and 47 branching surveys traced the gap to perceived safety, which reframed the whole project. Adult women reported significantly higher safety concerns than younger male users, and many said they would not ride without a helmet, which they rarely carry."], ["最直接的假设是价格。我们选择走到街上去问。", "37 场街头访谈和 47 份分支问卷，把差距追溯到「感知安全」，整个项目因此被重新定义。成年女性的安全顾虑明显高于年轻男性用户，很多人说没有头盔就不会骑，而她们很少随身带头盔。"]),
+          media: { type: "stats", items: [["37", L("street interviews", "场街头访谈")], ["47", L("branching surveys", "份分支问卷")], ["30.4%", L("survey acceptance rate", "问卷接受率")], ["+645k", L("SEK / month, projected", "SEK/月（预测）")]] } },
+        { h: L("Problem and opportunity — In the plan we wrote", "问题与机会 — 我们写的商业计划书里")  ,
+          p: L(["We wrote the work up as a business plan for Voi. The problem: shared e-bikes are fast and flexible, but many people find them unsafe because of traffic and the lack of an easily accessible helmet. The opportunity: Stockholm has about 995,600 residents, roughly 52% of them women, and combining demographic data with the survey's acceptance rate suggests around 60,000 potential new users."], ["我们把这些工作写成了一份给 Voi 的商业计划书。问题：共享电单车快速灵活，但很多人觉得它不安全，因为交通状况，也因为没有触手可及的头盔。机会：斯德哥尔摩约有 995,600 位居民，其中约 52% 是女性；把人口数据和问卷的接受率结合起来，大约有 6 万名潜在新用户。"]),
+          media: IMG("assets/shots/voi-problem.jpg", "Business plan page: Problem and Opportunity", { narrow: true }) },
+        { h: L("Ideation — Six ideas, one screened in", "构想 — 六个点子，筛出一个")  ,
+          p: L(["We sketched many ideas: a city exploration app, themed bikes, add-ons, creative marketing, a baby seat in the back basket, and a helmet in the basket. We scored them against five customer objectives, safety and uptime, aesthetics and comfort, price, access and payment, and availability. The helmet in the basket was the only one that scored well on safety, comfort and availability together."], ["我们画了很多点子：城市探索 App、主题电单车、加装配件、创意营销、后座的儿童座椅筐，以及前筐里的头盔。我们用五个客户目标给它们打分：安全与可用性、美观与舒适、价格、获取与支付、可得性。只有「前筐里的头盔」在安全、舒适和可得性上同时得分。"]),
+          media: IMG("assets/shots/voi-ideation.jpg", "Ideation page with sketches of a basket and helmets, and a scoring table of six ideas") },
+        { h: L("Concept — A helmet built into the basket", "概念 — 与车筐集成的智能头盔")  ,
+          p: L(["A modular, smart helmet in a lockable front basket, retrofitted to Voi's existing e-bike fleet through its repair centres, so no new vehicles are needed. The helmet is electronically paired with the bike and unlocks only through the Voi app when the ride starts."], ["一个模块化的智能头盔，放在可上锁的前筐里，通过 Voi 现有的维修中心改装到现有电单车上，不需要新车。头盔与车在电子层面配对，只有在骑行开始时，通过 Voi 的 App 才能解锁。"]),
+          media: IMG("assets/shots/voi-bike.jpg", "A Voi e-bike with a dark lockable box in the front basket", { narrow: true }) },
+        { h: L("Service blueprint — Nine stages, from locating the bike to giving feedback", "服务蓝图 — 九个阶段，从找车到反馈")  ,
+          p: L(["The blueprint follows a rider through nine stages, from locating a vehicle and checking the helmet, through unlocking, riding and parking, to returning the helmet and locking the bike, and then giving feedback. For each stage it lists what the user does, the touchpoint, the front-end support, the back-end support, and the experience goal."], ["蓝图跟随骑行者走过九个阶段：找车、检查头盔、解锁准备、解锁、开始骑行、骑行中故障提醒、结束停车、归还头盔并锁车，以及反馈。每个阶段列出用户动作、触点、前端支持、后端支持，和体验目标。"]),
+          media: IMG("assets/shots/voi-blueprint.jpg", "Service blueprint table with nine stages") },
+        { h: L("The flow — Inside Voi's own design language", "流程 — 落在 Voi 自己的设计语言里")  ,
+          p: L(["My part was the end-to-end in-app flow. It starts with an onboarding screen that says to unlock within the app, take the helmet out, and wear it properly. On the unlock sheet a second button sits next to Unlock, and turns green when the helmet is unlocked. A selfie with the helmet on earns a credit. If you try to unlock without taking the helmet, a reminder explains why. During the ride, Return helmet is the main action, the app checks the basket, and the button turns green when the helmet is back.", "Where the flow touches Voi's existing patterns, I used them, for example the unlock sheet and the ride panel, instead of inventing new ones."], ["我负责的是端到端的 App 内流程。它从一张引导页开始：在 App 里解锁、把头盔拿出来、戴好。解锁面板上，Unlock 旁边多了一个按钮，头盔解锁后它变成绿色。戴着头盔自拍一张，可以获得积分。如果没取头盔就想解锁，会弹出一条提醒，解释原因。骑行中，「归还头盔」是主要动作，App 检查车筐，头盔放回后按钮变绿。", "凡是碰到 Voi 现有的模式，比如解锁面板和骑行面板，我都直接沿用，而不是另造新的。"]),
+          media: IMG("assets/shots/voi-onboarding.jpg", "Five onboarding screens, the unlock sheet, and a helmet reminder") },
+        { h: L("Presenting — The app and the bike together", "呈现 — App 和车放在一起")  ,
+          p: L(["The screens were composed into a single image next to the bike, to show the service as one thing: a bike, a helmet in its basket, and an app that ties them together."], ["我把界面和车合成一张图，让这项服务看起来是一个整体：一辆车、车筐里的头盔，和把它们连起来的 App。"]),
+          media: IMG("assets/shots/voi-mockups.jpg", "Phone mock-ups showing the helmet flow arranged on a red background") },
+        { h: L("Business case — Grounded in a real supplier quote", "商业测算 — 基于真实供应商报价")  ,
+          p: L(["I contributed to a business case projecting +645k SEK per month, built on a real supplier quote for the helmet, with cost and budget plans, a risk analysis and an implementation plan. It is a projection, and I present it as one."], ["我参与了商业测算：预计每月 +645k SEK，基于头盔的真实供应商报价，并配有成本与预算计划、风险分析和实施计划。它是预测，我也只把它当预测来讲。"]),
+          media: IMG("assets/shots/voi-solution.jpg", "Business plan page: Solution", { narrow: true }) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 10 */
+    {
+      id: "community-viewfinder", num: "10", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service", "ux"], tags: ["award"],
       title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
       cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
       h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
       lead: L("A real brief from a community-renewal co-creation workshop in Huayang Road Subdistrict, Changning District. My proposal received an Excellent Proposal commendation.", "来自长宁区华阳路街道社区更新共创工作坊的真实命题。我的方案获得「优秀提案表彰」。"),
       role: L("Concept author; field research, prototyping, testing, UI", "概念提出者；实地调研、原型、测试、界面"),
-      status: L("Excellent Proposal commendation; a different version was built", "获优秀提案表彰；最终落地的是另一个版本"),
+      status: L("Excellent Proposal commendation; built as a compromise in an exhibition-hall wall", "获优秀提案表彰；最终以折中的形式落在一座展厅的墙上"),
       stack: ["Field research", "Personas", "Stakeholder map", "Full-scale prototype", "Service design", "UI design"],
       links: [],
-      verify: L("Add the built version next to your proposal. Workshop organiser names appear in the source pages; decide whether to name them.", "补落地版和你的方案的对比。来源页面里有活动主办方的名字，决定是否写出。"),
+      verify: L("Name of the exhibition hall (you wrote it as 包玉缸 / Bao Yugang: confirm the spelling and whether to name it), and who decided the compromise. Workshop organiser names appear in the source pages; decide whether to name them.", "展厅的名字（你写的是「包玉缸」，应是包玉刚？确认写法以及是否写出）；折中方案是谁定的。来源页面里有活动主办方的名字，决定是否写出。"),
       shape: "wide",
       tile: { img: "assets/shots/cv-tile.jpg" },
       hero: IMG("assets/shots/cv-cover.jpg", "Community Viewfinder cover: a camera screen framing laundry on a Shanghai street, and the project title"),
@@ -354,14 +446,18 @@
         { h: L("Service — The story of one afternoon, and who pays for it", "服务 — 一个下午的故事，以及谁来买单")  ,
           p: L(["A storyboard follows a retired resident and a group of tourists to the same corner, then an end-to-end flow for passers-by: spot the viewfinder, stand on the marked spot, shoot, scan, upload, rotate, and see the photos in an online gallery. A business model canvas covers costs, partners and revenue from advertisers and foot traffic."], ["故事板跟随一位退休居民和一群游客来到同一个街角，再给出路人的完整流程：发现取景框、站到地面标记处、拍照、扫码、上传、转动，然后在线上展览里看到照片。商业模式画布则涵盖成本、合作方，以及来自广告主和人流的收入。"]),
           media: IMG("assets/shots/cv-story.jpg", "Storyboard for a resident and tourists, plus user flows") },
-        { h: L("Honesty — What was actually built", "诚实 — 最后真正落地的是什么"),
-          p: L(["The final installation was windows cut into an exhibition-hall wall and framed-view greeting cards. The client's product manager chose that direction. It is not my proposal, and I was not part of that decision."], ["最终落地的是展厅墙面上的开窗和框景贺卡，方向由对方的产品经理决定。那不是我的方案，我也没有参与这个决定。"]) }
+        { h: L("What was built — A compromise, cut into a wall", "最终落地 — 一个折中，开在墙上"),
+          p: L(["The street office could not approve an art installation on the pavement, so the idea could not go up as designed. As it happened, an exhibition hall on the street was being renovated, so the two projects were combined: the viewfinder became a narrow opening cut through the hall's street-side wall, with a glass pane in it, and a small orange sign reading \u201cCommunity Viewfinder\u201d with a QR code beside it.", "From the street you see a slice of the neighbourhood through the wall, which was the point of the original idea: a frame that makes you look at the ordinary."], ["街道办没法批准在人行道上装一个艺术装置，所以这个想法没法照原样做出来。正好街边的一个展厅要装修，于是两个项目合到了一起：取景框变成展厅临街墙上开的一道窄口，里面嵌着一块玻璃，旁边是一块橙色的小牌子，写着「社区取景器」，带着二维码。", "站在街上，透过这面墙看到街区的一个切片，这也正是最初想法的要点：一个框，让人去看平常的东西。"]),
+          media: IMG("assets/shots/cv-built.jpg", "The built version: a narrow opening in a wall with an orange sign reading Community Viewfinder and a QR code") },
+        { h: L("Viewfinder cards — A take-home version of the frame", "取景卡片 — 可以带走的取景框"),
+          p: L(["Alongside the wall, I designed viewfinder cards: paper frames printed with the 2023 community renewal plan and a line that reads \u201cDiscover the good\u201d. Hold one up and the ordinary corner in front of you, a sign, a roof, two chairs, becomes a picture."], ["除了墙，我还设计了取景卡片：纸质的框，印着 2023 年社区更新计划，和一句「发现美好」。举起一张，眼前平常的一角，一块牌子、一个屋顶、两把椅子，就成了一幅画。"]),
+          media: IMG("assets/shots/cv-cards.jpg", "Three viewfinder cards held up to a sign, a tiled roof and a pair of chairs") }
       ]
     },
 
-    /* ------------------------------------------------------------ 10 */
+    /* ------------------------------------------------------------ 11 */
     {
-      id: "sushi-jerash", num: "10", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
+      id: "sushi-jerash", num: "11", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
       title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
       cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
       h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
@@ -391,9 +487,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 11 */
+    /* ------------------------------------------------------------ 12 */
     {
-      id: "legacychain", orgs: ["nebius"], num: "11", year: "2026", when: "Sep 2026", zones: ["ai", "build"], tags: ["hackathon", "built-with-ai"],
+      id: "legacychain", orgs: ["nebius"], num: "12", year: "2026", when: "Sep 2026", zones: ["ai", "build"], tags: ["hackathon", "built-with-ai"],
       title: "LegacyChain", meta: "LegacyChain · from MEMO · Sep 2026",
       cap: L("From a memoir app for older people to a family archive where AI reads but never rewrites the record", "从老年人回忆录 App，到 AI 只能阅读、不能改写记录的家族档案"),
       h1: L("A family archive where AI can read the letters but never rewrite the record", "一个家族档案：AI 可以读信，但永远改写不了记录"),
@@ -431,9 +527,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 12 */
+    /* ------------------------------------------------------------ 13 */
     {
-      id: "let-me-die", orgs: ["stoneleap"], num: "12", year: "2026", when: "Sep 2026", zones: ["games"], tags: ["hackathon", "award", "built-with-ai"],
+      id: "let-me-die", orgs: ["stoneleap"], num: "13", year: "2026", when: "Sep 2026", zones: ["games"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
       meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
       cap: L("A first-person game where every death opens a new world: 1st place at Stone Leap", "每死一次就进入一个新世界的第一人称游戏：Stone Leap 第一名"),
@@ -472,9 +568,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 13 */
+    /* ------------------------------------------------------------ 14 */
     {
-      id: "kikaren", hidden: true, orgs: ["pwc"], num: "13", year: "2026", when: "Hackathon · 2026", zones: ["ux", "service"], tags: ["hackathon", "built-with-ai"],
+      id: "kikaren", hidden: true, orgs: ["pwc"], num: "14", year: "2026", when: "Hackathon · 2026", zones: ["ux", "service"], tags: ["hackathon", "built-with-ai"],
       title: "Kikaren", meta: "Kikaren · 2026",
       cap: L("A telescope for seeing each party's vision for Järva", "用望远镜看每个政党对 Järva 的愿景"),
       h1: L("Letting first-time voters in Järva look through a telescope at the future each party imagines", "让 Järva 的首投族透过望远镜，看每个政党想象中的未来"),
@@ -499,9 +595,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 14 */
+    /* ------------------------------------------------------------ 15 */
     {
-      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "14", year: "2026", when: "Apr 2026", zones: ["ai", "ux"], tags: ["award", "built-with-ai"],
+      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "15", year: "2026", when: "Apr 2026", zones: ["ai", "ux"], tags: ["award", "built-with-ai"],
       title: "SAP Career Ignite", meta: "SAP × Capgemini × Google · Apr 2026",
       cap: L("Winning a consulting case with a clickable prototype", "用可点击的原型赢下咨询案例赛"),
       h1: L("Winning a consulting case by letting the judges click the future instead of reading about it", "让评委亲手点一点未来，而不是读一份 PPT，赢下咨询案例赛"),
@@ -509,10 +605,10 @@
       role: L("Prototype lead and presenter of the solution page", "原型负责人，方案页演示者"),
       status: L("1st place, case competition round two", "案例赛第二轮第一名"),
       stack: ["Claude", "Interactive prototype", "Case consulting"],
-      links: [],
+      links: [{ label: L("Open the dashboard I presented", "打开当晚演示的 dashboard"), url: "demos/sap-control-tower/index.html" }],
       shape: "wide",
-      tile: { motion: "tower" },
-      hero: { type: "motion", id: "tower", cap: L("Illustration of the idea: region filters, SKU-level explanations, one-click approve. The real dashboard used fictional demo data.", "思路示意：区域筛选、SKU 级解释、一键批准。真实的 dashboard 使用虚构的演示数据。"), tag: "ill" },
+      tile: { video: "sap-tower", poster: "sap-tower-poster" },
+      hero: { type: "embed", src: "demos/sap-control-tower/index.html", frame: "browser", ratio: "16/10", open: "demos/sap-control-tower/index.html", cap: L("The dashboard I presented, running live. Try DACH, then the BILLY bookcase row, then Approve all. Every number is demo data for a fictional retailer.", "当晚演示的 dashboard，现场可点。试试 DACH，再点 BILLY bookcase 那一行，最后点 Approve all。所有数字都是虚构零售商的演示数据。") },
       sections: [
         { h: L("Overview — Three evenings, two cases", "概述 — 三个晚上，两次案例赛")  ,
           p: L(["Career Ignite is a selective programme run by SAP with Capgemini, Google and Ericsson: three evening workshops in Stockholm, a business simulation and two team cases.", "The second case: a fictional global furniture retailer needs a digital-transformation roadmap, and our five-person team plays the consultants."], ["Career Ignite 是 SAP 联合 Capgemini、Google、Ericsson 举办的选拔制项目：斯德哥尔摩三场晚间工作坊、一次商业模拟、两次小组案例。", "第二次案例：一家虚构的全球家居零售商需要数字化转型路线图，我们五人小组扮演顾问。"]),
@@ -520,6 +616,14 @@
         { h: L("The bet — A prototype instead of slides", "这次押注 — 用原型代替 PPT")  ,
           p: L(["I proposed building a clickable supply-chain control tower with AI, and iterated on it for about two hours: region filters, SKU-level AI explanations, alert handling and a one-click 'approve all'.", "The judges clicked it themselves. Seeing the future state beat hearing about it."], ["我提议用 AI 做一个可点击的供应链控制塔，并在约两小时内迭代出来：区域筛选、SKU 级 AI 解释、告警处理、一键「全部批准」。", "评委亲手点了它。「看见」未来的样子，比「听说」更有说服力。"]),
           media: { type: "stats", items: [["1st", L("place, round two", "第二轮第一名")], ["~2h", L("to a clickable prototype", "做出可点击原型")], ["5", L("people on the team", "人的小组")], ["24", L("month roadmap (a teammate presented)", "个月路线图（队友讲解）")]] } },
+        { h: L("The case — Consultants answering an RFP", "案例 — 扮演顾问，回应一份招标书")  ,
+          p: L(["The client was Global Furnishing Group, a fictional home-furnishing retailer with 470 stores in 63 countries and 35 e-commerce markets. Our team played Capgemini consultants responding to its RFP.", "The problem, in the client's own words: a reactive supply chain, external signals that never reach the ERP, and the result: stockouts in stores and capital tied up in stock. The brief also asked us to name the team we would staff."], ["客户是 Global Furnishing Group，一家虚构的家居零售商，在 63 个国家有 470 家门店、35 个电商市场。我们小组扮演 Capgemini 的顾问，回应它的招标书。", "问题用客户自己的话说：供应链是被动反应式的，外部信号进不了 ERP，结果是门店缺货、资金压在库存里。任务书还要求我们写明会配置怎样的团队。"]),
+          media: { type: "steps", items: [["01", L("Modernise the core: S/4HANA, clean core, pilot markets first", "现代化核心：S/4HANA、Clean Core、先试点市场")], ["02", L("Unify the data: BigQuery and external signals", "打通数据：BigQuery 和外部信号")], ["03", L("Activate AI: Joule and Gemini for proactive decisions", "启用 AI：Joule 与 Gemini 做主动决策")]] } },
+        { h: L("Preparing — Turning a bad first evening into a plan", "准备 — 把糟糕的第一晚变成一个计划")  ,
+          p: L(["After the first evening I used Claude as a coach. It helped me lay out a structure for case answers (situation, complication, question, answer), a one-hour plan for the day of the case, and a fill-in brief: a short form I could type the case facts into while the team talked, so that the visuals could be generated from it in minutes.", "When the case arrived I fed it in and got three visuals to choose from: a roadmap, an architecture diagram and a dashboard. I took the solution page, the dashboard."], ["第一晚之后，我把 Claude 当教练。它帮我搭了案例回答的结构（背景、冲突、问题、答案）、案例当天的一小时计划，以及一份填空式简报：小组讨论的时候，我把案例信息填进去，几分钟就能据此生成视觉稿。", "案例发下来之后，我把信息填进去，得到三张视觉稿可选：路线图、架构图和 dashboard。我认领了方案页，也就是 dashboard。"]) },
+        { h: L("The dashboard — Region, insight, execute", "Dashboard — 区域、洞察、执行")  ,
+          p: L(["The page I presented is a control tower in SAP blue. Switch the region to DACH and the numbers change. Click the BILLY bookcase row and a Gemini insight explains why it is at risk and what to do about it. Then a Joule recommendation offers to approve the pending transfer orders in one click, and the open alerts clear.", "I kept the script to three words so I could not lose my place: region, insight, execute. In the demo, stockout risk goes from 12 to 2 after the last click."], ["我演示的这一页，是一个 SAP 蓝的控制塔。把区域切到 DACH，数字会变。点 BILLY bookcase 那一行，Gemini 的洞察会解释它为什么有风险、该怎么办。然后 Joule 的建议可以一键批准待处理的调拨单，未处理的告警随之清空。", "我把讲稿收成三个词，免得讲到一半找不到位置：区域、洞察、执行。在演示里，最后一次点击之后，缺货风险从 12 降到 2。"]),
+          media: V("sap-tower", { frame: "browser", tag: "rec", cap: L("A recorded walk-through of the same dashboard: DACH, the BILLY insight, one alert rerouted, then Approve all.", "同一个 dashboard 的录屏：DACH、BILLY 的洞察、处理一条告警，然后 Approve all。") }) },
         { h: L("Reflection — The first evening went badly", "反思 — 第一晚并不顺利")  ,
           p: L(["I was under-prepared, got flustered, and my weak spot was teamwork and speaking, not knowledge. Before the second evening I built a framework first, prepared templates, and fixed my role: structure and prototype.", "That loop, from a bad first evening to a result, is the part of this project I trust most."], ["我准备不足，慌了，弱项是协作和表达，而不是知识。第二晚之前，我先搭好框架、备好模板、定好自己的角色：结构和原型。", "从糟糕的第一晚到拿到结果，这个循环是这个项目里我最信任的部分。"]) },
         { h: L("What's real — Fictional client, AI-generated code", "什么是真的 — 虚构的客户，AI 生成的代码")  ,
@@ -527,9 +631,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 15 */
+    /* ------------------------------------------------------------ 16 */
     {
-      id: "beside", num: "15", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["built-with-ai"],
+      id: "beside", num: "16", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["built-with-ai"],
       title: "Beside", meta: "Beside · Sep 2026",
       cap: L("Two squares for two friends, with no obligation to reply", "两个朋友的两个方格，没有回复的义务"),
       h1: L("Two friends, two squares, and no obligation to reply", "两个朋友，两个方格，没有回复的义务"),
@@ -555,9 +659,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 16 */
+    /* ------------------------------------------------------------ 17 */
     {
-      id: "chroma-reader", num: "16", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["hackathon", "built-with-ai"],
+      id: "chroma-reader", num: "17", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["hackathon", "built-with-ai"],
       title: "Chroma Reader", meta: "Chroma Reader · Sep 2026",
       cap: L("A study reader that colours sentences by mastery", "按掌握程度给句子上色的学习阅读器"),
       h1: L("A study reader that colours every sentence by how well you know it, at the speed of a keypress", "一个按掌握程度给每个句子上色的阅读器，快到只需一次按键"),
@@ -583,9 +687,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 17 */
+    /* ------------------------------------------------------------ 18 */
     {
-      id: "notchbreak", num: "17", year: "2026", when: "25 Sep 2026 · one day", zones: ["build", "ux"], tags: ["built-with-ai"],
+      id: "notchbreak", num: "18", year: "2026", when: "25 Sep 2026 · one day", zones: ["build", "ux"], tags: ["built-with-ai"],
       title: "NotchBreak", meta: "NotchBreak · macOS · Sep 2026",
       cap: L("A break reminder that grows out of the MacBook notch", "从 MacBook 刘海里长出来的休息提醒"),
       h1: L("A macOS break reminder that grows out of the notch, built in one day", "一个从刘海里长出来的 macOS 休息提醒，一天做完"),
@@ -594,13 +698,17 @@
       status: L("MVP finished; runs locally, not published", "MVP 已完成；本地可运行，未公开发布"),
       stack: ["Swift", "SwiftUI + AppKit", "macOS 14+", "Claude Code"],
       links: [],
-      verify: L("The images are early comparison renders with a Chinese interface; add a recording of the current English build. Decide whether to publish it. Confirm nobody else worked on it.", "图片是早期的对比渲染，界面还是中文；补一段当前英文版的录屏。决定是否公开发布；确认有没有队友。"),
-      shape: "square",
-      tile: { img: "assets/shots/notch-radius.jpg" },
+      verify: L("The hero is an animation drawn from the app\u2019s code, not a recording: to record the real thing, grant Screen Recording to the terminal/Claude. The comparison images are early renders with a Chinese interface. Decide whether to publish it. Confirm nobody else worked on it.", "图片是早期的对比渲染，界面还是中文；英雄位的视频是根据代码画的动画、不是录屏：要录真机，需要给终端/Claude 开「屏幕录制」权限。对比图是早期的中文界面渲染。决定是否公开发布；确认有没有队友。"),
+      shape: "wide",
+      tile: { video: "notchbreak", poster: "notchbreak-poster" },
+      hero: V("notchbreak", { tag: "ill", cap: L("How it behaves: it hides in the notch, grows a card when it is time, counts a five-minute break down, then folds away. This is an animation drawn from the app\u2019s own notch shape, sizes, texts and spring settings, not a screen recording.", "它的行为：藏在刘海里，到点长出一张卡片，倒数五分钟的休息，然后收回。这是根据 App 自己的刘海形状、尺寸、文案和弹簧参数画出来的动画，不是屏幕录制。") }),
       sections: [
         { h: L("Overview — The reminder is the notch", "概述 — 提醒就是刘海本身"),
           p: L(["NotchBreak is a native macOS menu-bar tool. After a stretch of continuous computer use, a pure-black shape grows out of the MacBook's notch to tell me to rest. The rest of the time it hides completely inside the notch.", "What I cared about most was blending in: it should look like the notch itself changing shape, not like a pop-up stuck on top. I set the idea, the visual direction and the acceptance bar; Claude Code wrote the Swift."], ["NotchBreak 是一个原生 macOS 菜单栏小工具。连续使用电脑一段时间后，一块纯黑的形状从 MacBook 的刘海里「长」出来，提醒我休息；其余时间它完全藏在刘海里。", "我最在意的是融入感：它要看起来像刘海本身在变形，而不是贴在上面的弹窗。想法、视觉方向和验收标准由我定，Swift 代码由 Claude Code 编写。"]),
           media: { type: "stats", items: [["60 s", L("idle pauses the timer", "无操作就暂停计时")], ["5 min", L("idle counts as rested", "无操作视为已休息")], ["5 min", L("break countdown", "休息倒计时")], ["0", L("permissions asked", "需要的系统权限")]] } },
+        { h: L("Native — A menu that looks like Apple's own", "原生 — 看起来就是苹果自己做的菜单")  ,
+          p: L(["The menu-bar item is a standard macOS menu: an eye icon, a line that says how long you have been active, submenus for how often to remind you and how long a break lasts, and keyboard shortcuts for taking a break now, previewing the reminder and resetting the timer. Because it is built from Apple's own frameworks, it matches the system in type, spacing and behaviour, and follows light and dark mode without any work.", "I think this kind of native integration is the most beautiful thing software can do: nothing shows that it was added."], ["菜单栏里的图标是一个标准的 macOS 菜单：一个眼睛图标、一行告诉你已经连续使用了多久的文字、用来选择提醒间隔和休息时长的子菜单，以及「现在休息」「预览提醒」「重置计时」的快捷键。因为它用的是苹果自己的框架，字体、间距和行为都和系统一致，深色和浅色模式也不用额外处理。", "我觉得这种原生的融入，是软件能做到的最美的事：看不出它是后来加上去的。"]),
+          media: IMG("assets/shots/notch-native-menu.jpg", "The NotchBreak menu-bar menu, with the Remind Every and Break Length submenus", {}), cap: L("The menu, its Remind Every and Break Length submenus. The two 'testing' options are for development.", "菜单，以及「提醒间隔」「休息时长」子菜单。两个 testing 选项是开发用的。") },
         { h: L("Decision — One radius, eight renders", "决策 — 一个圆角，八次渲染"),
           p: L(["The shoulders, where the black card meets the screen, decide whether it feels like part of the notch. I rendered the same card at radius 0, 6, 8, 10, 12, 14, 16 and 20, put them side by side, and picked 12 as the default.", "These are early renders with a Chinese interface; the interface text has since changed to English."], ["黑色卡片和屏幕相接的「肩膀」，决定了它像不像刘海的一部分。我把同一张卡片渲染成圆角 0、6、8、10、12、14、16、20 八个版本并排比较，最后默认选 12。", "这些是早期的渲染图，界面是中文；界面文字后来改成了英文。"]),
           media: IMG("assets/shots/notch-radius.jpg", "The same notch card rendered at eight corner radii", {}), cap: L("Radius 0 to 20, side by side.", "圆角 0 到 20，并排比较。") },
@@ -621,9 +729,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 18 */
+    /* ------------------------------------------------------------ 19 */
     {
-      id: "microhack", orgs: ["microsoft"], num: "18", year: "2026", when: "Sep 2026", zones: ["build", "ai"], tags: ["automation"],
+      id: "microhack", orgs: ["microsoft"], num: "19", year: "2026", when: "Sep 2026", zones: ["build", "ai"], tags: ["automation"],
       title: "MicroHack", meta: "Microsoft MicroHack · Sep 2026",
       cap: L("Learning Microsoft Foundry, Fabric and Azure by wiring three agents into one workflow", "把三个 agent 串成一个工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
       h1: L("Learning Microsoft Foundry, Fabric and Azure by building a multi-agent workflow", "通过搭一个多 agent 工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
@@ -655,9 +763,46 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 19 */
+    /* ------------------------------------------------------------ 20 */
     {
-      id: "longevity-3d", num: "19", year: "2026", when: "Sep 2026", zones: ["games", "ux"], tags: ["hackathon", "data-viz"],
+      id: "planet-maps", orgs: ["deloitte"], num: "20", year: "2026", when: "Sep 2026", zones: ["ux", "ai", "build"], tags: ["hackathon", "award", "built-with-ai"],
+      title: "Planet Intelligence Maps", meta: "Deloitte Spark Hackathon · 2026",
+      cap: L("A maps app that shows which forests your route crosses: 3rd place at Deloitte Spark", "告诉你路线穿过哪些森林的地图应用：Deloitte Spark 第三名"),
+      h1: L("A navigation app that makes the planet-friendlier route the easy choice", "一个让「对地球更友好的路线」成为轻松选择的导航应用"),
+      lead: L("Enter a destination as in any maps app, and Planet Intelligence Maps adds what your route does to the places it crosses: forests at risk, biodiversity hotspots, and the emissions of each way of getting there. It took 3rd place at the Deloitte Spark Hackathon.", "像用任何地图应用一样输入目的地，Planet Intelligence Maps 会补上你的路线对沿途地方的影响：处于风险中的森林、生物多样性热点，以及每种走法的排放。它在 Deloitte Spark 黑客松上获得第三名。"),
+      role: L("Product design and prototype, built in Figma Make with AI", "产品设计与原型，用 AI 在 Figma Make 里搭建"),
+      status: L("3rd place. A hackathon prototype using mock and open data.", "第三名。黑客松原型，使用模拟数据和开放数据。"),
+      stack: ["Figma Make", "Claude", "Google Maps", "Open data: WWF, Global Forest Watch, OpenAQ, HBEFA"],
+      links: [],
+      verify: L("Team and your exact role, the challenge brief, and the judging criteria are not confirmed. I could not open the Figma Make file (no access), so this page is built from your screenshots only: add a recording if you can run it. The map shows Stockholm to Kiruna with four eco-zones; confirm every figure is demo data.", "团队、你的具体角色、赛题和评审标准都未确认。Figma Make 文件我没有权限打开，所以这一页只根据你给的截图：如果你能运行它，请补一段录屏。地图演示的是斯德哥尔摩到 Kiruna、四个生态区；确认所有数字都是演示数据。"),
+      shape: "wide",
+      tile: { img: "assets/shots/dl-route.jpg" },
+      hero: IMG("assets/shots/dl-route.jpg", "Planet Intelligence Maps: a Stockholm to Kiruna route on a map with risk circles, and a panel listing four eco-zones along the route", { frame: "browser", cap: L("Stockholm to Kiruna: the route, four eco-zones along it, and an eco score. Screenshot of the prototype.", "斯德哥尔摩到 Kiruna：路线、沿途四个生态区，和一个生态评分。原型截图。") }),
+      sections: [
+        { h: L("Overview — Making the good choice the easy one", "概述 — 让好的选择变得轻松")  ,
+          p: L(["The premise is simple: people already pick routes in a maps app, so that is where environmental information can change a decision. The app opens with four ideas: plan your route as usual, see hidden impact, take micro-actions, and build your legacy.", "It says plainly that it \u201cintegrates environmental data into your everyday routes, making the planet-positive choice the easy choice\u201d, and that the data behind the demo is mock data based on WWF layers."], ["前提很简单：人们本来就在地图应用里选路线，所以环境信息正好可以在这里影响决定。应用一开始讲四件事：像往常一样规划路线、看见隐藏的影响、做一些小行动、建立你的遗产。", "它明说自己「把环境数据放进你每天的路线，让对地球有利的选择变成轻松的选择」，也明说演示背后的数据是基于 WWF 图层的模拟数据。"]),
+          media: IMG("assets/shots/dl-intro.jpg", "Intro screen: Turn Every Journey into Environmental Action, with four cards", { frame: "browser" }) },
+        { h: L("Route choices — Speed against impact", "路线选择 — 速度对比影响")  ,
+          p: L(["A Route Optimizer lets you choose how to balance travel time against environmental impact. Fastest Route shows an eco impact of 40% and says no major zones were crossed. Eco-Balanced, marked Recommended, scores 80%. A third option, Planet Hero, goes further. It is honest about what it does not know: \u201cRoute time is an estimate, no live alt-route calculated\u201d."], ["路线优化器让你在出行时间和环境影响之间做权衡。「最快路线」的生态影响是 40%，并提示没有经过主要的生态区。标着「推荐」的「生态平衡」得分 80%。第三个选项「Planet Hero」走得更远。它对自己不知道的事也很诚实：「路线时间是估算，没有实时计算替代路线」。"]),
+          media: IMG("assets/shots/dl-options.jpg", "Route optimizer with Fastest Route, Eco-Balanced (recommended) and Planet Hero", { frame: "browser" }) },
+        { h: L("Zones — What the route crosses", "生态区 — 路线穿过了什么")  ,
+          p: L(["Stockholm to Kiruna is 1,234 km and crosses four eco-zones: the Tyresta ancient forest (medium risk, 14% tree loss), the Dalarna wolf and bear corridor (high risk, 11%), the Norrland boreal forest belt (high risk, 21%), and the Kiruna iron-ore mining frontier (high risk, 26%). Each has a colour, an icon and a number, so a driver can read them at a glance. The map draws them as circles along the route."], ["斯德哥尔摩到 Kiruna 全程 1,234 公里，穿过四个生态区：Tyresta 古森林（中等风险，树木损失 14%）、Dalarna 狼与熊的廊道（高风险，11%）、Norrland 北方针叶林带（高风险，21%）、Kiruna 铁矿开采前沿（高风险，26%）。每个区都有颜色、图标和数字，让司机一眼就能读懂。地图把它们画成沿路线的圆圈。"]),
+          media: IMG("assets/shots/dl-zones.jpg", "Panel listing four eco-zones along the route with risk levels", { narrow: true }) },
+        { h: L("Trust — Saying how sure it is", "信任 — 说明自己有多确定")  ,
+          p: L(["The panel that matters most for trust is Data Accuracy and Sources. It tags every data source as Live, Verified, Estimated or Illustrative, names it (vehicle emissions from the HBEFA 4.2 tables, air quality from OpenAQ live sensors, ecoregions from WWF, forest loss from Global Forest Watch), and links to the dataset. An environmental app that asks to be believed has to show its work."], ["对信任最关键的是「数据准确度与来源」面板。它给每个数据来源标上「实时」「已验证」「估算」或「示意」，写明来源（车辆排放来自 HBEFA 4.2 表、空气质量来自 OpenAQ 的实时传感器、生态区来自 WWF、森林损失来自 Global Forest Watch），并链接到数据集。一个要别人相信它的环境应用，必须把依据摆出来。"]),
+          media: IMG("assets/shots/dl-sources.jpg", "Data Accuracy and Sources panel with Live, Verified, Estimated and Illustrative tags, and a My Impact card", { frame: "browser" }) },
+        { h: L("Legacy — A reason to care", "遗产 — 一个在乎的理由")  ,
+          p: L(["The app ends a trip with a summary: trees planted, forest restored, eco-actions taken, and a message addressed to a child: \u201cYour legacy for Noah. You helped protect these forests and animals for future generations.\u201d The numbers here are zeros, because nothing was planted in the demo, and I left them honest."], ["一次出行结束时，应用会给出总结：种了多少树、恢复了多少森林、做了多少环保行动，再加一句写给一个孩子的话：「你为 Noah 留下的遗产。你帮助保护了这些森林和动物，留给后代。」这里的数字都是 0，因为演示里什么都没种，我让它保持诚实。"]),
+          media: IMG("assets/shots/dl-legacy.jpg", "Trip Complete screen: 0 trees planted, 0 m2 forest restored, 0 eco-actions, and a message about a legacy for Noah", { frame: "browser" }) },
+        { h: L("How it was built — Prompting in Figma Make", "怎么做的 — 在 Figma Make 里提示")  ,
+          p: L(["I built it in Figma Make by prompting, and the file is at version 65. One example of what that looked like: when the forest-loss service kept failing, I had it fall back to a realistic estimate based on regional rates, never throw, and mark estimated data with a teal badge, so the demo could not crash and could not pretend the estimate was live."], ["我在 Figma Make 里靠提示来做，文件已经迭代到第 65 版。举一个例子：当森林损失的数据服务一直出错时，我让它退回到基于区域速率的合理估算、永不抛错，并给估算数据加一个青绿色标记，这样演示既不会崩，也不会假装估算是实时数据。"]),
+          media: IMG("assets/shots/dl-editor.jpg", "Figma Make editor: a chat describing a fix to the estimated-data badge next to the app preview", { frame: "browser" }) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 21 */
+    {
+      id: "longevity-3d", num: "21", year: "2026", when: "Sep 2026", zones: ["games", "ux"], tags: ["hackathon", "data-viz"],
       title: "Longevity: Hibernal", meta: "Stockholm Longevity × AI Hackathon · Sep 2026",
       cap: L("The pitch deck and a 3D body that cools, rests and rewarms, for a team exploring reversible biostasis", "可逆生物休眠团队的路演 deck，和一个会降温、储存、复温的 3D 人体"),
       h1: L("A pitch deck and a 3D body for a question nobody has simulated yet: can a whole body be cooled and brought back?", "一份路演 deck 和一个 3D 人体，回答一个还没人模拟过的问题：整个人体能否被冷冻再复苏？"),
@@ -703,9 +848,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 20 */
+    /* ------------------------------------------------------------ 22 */
     {
-      id: "hardware-prototyping", num: "20", year: "2022", when: "2022–23 · university projects", zones: ["build", "ux"], tags: [],
+      id: "hardware-prototyping", num: "22", year: "2022", when: "2022–23 · university projects", zones: ["build", "ux"], tags: [],
       title: "Hardware & 3D prototyping", meta: "Industrial design projects · 2022–23",
       cap: L("Before AI coding: physical prototypes, electronics and 3D-modelled devices", "在 AI 编程之前：实物原型、电子电路和 3D 建模的设备"),
       h1: L("Before I directed AI to write software, I built things you could hold", "在指挥 AI 写软件之前，我做的是能拿在手里的东西"),

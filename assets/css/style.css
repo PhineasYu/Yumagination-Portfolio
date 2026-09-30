@@ -144,8 +144,8 @@ html[lang="zh"] .hero .pos { letter-spacing: 0; }
 .proj[hidden] { display: none; }
 .tile { position: relative; display: block; aspect-ratio: var(--ar); overflow: hidden; background: var(--tile); border-radius: var(--radius-md); }
 .tile > video, .tile > svg.mo, .tile > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.go { position: absolute; z-index: 3; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; background: var(--ink); color: #fff; border-radius: var(--radius-pill); opacity: 0; transform: translateY(6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); pointer-events: none; }
-.go .arrow { color: var(--tf); transition: transform var(--dur) var(--ease); }
+.go { position: absolute; z-index: 3; left: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; font-size: 13px; font-weight: 600; background: var(--tf); color: var(--ink); border-radius: var(--radius-pill); opacity: 0; transform: translateY(6px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); pointer-events: none; }
+.go .arrow { color: var(--ink); transition: transform var(--dur) var(--ease); }
 .proj-cap { display: flex; flex-direction: column; gap: 4px; padding: 16px 10px 10px; flex: 1; }
 .proj-title { font: 600 var(--fs-3)/1.25 var(--sans); letter-spacing: -.015em; color: var(--ink); }
 .proj-line { font-size: 15px; line-height: 1.45; color: var(--ink-muted); max-width: 52ch; }
