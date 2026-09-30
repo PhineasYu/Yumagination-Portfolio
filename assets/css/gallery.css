@@ -17,7 +17,7 @@ html.g, body.gallery-page { overflow: hidden; overscroll-behavior: none; }
 
 /* the title lives on the canvas, at the start */
 .g-title-card { position: absolute; z-index: 2; left: 480px; top: 360px; transform: translate(-50%, -50%); width: 440px; text-align: left; pointer-events: none; }
-.g-title-card h1 { margin: 0; font: 400 84px/1 var(--sans); letter-spacing: -.035em; }
+.g-title-card h1 { margin: 0; font: 600 84px/1 var(--sans); letter-spacing: -.035em; }
 html[lang="zh"] .g-title-card h1 { letter-spacing: -.01em; }
 .g-title-card p { margin: 18px 0 0; color: var(--ink-body); font-size: var(--fs-body); line-height: 1.55; }
 .g-title-card .g-kicker { margin: 0 0 12px; color: var(--ink-muted); }
