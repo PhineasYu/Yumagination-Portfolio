@@ -38,12 +38,15 @@
 Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对应的 `verify`。
 
 - [ ] **1.1 旧 Framer 网站**：`yunfeiyu.framer.website` 还挂在简历上吗？（7 月诊断说它有模板残留和陌生人邮箱。）选一个：把简历里的链接换成新站 / 先下线旧站 / 暂时不管。
-- [ ] **1.2 Dossier**：这是哪场比赛？有成绩吗？（没有就写「参赛作品」。）
-- [ ] **1.3 Aris & Friends 奖项**：奖项确切名字是什么？（你笔记里写的是 “Thinking outside of the box Prize”。）
-- [ ] **1.4 Deloitte Spark 黑客松**：哪一年？第三名确认吗？
-- [ ] **1.5 Meanwhile 的名字**：界面里叫 `beside`，spec 里叫 `Meanwhile`。选一个，Claude 统一。
+- [x] **1.2 Dossier**：这是哪场比赛？有成绩吗？（没有就写「参赛作品」。）
+- [x] **1.3 Aris & Friends 奖项**：奖项确切名字是什么？（你笔记里写的是 “Thinking outside of the box Prize”。）
+- [x] **1.4 Deloitte Spark 黑客松**：哪一年？第三名确认吗？
+- [x] **1.5 Meanwhile 的名字**：界面里叫 `beside`，spec 里叫 `Meanwhile`。选一个，Claude 统一。
 - [ ] **1.6 Kodiak Hub**：先只放文字（现在就是这样），还是去问公司能不能放截图？选「只放文字」就直接勾掉。
 - [ ] **1.7 分工（4 个小问题）**：LegacyChain、Kikaren、Teamdex、SAP，各自是你一个人做的，还是有队友？队友做了什么？（一句话即可；不确定就写「团队项目，我负责 X」。）
+- [x] **1.9 Let Me Die 的玩法**：一句话说清这款游戏怎么玩（它会成为卡片和标题的第一句）。顺便：你一个人做的还是有队友？ ✅ 2026-09-30 已写入四个空间和名字由来（队友问题未提供，页面没写）
+- [ ] **1.10 Disco Fever**：黑客松的正式名称是什么？有队友吗？
+- [ ] **1.11 Revive**：网站上可以出现公司名 Revive 吗？（不行就改成「一家零售公司」。）
 - [ ] **1.8 联系方式**：网站上公开的是 phineasyu0812@gmail.com、LinkedIn、GitHub。可以公开吗？要不要加别的（比如小红书/Instagram）？
 
 **Phase 1 完成 = 网站可以安全地发给招聘方了。**

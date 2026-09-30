@@ -5,7 +5,7 @@
 
 硬规则：
 1. 一次只给用户**一个**任务，永远不要展示整张清单。做完再给下一个。
-2. 项目内容在 `assets/js/projects.js`（结构见文件头注释和已有项目），其余文案在 `assets/js/data.js`。
+2. 项目内容在 `assets/js/projects.js`（结构见文件头注释和已有项目；每个项目一个主分区 `zone`、若干 `tags`，分区和标签的定义在 `data.js` 的 `cats` / `tags`），其余文案在 `assets/js/data.js`。
 3. 用户说「不知道 / 跳过 / 之后」就立刻标记跳过，不追问，不劝说。
 4. 设计已冻结（v2，参考 sreedesigns.com 的结构 + 用户选定的 Tiffany Blue；首屏是呼吸光圈；摄影 Gallery 是独立页面 gallery.html，照片由 scripts/add-photos.mjs 生成）。任何「想改设计 / 加功能」的念头，写进 `docs/PARKING.md`，不要现在做。
 5. 只加内容，不动 `style.css` / `app.js` / `breath.js`，除非有 bug。
