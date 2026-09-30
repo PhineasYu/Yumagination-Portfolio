@@ -617,8 +617,8 @@
       stack: ["Lovable", "TanStack Start", "React"],
       links: [{ label: L("Open the live app", "打开在线应用"), url: "https://moment-share-square.lovable.app" }, GH("https://github.com/PhineasYu/moment-share-square")],
       shape: "tall",
-      tile: { video: "meanwhile", poster: "meanwhile-poster", phone: true },
-      hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, the days scrolling past, her side, an emoji added to today, and \u201cI have time\u201d on the drum picker. Recorded from the latest code, running locally.", "新的 Beside：那句诗、一天天滑过、她那一侧、给今天添一个 emoji，以及在滚轮上选「I have time」。录自最新代码（本地运行）。") }),
+      tile: { video: "beside", poster: "beside-poster", phone: true },
+      hero: V("beside", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, the days scrolling past, her side, an emoji added to today, and \u201cI have time\u201d on the drum picker. Recorded from the latest code, running locally.", "新的 Beside：那句诗、一天天滑过、她那一侧、给今天添一个 emoji，以及在滚轮上选「I have time」。录自最新代码（本地运行）。") }),
       sections: [
         { h: L("Overview — Removing the pressure to reply", "概述 — 拿掉回复的压力")  ,
           p: L(["A moment is a photo taken right now or one huge emoji. The left square is one person's, the right is the other's. Nothing in the interface asks for a reply.", "Timestamps show each person's local time and city, so distance is part of the picture."], ["一个「瞬间」是此刻拍的照片，或者一个巨大的 emoji。左边是一个人的，右边是另一个人的。界面里没有任何东西催你回复。", "时间戳显示各自的当地时间和城市，让距离本身成为画面的一部分。"]),

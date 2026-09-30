@@ -44,7 +44,7 @@ const jobs = {
     await click(p, p.locator('a[href*="/certificate/"]').nth(2), 2600);
     await p.mouse.wheel(0,600); await wait(p,1600); await p.mouse.wheel(0,700); await wait(p,1800);
     await click(p, p.getByRole('link',{name:'Provenance'}).first(), 2600); } },
-  meanwhile: { url:'http://127.0.0.1:5402/', vp:[390,844], mobile:true, clock:'2026-09-30T17:40:00+02:00', run: async p => {
+  beside: { url:'http://127.0.0.1:5402/', vp:[390,844], mobile:true, clock:'2026-09-30T17:40:00+02:00', run: async p => {
     // Beside, poetic version (github.com/PhineasYu/moment-share-square, run locally with `npx vite dev --port 5402`)
     await wait(p,2200); await p.mouse.move(195,520);
     for (let i=0;i<3;i++){ await p.mouse.wheel(0,260); await wait(p,900); }
