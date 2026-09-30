@@ -327,13 +327,13 @@ html[lang="zh"] .case h1 { line-height: 1.22; letter-spacing: -.01em; }
 .meta .lk a { align-self: flex-start; color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--tf); transition: background var(--dur-s) var(--ease); }
 .meta .lk a:hover { background: var(--wash); }
 .body { padding: 0 var(--gx); }
-.blk { margin-top: var(--sec); }
-.blk h2 { margin: 0 0 24px; max-width: 24em; font: 600 var(--fs-2)/1.15 var(--sans); letter-spacing: -.03em; }
+.blk { margin-top: clamp(44px, 5.2vw, 76px); }
+.blk h2 { margin: 0 0 16px; max-width: 24em; font: 600 var(--fs-2)/1.15 var(--sans); letter-spacing: -.03em; }
 .blk h2 .dash { color: var(--tf); }
-.blk p { margin: 0 0 1.1em; max-width: var(--measure); font-size: var(--fs-body); line-height: 1.7; color: var(--ink-body); }
+.blk p { margin: 0 0 .9em; max-width: var(--measure); font-size: var(--fs-body); line-height: 1.7; color: var(--ink-body); }
 .blk p a { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--tf); }
 html[lang="zh"] .blk p { max-width: 36em; }
-.shot { margin-top: clamp(40px, 5vw, 64px); }
+.shot { margin-top: clamp(24px, 3vw, 36px); }
 .cap { margin: 14px 0 0; max-width: var(--measure); font-size: var(--fs-small); line-height: 1.5; color: var(--ink-muted); }
 .draft { border: 1px dashed var(--ink-muted); color: var(--ink-body); padding: 12px 16px; margin: 32px var(--gx) 0; background: var(--wash); border-radius: var(--radius-md); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin: var(--sec) var(--gx) 0; }
