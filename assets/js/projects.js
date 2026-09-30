@@ -619,16 +619,16 @@
       verify: L("The recording and screenshots come from the updated code, run locally. The published link still shows the older black-and-white version until you publish again in Lovable.", "录屏和截图取自更新后的代码（本地运行）。在你于 Lovable 里重新发布之前，线上链接显示的仍是旧的黑白版本。"),
       shape: "tall",
       tile: { video: "meanwhile", poster: "meanwhile-poster", phone: true },
-      hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, scrolling the days, opening the menu, and sending a moon. Recorded from the updated app, running locally.", "新的 Beside：那句诗、滚过一天天、打开菜单、发一个月亮。录自更新后的应用（本地运行）。") }),
+      hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, the days scrolling past, her side, and a photograph added to today. Recorded from the updated app, running locally.", "新的 Beside：那句诗、一天天滑过、她那一侧，以及给今天添上一张照片。录自更新后的应用（本地运行）。") }),
       sections: [
         { h: L("Overview — Removing the pressure to reply", "概述 — 拿掉回复的压力")  ,
           p: L(["A moment is a photo taken right now or one huge emoji. The left square is one person's, the right is the other's. Nothing in the interface asks for a reply.", "Timestamps show each person's local time and city, so distance is part of the picture."], ["一个「瞬间」是此刻拍的照片，或者一个巨大的 emoji。左边是一个人的，右边是另一个人的。界面里没有任何东西催你回复。", "时间戳显示各自的当地时间和城市，让距离本身成为画面的一部分。"]),
           media: { type: "stats", items: [["2", L("people", "个人")], ["4", L("ways to add a moment", "种添加瞬间的方式")], ["1", L("line of verse at the top", "句诗在最上面")], ["0", L("replies required", "个必须的回复")]] } },
         { h: L("The new voice — Softer, slower, more poetic", "新的语气 — 更轻、更慢、更有诗意")  ,
           p: L(["The first version was strict: black and white, hard edges, one typeface. The new one keeps the frame and softens everything inside it. A line of verse in an italic serif opens the page. The photographs have a faded, slightly vintage tone and dissolve at the edges. Your name sits next to \u201cHer\u201d, not a label.", "The point did not change: no pressure. The tone now says it instead of the interface only implying it."], ["第一版很严格：黑白、硬边、单一字体。新版保留了框架，把里面的一切都变软了。页面顶部是一句斜体衬线的诗。照片带着褪色、略微复古的色调，边缘渐隐。导航里是「You」和「Her」，而不是一个标签。", "核心没有变：没有压力。现在由语气来说出它，而不只是由界面来暗示。"]),
-          media: IMG("assets/shots/beside-row.jpg", "Three screens of Beside: the verse and the empty square, the menu for adding a moment, and a moon emoji sent") },
+          media: IMG("assets/shots/beside-row.jpg", "Four screens of Beside: the verse and today's empty square, the days scrolling past, her side, and a photograph added") },
         { h: L("Adding a moment — A quieter menu", "添加瞬间 — 一个更安静的菜单")  ,
-          p: L(["The plus opens a sheet with four plain lines: take a photo, choose a photo, send an emoji, and \u201cI have time\u201d. I redrew the menu so it feels like a page turning up, not a dialog, and sent a moon as a goodnight."], ["点加号会升起一张只有四行字的面板：拍照、选一张照片、发一个 emoji，以及「I have time」。我重画了这个菜单，让它像翻上来的一页，而不是一个对话框，并发了一个月亮当作晚安。"]) },
+          p: L(["The plus opens a sheet with four plain lines: take a photo, choose a photo, send an emoji, and \u201cI have time\u201d, which opens a quiet drum picker for how long you are free. I redrew the menu so it feels like a page turning up, not a dialog."], ["点加号会升起一张只有四行字的面板：拍照、选一张照片、发一个 emoji，以及「I have time」，它会打开一个安静的滚轮，选你有多久空闲。我重画了这个菜单，让它像翻上来的一页，而不是一个对话框。"]) },
         { h: L("Spec — The whole build in one document", "Spec — 整个构建写在一份文档里")  ,
           p: L(["Before generating anything I wrote the full Lovable build spec: design tokens, the data model, the ordering rule, the pairing animation. The later changes, the verse, the softer menu, the vintage photographs, were small corrections against that spec."], ["在生成任何东西之前，我先写下完整的 Lovable 开发 spec：设计 token、数据模型、排序规则、配对动画。之后的改动，诗句、更柔和的菜单、复古的照片，都是对照这份 spec 的小修正。"]) }
       ]
