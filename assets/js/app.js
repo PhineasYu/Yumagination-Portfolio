@@ -63,7 +63,7 @@
     if (!m) return "";
     const bg = m.bg ? ` style="--bg:${m.bg}"` : "";
     const wrap = (inner, kind, extra = "") => {
-      const cls = m.frame === "browser" ? "frame-browser" : m.frame === "phone" ? "frame-phone" : "";
+      const cls = (m.frame === "browser" ? "frame-browser" : m.frame === "phone" ? "frame-phone" : "") + (m.narrow ? " narrow" : "");
       return `<div class="media ${cls}"${bg}>${kind ? badge(kind) : ""}${m.frame === "phone" ? phone(inner, m.sb) : inner}${extra}</div>`;
     };
     switch (m.type) {
@@ -89,6 +89,7 @@
       const v = videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` });
       return p.shape === "tall" ? `<span class="tile is-phone"${bg}>${phone(v, tl.sb)}${go}</span>` : `<span class="tile"${bg}>${v}${go}</span>`;
     }
+    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${go}</span>`;
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}${go}</span>`;
     if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}${go}</span>`;
     return `<span class="tile">${go}</span>`;
@@ -148,7 +149,7 @@
 
   /* ---------- home ---------- */
   function home() {
-    const P = D.projects, pos = D.person.tagline[lang] || D.person.tagline.en;
+    const P = D.projects.filter((p) => !p.hidden), pos = D.person.tagline[lang] || D.person.tagline.en;
     const zoneNames = (p) => `<span class="zn">${ic(ZONE_IC[p.zones[0]])}<span>${p.zones.map((z) => esc(t(D.cats.find((c) => c.id === z)))).join(" · ")}</span></span>`;
     const award = D.tags.find((x) => x.id === "award");
     return `
@@ -270,7 +271,7 @@
   const zoneLine = (p) => p.zones.map((z) => t(D.cats.find((c) => c.id === z))).join(" · ");
   function project(id) {
     id = ALIAS[id] || id;
-    const P = D.projects, i = P.findIndex((p) => p.id === id);
+    const P = D.projects.filter((p) => !p.hidden), i = P.findIndex((p) => p.id === id);
     if (i < 0) return `<div class="case-head" style="padding-top:120px"><p>Not found. <a href="#/">Home</a></p></div>`;
     const p = P[i], prev = P[(i - 1 + P.length) % P.length], next = P[(i + 1) % P.length];
     return `
@@ -321,7 +322,7 @@
     $("#view").innerHTML = isCase ? project(b) : home();
     $$("[data-t]").forEach((el) => (el.textContent = s(el.dataset.t)));
     $("#lang").textContent = lang === "zh" ? "EN" : "中文";
-    document.title = isCase ? `${(D.projects.find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
+    document.title = isCase ? `${(D.projects.filter((p) => !p.hidden).find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
     wire();
     if (!keepScroll) {
       const el = !isCase && a ? document.getElementById(a) : null;

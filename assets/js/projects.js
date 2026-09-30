@@ -101,30 +101,30 @@
 
     /* ------------------------------------------------------------ 03 */
     {
-      id: "sushi-jerash", num: "03", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
-      title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
-      cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
-      h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
-      lead: L("The first sushi shop in Jerash, Jordan took orders by phone. This is the site, the bot and the admin that replaced that, live in production.", "约旦杰拉什第一家寿司店原来靠电话接单。这是取代它的网站、机器人和后台，已在生产环境上线。"),
-      role: L("Spec, direction, Supabase, Telegram bot, deploy, QA", "spec、指挥、Supabase、Telegram 机器人、部署、验收"),
-      status: L("Live in production", "已上线"),
-      stack: ["Next.js 15", "TypeScript", "Tailwind (RTL)", "Supabase", "Zustand", "Telegram Bot API", "Netlify"],
+      id: "collaboration-canvas", num: "03", year: "2026", when: "MSc thesis · 2026", zones: ["service", "ux"], tags: ["built-with-ai"],
+      title: "Collaboration Canvas", meta: "KTH thesis · 2026",
+      cap: L("Why student–industry collaborations break, and a canvas to hold them", "学生—企业合作为什么会散架，以及一张让它们不散的画布"),
+      h1: L("Why student–industry–university collaborations break, and a shared canvas that holds them together", "学生—企业—学校的合作为什么会散架，以及一张让它们不散的共享画布"),
+      lead: L("My master's thesis at KTH: nine interviews, five systemic tensions, four design principles, and one interactive prototype.", "我在 KTH 的硕士论文：九场访谈、五个系统性张力、四条设计原则，以及一个交互原型。"),
+      role: L("MSc thesis · research, service design, prototype", "硕士论文 · 研究、服务设计、原型"),
+      status: L("Defended, KTH 2026", "已答辩，KTH 2026"),
+      stack: ["Interviews", "Thematic coding", "Service design", "Interactive prototype"],
       links: [],
-      verify: L("Add the live URL and 3–5 screenshots or a screen recording (menu, cart, checkout, Telegram message, admin). Repo is private.", "需补线上网址和 3–5 张截图或一段录屏（菜单、购物车、结账、Telegram 通知、后台）。仓库为私有。"),
+      verify: L("Add prototype link, 4–6 figures, and the thesis PDF if you want it public.", "如需公开，请补原型链接、4–6 张图和论文 PDF。"),
       shape: "wide",
-      tile: { motion: "sushi-flow" },
-      hero: { type: "motion", id: "sushi-flow", cap: L("Illustration of the order loop: site, database, Telegram, owner's phone call.", "订单闭环示意：网站、数据库、Telegram、老板电话确认。"), tag: "ill" },
+      tile: { motion: "funnel" },
+      hero: { type: "motion", id: "funnel", cap: L("From data to design: interviews to tensions to principles to the Canvas.", "从数据到设计：访谈 → 张力 → 原则 → 画布。"), tag: "ill" },
       sections: [
-        { h: L("Overview — Arabic first, cash on delivery, no ops burden", "概述 — 阿拉伯语优先、货到付款、没有运维负担"),
-          p: L(["The owner needed something manageable from a phone. So: Arabic-only right-to-left, cash on delivery, and the owner confirms every order by phone before it counts.", "I translated those constraints into a product spec, went through two versions of it, and directed an AI coding agent to build it."], ["老板需要一个能用手机管理的东西。所以：纯阿拉伯语、从右到左、货到付款，每一单都由老板电话确认后才算数。", "我把这些约束翻译成产品 spec，迭代了两版，再指挥 AI 编程助手实现。"]),
-          media: { type: "stats", items: [["~2", L("days to live", "天上线")], ["19", L("delivery areas", "个配送区域")], ["3", L("database migrations", "次数据库迁移")], ["1", L("real customer loop tested", "次真实顾客链路验证")]] } },
-        { h: L("Delivery — Fees by area, snapshotted onto each order", "配送 — 按区域计费，并快照进每张订单"),
-          p: L(["Version 1.1 replaced a free-delivery threshold with 19 owner-editable areas after the owner's feedback. The cart shows the fee as 'set at checkout' until an area is chosen.", "Each order stores the area name and fee at that moment, so history never drifts when prices change. Hard delete of areas is disabled on purpose, so old orders always resolve."], ["v1.1 根据老板的反馈，把「满额免运费」换成了 19 个老板可自己编辑的配送区域。选定区域之前，购物车里的运费显示为「结账时确定」。", "每张订单会记下当时的区域名和运费，改价格也不会改动历史。刻意禁用区域的硬删除，保证旧订单永远能追溯。"]),
-          media: { type: "motion", id: "sushi-fees" }, cap: L("Choosing an area sets the fee and total live; the order keeps a snapshot.", "选择区域后运费和总价实时更新；订单保存当时的快照。") },
-        { h: L("Owner tools — Telegram in, admin out", "老板工具 — Telegram 进，后台出"),
-          p: L(["A Telegram bot pushes every order to the owner with inline action buttons, and a WhatsApp deep link lets the customer confirm themselves.", "The admin uses magic-link login with an email allowlist: today's orders, store open or closed, menu prices and availability, delivery areas."], ["Telegram 机器人把每张订单推给老板，附内联操作按钮；顾客可以用 WhatsApp 链接自己确认。", "后台用魔法链接登录，加邮件白名单：今日订单、营业状态、菜单价格与上下架、配送区域。"]) },
-        { h: L("Shipping — Moving Vercel to Netlify after the owner's own test", "上线 — 老板实测后从 Vercel 迁到 Netlify"),
-          p: L(["The owner tested from the shop and hit reachability problems, so I migrated the deployment and re-ran the whole loop with a real customer: order, Telegram message, phone confirmation.", "I handled Supabase, the bot, deployment and QA myself through a pull-request workflow."], ["老板在店里实测后发现访问不稳定，于是我迁移了部署，并用一位真实顾客把整个链路再跑一遍：下单、Telegram 通知、电话确认。", "Supabase、机器人、部署和验收由我亲自完成，采用 PR 工作流。"]) }
+        { h: L("Overview — Collaboration fails at the seams", "概述 — 合作总在接缝处出问题"),
+          p: L(["University-led innovation labs bring students, teachers and external partners together. The collaboration keeps failing in the same places: mismatched goals, communication gaps, unclear roles.", "The thesis asks why, and whether service design tools can hold the seams together, not just diagnose them."], ["由大学主导的创新实验室把学生、教师和外部伙伴放在一起，合作却总在同样的地方出问题：目标错位、沟通断层、角色不清。", "论文要问的是为什么，以及服务设计工具能不能把这些接缝真正连起来，而不只是诊断它们。"]),
+          media: { type: "stats", items: [["9", L("stakeholder interviews", "场利益相关者访谈")], ["2", L("cases", "个案例")], ["5", L("systemic tensions", "个系统性张力")], ["4", L("design principles", "条设计原则")]] } },
+        { h: L("Method — Two-layer coding across two cases", "方法 — 两个案例，两层编码")  ,
+          p: L(["Nine interviews across two cases were coded in two layers. The first stays close to what people said; the second lifts it into patterns about the system.", "Five tensions came out of that second layer, and four design principles were distilled from them."], ["两个案例共九场访谈，做了两层编码。第一层贴近受访者原话；第二层把它抬升为关于系统的模式。", "第二层里浮现出五个张力，并从中提炼出四条设计原则。"]),
+          media: { type: "steps", items: [["01", L("9 interviews, 2 cases", "9 场访谈、2 个案例")], ["02", L("Two-layer coding", "两层编码")], ["03", L("5 systemic tensions", "5 个系统性张力")], ["04", L("4 design principles", "4 条设计原则")], ["05", L("Collaboration Canvas", "Collaboration Canvas")], ["→", L("Next: real-world validation", "下一步：真实场景验证")]] }, cap: L("The chain of evidence in the thesis.", "论文里的证据链。") },
+        { h: L("The Canvas — Seven components, one shared coordination layer", "画布 — 七个组件，一层共享的协调界面"),
+          p: L(["The Collaboration Canvas is a seven-component shared coordination layer, delivered as a role-switchable interactive prototype so each party sees the same board from their own seat.", "The methodological claim: service design tools work as infrastructural devices, not only diagnostic instruments."], ["Collaboration Canvas 是由七个组件构成的共享协调层，做成可切换角色的交互原型，让各方从各自的位置看到同一块画布。", "方法论主张：服务设计工具是「基础设施装置」，而不只是诊断工具。"]) },
+        { h: L("Honesty — What is claimed, and what isn't", "诚实 — 声称了什么，没有声称什么"),
+          p: L(["Real-world validation is defined as the explicit next step, not claimed as done. The prototype was spec-driven and implemented by AI, and that is disclosed in the methodology chapter.", "The research design, the coding and the synthesis are mine."], ["真实场景验证被明确定义为下一步，而不是声称已完成。原型由 spec 驱动、AI 实现，并在方法论章节里披露。", "研究设计、编码和归纳由我完成。"]) }
       ]
     },
 
@@ -168,12 +168,20 @@
       status: L("2nd place · live", "二等奖 · 已上线"),
       stack: ["BitMagic GDK", "Claude Code"],
       links: [{ label: L("Play it", "在线试玩"), url: "https://bitmagic.ai/play/disco-fever/" }],
-      verify: L("Official hackathon name; teammates; add a screen recording.", "黑客松正式名称；队友；补一段录屏。"),
+      verify: L("Official hackathon name; teammates.", "黑客松正式名称；队友。"),
       shape: "square",
-      tile: { text: L("2nd place", "二等奖"), sub: L("Rhythm game · playable online", "节奏游戏 · 在线可玩") },
+      tile: { img: "assets/shots/disco-tile.jpg" },
+      hero: IMG("assets/shots/disco-play.jpg", "Disco Fever mid-game: 54 of 61 dancers on the floor, a 44 combo", { narrow: true, cap: L("Mid-game on a phone: 54 of 61 dancers are dancing, a 44 combo, and the floor has lit up.", "手机上的游戏中途：61 个舞者里已有 54 个在跳舞，44 连击，舞池也亮起来了。") }),
       sections: [
         { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
-          p: L(["One minute, a stream of arrows, and a dance floor. Every correct arrow sends the dancing further out from the centre.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一分钟、一串箭头、一个舞池。每按对一个箭头，跳舞的范围就从中心向外扩一圈。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]) },
+          p: L(["One dancer, five lanes of arrows, and a dance floor. Hit the arrows on the beat and the groove spreads out from the centre until the whole 70s disco hall is dancing, then the mirror ball goes KA-BLING.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一个舞者、五条箭头轨道、一个舞池。踩着节拍按对箭头，律动就从中心向外扩散，直到整个 70 年代的迪斯科舞厅都在跳舞，然后灯球「叮」地一声亮起来。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]),
+          media: { type: "stats", items: [["61", L("dancers to wake up", "个舞者等你唤醒")], ["5", L("arrow lanes", "条箭头轨道")], ["1 min", L("per round", "每局")], ["11", L("prompts to build", "条提示词做成")]] } },
+        { h: L("How it plays — From a dark floor to a full one", "玩法 — 从黑暗的舞池到满场"),
+          p: L(["The round starts with one dancer and a floor full of dark silhouettes, 1 of 61 on the floor. Each correct arrow wakes more of them up.", "A minute later the silhouettes are lit in neon colours, the combo counter is at 44, and \u201cPerfect\u201d floats over the lanes."], ["一局开始时，舞池里只有一个舞者，其余都是暗色剪影，「61 个里的第 1 个」。每按对一个箭头，就有更多剪影被唤醒。", "一分钟后，剪影都变成了霓虹色，连击数到了 44，轨道上方飘着「Perfect」。"]),
+          media: IMG("assets/shots/disco-start.jpg", "Disco Fever at the start: one dancer, 1 of 61, on a dark floor", { narrow: true }), cap: L("The start of a round: one dancer lit, 1 of 61.", "一局的开始：只有一个舞者亮着，61 个里的第 1 个。") },
+        { h: L("On Bitmagic — Built with 11 prompts", "在 Bitmagic 上 — 用 11 条提示词做成"),
+          p: L(["The game lives on Bitmagic's site, tagged Arcade and Music Game and marked \u201cMade with Bitmagic GDK\u201d. The page credits the build to 11 prompts."], ["游戏发布在 Bitmagic 的网站上，标签是 Arcade 和 Music Game，并标明「Made with Bitmagic GDK」。页面上写着它由 11 条提示词做成。"]),
+          media: IMG("assets/shots/disco-page.jpg", "Disco Fever on the Bitmagic game page", { narrow: true }), cap: L("The game page on Bitmagic, with the Play button.", "Bitmagic 上的游戏页面，右下角是 Play 按钮。") },
         { h: L("After the event — A phone version that leaves the web version untouched", "赛后 — 做一个不影响网页版的手机版"),
           p: L(["After the hackathon I made a portrait version for phones. It was adapted separately, with one rule for the agent: the web version must not change."], ["黑客松结束后，我做了手机竖屏版。它是单独适配的，给 AI 的规则只有一条：网页版不能受影响。"]) }
       ]
@@ -181,36 +189,89 @@
 
     /* ------------------------------------------------------------ 06 */
     {
-      id: "collaboration-canvas", num: "06", year: "2026", when: "MSc thesis · 2026", zones: ["service", "ux"], tags: ["built-with-ai"],
-      title: "Collaboration Canvas", meta: "KTH thesis · 2026",
-      cap: L("Why student–industry collaborations break, and a canvas to hold them", "学生—企业合作为什么会散架，以及一张让它们不散的画布"),
-      h1: L("Why student–industry–university collaborations break, and a shared canvas that holds them together", "学生—企业—学校的合作为什么会散架，以及一张让它们不散的共享画布"),
-      lead: L("My master's thesis at KTH: nine interviews, five systemic tensions, four design principles, and one interactive prototype.", "我在 KTH 的硕士论文：九场访谈、五个系统性张力、四条设计原则，以及一个交互原型。"),
-      role: L("MSc thesis · research, service design, prototype", "硕士论文 · 研究、服务设计、原型"),
-      status: L("Defended, KTH 2026", "已答辩，KTH 2026"),
-      stack: ["Interviews", "Thematic coding", "Service design", "Interactive prototype"],
+      id: "voi", orgs: ["voi"], num: "06", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
+      title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
+      cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
+      h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
+      lead: L("A KTH course project with Voi Technology. The assumed cause was price. The field research said otherwise.", "与 Voi Technology 合作的 KTH 课程项目。原本假设的原因是价格，田野研究给出了不同答案。"),
+      role: L("Co-led research, in-app flow design, business case", "联合带领研究、App 内流程设计、商业测算"),
+      status: L("KTH × Voi, Aug–Dec 2025", "KTH × Voi，2025 年 8–12 月"),
+      stack: ["Field research", "Surveys", "Service + UI design", "Business case"],
       links: [],
-      verify: L("Add prototype link, 4–6 figures, and the thesis PDF if you want it public.", "如需公开，请补原型链接、4–6 张图和论文 PDF。"),
+      verify: L("Add visuals (helmet concept, flow screens) if Voi allows publication.", "如 Voi 允许公开，请补头盔概念与流程截图。"),
       shape: "wide",
-      tile: { motion: "funnel" },
-      hero: { type: "motion", id: "funnel", cap: L("From data to design: interviews to tensions to principles to the Canvas.", "从数据到设计：访谈 → 张力 → 原则 → 画布。"), tag: "ill" },
+      tile: { motion: "voi-flow" },
+      hero: { type: "motion", id: "voi-flow", cap: L("Illustration of the helmet flow: unlock, wear, ride, return.", "头盔流程示意：解锁、佩戴、骑行、归还。"), tag: "ill" },
       sections: [
-        { h: L("Overview — Collaboration fails at the seams", "概述 — 合作总在接缝处出问题"),
-          p: L(["University-led innovation labs bring students, teachers and external partners together. The collaboration keeps failing in the same places: mismatched goals, communication gaps, unclear roles.", "The thesis asks why, and whether service design tools can hold the seams together, not just diagnose them."], ["由大学主导的创新实验室把学生、教师和外部伙伴放在一起，合作却总在同样的地方出问题：目标错位、沟通断层、角色不清。", "论文要问的是为什么，以及服务设计工具能不能把这些接缝真正连起来，而不只是诊断它们。"]),
-          media: { type: "stats", items: [["9", L("stakeholder interviews", "场利益相关者访谈")], ["2", L("cases", "个案例")], ["5", L("systemic tensions", "个系统性张力")], ["4", L("design principles", "条设计原则")]] } },
-        { h: L("Method — Two-layer coding across two cases", "方法 — 两个案例，两层编码")  ,
-          p: L(["Nine interviews across two cases were coded in two layers. The first stays close to what people said; the second lifts it into patterns about the system.", "Five tensions came out of that second layer, and four design principles were distilled from them."], ["两个案例共九场访谈，做了两层编码。第一层贴近受访者原话；第二层把它抬升为关于系统的模式。", "第二层里浮现出五个张力，并从中提炼出四条设计原则。"]),
-          media: { type: "steps", items: [["01", L("9 interviews, 2 cases", "9 场访谈、2 个案例")], ["02", L("Two-layer coding", "两层编码")], ["03", L("5 systemic tensions", "5 个系统性张力")], ["04", L("4 design principles", "4 条设计原则")], ["05", L("Collaboration Canvas", "Collaboration Canvas")], ["→", L("Next: real-world validation", "下一步：真实场景验证")]] }, cap: L("The chain of evidence in the thesis.", "论文里的证据链。") },
-        { h: L("The Canvas — Seven components, one shared coordination layer", "画布 — 七个组件，一层共享的协调界面"),
-          p: L(["The Collaboration Canvas is a seven-component shared coordination layer, delivered as a role-switchable interactive prototype so each party sees the same board from their own seat.", "The methodological claim: service design tools work as infrastructural devices, not only diagnostic instruments."], ["Collaboration Canvas 是由七个组件构成的共享协调层，做成可切换角色的交互原型，让各方从各自的位置看到同一块画布。", "方法论主张：服务设计工具是「基础设施装置」，而不只是诊断工具。"]) },
-        { h: L("Honesty — What is claimed, and what isn't", "诚实 — 声称了什么，没有声称什么"),
-          p: L(["Real-world validation is defined as the explicit next step, not claimed as done. The prototype was spec-driven and implemented by AI, and that is disclosed in the methodology chapter.", "The research design, the coding and the synthesis are mine."], ["真实场景验证被明确定义为下一步，而不是声称已完成。原型由 spec 驱动、AI 实现，并在方法论章节里披露。", "研究设计、编码和归纳由我完成。"]) }
+        { h: L("Overview — Ridership among Gen-Y women was low", "概述 — Gen-Y 女性的使用率偏低")  ,
+          p: L(["The obvious hypothesis was price. We went to the street instead.", "Thirty-seven street interviews and 47 branching surveys traced the gap to perceived safety, which reframed the whole project."], ["最直接的假设是价格。我们选择走到街上去问。", "37 场街头访谈和 47 份分支问卷，把差距追溯到「感知安全」，整个项目因此被重新定义。"]),
+          media: { type: "stats", items: [["37", L("street interviews", "场街头访谈")], ["47", L("branching surveys", "份分支问卷")], ["+645k", L("SEK / month, projected", "SEK/月（预测）")]] } },
+        { h: L("Concept — A helmet built into the basket", "概念 — 与车筐集成的智能头盔")  ,
+          p: L(["The team designed a smart helmet integrated with the scooter's basket, and iterated on feedback from Voi.", "My part was the end-to-end in-app flow, inside Voi's existing design language."], ["团队设计了与滑板车车筐集成的智能头盔，并根据 Voi 的反馈迭代。", "我负责端到端的 App 内流程，并且必须落在 Voi 现有的设计语言里。"]) },
+        { h: L("Flow — Unlock sequencing, wear confirmation, return detection", "流程 — 解锁顺序、佩戴确认、归还检测")  ,
+          p: L(["The flow covers unlock sequencing, wear confirmation and return detection, so that a helmet is a natural part of starting a ride and not an extra chore.", "Where it touches Voi's existing patterns, I used them instead of inventing new ones."], ["这个流程覆盖解锁顺序、佩戴确认和归还检测，目的是让头盔成为开始骑行的自然一步，而不是额外的负担。", "凡是碰到 Voi 现有的模式，我都直接沿用，而不是另造新的。"]) },
+        { h: L("Business case — Grounded in a real supplier quote", "商业测算 — 基于真实供应商报价")  ,
+          p: L(["I contributed a business case projecting +645k SEK per month, built on a real supplier quote for the helmet.", "It is a projection, and I present it as one."], ["我参与了商业测算：预计每月 +645k SEK，基于头盔的真实供应商报价。", "它是预测，我也只把它当预测来讲。"]) }
       ]
     },
 
     /* ------------------------------------------------------------ 07 */
     {
-      id: "legacychain", orgs: ["nebius"], num: "07", year: "2026", when: "Sep 2026", zones: ["ai", "build"], tags: ["hackathon", "built-with-ai"],
+      id: "community-viewfinder", num: "07", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service"], tags: ["award"],
+      title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
+      cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
+      h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
+      lead: L("A real brief from a community-renewal co-creation workshop in Huayang Road Subdistrict, Changning District. My proposal received an Excellent Proposal commendation.", "来自长宁区华阳路街道社区更新共创工作坊的真实命题。我的方案获得「优秀提案表彰」。"),
+      role: L("Concept author; field research, prototyping, testing, UI", "概念提出者；实地调研、原型、测试、界面"),
+      status: L("Excellent Proposal commendation; a different version was built", "获优秀提案表彰；最终落地的是另一个版本"),
+      stack: ["Field research", "Personas", "Stakeholder map", "Full-scale prototype", "UI design"],
+      links: [],
+      verify: L("Add publishable photos, the built version next to your proposal, and the hand sketches.", "补可公开的照片、落地版和你的方案的对比，以及手绘稿。"),
+      shape: "square",
+      tile: { text: L("Frame the street", "框住街道"), sub: L("Excellent Proposal commendation · Shanghai", "优秀提案表彰 · 上海") },
+      sections: [
+        { h: L("Overview — A real neighbourhood, a real brief", "概述 — 真实的社区，真实的命题"),
+          p: L(["The workshop was co-hosted by the subdistrict and a design studio, and judges came from both. The question was community renewal, so residents, the local government and designers all had a stake.", "I proposed the viewfinder concept and walked every street in the subdistrict before designing anything. The research used personas, a stakeholder map and Passerby Research."], ["工作坊由街道和设计工作室共同举办，评委也来自双方。命题是社区更新，居民、街道和设计方都是相关方。", "取景框的概念是我提出的。动手设计之前，我走遍了街道的每一条街。研究用到了 persona、利益相关者地图和 Passerby Research。"]) },
+        { h: L("Prototype — Full scale, tested twice", "原型 — 1:1 尺寸，测试两轮"),
+          p: L(["I built a 1:1 foam prototype and tested it in two rounds, then designed three high-fidelity interface screens for it."], ["我做了 1:1 的泡沫原型，测试了两轮，然后为它设计了 3 张高保真界面。"]),
+          media: { type: "steps", items: [["01", L("Walk every street", "走遍每一条街")], ["02", L("Personas, stakeholder map, Passerby Research", "Persona、利益相关者地图、Passerby Research")], ["03", L("1:1 foam prototype, two test rounds", "1:1 泡沫原型，两轮测试")], ["04", L("Three high-fidelity screens", "3 张高保真界面")], ["05", L("Excellent Proposal commendation", "优秀提案表彰")]] } },
+        { h: L("Honesty — What was actually built", "诚实 — 最后真正落地的是什么"),
+          p: L(["The final installation was windows cut into an exhibition-hall wall and framed-view greeting cards. The client's product manager chose that direction. It is not my proposal, and I was not part of that decision."], ["最终落地的是展厅墙面上的开窗和框景贺卡，方向由对方的产品经理决定。那不是我的方案，我也没有参与这个决定。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 08 */
+    {
+      id: "sushi-jerash", num: "08", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
+      title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
+      cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
+      h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
+      lead: L("The first sushi shop in Jerash, Jordan took orders by phone. This is the site, the bot and the admin that replaced that, live in production.", "约旦杰拉什第一家寿司店原来靠电话接单。这是取代它的网站、机器人和后台，已在生产环境上线。"),
+      role: L("Spec, direction, Supabase, Telegram bot, deploy, QA", "spec、指挥、Supabase、Telegram 机器人、部署、验收"),
+      status: L("Live in production", "已上线"),
+      stack: ["Next.js 15", "TypeScript", "Tailwind (RTL)", "Supabase", "Zustand", "Telegram Bot API", "Netlify"],
+      links: [],
+      verify: L("Add the live URL and 3–5 screenshots or a screen recording (menu, cart, checkout, Telegram message, admin). Repo is private.", "需补线上网址和 3–5 张截图或一段录屏（菜单、购物车、结账、Telegram 通知、后台）。仓库为私有。"),
+      shape: "wide",
+      tile: { motion: "sushi-flow" },
+      hero: { type: "motion", id: "sushi-flow", cap: L("Illustration of the order loop: site, database, Telegram, owner's phone call.", "订单闭环示意：网站、数据库、Telegram、老板电话确认。"), tag: "ill" },
+      sections: [
+        { h: L("Overview — Arabic first, cash on delivery, no ops burden", "概述 — 阿拉伯语优先、货到付款、没有运维负担"),
+          p: L(["The owner needed something manageable from a phone. So: Arabic-only right-to-left, cash on delivery, and the owner confirms every order by phone before it counts.", "I translated those constraints into a product spec, went through two versions of it, and directed an AI coding agent to build it."], ["老板需要一个能用手机管理的东西。所以：纯阿拉伯语、从右到左、货到付款，每一单都由老板电话确认后才算数。", "我把这些约束翻译成产品 spec，迭代了两版，再指挥 AI 编程助手实现。"]),
+          media: { type: "stats", items: [["~2", L("days to live", "天上线")], ["19", L("delivery areas", "个配送区域")], ["3", L("database migrations", "次数据库迁移")], ["1", L("real customer loop tested", "次真实顾客链路验证")]] } },
+        { h: L("Delivery — Fees by area, snapshotted onto each order", "配送 — 按区域计费，并快照进每张订单"),
+          p: L(["Version 1.1 replaced a free-delivery threshold with 19 owner-editable areas after the owner's feedback. The cart shows the fee as 'set at checkout' until an area is chosen.", "Each order stores the area name and fee at that moment, so history never drifts when prices change. Hard delete of areas is disabled on purpose, so old orders always resolve."], ["v1.1 根据老板的反馈，把「满额免运费」换成了 19 个老板可自己编辑的配送区域。选定区域之前，购物车里的运费显示为「结账时确定」。", "每张订单会记下当时的区域名和运费，改价格也不会改动历史。刻意禁用区域的硬删除，保证旧订单永远能追溯。"]),
+          media: { type: "motion", id: "sushi-fees" }, cap: L("Choosing an area sets the fee and total live; the order keeps a snapshot.", "选择区域后运费和总价实时更新；订单保存当时的快照。") },
+        { h: L("Owner tools — Telegram in, admin out", "老板工具 — Telegram 进，后台出"),
+          p: L(["A Telegram bot pushes every order to the owner with inline action buttons, and a WhatsApp deep link lets the customer confirm themselves.", "The admin uses magic-link login with an email allowlist: today's orders, store open or closed, menu prices and availability, delivery areas."], ["Telegram 机器人把每张订单推给老板，附内联操作按钮；顾客可以用 WhatsApp 链接自己确认。", "后台用魔法链接登录，加邮件白名单：今日订单、营业状态、菜单价格与上下架、配送区域。"]) },
+        { h: L("Shipping — Moving Vercel to Netlify after the owner's own test", "上线 — 老板实测后从 Vercel 迁到 Netlify"),
+          p: L(["The owner tested from the shop and hit reachability problems, so I migrated the deployment and re-ran the whole loop with a real customer: order, Telegram message, phone confirmation.", "I handled Supabase, the bot, deployment and QA myself through a pull-request workflow."], ["老板在店里实测后发现访问不稳定，于是我迁移了部署，并用一位真实顾客把整个链路再跑一遍：下单、Telegram 通知、电话确认。", "Supabase、机器人、部署和验收由我亲自完成，采用 PR 工作流。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 09 */
+    {
+      id: "legacychain", orgs: ["nebius"], num: "09", year: "2026", when: "Sep 2026", zones: ["ai", "build"], tags: ["hackathon", "built-with-ai"],
       title: "LegacyChain", meta: "LegacyChain · from MEMO · Sep 2026",
       cap: L("From a memoir app for older people to a family archive where AI reads but never rewrites the record", "从老年人回忆录 App，到 AI 只能阅读、不能改写记录的家族档案"),
       h1: L("A family archive where AI can read the letters but never rewrite the record", "一个家族档案：AI 可以读信，但永远改写不了记录"),
@@ -241,9 +302,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 08 */
+    /* ------------------------------------------------------------ 10 */
     {
-      id: "let-me-die", orgs: ["stoneleap"], num: "08", year: "2026", when: "Sep 2026", zones: ["games"], tags: ["hackathon", "award", "built-with-ai"],
+      id: "let-me-die", orgs: ["stoneleap"], num: "10", year: "2026", when: "Sep 2026", zones: ["games"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
       meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
       cap: L("A first-person game where every death opens a new world: 1st place at Stone Leap", "每死一次就进入一个新世界的第一人称游戏：Stone Leap 第一名"),
@@ -266,9 +327,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 09 */
+    /* ------------------------------------------------------------ 11 */
     {
-      id: "kikaren", orgs: ["pwc"], num: "09", year: "2026", when: "Hackathon · 2026", zones: ["ux", "service"], tags: ["hackathon", "built-with-ai"],
+      id: "kikaren", hidden: true, orgs: ["pwc"], num: "11", year: "2026", when: "Hackathon · 2026", zones: ["ux", "service"], tags: ["hackathon", "built-with-ai"],
       title: "Kikaren", meta: "Kikaren · 2026",
       cap: L("A telescope for seeing each party's vision for Järva", "用望远镜看每个政党对 Järva 的愿景"),
       h1: L("Letting first-time voters in Järva look through a telescope at the future each party imagines", "让 Järva 的首投族透过望远镜，看每个政党想象中的未来"),
@@ -293,9 +354,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 10 */
+    /* ------------------------------------------------------------ 12 */
     {
-      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "10", year: "2026", when: "Apr 2026", zones: ["ai", "ux"], tags: ["award", "built-with-ai"],
+      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "12", year: "2026", when: "Apr 2026", zones: ["ai", "ux"], tags: ["award", "built-with-ai"],
       title: "SAP Career Ignite", meta: "SAP × Capgemini × Google · Apr 2026",
       cap: L("Winning a consulting case with a clickable prototype", "用可点击的原型赢下咨询案例赛"),
       h1: L("Winning a consulting case by letting the judges click the future instead of reading about it", "让评委亲手点一点未来，而不是读一份 PPT，赢下咨询案例赛"),
@@ -321,9 +382,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 11 */
+    /* ------------------------------------------------------------ 13 */
     {
-      id: "beside", num: "11", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["built-with-ai"],
+      id: "beside", num: "13", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["built-with-ai"],
       title: "Beside", meta: "Beside · Sep 2026",
       cap: L("Two squares for two friends, with no obligation to reply", "两个朋友的两个方格，没有回复的义务"),
       h1: L("Two friends, two squares, and no obligation to reply", "两个朋友，两个方格，没有回复的义务"),
@@ -349,9 +410,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 12 */
+    /* ------------------------------------------------------------ 14 */
     {
-      id: "chroma-reader", num: "12", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["hackathon", "built-with-ai"],
+      id: "chroma-reader", num: "14", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["hackathon", "built-with-ai"],
       title: "Chroma Reader", meta: "Chroma Reader · Sep 2026",
       cap: L("A study reader that colours sentences by mastery", "按掌握程度给句子上色的学习阅读器"),
       h1: L("A study reader that colours every sentence by how well you know it, at the speed of a keypress", "一个按掌握程度给每个句子上色的阅读器，快到只需一次按键"),
@@ -377,79 +438,41 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 13 */
+    /* ------------------------------------------------------------ 15 */
     {
-      id: "community-viewfinder", num: "13", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service"], tags: ["award"],
-      title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
-      cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
-      h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
-      lead: L("A real brief from a community-renewal co-creation workshop in Huayang Road Subdistrict, Changning District. My proposal received an Excellent Proposal commendation.", "来自长宁区华阳路街道社区更新共创工作坊的真实命题。我的方案获得「优秀提案表彰」。"),
-      role: L("Concept author; field research, prototyping, testing, UI", "概念提出者；实地调研、原型、测试、界面"),
-      status: L("Excellent Proposal commendation; a different version was built", "获优秀提案表彰；最终落地的是另一个版本"),
-      stack: ["Field research", "Personas", "Stakeholder map", "Full-scale prototype", "UI design"],
-      links: [],
-      verify: L("Add publishable photos, the built version next to your proposal, and the hand sketches.", "补可公开的照片、落地版和你的方案的对比，以及手绘稿。"),
-      shape: "square",
-      tile: { text: L("Frame the street", "框住街道"), sub: L("Excellent Proposal commendation · Shanghai", "优秀提案表彰 · 上海") },
-      sections: [
-        { h: L("Overview — A real neighbourhood, a real brief", "概述 — 真实的社区，真实的命题"),
-          p: L(["The workshop was co-hosted by the subdistrict and a design studio, and judges came from both. The question was community renewal, so residents, the local government and designers all had a stake.", "I proposed the viewfinder concept and walked every street in the subdistrict before designing anything. The research used personas, a stakeholder map and Passerby Research."], ["工作坊由街道和设计工作室共同举办，评委也来自双方。命题是社区更新，居民、街道和设计方都是相关方。", "取景框的概念是我提出的。动手设计之前，我走遍了街道的每一条街。研究用到了 persona、利益相关者地图和 Passerby Research。"]) },
-        { h: L("Prototype — Full scale, tested twice", "原型 — 1:1 尺寸，测试两轮"),
-          p: L(["I built a 1:1 foam prototype and tested it in two rounds, then designed three high-fidelity interface screens for it."], ["我做了 1:1 的泡沫原型，测试了两轮，然后为它设计了 3 张高保真界面。"]),
-          media: { type: "steps", items: [["01", L("Walk every street", "走遍每一条街")], ["02", L("Personas, stakeholder map, Passerby Research", "Persona、利益相关者地图、Passerby Research")], ["03", L("1:1 foam prototype, two test rounds", "1:1 泡沫原型，两轮测试")], ["04", L("Three high-fidelity screens", "3 张高保真界面")], ["05", L("Excellent Proposal commendation", "优秀提案表彰")]] } },
-        { h: L("Honesty — What was actually built", "诚实 — 最后真正落地的是什么"),
-          p: L(["The final installation was windows cut into an exhibition-hall wall and framed-view greeting cards. The client's product manager chose that direction. It is not my proposal, and I was not part of that decision."], ["最终落地的是展厅墙面上的开窗和框景贺卡，方向由对方的产品经理决定。那不是我的方案，我也没有参与这个决定。"]) }
-      ]
-    },
-
-    /* ------------------------------------------------------------ 14 */
-    {
-      id: "notchbreak", num: "14", year: "2026", when: "Sep 2026", zones: ["build", "ux"], tags: ["built-with-ai"],
+      id: "notchbreak", num: "15", year: "2026", when: "25 Sep 2026 · one day", zones: ["build", "ux"], tags: ["built-with-ai"],
       title: "NotchBreak", meta: "NotchBreak · macOS · Sep 2026",
       cap: L("A break reminder that grows out of the MacBook notch", "从 MacBook 刘海里长出来的休息提醒"),
       h1: L("A macOS break reminder that grows out of the notch, built in one day", "一个从刘海里长出来的 macOS 休息提醒，一天做完"),
       lead: L("After a stretch of continuous screen time, a black bar grows out from under the notch. From there you can start a five-minute break countdown.", "连续看屏幕一段时间后，刘海下方会长出一块黑色提醒，可以从这里进入 5 分钟的休息倒计时。"),
       role: L("Idea, design direction, acceptance testing", "想法、设计方向、验收"),
-      status: L("Native app that runs locally; not published", "本地可运行的原生 app，未公开发布"),
-      stack: ["Swift", "macOS", "Claude Code"],
+      status: L("MVP finished; runs locally, not published", "MVP 已完成；本地可运行，未公开发布"),
+      stack: ["Swift", "SwiftUI + AppKit", "macOS 14+", "Claude Code"],
       links: [],
-      verify: L("Add a screen recording or screenshots. Decide whether to publish it. Confirm nobody else worked on it.", "补录屏或截图；决定是否公开发布；确认有没有队友。"),
+      verify: L("The images are early comparison renders with a Chinese interface; add a recording of the current English build. Decide whether to publish it. Confirm nobody else worked on it.", "图片是早期的对比渲染，界面还是中文；补一段当前英文版的录屏。决定是否公开发布；确认有没有队友。"),
       shape: "square",
-      tile: { text: L("Notch → break", "刘海 → 休息"), sub: L("Native macOS app · built in one day", "原生 macOS app · 一天完成") },
+      tile: { img: "assets/shots/notch-radius.jpg" },
       sections: [
-        { h: L("Overview — The reminder lives where the notch already is", "概述 — 提醒就长在刘海那里"),
-          p: L(["I set the idea, the visual direction and the acceptance bar: Apple Human Interface Guidelines style, and a rounded transition where the bar meets the notch.", "Claude Code wrote the Swift. The build script packages a working .app, and the build finishes with zero errors and zero warnings."], ["想法、视觉方向和验收标准由我定：Apple HIG 风格，提醒条和刘海相接的地方做圆角过渡。", "Swift 代码由 Claude Code 编写。构建脚本能打包出可以打开的 .app，编译零错误、零警告。"]) },
+        { h: L("Overview — The reminder is the notch", "概述 — 提醒就是刘海本身"),
+          p: L(["NotchBreak is a native macOS menu-bar tool. After a stretch of continuous computer use, a pure-black shape grows out of the MacBook's notch to tell me to rest. The rest of the time it hides completely inside the notch.", "What I cared about most was blending in: it should look like the notch itself changing shape, not like a pop-up stuck on top. I set the idea, the visual direction and the acceptance bar; Claude Code wrote the Swift."], ["NotchBreak 是一个原生 macOS 菜单栏小工具。连续使用电脑一段时间后，一块纯黑的形状从 MacBook 的刘海里「长」出来，提醒我休息；其余时间它完全藏在刘海里。", "我最在意的是融入感：它要看起来像刘海本身在变形，而不是贴在上面的弹窗。想法、视觉方向和验收标准由我定，Swift 代码由 Claude Code 编写。"]),
+          media: { type: "stats", items: [["60 s", L("idle pauses the timer", "无操作就暂停计时")], ["5 min", L("idle counts as rested", "无操作视为已休息")], ["5 min", L("break countdown", "休息倒计时")], ["0", L("permissions asked", "需要的系统权限")]] } },
+        { h: L("Decision — One radius, eight renders", "决策 — 一个圆角，八次渲染"),
+          p: L(["The shoulders, where the black card meets the screen, decide whether it feels like part of the notch. I rendered the same card at radius 0, 6, 8, 10, 12, 14, 16 and 20, put them side by side, and picked 12 as the default.", "These are early renders with a Chinese interface; the interface text has since changed to English."], ["黑色卡片和屏幕相接的「肩膀」，决定了它像不像刘海的一部分。我把同一张卡片渲染成圆角 0、6、8、10、12、14、16、20 八个版本并排比较，最后默认选 12。", "这些是早期的渲染图，界面是中文；界面文字后来改成了英文。"]),
+          media: IMG("assets/shots/notch-radius.jpg", "The same notch card rendered at eight corner radii", {}), cap: L("Radius 0 to 20, side by side.", "圆角 0 到 20，并排比较。") },
+        { h: L("Zoomed in — Where the corner meets the screen", "放大 — 圆角和屏幕相接的地方"),
+          p: L(["Zooming into one corner shows the difference: at 0 the join is a hard step, and at 12 to 14 the curve flows into the menu bar without a seam or a bright edge."], ["放大看一个角就能看出差别：圆角为 0 时相接处是生硬的台阶，12 到 14 时曲线顺着菜单栏流过去，没有缝隙，也没有亮边。"]),
+          media: IMG("assets/shots/notch-corners.jpg", "Close-up of the corner at eight radii", {}), cap: L("The same corner at each radius.", "每个圆角下的同一个角。") },
+        { h: L("Decision — Follow the menu bar", "决策 — 跟着菜单栏变"),
+          p: L(["The card is always pure black. Whether its shoulders sit on the bottom edge of the menu bar or on the top of the screen depends on the menu bar: with a dark menu bar the card joins it, and with a light or transparent one it grows straight out of the notch.", "A launch flag, --menubar light or dark, makes both cases easy to check."], ["卡片永远是纯黑。肩膀贴在菜单栏底边，还是贴在屏幕顶边，取决于菜单栏：深色菜单栏时卡片和它连成一体，浅色或透明菜单栏时就像直接从刘海里长出来。", "一个启动参数 --menubar light 或 dark，让两种情况都容易检查。"]),
+          media: IMG("assets/shots/notch-menubar.jpg", "Light menu bar with shoulder radius 0 and 12", {}), cap: L("A light menu bar, radius 0 and radius 12.", "浅色菜单栏，圆角 0 和圆角 12。") },
+        { h: L("Behaviour — Quiet, and only when it should be", "行为 — 安静，只在该出现时出现"),
+          p: L(["It counts idle time from the system clock, so no permission is needed. 60 seconds of no input pauses the timer, and 5 minutes counts as a rest and resets it. Snoozing pushes the reminder back 10 minutes.", "It stays away from full-screen video and presentations such as Keynote, resets after sleep or lock, keeps its place when an external display is connected or removed, remembers its settings, can start at login, and fades instead of pulsing when Reduce Motion is on."], ["它用系统的空闲时间来计时，所以不需要任何权限。60 秒没有操作就暂停计时，5 分钟没操作算作已经休息并清零。选「稍后提醒」会推迟 10 分钟。", "全屏视频和演示（比如 Keynote 放映）时它不会出现；睡眠或锁屏回来后重新计时；连接或断开外接显示器后位置依然正确；设置重启后保留；可以开机自启；打开「减弱动态效果」时改用淡入淡出、不再循环脉冲。"]),
+          media: { type: "steps", items: [["01", L("Hidden in the notch", "藏在刘海里")], ["02", L("Reminder grows out", "提醒长出来")], ["03", L("Five-minute break countdown", "5 分钟休息倒计时")], ["04", L("Done, back into the notch", "完成，收回刘海")]] } },
+        { h: L("Constraints — Small on purpose", "约束 — 刻意做小"),
+          p: L(["Only Apple's own frameworks (AppKit, SwiftUI, Combine, ServiceManagement), no third-party dependencies, and a build script that needs no Xcode, just swiftc. macOS 14 or later. No camera, microphone, accessibility or input-monitoring permission, no network, and no data collected.", "Left out on purpose: charts and history, eye tracking, iOS, accounts and sync, and an App Store release."], ["只用 Apple 自带框架（AppKit、SwiftUI、Combine、ServiceManagement），不引入第三方依赖，构建脚本不需要 Xcode，只用 swiftc。要求 macOS 14 或更高。不使用摄像头、麦克风、辅助功能或输入监控权限，不联网，不收集任何数据。", "刻意不做：统计图表和历史记录、眼动追踪、iOS 版、账号与同步、App Store 上架。"]) },
         { h: L("Decisions — Cutting back to the timer", "关键决策 — 砍到只剩计时"),
-          p: L(["I tried a light glass look and went back to black. I also added camera-guided exercises with an illustrated figure, then removed all of it and kept only the time."], ["试过浅色玻璃效果，不喜欢，改回黑色。也加过摄像头跟练和插画小人，后来整段撤掉，只留下时间。"]),
-          media: { type: "steps", items: [["01", L("Black bar grows from the notch", "黑色提醒从刘海长出")], ["02", L("Light glass tried, back to black", "试过浅色玻璃，改回黑色")], ["03", L("Camera-guided exercises tried, removed", "试过摄像头跟练，撤掉")], ["04", L("Only the timer kept", "只留下计时")]] } }
-      ]
-    },
-
-    /* ------------------------------------------------------------ 15 */
-    {
-      id: "voi", orgs: ["voi"], num: "15", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
-      title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
-      cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
-      h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
-      lead: L("A KTH course project with Voi Technology. The assumed cause was price. The field research said otherwise.", "与 Voi Technology 合作的 KTH 课程项目。原本假设的原因是价格，田野研究给出了不同答案。"),
-      role: L("Co-led research, in-app flow design, business case", "联合带领研究、App 内流程设计、商业测算"),
-      status: L("KTH × Voi, Aug–Dec 2025", "KTH × Voi，2025 年 8–12 月"),
-      stack: ["Field research", "Surveys", "Service + UI design", "Business case"],
-      links: [],
-      verify: L("Add visuals (helmet concept, flow screens) if Voi allows publication.", "如 Voi 允许公开，请补头盔概念与流程截图。"),
-      shape: "wide",
-      tile: { motion: "voi-flow" },
-      hero: { type: "motion", id: "voi-flow", cap: L("Illustration of the helmet flow: unlock, wear, ride, return.", "头盔流程示意：解锁、佩戴、骑行、归还。"), tag: "ill" },
-      sections: [
-        { h: L("Overview — Ridership among Gen-Y women was low", "概述 — Gen-Y 女性的使用率偏低")  ,
-          p: L(["The obvious hypothesis was price. We went to the street instead.", "Thirty-seven street interviews and 47 branching surveys traced the gap to perceived safety, which reframed the whole project."], ["最直接的假设是价格。我们选择走到街上去问。", "37 场街头访谈和 47 份分支问卷，把差距追溯到「感知安全」，整个项目因此被重新定义。"]),
-          media: { type: "stats", items: [["37", L("street interviews", "场街头访谈")], ["47", L("branching surveys", "份分支问卷")], ["+645k", L("SEK / month, projected", "SEK/月（预测）")]] } },
-        { h: L("Concept — A helmet built into the basket", "概念 — 与车筐集成的智能头盔")  ,
-          p: L(["The team designed a smart helmet integrated with the scooter's basket, and iterated on feedback from Voi.", "My part was the end-to-end in-app flow, inside Voi's existing design language."], ["团队设计了与滑板车车筐集成的智能头盔，并根据 Voi 的反馈迭代。", "我负责端到端的 App 内流程，并且必须落在 Voi 现有的设计语言里。"]) },
-        { h: L("Flow — Unlock sequencing, wear confirmation, return detection", "流程 — 解锁顺序、佩戴确认、归还检测")  ,
-          p: L(["The flow covers unlock sequencing, wear confirmation and return detection, so that a helmet is a natural part of starting a ride and not an extra chore.", "Where it touches Voi's existing patterns, I used them instead of inventing new ones."], ["这个流程覆盖解锁顺序、佩戴确认和归还检测，目的是让头盔成为开始骑行的自然一步，而不是额外的负担。", "凡是碰到 Voi 现有的模式，我都直接沿用，而不是另造新的。"]) },
-        { h: L("Business case — Grounded in a real supplier quote", "商业测算 — 基于真实供应商报价")  ,
-          p: L(["I contributed a business case projecting +645k SEK per month, built on a real supplier quote for the helmet.", "It is a projection, and I present it as one."], ["我参与了商业测算：预计每月 +645k SEK，基于头盔的真实供应商报价。", "它是预测，我也只把它当预测来讲。"]) }
+          p: L(["I tried Liquid Glass cards and went back to pure black. On the same day I also tried camera-guided exercises, with paper strips printed out of the notch, an illustrated figure demonstrating the moves and pose recognition from the camera, then cut all of it and kept only the timer. The code is still in git history if I want it back."], ["我试过 Liquid Glass 玻璃卡片，不喜欢，改回纯黑。同一天还试过摄像头跟练：从刘海「打印」纸条、插画小人示范动作、摄像头识别姿势，之后整段撤掉，只留下计时。代码还留在 git 历史里，需要时可以找回。"]),
+          media: { type: "steps", items: [["01", L("Black bar grows from the notch", "黑色提醒从刘海长出")], ["02", L("Liquid Glass tried, back to black", "试过 Liquid Glass，改回纯黑")], ["03", L("Camera-guided exercises tried, removed", "试过摄像头跟练，撤掉")], ["04", L("Only the timer kept", "只留下计时")]] } }
       ]
     },
 
