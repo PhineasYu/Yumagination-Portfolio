@@ -13,9 +13,9 @@
   const arr = (o) => (o && (o[lang] || o.en)) || [];
   const STR = {
     letsTalk: { en: "Let's talk", zh: "聊一聊" }, viewWork: { en: "View work", zh: "看作品" },
-    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "Five areas: UX & UI, service design and research, AI products, building and automating, and games. Filter by area or by tag. Most of them actually run: watch them in motion, or open them yourself.", zh: "五个方向：用户体验与界面、服务设计与研究、AI 产品、开发与自动化、游戏。可以按方向或标签筛选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
-    zoneLbl: { en: "Area", zh: "方向" }, tagLbl: { en: "Tag", zh: "标签" }, zone: { en: "Area & tags", zh: "方向与标签" },
-    empty: { en: "Nothing matches both filters yet.", zh: "暂时没有同时符合这两个条件的作品。" },
+    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "Five areas: UX & UI, service design and research, AI products, building and automating, and games. A project sits under every area it belongs to, so it can show up in more than one. Most of them actually run: watch them in motion, or open them yourself.", zh: "五个方向：用户体验与界面、服务设计与研究、AI 产品、开发与自动化、游戏。一个作品会出现在它涉及的每个方向里。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
+    zoneLbl: { en: "Area", zh: "方向" }, tagLbl: { en: "Tag", zh: "标签" }, zone: { en: "Areas", zh: "方向" },
+    empty: { en: "Nothing here yet.", zh: "这个方向暂时还没有作品。" },
     method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" },
     recog: { en: "Recognition", zh: "获奖与认可" }, tools: { en: "Working with", zh: "常用工具" },
     all: { en: "All", zh: "全部" },
@@ -46,9 +46,8 @@
   const heading = (h) => esc(t(h)).replace(" — ", ' <span class="dash">—</span> ');
   const badge = (kind) => `<span class="badge ${kind}">${esc(s(kind))}</span>`;
 
-  /* icons (assets/js/icons.js): one per area and tag, so chips and labels are not just words */
+  /* icons (assets/js/icons.js): one per area, so chips and labels are not just words */
   const ZONE_IC = { all: "layers", ux: "layout-dashboard", service: "users", ai: "bot", build: "hammer", games: "gamepad-2" };
-  const TAG_IC = { hackathon: "zap", award: "trophy", "real-users": "user", "built-with-ai": "sparkles", automation: "rocket", "data-viz": "chart-column" };
   const ic = (n, c) => (window.ic ? window.ic(n, c) : "");
 
   /* company logos: real files in assets/logos, sized by D.logos[id].h */
@@ -150,7 +149,7 @@
   /* ---------- home ---------- */
   function home() {
     const P = D.projects, pos = D.person.tagline[lang] || D.person.tagline.en;
-    const zoneName = (p) => t(D.cats.find((c) => c.id === p.zone));
+    const zoneNames = (p) => `<span class="zn">${ic(ZONE_IC[p.zones[0]])}<span>${p.zones.map((z) => esc(t(D.cats.find((c) => c.id === z)))).join(" · ")}</span></span>`;
     const award = D.tags.find((x) => x.id === "award");
     return `
     <section class="hero" id="top">
@@ -164,15 +163,14 @@
     <section class="section" id="work">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
       <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${ic(ZONE_IC[c.id])}${esc(t(c))}</button>`).join("")}</div>
-      <div class="filters tags" role="group" aria-label="${esc(s("tagLbl"))}"><span class="flabel mono">${esc(s("tagLbl"))}</span>${D.tags.map((c) => `<button class="chip" type="button" data-tag="${c.id}" aria-pressed="${c.id === filt.tag}">${ic(TAG_IC[c.id])}${esc(t(c))}</button>`).join("")}</div>
       <div class="work-grid">
         ${P.map((p) => `
-          <a class="proj rv ${p.shape || "wide"}" href="#/work/${p.id}" data-id="${p.id}" data-shape="${p.shape || "wide"}" data-zone="${p.zone}" data-tags="${p.tags.join(" ")}">
+          <a class="proj rv ${p.shape || "wide"}" href="#/work/${p.id}" data-id="${p.id}" data-shape="${p.shape || "wide"}" data-zones="${p.zones.join(" ")}">
             ${tile(p)}
             <span class="proj-cap">
               <span class="proj-title">${esc(p.title)}</span>
               <span class="proj-line">${esc(t(p.cap))}</span>
-              <span class="proj-tags"><span class="zn">${ic(ZONE_IC[p.zone])}${esc(zoneName(p))}</span>${award && p.tags.includes("award") ? `<span class="pill accent">${esc(t(award))}</span>` : ""}</span>
+              <span class="proj-tags">${zoneNames(p)}${award && p.tags.includes("award") ? `<span class="pill accent">${esc(t(award))}</span>` : ""}</span>
             </span>
           </a>`).join("")}
       </div>
@@ -269,7 +267,7 @@
 
   /* ---------- case study ---------- */
   const ALIAS = { meanwhile: "beside" };
-  const zoneLine = (p) => [D.cats.find((c) => c.id === p.zone), ...p.tags.map((x) => D.tags.find((c) => c.id === x))].filter(Boolean).map(t).join(" · ");
+  const zoneLine = (p) => p.zones.map((z) => t(D.cats.find((c) => c.id === z))).join(" · ");
   function project(id) {
     id = ALIAS[id] || id;
     const P = D.projects, i = P.findIndex((p) => p.id === id);
@@ -331,7 +329,7 @@
     }
   }
 
-  const filt = { zone: "all", tag: "" };
+  const filt = { zone: "all" };
   let io, vio;
   // autoplay muted loops only while at least a quarter is on screen; pause when it leaves
   function watchVideos() {
@@ -343,20 +341,18 @@
   }
   function wire() {
     CARDS = $$(".proj");
-    // zone: pick one (All = none); tag: optional, click again to clear
+    // area: pick one (All = none); a project shows under every area it lists
     const applyFilter = () => {
       $$(".chip[data-zone]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.zone === filt.zone));
-      $$(".chip[data-tag]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.tag === filt.tag));
       let n = 0;
       CARDS.forEach((r) => {
-        const ok = (filt.zone === "all" || r.dataset.zone === filt.zone) && (!filt.tag || r.dataset.tags.split(" ").includes(filt.tag));
+        const ok = filt.zone === "all" || r.dataset.zones.split(" ").includes(filt.zone);
         r.hidden = !ok; if (ok) n++;
       });
       const e = $(".empty"); if (e) e.hidden = n > 0;
       pack();
     };
     $$(".chip[data-zone]").forEach((c) => c.addEventListener("click", () => { filt.zone = c.dataset.zone; applyFilter(); }));
-    $$(".chip[data-tag]").forEach((c) => c.addEventListener("click", () => { filt.tag = filt.tag === c.dataset.tag ? "" : c.dataset.tag; applyFilter(); }));
     if ($(".work-grid")) { packW = $(".work-grid").clientWidth; applyFilter(); }
     if (window.startSilk) window.startSilk($("canvas.silk"));
 

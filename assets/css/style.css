@@ -209,7 +209,8 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .chip { display: inline-flex; align-items: center; gap: 8px; }
 .chip .ic { width: 16px; height: 16px; }
 .btn-pill .ic, .btn-ghost .ic { width: 18px; height: 18px; }
-.proj-tags .zn { display: inline-flex; align-items: center; gap: 6px; }
+.proj-tags .zn { display: inline-flex; align-items: flex-start; gap: 6px; }
+.proj-tags .zn .ic { margin-top: 2px; }
 .proj-tags .zn .ic { width: 14px; height: 14px; }
 .avail { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-muted); }
 .avail .dot { width: 8px; height: 8px; background: var(--butter); box-shadow: 0 0 0 3px rgba(255, 224, 122, .35); }

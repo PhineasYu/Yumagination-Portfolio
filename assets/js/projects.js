@@ -2,7 +2,8 @@
    Projects. One object per project; the home grid and case pages render
    from it. Add a project = add an object here.
 
-   zone:  one id from PORTFOLIO.cats;  tags: ids from PORTFOLIO.tags.
+   zones: one or more ids from PORTFOLIO.cats (the home filter shows a project under every area it lists; the first is its main area);
+          tags: ids from PORTFOLIO.tags (only "award" is shown, as the pill on the card).
    tile:  { video, poster } | { motion } | { text, sub } (typographic tile).
    shape: "wide" (browser / desktop recordings, 16:10 illustrations) | "tall" (phone
           screens) | "square" (text tiles). The home bento sizes cards by it; nothing is cropped.
@@ -19,7 +20,7 @@
   window.PORTFOLIO.projects = [
     /* ------------------------------------------------------------ 01 */
     {
-      id: "full-context-canvas", num: "01", year: "2026", when: "Sep 2026", zone: "ai", tags: ["built-with-ai"],
+      id: "full-context-canvas", num: "01", year: "2026", when: "Sep 2026", zones: ["ai", "ux"], tags: ["built-with-ai"],
       title: "Full Context Canvas", meta: "Full Context Canvas · Sep 2026",
       cap: L("A whiteboard for every AI chat and every save", "把每个 AI 聊天和每条收藏放上同一张白板"),
       h1: L("A whiteboard that shows every AI conversation and every save in one place, and explains where each one went", "一张白板，把所有 AI 对话和收藏放在一起，并解释每一条被放到了哪里"),
@@ -55,7 +56,7 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "dossier", orgs: ["accel"], num: "02", year: "2026", zone: "ai", tags: ["hackathon", "award", "built-with-ai"],
+      id: "dossier", orgs: ["accel"], num: "02", year: "2026", zones: ["ai", "ux"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Dossier", meta: "Dossier · Sep 2026",
       cap: L("A voice-first archive of a child's growing up", "用语音记录孩子成长的档案"),
       h1: L("Turning a parent's 60-second voice memo into a child's timeline and profile", "把家长 60 秒的语音，变成孩子的时间线和档案"),
@@ -100,7 +101,7 @@
 
     /* ------------------------------------------------------------ 03 */
     {
-      id: "sushi-jerash", num: "03", year: "2026", when: "May 2026", zone: "build", tags: ["real-users", "built-with-ai"],
+      id: "sushi-jerash", num: "03", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
       title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
       cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
       h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
@@ -129,7 +130,7 @@
 
     /* ------------------------------------------------------------ 04 */
     {
-      id: "teamdex", orgs: ["uniplay"], num: "04", year: "2026", when: "Sep 2026", zone: "service", tags: ["hackathon", "award", "built-with-ai"],
+      id: "teamdex", orgs: ["uniplay"], num: "04", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Teamdex", meta: "Teamdex · Sep 2026",
       cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
       h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
@@ -158,7 +159,7 @@
 
     /* ------------------------------------------------------------ 05 */
     {
-      id: "disco-fever", orgs: ["bitmagic"], num: "05", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      id: "disco-fever", orgs: ["bitmagic"], num: "05", year: "2026", when: "Sep 2026", zones: ["games", "build"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
       cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
       h1: L("A one-minute disco rhythm game where every correct arrow spreads the dancing further across the floor", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
@@ -180,7 +181,7 @@
 
     /* ------------------------------------------------------------ 06 */
     {
-      id: "collaboration-canvas", num: "06", year: "2026", when: "MSc thesis · 2026", zone: "service", tags: ["built-with-ai"],
+      id: "collaboration-canvas", num: "06", year: "2026", when: "MSc thesis · 2026", zones: ["service", "ux"], tags: ["built-with-ai"],
       title: "Collaboration Canvas", meta: "KTH thesis · 2026",
       cap: L("Why student–industry collaborations break, and a canvas to hold them", "学生—企业合作为什么会散架，以及一张让它们不散的画布"),
       h1: L("Why student–industry–university collaborations break, and a shared canvas that holds them together", "学生—企业—学校的合作为什么会散架，以及一张让它们不散的共享画布"),
@@ -209,7 +210,7 @@
 
     /* ------------------------------------------------------------ 07 */
     {
-      id: "legacychain", orgs: ["nebius"], num: "07", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "built-with-ai"],
+      id: "legacychain", orgs: ["nebius"], num: "07", year: "2026", when: "Sep 2026", zones: ["ai", "build"], tags: ["hackathon", "built-with-ai"],
       title: "LegacyChain", meta: "LegacyChain · from MEMO · Sep 2026",
       cap: L("From a memoir app for older people to a family archive where AI reads but never rewrites the record", "从老年人回忆录 App，到 AI 只能阅读、不能改写记录的家族档案"),
       h1: L("A family archive where AI can read the letters but never rewrite the record", "一个家族档案：AI 可以读信，但永远改写不了记录"),
@@ -242,7 +243,7 @@
 
     /* ------------------------------------------------------------ 08 */
     {
-      id: "let-me-die", orgs: ["stoneleap"], num: "08", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      id: "let-me-die", orgs: ["stoneleap"], num: "08", year: "2026", when: "Sep 2026", zones: ["games"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
       meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
       cap: L("A first-person game where every death opens a new world: 1st place at Stone Leap", "每死一次就进入一个新世界的第一人称游戏：Stone Leap 第一名"),
@@ -267,7 +268,7 @@
 
     /* ------------------------------------------------------------ 09 */
     {
-      id: "kikaren", orgs: ["pwc"], num: "09", year: "2026", when: "Hackathon · 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
+      id: "kikaren", orgs: ["pwc"], num: "09", year: "2026", when: "Hackathon · 2026", zones: ["ux", "service"], tags: ["hackathon", "built-with-ai"],
       title: "Kikaren", meta: "Kikaren · 2026",
       cap: L("A telescope for seeing each party's vision for Järva", "用望远镜看每个政党对 Järva 的愿景"),
       h1: L("Letting first-time voters in Järva look through a telescope at the future each party imagines", "让 Järva 的首投族透过望远镜，看每个政党想象中的未来"),
@@ -294,7 +295,7 @@
 
     /* ------------------------------------------------------------ 10 */
     {
-      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "10", year: "2026", when: "Apr 2026", zone: "ai", tags: ["award", "built-with-ai"],
+      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "10", year: "2026", when: "Apr 2026", zones: ["ai", "ux"], tags: ["award", "built-with-ai"],
       title: "SAP Career Ignite", meta: "SAP × Capgemini × Google · Apr 2026",
       cap: L("Winning a consulting case with a clickable prototype", "用可点击的原型赢下咨询案例赛"),
       h1: L("Winning a consulting case by letting the judges click the future instead of reading about it", "让评委亲手点一点未来，而不是读一份 PPT，赢下咨询案例赛"),
@@ -322,7 +323,7 @@
 
     /* ------------------------------------------------------------ 11 */
     {
-      id: "beside", num: "11", year: "2026", when: "Sep 2026", zone: "ux", tags: ["built-with-ai"],
+      id: "beside", num: "11", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["built-with-ai"],
       title: "Beside", meta: "Beside · Sep 2026",
       cap: L("Two squares for two friends, with no obligation to reply", "两个朋友的两个方格，没有回复的义务"),
       h1: L("Two friends, two squares, and no obligation to reply", "两个朋友，两个方格，没有回复的义务"),
@@ -350,7 +351,7 @@
 
     /* ------------------------------------------------------------ 12 */
     {
-      id: "chroma-reader", num: "12", year: "2026", when: "Sep 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
+      id: "chroma-reader", num: "12", year: "2026", when: "Sep 2026", zones: ["ux"], tags: ["hackathon", "built-with-ai"],
       title: "Chroma Reader", meta: "Chroma Reader · Sep 2026",
       cap: L("A study reader that colours sentences by mastery", "按掌握程度给句子上色的学习阅读器"),
       h1: L("A study reader that colours every sentence by how well you know it, at the speed of a keypress", "一个按掌握程度给每个句子上色的阅读器，快到只需一次按键"),
@@ -378,7 +379,7 @@
 
     /* ------------------------------------------------------------ 13 */
     {
-      id: "community-viewfinder", num: "13", year: "2023", when: "Oct 2022 – Jun 2023", zone: "service", tags: ["award"],
+      id: "community-viewfinder", num: "13", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service"], tags: ["award"],
       title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
       cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
       h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
@@ -403,7 +404,7 @@
 
     /* ------------------------------------------------------------ 14 */
     {
-      id: "notchbreak", num: "14", year: "2026", when: "Sep 2026", zone: "build", tags: ["built-with-ai"],
+      id: "notchbreak", num: "14", year: "2026", when: "Sep 2026", zones: ["build", "ux"], tags: ["built-with-ai"],
       title: "NotchBreak", meta: "NotchBreak · macOS · Sep 2026",
       cap: L("A break reminder that grows out of the MacBook notch", "从 MacBook 刘海里长出来的休息提醒"),
       h1: L("A macOS break reminder that grows out of the notch, built in one day", "一个从刘海里长出来的 macOS 休息提醒，一天做完"),
@@ -426,7 +427,7 @@
 
     /* ------------------------------------------------------------ 15 */
     {
-      id: "voi", orgs: ["voi"], num: "15", year: "2025", when: "Aug–Dec 2025", zone: "ux", tags: [],
+      id: "voi", orgs: ["voi"], num: "15", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
       title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
       cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
       h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
@@ -454,7 +455,7 @@
 
     /* ------------------------------------------------------------ 16 */
     {
-      id: "kodiak-hub", orgs: ["kodiak"], num: "16", year: "2025", when: "Jun–Sep 2025", zone: "ux", tags: [],
+      id: "kodiak-hub", orgs: ["kodiak"], num: "16", year: "2025", when: "Jun–Sep 2025", zones: ["ux"], tags: [],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
       cap: L("Design work inside a live B2B SaaS design system", "在真实 B2B SaaS 设计系统里做设计"),
       h1: L("Designing inside a live B2B design system, and leaving a usability-testing process behind", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程"),
@@ -485,7 +486,7 @@
 
     /* ------------------------------------------------------------ 17 */
     {
-      id: "revive-automation", orgs: ["revive"], num: "17", year: "2026", when: "May–Aug 2026", zone: "build", tags: ["automation", "built-with-ai"],
+      id: "revive-automation", orgs: ["revive"], num: "17", year: "2026", when: "May–Aug 2026", zones: ["build", "ai"], tags: ["automation", "built-with-ai"],
       title: "Revive report automation", meta: "Revive · internship · 2026",
       cap: L("Automating a commission reconciliation during an internship", "实习期间把佣金对账自动化"),
       h1: L("Turning a manual commission reconciliation into a script that checks every row", "把手工佣金对账变成一个逐行核对的脚本"),
@@ -510,7 +511,7 @@
 
     /* ------------------------------------------------------------ 18 */
     {
-      id: "microhack", orgs: ["microsoft"], num: "18", year: "2026", when: "Sep 2026", zone: "build", tags: ["automation"],
+      id: "microhack", orgs: ["microsoft"], num: "18", year: "2026", when: "Sep 2026", zones: ["build", "ai"], tags: ["automation"],
       title: "MicroHack", meta: "Microsoft MicroHack · Sep 2026",
       cap: L("Learning Microsoft Foundry, Fabric and Azure by wiring three agents into one workflow", "把三个 agent 串成一个工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
       h1: L("Learning Microsoft Foundry, Fabric and Azure by building a multi-agent workflow", "通过搭一个多 agent 工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
@@ -538,7 +539,7 @@
     (() => {
       const LONGEVITY_VIDEO = null;
       return {
-      id: "longevity-3d", num: "19", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "data-viz"],
+      id: "longevity-3d", num: "19", year: "2026", when: "Sep 2026", zones: ["games", "ux"], tags: ["hackathon", "data-viz"],
       title: "Longevity 3D visualisation", meta: "Hackathon team project · Sep 2026",
       cap: L("A 3D body that cools, rests and rewarms, animated for a big-screen presentation", "会降温、储存、复温的 3D 人体，为大屏演示而做的动画"),
       h1: L("A 3D body that cools, rests and rewarms, made for a big-screen presentation", "会降温、储存、复温的 3D 人体，为大屏演示而做"),
