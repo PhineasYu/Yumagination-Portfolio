@@ -1,40 +1,55 @@
-/* Flowing silk background for the hero: a small WebGL fragment shader in
-   Tiffany Blue. The original silk, made finer and regular: evenly spaced
-   folds travel at one constant speed under a slow periodic swell, with fine
-   threads riding on them (no noise, no turbulence). The cloth fades out
-   behind the text. Pauses off-screen and when the tab is hidden, and draws
-   one still frame when the visitor prefers reduced motion. Falls back to the
-   CSS background if WebGL is missing. */
+/* Hero background, "light rails" (after Yunfei's light-rails preset, 2026-10-01): a grid of small cells on
+   a deep teal-black. A band of checkered cells runs along a zigzag rail (the preset's four path points);
+   around it, slow soft regions are drawn as sparse dots, dense dots, large dots and short bars. Every 3.6 s
+   the pattern wipes in from the top right, holds while the colours drift through the Tiffany range, and
+   dissolves cell by cell. Quiet behind the name. Pauses off-screen and when the tab is hidden; one still
+   frame (fully shown) for reduced motion. Falls back to the CSS background if WebGL is missing.
+   (The function keeps its old name, startSilk, so app.js does not change.) */
 window.startSilk = function (canvas) {
   if (!canvas) return;
   const gl = canvas.getContext("webgl", { antialias: false, alpha: false, powerPreference: "low-power" });
   if (!gl) return;
   const vs = "attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}";
   const fs = `precision mediump float;
-uniform vec2 r; uniform float t;
+uniform vec2 r; uniform float t; uniform float cs; uniform float still;
+float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+const vec3 BG=vec3(.047,.086,.082);                       // deep teal-black
+vec3 pal(float k){                                        // the Tiffany range, looping
+  vec3 c0=vec3(.506,.847,.816), c1=vec3(.753,.922,.906), c2=vec3(.910,.969,.961), c3=vec3(.247,.690,.655);
+  k=fract(k)*4.;
+  return k<1.?mix(c0,c1,k):k<2.?mix(c1,c2,k-1.):k<3.?mix(c2,c3,k-2.):mix(c3,c0,k-3.);
+}
 void main(){
-  vec2 n=gl_FragCoord.xy/r;               // 0..1, y up
-  vec2 uv=gl_FragCoord.xy/r.y;
-  float a=r.x/r.y;
-  // slow, periodic swell of the whole cloth: fixed frequencies, fixed speeds
-  float sw=.10*sin(uv.x*1.5+t*.26)+.05*sin(uv.x*2.7-t*.19+1.3);
-  float y=uv.y+sw+.32*uv.x;
-  // evenly spaced folds travelling at one constant speed
-  float ph=y*6.2-t*.36+.55*sin(uv.x*1.1+t*.14);
-  float fold=.5+.5*sin(ph);
-  // fine threads that ride on the folds
-  float thread=.5+.5*sin(ph*23.);
-  vec3 base=vec3(.949,.957,.957), mist=vec3(.86,.945,.937), lt=vec3(.506,.847,.816), tf=vec3(.039,.729,.71), dp=vec3(.024,.498,.482);
-  vec3 c=mix(mist,lt,smoothstep(.05,.95,fold));
-  c=mix(c,tf,pow(fold,3.)*.6);
-  c=mix(c,dp,pow(fold,9.)*.28);
-  c+=.07*smoothstep(.2,.02,abs(fold-.72))*(1.-fold);   // soft sheen on each fold's shoulder
-  c*=1.-.035*thread*smoothstep(.15,.8,fold);
-  // keep the text side quiet: wide screens fade toward the left, narrow ones toward the bottom (where the text sits)
-  float mw=smoothstep(.18,.95,n.x*.95+(1.-n.y)*.35);
-  float mn=smoothstep(.35,.95,n.y*1.1);
-  float m=mix(mn,mw,step(1.,a));
-  gl_FragColor=vec4(mix(base,c,m),1.);
+  vec2 cell=floor(gl_FragCoord.xy/cs), lc=fract(gl_FragCoord.xy/cs)-.5;
+  vec2 n=(cell+.5)*cs/r;                                  // 0..1, y up, at the cell's centre
+  float a=r.x/r.y; vec2 q=vec2(n.x*a,n.y);
+  float P=3.6, ph=still>.5?.4:fract(t/P), cyc=still>.5?0.:floor(t/P);
+  // the rail: a smooth curve through the preset's four path points (x, y from the top), gently breathing
+  float x0=.06*a,x1=.34*a,x2=.66*a,x3=.95*a, y0=.15,y1=.78,y2=.22,y3=.85, xa,xb,ya,yb;
+  if(q.x<x1){xa=x0;xb=x1;ya=y0;yb=y1;} else if(q.x<x2){xa=x1;xb=x2;ya=y1;yb=y2;} else {xa=x2;xb=x3;ya=y2;yb=y3;}
+  float u=clamp((q.x-xa)/(xb-xa),0.,1.), Y=mix(ya,yb,.5-.5*cos(3.14159*u)), dY=(yb-ya)*1.5708*sin(3.14159*u)/(xb-xa);
+  float d=abs(q.y-Y)/sqrt(1.+dY*dY)+.012*sin(q.x*7.+t*.5);
+  // soft regions around it
+  float f=.5+.22*sin(q.x*2.3+1.7*sin(q.y*1.9+t*.11)+t*.07)+.2*sin(q.y*3.1-q.x*1.2+1.3*sin(q.x*1.4-t*.09))+.08*sin((q.x+q.y)*5.+t*.2);
+  float px=1.4/cs, cover=0., lvl;
+  if(d<.06){ lvl=4.; cover=step(.5,mod(cell.x+cell.y,2.)); }                              // checkered rail
+  else if(d<.085){ lvl=-1.; }                                                              // a dark gap along it
+  else if(f<.4){ lvl=0.; cover=(mod(cell.x,2.)+mod(cell.y,2.)<.5)?smoothstep(.2+px,.2-px,length(lc)):0.; } // sparse dots
+  else if(f<.55){ lvl=1.; cover=smoothstep(.26+px,.26-px,length(lc)); }                   // dense small dots
+  else if(f<.7){ lvl=2.; cover=smoothstep(.4+px,.4-px,length(lc)); }                      // large dots
+  else { lvl=3.; cover=step(abs(lc.x),.19)*step(abs(lc.y),.42); }                          // short bars
+  vec3 col=pal(lvl*.17+f*.35+cyc*.29+ph*.18);
+  if(lvl<.5) col=mix(BG,col,.55);
+  // timing: wipe in from the top right, hold, dissolve cell by cell, a short rest
+  float s=((1.-n.x)+(1.-n.y))*.5, h=hash(cell);
+  float on=step(s*.88+h*.12,smoothstep(0.,.12,ph)*1.02);
+  float stay=step(h,1.-smoothstep(.7,.84,ph));
+  // keep it quiet behind the name and the two lines (bottom left)
+  float zone=(1.-smoothstep(.2,.72,n.y))*(1.-smoothstep(.45,1.,n.x/max(a*.55,1.)));
+  float top=smoothstep(r.y-cs*9.,r.y-cs*3.,(cell.y+.5)*cs);   // and under the menu bar
+  float k=cover*on*stay*(1.-.9*zone)*(1.-.75*top);
+  vec3 c=mix(BG,col,k)+(hash(gl_FragCoord.xy+fract(t)*91.)-.5)*.02;   // a trace of grain
+  gl_FragColor=vec4(c,1.);
 }`;
   const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null; };
   const v = sh(gl.VERTEX_SHADER, vs), f = sh(gl.FRAGMENT_SHADER, fs);
@@ -45,11 +60,12 @@ void main(){
   const b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
   const loc = gl.getAttribLocation(pr, "p"); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-  const ur = gl.getUniformLocation(pr, "r"), ut = gl.getUniformLocation(pr, "t");
-  const scale = Math.min(devicePixelRatio || 1, 1.5);   // fine threads need close to full resolution
+  const ur = gl.getUniformLocation(pr, "r"), ut = gl.getUniformLocation(pr, "t"), uc = gl.getUniformLocation(pr, "cs"), us = gl.getUniformLocation(pr, "still");
+  const scale = Math.min(devicePixelRatio || 1, 2);     // round dots need the full resolution
+  const CELL = 14;                                      // one cell, in CSS pixels
   const size = () => { const w = Math.max(2, Math.floor(canvas.clientWidth * scale)), h = Math.max(2, Math.floor(canvas.clientHeight * scale)); if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; gl.viewport(0, 0, w, h); } };
-  const draw = (ms) => { size(); gl.uniform2f(ur, canvas.width, canvas.height); gl.uniform1f(ut, ms / 1000 + 12); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const draw = (ms) => { size(); gl.uniform2f(ur, canvas.width, canvas.height); gl.uniform1f(ut, ms / 1000); gl.uniform1f(uc, CELL * scale); gl.uniform1f(us, reduce ? 1 : 0); gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4); };
   canvas.classList.add("on");
   draw(0);
   if (reduce) { addEventListener("resize", () => draw(0)); return; }
