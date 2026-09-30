@@ -509,7 +509,7 @@
       stack: ["Stone Leap", "AI world builder"],
       links: [{ label: L("Play it on Stone Leap", "在 Stone Leap 上试玩"), url: "https://anna.stoneleap.com/let-me-die-2/" }],
       shape: "wide",
-      tile: { img: "assets/shots/lmd-tile.jpg", emoji: "\u{1F602}" },
+      tile: { img: "assets/shots/lmd-tile.jpg", emoji: "\u{1F602}", emojiAt: [70.5, 75.5] },
       hero: IMG("assets/shots/lmd-waiting.jpg", "Let Me Die, the first world: a vast waiting hall of grey chairs, a NOW SERVING screen, a ticket machine and a wooden door", { tag: "rec", cap: L("The first world: a waiting hall with endless chairs, a ticket machine and a door. Screenshot from the game.", "第一个世界：摆满椅子的候诊大厅、一台取号机和一扇门。游戏截图。") }),
       sections: [
         { h: L("Overview — Dying as a way to see more worlds", "概述 — 用死亡去看更多的世界"),

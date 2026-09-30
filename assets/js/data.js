@@ -35,6 +35,7 @@ window.PORTFOLIO = {
      Kodiak Hub, Stone Leap and Bitmagic publish light-on-dark versions only, so theirs are re-coloured to one dark tone. */
   logos: {
     unilever:  { name: "Unilever",   file: "unilever.svg",     h: 40, th: 34 },
+    zzu:       { name: "Zhengzhou University", file: "zzu.png", h: 34, th: 44 },
     kth:       { name: "KTH Royal Institute of Technology", file: "kth.png", h: 52, th: 40 },
     kodiak:    { name: "Kodiak Hub", file: "kodiak.svg",       h: 26, th: 20 },
     revive:    { name: "Revive Retail", file: "revive.svg",    h: 26, th: 20 },
@@ -54,7 +55,7 @@ window.PORTFOLIO = {
     nebius:    { name: "Nebius",     file: "nebius.svg",       h: 30 }
   },
   // order of the logo strip under the hero
-  logoStrip: ["unilever", "kth", "kodiak", "revive", "voi", "sap", "capgemini", "ericsson", "google", "microsoft", "deloitte", "uniplay", "stoneleap", "bitmagic", "aris", "accel", "pwc", "nebius"],
+  logoStrip: ["unilever", "kth", "zzu", "kodiak", "revive", "voi", "sap", "capgemini", "ericsson", "google", "microsoft", "deloitte", "uniplay", "stoneleap", "bitmagic", "aris", "accel", "pwc", "nebius"],
 
   /* Zones: every project has exactly one `zone` and any number of `tags`. */
   cats: [
@@ -148,8 +149,9 @@ window.PORTFOLIO = {
       { logo: "kth", when: "2024–2026", role: { en: "MSc Integrated Product Design", zh: "集成产品设计硕士" }, org: { en: "KTH Royal Institute of Technology", zh: "KTH 皇家理工学院" } },
       { logo: "kodiak", when: "2025", role: { en: "UI/UX Design Intern", zh: "UI/UX 设计实习生" }, org: { en: "Kodiak Hub, Stockholm", zh: "Kodiak Hub，斯德哥尔摩" } },
       { logo: "unilever", when: "2022–2024", role: { en: "Packaging Laboratory Assistant", zh: "包装实验室助理" }, org: { en: "Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心，上海" } },
-      { when: "2017–2021", role: { en: "BEng Packaging Engineering", zh: "包装工程学士" }, org: { en: "Zhengzhou University", zh: "郑州大学" } }
+      { logo: "zzu", when: "2017–2021", role: { en: "BEng Packaging Engineering", zh: "包装工程学士" }, org: { en: "Zhengzhou University", zh: "郑州大学" } }
     ],
+    cv: { label: { en: "Download my CV", zh: "下载我的简历" }, file: "assets/Yunfei_Yu_CV.pdf" },
     languages: { en: "English (professional) · Chinese (native) · Swedish (learning)", zh: "英语（工作语言）· 中文（母语）· 瑞典语（学习中）" }
   },
 

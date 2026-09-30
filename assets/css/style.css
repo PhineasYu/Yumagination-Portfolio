@@ -503,4 +503,37 @@ html[lang="zh"] .blk p { max-width: 36em; }
 @media (prefers-reduced-motion: reduce) { .egg-rec i { animation: none; } }
 
 /* an emoji laid on a card cover, to soften a dark title */
-.tile-emoji { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, calc(-50% - 1.15em)); font-size: clamp(34px, 5.2cqw, 64px); line-height: 1; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35)); pointer-events: none; }
+.tile-emoji { position: absolute; z-index: 2; transform: translate(-50%, -50%) rotate(45deg); font-size: clamp(34px, 5.2cqw, 64px); line-height: 1; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35)); pointer-events: none; }
+
+/* about: CV button */
+.cv-btn { margin-top: 18px; }
+
+/* method is its own page now */
+.method-page { padding-top: calc(var(--bar) + 8px); }
+
+/* the first idea card: a grainy Tiffany-to-black flow */
+.m-idea.i1 { position: relative; overflow: hidden; isolation: isolate; }
+.m-shader { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; image-rendering: auto; }
+.m-idea.i1 h4, .m-idea.i1 p { position: relative; }
+.m-idea.i1 p { color: rgba(255, 255, 255, .86); }
+
+/* Awards & wins: each card turns up like a card being turned over */
+.awards { perspective: 1100px; }
+.awards .award.rv { opacity: 0; transform: rotateX(-72deg) translateY(24px); transform-origin: 50% 0; backface-visibility: hidden; transition: opacity .55s var(--ease), transform .8s cubic-bezier(.2, .9, .25, 1.15); transition-delay: calc(var(--i, 0) * 110ms); }
+.awards .award.rv.in { opacity: 1; transform: none; }
+.awards .award.rv::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--tf); opacity: 0; pointer-events: none; }
+.awards .award.rv.in::after { animation: award-flash .9s var(--ease) calc(var(--i, 0) * 110ms + 120ms) both; }
+.award { position: relative; }
+@keyframes award-flash { 0% { opacity: .55; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .awards .award.rv { transform: none; } .awards .award.rv.in::after { animation: none; } }
+
+/* home: the photography window, in pixels */
+.gpix { position: relative; display: block; height: clamp(300px, 34vw, 440px); border-radius: var(--radius-lg); overflow: hidden; background: #111; color: var(--ink); }
+.gpix-cv { position: absolute; inset: 0; display: block; }
+.gpix-t { position: absolute; left: clamp(18px, 3vw, 40px); bottom: clamp(18px, 3vw, 40px); display: flex; flex-direction: column; align-items: flex-start; gap: 8px; max-width: min(92%, 860px); }
+.gpix-t b { font: 800 clamp(28px, 5.4vw, 76px)/1.02 var(--sans); letter-spacing: -.035em; }
+.gpix-t b:last-child { font-size: clamp(20px, 3.2vw, 44px); letter-spacing: -.025em; }
+.gpix-t b span { background: #fff; padding: .04em .22em .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.gpix-go { position: absolute; right: clamp(14px, 2vw, 24px); top: clamp(14px, 2vw, 24px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; background: var(--tf); border-radius: var(--radius-pill); transition: transform var(--dur) var(--ease); }
+.gpix:hover .gpix-go { transform: translateY(-2px); }
+.gpix:hover .gpix-go .arrow { transform: translateX(3px); } .gpix-go .arrow { transition: transform var(--dur) var(--ease); }

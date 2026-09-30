@@ -89,7 +89,7 @@
       const v = videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` });
       return p.shape === "tall" ? `<span class="tile is-phone"${bg}>${phone(v, tl.sb)}${go}</span>` : `<span class="tile"${bg}>${v}${go}</span>`;
     }
-    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${tl.emoji ? `<span class="tile-emoji" aria-hidden="true">${tl.emoji}</span>` : ""}${go}</span>`;
+    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${tl.emoji ? `<span class="tile-emoji" aria-hidden="true" style="left:${(tl.emojiAt || [50, 50])[0]}%;top:${(tl.emojiAt || [50, 50])[1]}%">${tl.emoji}</span>` : ""}${go}</span>`;
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}${go}</span>`;
     if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}${go}</span>`;
     return `<span class="tile">${go}</span>`;
@@ -180,11 +180,10 @@
 
     <section class="section" id="recognition">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
-      <div class="awards">${D.awards.map((a) => `<div class="award rv"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
+      <div class="awards">${D.awards.map((a, i) => `<div class="award rv" style="--i:${i % 3}"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
     </section>
 
-    ${methodBlock()}
-    ${galleryTeaser()}
+    ${galleryPixel()}
 
     <div class="tools" aria-label="${esc(t(D.ui.logosLbl))}"><div class="tools-track">${[...D.logoStrip, ...D.logoStrip].map((id) => `<span>${logoImg(id)}</span>`).join("")}</div></div>
 
@@ -192,18 +191,104 @@
     ${contactBlock()}`;
   }
 
-  function galleryTeaser() {
-    const G = window.GALLERY, ph = G && G.series ? G.series.flatMap((r) => r.photos) : [];
-    if (ph.length < 3) return "";
-    const pick = ph.slice(0, 4);
+  /* home: a short, loud window onto the photography page. Colours are taken from the real photographs
+     (when there are any) and redrawn as pixels; with none yet it uses a vivid stand-in palette. */
+  function galleryPixel() {
     return `
     <section class="section" id="gallery">
-      <div class="sec-head rv"><h2 class="sec-title">${esc(t(G.title))}</h2><p class="sec-lede">${esc(t(G.statement))}</p></div>
-      <a class="teaser rv" href="gallery.html" aria-label="${esc(t(G.title))}">
-        ${pick.map((p) => `<span class="tz"><img src="${esc(p.thumb || p.file)}" alt="" loading="lazy"></span>`).join("")}
+      <a class="gpix rv" href="gallery.html" aria-label="${esc(lang === "zh" ? "进入摄影" : "Enter the photography gallery")}">
+        <canvas class="gpix-cv" aria-hidden="true"></canvas>
+        <span class="gpix-t"><b><span>${esc(lang === "zh" ? "摄影" : "Photography")}</span></b><b><span>${esc(lang === "zh" ? "欢迎来到我的摄影世界" : "Welcome to my photography world")}</span></b></span>
+        <span class="gpix-go">${esc(lang === "zh" ? "进入画布" : "Enter the canvas")} <span class="arrow">→</span></span>
       </a>
-      <p class="teaser-go"><a class="btn-text" href="gallery.html"><span class="arrow">↳</span> ${esc(t(D.person.role) && (lang === "zh" ? "进入摄影展厅" : "Enter the gallery"))}</a></p>
     </section>`;
+  }
+  /* a grainy Tiffany-to-black gradient that slowly flows, drawn per pixel at low resolution */
+  let shStop = null;
+  function startShader() {
+    shStop && shStop(); shStop = null;
+    const cv = $(".m-shader"); if (!cv) return;
+    const ctx = cv.getContext("2d"), box = cv.parentElement, tf = [129, 216, 208];
+    let W = 0, H = 0, img, raf = 0, dead = false, last = 0;
+    const size = () => { W = Math.max(40, Math.round(box.clientWidth / 5)); H = Math.max(24, Math.round(box.clientHeight / 5)); cv.width = W; cv.height = H; img = ctx.createImageData(W, H); };
+    const hash = (x, y) => { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); };
+    function frame(now) {
+      const tm = now / 1000, d = img.data;
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const u = x / W, v = y / H;
+        // light gathers in the top-right corner and drifts, fading to black towards the bottom-left
+        let f = 1 - Math.hypot((u - .92) * 1.1, (v - .05) * 1.9) * .95;
+        f += Math.sin(u * 5 + tm * .5) * .08 + Math.sin((u + v) * 7 - tm * .4) * .06 + Math.sin(v * 9 + tm * .3) * .04;
+        f = Math.max(0, Math.min(1, f));
+        f = f * f * (3 - 2 * f);
+        const g = hash(x + Math.floor(tm * 6), y) - .5;      // grain: the light breaks up into particles
+        const k = Math.max(0, Math.min(1, f + g * (.22 + .35 * f * (1 - f) * 2)));
+        const i = (y * W + x) * 4; d[i] = 6 + (tf[0] - 6) * k; d[i + 1] = 10 + (tf[1] - 10) * k; d[i + 2] = 12 + (tf[2] - 12) * k; d[i + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function loop(now) { if (dead) return; raf = requestAnimationFrame(loop); if (now - last < 50) return; last = now; frame(now); }
+    size(); frame(0);
+    const ro = new ResizeObserver(() => { size(); frame(performance.now()); }); ro.observe(box);
+    const vis = new IntersectionObserver((es) => { const on = es[0].isIntersecting; if (on && !raf && !dead && !reduce) raf = requestAnimationFrame(loop); if (!on) { cancelAnimationFrame(raf); raf = 0; } }, { threshold: 0 }); vis.observe(box);
+    shStop = () => { dead = true; cancelAnimationFrame(raf); ro.disconnect(); vis.disconnect(); };
+  }
+  let gpixStop = null;
+  function startGpix() {
+    gpixStop && gpixStop(); gpixStop = null;
+    const cv = $(".gpix-cv"); if (!cv) return;
+    const box = cv.parentElement, ctx = cv.getContext("2d"), G = window.GALLERY, photos = G && G.series ? G.series.flatMap((r) => r.photos) : [];
+    const PAL = ["#81D8D0", "#ff9a8b", "#ffe07a", "#3d6dff", "#ff5fa2", "#7be06a", "#ff8a1f", "#8a5cff", "#111111", "#ffffff"];
+    const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+    const TW = 12, TH = 8;                                  // a tile is 12 x 8 pixels
+    let cell = 18, cols = 0, rows = 0, tiles = [], raf = 0, dead = false, last = 0;
+    const boost = (c) => { const m = (c[0] + c[1] + c[2]) / 3; return c.map((v) => Math.max(0, Math.min(255, m + (v - m) * 1.55 + (v - 128) * .1))); };
+    const fake = (i) => { // a stand-in: a little pixel "landscape" in three palette colours
+      const r = (n) => { const x = Math.sin(i * 91.7 + n * 12.9898) * 43758.5453; return x - Math.floor(x); };
+      const a = hex(PAL[Math.floor(r(1) * 7)]), b = hex(PAL[Math.floor(r(2) * 7)]), c = hex(PAL[Math.floor(r(3) * 9)]);
+      const out = []; for (let y = 0; y < TH; y++) for (let x = 0; x < TW; x++) { const k = y / TH + (r(x * 7 + y) - .5) * .35; out.push(k < .5 ? a : k < .78 ? b : c); }
+      return out;
+    };
+    const sample = (img) => { const o = document.createElement("canvas"); o.width = TW; o.height = TH; const c = o.getContext("2d"); c.drawImage(img, 0, 0, TW, TH); const d = c.getImageData(0, 0, TW, TH).data, out = []; for (let i = 0; i < d.length; i += 4) out.push(boost([d[i], d[i + 1], d[i + 2]])); return out; };
+    const pool = []; let ready = 0;
+    photos.slice(0, 60).forEach((p) => { const im = new Image(); im.onload = () => { try { pool.push(sample(im)); } catch (e) {} if (++ready) fill(); }; im.src = p.small || p.thumb || p.file; });
+    function getTile(i) { return pool.length ? pool[(i * 7 + Math.floor(i / 3)) % pool.length] : fake(i); }
+    function layout() {
+      const w = box.clientWidth, h = box.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+      cell = w > 900 ? 20 : w > 560 ? 16 : 12;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); cv.style.width = w + "px"; cv.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cols = Math.ceil(w / cell); rows = Math.ceil(h / cell); fill(); draw(0);
+    }
+    function fill() { const tc = Math.ceil(cols / TW), tr = Math.ceil(rows / TH); tiles = []; for (let j = 0; j < tr; j++) for (let i = 0; i < tc; i++) tiles.push({ i, j, k: j * tc + i, t: getTile(j * tc + i), a: null, born: 0 }); }
+    function draw(now) {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      tiles.forEach((tl) => {
+        const fade = tl.a ? Math.min(1, (now - tl.born) / 900) : 1;
+        for (let y = 0; y < TH; y++) for (let x = 0; x < TW; x++) {
+          const px = tl.i * TW + x, py = tl.j * TH + y; if (px >= cols || py >= rows) continue;
+          const n = y * TW + x, c = tl.t[n], o = tl.a ? tl.a[n] : c, tw = (Math.sin(now / 900 + px * .9 + py * 1.7) + 1) * .04;
+          // each pixel turns from the old colour to the new one at its own moment
+          const u = tl.a ? Math.max(0, Math.min(1, fade * 1.6 - ((x * 3 + y * 5) % 9) / 9 * .6)) : 1;
+          const r = o[0] + (c[0] - o[0]) * u, g = o[1] + (c[1] - o[1]) * u, b = o[2] + (c[2] - o[2]) * u, k = 1 + tw;
+          ctx.fillStyle = `rgb(${Math.min(255, r * k) | 0},${Math.min(255, g * k) | 0},${Math.min(255, b * k) | 0})`;
+          ctx.fillRect(px * cell, py * cell, cell - 1, cell - 1);
+        }
+        if (tl.a && fade >= 1) tl.a = null;
+      });
+    }
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function loop(now) {
+      if (dead) return; raf = requestAnimationFrame(loop);
+      if (now - last < 66) return; last = now;
+      if (!reduce && tiles.length && now - (loop.swap || 0) > 1400) { loop.swap = now; const tl = tiles[Math.floor(Math.random() * tiles.length)]; tl.a = tl.t; tl.t = getTile(tl.k + Math.floor(Math.random() * 97)); tl.born = now; }
+      draw(now);
+    }
+    layout();
+    const ro = new ResizeObserver(() => layout()); ro.observe(box);
+    const vis = new IntersectionObserver((es) => { const on = es[0].isIntersecting; if (on && !raf && !dead) raf = requestAnimationFrame(loop); if (!on) { cancelAnimationFrame(raf); raf = 0; } }, { threshold: 0 }); vis.observe(box);
+    gpixStop = () => { dead = true; cancelAnimationFrame(raf); ro.disconnect(); vis.disconnect(); };
   }
 
   function methodBlock() {
@@ -219,10 +304,14 @@
       </div>
       <div class="m-main">
         <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
-        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
+        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}">${i === 0 ? `<canvas class="m-shader" aria-hidden="true"></canvas>` : ""}<h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
         <p class="disclosure rv">${esc(t(M.disclosure))}</p>
       </div>
     </section>`;
+  }
+
+  function methodPage() {
+    return `<article class="case method-page">${methodBlock()}<section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)"><h2>${t(STR.talkTitle)}</h2>${reachRow()}<div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div></section></article>`;
   }
 
   function moreBlock() {
@@ -246,9 +335,8 @@
         <div>
           <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
-          <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${ic("mail")}${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
         </div>
-        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p></div>
+        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p><a class="btn-pill cv-btn" href="${esc(A.cv.file)}" download>${ic("download")}${esc(t(A.cv.label))}</a></div>
       </div>
     </section>`;
   }
@@ -320,14 +408,16 @@
 
   function render(keepScroll) {
     const { a, b } = route();
-    const isCase = a === "work" && b;
-    $("#view").innerHTML = isCase ? project(b) : home();
+    const isCase = a === "work" && b, isMethod = a === "method";
+    $("#view").innerHTML = isCase ? project(b) : isMethod ? methodPage() : home();
     $$("[data-t]").forEach((el) => (el.textContent = s(el.dataset.t)));
     $("#lang").textContent = lang === "zh" ? "EN" : "中文";
     document.title = isCase ? `${(D.projects.filter((p) => !p.hidden).find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
     wire();
+    startGpix();
+    startShader();
     if (!keepScroll) {
-      const el = !isCase && a ? document.getElementById(a) : null;
+      const el = !isCase && !isMethod && a ? document.getElementById(a) : null;
       if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
     }
   }

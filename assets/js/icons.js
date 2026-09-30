@@ -1,6 +1,10 @@
 /* Icons for buttons, chips and labels. Stroke icons are Lucide (ISC licence); github and linkedin are Simple Icons (CC0).
    ic(name) returns an inline <svg> that takes its colour from the surrounding text (currentColor). */
 window.ICONS = {
+ "download": [
+  "s",
+  "<path d=\"M12 15V3\" /> <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\" /> <path d=\"m7 10 5 5 5-5\" />"
+ ],
  "mail": [
   "s",
   "<path d=\"m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7\" /> <rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\" />"
