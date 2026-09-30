@@ -46,6 +46,9 @@
   const heading = (h) => esc(t(h)).replace(" — ", ' <span class="dash">—</span> ');
   const badge = (kind) => `<span class="badge ${kind}">${esc(s(kind))}</span>`;
 
+  /* company logos: real files in assets/logos, sized by D.logos[id].h */
+  const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px" loading="lazy" decoding="async">` : ""; };
+
   /* ---------- media ---------- */
   function videoTag(m, extra = "") {
     return `<video src="${esc(m.src)}" poster="${esc(m.poster || "")}" autoplay muted loop playsinline preload="metadata" ${extra}></video>`;
@@ -150,6 +153,11 @@
       </div>
     </section>
 
+    <section class="logos" aria-label="${esc(t(D.ui.logosLbl))}">
+      <p class="logos-lbl rv">${esc(t(D.ui.logosLbl))}</p>
+      <div class="logos-row rv">${D.logoStrip.map((id) => logoImg(id)).join("")}</div>
+    </section>
+
     <section class="section" id="work">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
       <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${esc(t(c))}</button>`).join("")}</div>
@@ -170,7 +178,7 @@
 
     <section class="section" id="recognition">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
-      <div class="awards">${D.awards.map((a) => `<div class="award rv"><span class="mono dim">${a.year}</span><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
+      <div class="awards">${D.awards.map((a) => `<div class="award rv"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
     </section>
 
     ${methodBlock()}
@@ -237,7 +245,7 @@
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
           <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">GitHub ↗</a></div>
         </div>
-        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span></li>`).join("")}</ul><p class="langline mono">${esc(t(A.languages))}</p></div>
+        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${esc(t(A.languages))}</p></div>
       </div>
     </section>`;
   }
@@ -276,6 +284,7 @@
         <div><dt>${esc(s("when"))}</dt><dd>${esc(p.when)}</dd></div>
         <div><dt>${esc(s("status"))}</dt><dd>${esc(t(p.status))}</dd></div>
         <div><dt>${esc(s("zone"))}</dt><dd>${esc(zoneLine(p))}</dd></div>
+        ${p.orgs && p.orgs.length ? `<div><dt>${esc(t(D.ui.orgs))}</dt><dd class="orgs">${p.orgs.map((id) => logoImg(id, "sm")).join("")}</dd></div>` : ""}
         <div><dt>${esc(s("skills"))}</dt><dd>${esc(p.stack.join(" · "))}</dd></div>
         ${p.links && p.links.length ? `<div><dt>${esc(s("links"))}</dt><dd class="lk">${p.links.map(link).join("")}</dd></div>` : ""}
       </dl>

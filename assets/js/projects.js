@@ -115,7 +115,7 @@
 
     /* ------------------------------------------------------------ 04 */
     {
-      id: "teamdex", num: "04", year: "2026", when: "Sep 2026", zone: "service", tags: ["hackathon", "award", "built-with-ai"],
+      id: "teamdex", orgs: ["uniplay"], num: "04", year: "2026", when: "Sep 2026", zone: "service", tags: ["hackathon", "award", "built-with-ai"],
       title: "Teamdex", meta: "Teamdex · Sep 2026",
       cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
       h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
@@ -144,7 +144,7 @@
 
     /* ------------------------------------------------------------ 05 */
     {
-      id: "disco-fever", num: "05", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      id: "disco-fever", orgs: ["bitmagic"], num: "05", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
       title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
       cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
       h1: L("A one-minute disco rhythm game where every correct arrow spreads the dancing further across the floor", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
@@ -228,7 +228,7 @@
 
     /* ------------------------------------------------------------ 08 */
     {
-      id: "let-me-die", num: "08", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      id: "let-me-die", orgs: ["stoneleap"], num: "08", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
       title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
       meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
       cap: L("A first-person game where every death opens a new world: 1st place at Stone Leap", "每死一次就进入一个新世界的第一人称游戏：Stone Leap 第一名"),
@@ -280,7 +280,7 @@
 
     /* ------------------------------------------------------------ 10 */
     {
-      id: "sap-career-ignite", num: "10", year: "2026", when: "Apr 2026", zone: "ai", tags: ["award", "built-with-ai"],
+      id: "sap-career-ignite", orgs: ["sap", "capgemini", "google", "ericsson"], num: "10", year: "2026", when: "Apr 2026", zone: "ai", tags: ["award", "built-with-ai"],
       title: "SAP Career Ignite", meta: "SAP × Capgemini × Google · Apr 2026",
       cap: L("Winning a consulting case with a clickable prototype", "用可点击的原型赢下咨询案例赛"),
       h1: L("Winning a consulting case by letting the judges click the future instead of reading about it", "让评委亲手点一点未来，而不是读一份 PPT，赢下咨询案例赛"),
@@ -412,7 +412,7 @@
 
     /* ------------------------------------------------------------ 15 */
     {
-      id: "voi", num: "15", year: "2025", when: "Aug–Dec 2025", zone: "ux", tags: [],
+      id: "voi", orgs: ["voi"], num: "15", year: "2025", when: "Aug–Dec 2025", zone: "ux", tags: [],
       title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
       cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
       h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
@@ -440,7 +440,7 @@
 
     /* ------------------------------------------------------------ 16 */
     {
-      id: "kodiak-hub", num: "16", year: "2025", when: "Jun–Sep 2025", zone: "ux", tags: [],
+      id: "kodiak-hub", orgs: ["kodiak"], num: "16", year: "2025", when: "Jun–Sep 2025", zone: "ux", tags: [],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
       cap: L("Design work inside a live B2B SaaS design system", "在真实 B2B SaaS 设计系统里做设计"),
       h1: L("Designing inside a live B2B design system, and leaving a usability-testing process behind", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程"),
@@ -471,7 +471,7 @@
 
     /* ------------------------------------------------------------ 17 */
     {
-      id: "revive-automation", num: "17", year: "2026", when: "May–Aug 2026", zone: "build", tags: ["automation", "built-with-ai"],
+      id: "revive-automation", orgs: ["revive"], num: "17", year: "2026", when: "May–Aug 2026", zone: "build", tags: ["automation", "built-with-ai"],
       title: "Revive report automation", meta: "Revive · internship · 2026",
       cap: L("Automating a commission reconciliation during an internship", "实习期间把佣金对账自动化"),
       h1: L("Turning a manual commission reconciliation into a script that checks every row", "把手工佣金对账变成一个逐行核对的脚本"),
@@ -496,7 +496,7 @@
 
     /* ------------------------------------------------------------ 18 */
     {
-      id: "microhack", num: "18", year: "2026", when: "Sep 2026", zone: "build", tags: ["automation"],
+      id: "microhack", orgs: ["microsoft"], num: "18", year: "2026", when: "Sep 2026", zone: "build", tags: ["automation"],
       title: "MicroHack", meta: "Microsoft MicroHack · Sep 2026",
       cap: L("Learning Microsoft Foundry, Fabric and Azure by wiring three agents into one workflow", "把三个 agent 串成一个工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
       h1: L("Learning Microsoft Foundry, Fabric and Azure by building a multi-agent workflow", "通过搭一个多 agent 工作流，学习 Microsoft Foundry、Fabric 和 Azure"),

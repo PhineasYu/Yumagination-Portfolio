@@ -208,6 +208,16 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .teaser-go { margin: 32px 0 0; }
 @media (max-width: 720px) { .teaser { grid-template-columns: 1fr 1fr; } }
 
+/* ---------- company logos: original colours, never filtered ---------- */
+.logo { display: block; width: auto; height: var(--h, 28px); max-width: 100%; object-fit: contain; flex: none; }
+.logo.sm { height: calc(var(--h, 28px) * .72); max-width: 120px; }
+.logos { padding: clamp(48px, 6vw, 88px) var(--gx) 0; }
+.logos-lbl { margin: 0 0 clamp(24px, 3vw, 40px); font-size: var(--fs-body); color: var(--ink-muted); }
+.logos-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(24px, 3vw, 40px) clamp(32px, 4.4vw, 68px); }
+.orgs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }
+.award-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 30px; }
+.tl li .logo { justify-self: end; }
+
 /* ---------- tools / awards ---------- */
 .tools { margin-top: var(--sec); overflow: hidden; border-block: 1px solid var(--line); white-space: nowrap; }
 .tools-track { display: inline-flex; animation: slide 60s linear infinite; padding: 22px 0; }
@@ -252,7 +262,7 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .about p { margin: 0 0 1.1em; font-size: var(--fs-lead); line-height: 1.55; max-width: 34em; color: var(--ink-body); }
 .reach { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
 .tl { padding: 0; margin: 0; list-style: none; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
-.tl li { display: grid; grid-template-columns: 110px 1fr; gap: 20px; padding: 16px var(--pad); border-bottom: 1px solid var(--line); font-size: var(--fs-small); line-height: 1.5; }
+.tl li { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 20px; padding: 16px var(--pad); border-bottom: 1px solid var(--line); font-size: var(--fs-small); line-height: 1.5; }
 .tl li:last-child { border-bottom: 0; }
 .tl li .mono { padding-top: 2px; }
 .about .langline { margin: 20px 0 0; font-size: var(--fs-label); line-height: 1.6; color: var(--ink-muted); }
@@ -408,7 +418,10 @@ html[lang="zh"] .blk p { max-width: 36em; }
   .m-idea, .m-idea.i1, .m-idea.i2, .m-idea.i3, .m-idea.i4 { grid-column: auto; }
   .m-step { grid-template-columns: 64px minmax(0, 1fr); }
   .meta { grid-template-columns: 1fr 1fr; }
-  .tl li { grid-template-columns: 88px 1fr; }
+  .tl li { grid-template-columns: 88px 1fr auto; gap: 12px; }
+  .tl li .logo { max-width: 56px; }
+  .logos-row { justify-content: flex-start; gap: 20px 30px; }
+  .logos-row .logo { height: calc(var(--h, 28px) * .82); }
   .stats, .stepl { grid-template-columns: repeat(2, 1fr); }
   .pager { grid-template-columns: 1fr; }
   .pager a + a { align-items: flex-start; text-align: left; }

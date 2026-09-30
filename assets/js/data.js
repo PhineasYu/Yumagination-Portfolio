@@ -30,6 +30,29 @@ window.PORTFOLIO = {
 
   tools: ["Claude Code", "Lovable", "Figma", "Supabase", "Next.js", "TypeScript", "Tailwind", "ElevenLabs", "Telegram Bot API", "Chrome Extensions", "Netlify", "Vercel", "Git / PR workflow"],
 
+  /* Company logos (assets/logos). `h` = display height in px, tuned so the marks look evenly sized.
+     Only real logos from each organisation's own site or a public logo archive; never redrawn.
+     Kodiak Hub, Stone Leap and Bitmagic publish light-on-dark versions only, so theirs are re-coloured to one dark tone. */
+  logos: {
+    unilever:  { name: "Unilever",   file: "unilever.svg",     h: 40 },
+    kth:       { name: "KTH Royal Institute of Technology", file: "kth.svg", h: 28 },
+    kodiak:    { name: "Kodiak Hub", file: "kodiak.svg",       h: 26 },
+    revive:    { name: "Revive Retail", file: "revive.svg",    h: 26 },
+    voi:       { name: "Voi",        file: "voi.svg",          h: 26 },
+    sap:       { name: "SAP",        file: "sap.svg",          h: 32 },
+    capgemini: { name: "Capgemini",  file: "capgemini.svg",    h: 26 },
+    ericsson:  { name: "Ericsson",   file: "ericsson.svg",     h: 38 },
+    google:    { name: "Google",     file: "google.svg",       h: 30 },
+    microsoft: { name: "Microsoft",  file: "microsoft.svg",    h: 26 },
+    deloitte:  { name: "Deloitte",   file: "deloitte.svg",     h: 22 },
+    uniplay:   { name: "Uniplay",    file: "uniplay.svg",      h: 26 },
+    stoneleap: { name: "Stone Leap", file: "stoneleap.png",    h: 32 },
+    bitmagic:  { name: "Bitmagic",   file: "bitmagic.png",     h: 22 },
+    aris:      { name: "Aris Machina", file: "aris-machina.svg", h: 18 }
+  },
+  // order of the logo strip under the hero
+  logoStrip: ["unilever", "kth", "kodiak", "revive", "voi", "sap", "capgemini", "ericsson", "google", "microsoft", "deloitte", "uniplay", "stoneleap", "bitmagic", "aris"],
+
   /* Zones: every project has exactly one `zone` and any number of `tags`. */
   cats: [
     { id: "all", en: "All", zh: "全部" },
@@ -64,12 +87,12 @@ window.PORTFOLIO = {
   },
 
   awards: [
-    { year: "2026", title: { en: "SAP Career Ignite: 1st place", zh: "SAP Career Ignite：第一名" }, note: { en: "Case competition, round two, with Capgemini and Google", zh: "案例竞赛第二轮，合作方 Capgemini 与 Google" } },
-    { year: "2026", title: { en: "Aris & Friends Hackathon: 'Thinking outside of the box' prize", zh: "Aris & Friends 黑客松：「跳出框框思考」奖" }, note: { en: "4-hour build with Protos and Redpine, Stockholm", zh: "4 小时现场搭建，使用 Protos 与 Redpine，斯德哥尔摩" } },
-    { year: "2026", title: { en: "Deloitte Spark Hackathon: 3rd place", zh: "Deloitte Spark 黑客松：第三名" }, note: { en: "Planet-friendlier routing from open deforestation, biodiversity, soil and CO₂ data", zh: "基于森林砍伐、生物多样性、土壤污染与碳排放开放数据的更环保路线建议" } },
-    { year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
-    { year: "2026", title: { en: "Stone Leap Build-a-Game: 1st place (Let Me Die)", zh: "Stone Leap Build-a-Game：第一名（Let Me Die）" }, note: { en: "A playable game built in one evening with an AI world builder", zh: "用 AI world builder 一个晚上做出的可玩游戏" } },
-    { year: "2026", title: { en: "BitMagic game hackathon: 2nd place (Disco Fever)", zh: "BitMagic 游戏黑客松：二等奖（Disco Fever）" }, note: { en: "A one-minute disco rhythm game, now playable online", zh: "一分钟的迪斯科节奏游戏，已在线可玩" }, verify: true },
+    { logo: "sap", year: "2026", title: { en: "SAP Career Ignite: 1st place", zh: "SAP Career Ignite：第一名" }, note: { en: "Case competition, round two, with Capgemini and Google", zh: "案例竞赛第二轮，合作方 Capgemini 与 Google" } },
+    { logo: "aris", year: "2026", title: { en: "Aris & Friends Hackathon: 'Thinking outside of the box' prize", zh: "Aris & Friends 黑客松：「跳出框框思考」奖" }, note: { en: "4-hour build with Protos and Redpine, Stockholm", zh: "4 小时现场搭建，使用 Protos 与 Redpine，斯德哥尔摩" } },
+    { logo: "deloitte", year: "2026", title: { en: "Deloitte Spark Hackathon: 3rd place", zh: "Deloitte Spark 黑客松：第三名" }, note: { en: "Planet-friendlier routing from open deforestation, biodiversity, soil and CO₂ data", zh: "基于森林砍伐、生物多样性、土壤污染与碳排放开放数据的更环保路线建议" } },
+    { logo: "uniplay", year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
+    { logo: "stoneleap", year: "2026", title: { en: "Stone Leap Build-a-Game: 1st place (Let Me Die)", zh: "Stone Leap Build-a-Game：第一名（Let Me Die）" }, note: { en: "A playable game built in one evening with an AI world builder", zh: "用 AI world builder 一个晚上做出的可玩游戏" } },
+    { logo: "bitmagic", year: "2026", title: { en: "BitMagic game hackathon: 2nd place (Disco Fever)", zh: "BitMagic 游戏黑客松：二等奖（Disco Fever）" }, note: { en: "A one-minute disco rhythm game, now playable online", zh: "一分钟的迪斯科节奏游戏，已在线可玩" }, verify: true },
     { year: "2026", title: { en: "Accel AI Innovate Hackathon: Top 8 and a pitch slot (Dossier)", zh: "Accel AI Innovate 黑客松：Top 8 并获得路演机会（Dossier）" }, note: { en: "Hosted by KTH AI Society", zh: "KTH AI Society 主办" } },
     { year: "2022–23", title: { en: "Huayang Road community renewal: Excellent Proposal commendation", zh: "华阳路街道社区更新：优秀提案表彰" }, note: { en: "Community Viewfinder, Changning District, Shanghai", zh: "社区取景框，上海长宁区" } }
   ],
@@ -112,9 +135,9 @@ window.PORTFOLIO = {
       ]
     },
     timeline: [
-      { when: "2024–2026", what: { en: "MSc Integrated Product Design, KTH Royal Institute of Technology", zh: "KTH 皇家理工学院，集成产品设计硕士" } },
-      { when: "2025", what: { en: "UI/UX Design Intern, Kodiak Hub, Stockholm", zh: "Kodiak Hub UI/UX 设计实习生，斯德哥尔摩" } },
-      { when: "2022–2024", what: { en: "Packaging Laboratory Assistant, Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心包装实验室助理，上海" } },
+      { logo: "kth", when: "2024–2026", what: { en: "MSc Integrated Product Design, KTH Royal Institute of Technology", zh: "KTH 皇家理工学院，集成产品设计硕士" } },
+      { logo: "kodiak", when: "2025", what: { en: "UI/UX Design Intern, Kodiak Hub, Stockholm", zh: "Kodiak Hub UI/UX 设计实习生，斯德哥尔摩" } },
+      { logo: "unilever", when: "2022–2024", what: { en: "Packaging Laboratory Assistant, Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心包装实验室助理，上海" } },
       { when: "2017–2021", what: { en: "BEng Packaging Engineering, Zhengzhou University", zh: "郑州大学，包装工程学士" } }
     ],
     languages: { en: "English (professional) · Chinese (native) · Swedish (learning)", zh: "英语（工作语言）· 中文（母语）· 瑞典语（学习中）" }
@@ -125,6 +148,8 @@ window.PORTFOLIO = {
     selected: { en: "Selected work", zh: "精选作品" },
     all: { en: "Index", zh: "全部作品" },
     view: { en: "View", zh: "查看" },
+    logosLbl: { en: "Worked, studied and competed with", zh: "一起工作、学习、参赛的机构" },
+    orgs: { en: "Organisations", zh: "相关机构" },
     back: { en: "← All work", zh: "← 全部作品" },
     next: { en: "Next", zh: "下一个" },
     prev: { en: "Previous", zh: "上一个" },
