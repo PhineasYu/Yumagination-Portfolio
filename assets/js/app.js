@@ -171,7 +171,7 @@
             <span class="proj-cap">
               <span class="proj-title">${esc(p.title)}</span>
               <span class="proj-line">${esc(t(p.cap))}</span>
-              <span class="proj-tags">${zoneNames(p)}${award && p.tags.includes("award") ? `<span class="pill accent">${esc(t(award))}</span>` : ""}</span>
+              <span class="proj-tags">${zoneNames(p)}${award && p.tags.includes("award") ? `<span class="pill accent"><span aria-hidden="true">🏆</span>${esc(t(award))}</span>` : ""}</span>
             </span>
           </a>`).join("")}
       </div>

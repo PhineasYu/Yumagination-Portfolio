@@ -94,7 +94,7 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 
 - [ ] **3.1 Sushi Jerash**：给 Claude 线上网址 + 手机截图 3–5 张（菜单、购物车、结账、Telegram 通知、后台）。
 - [x] **3.2 Dossier**：登录后的主界面截图 2 张（时间线、档案）或一段录屏。只用虚构孩子的数据，不要出现真实孩子。另外：Dossier 的 Lovable 已发布网址现在显示 “Build incomplete”，需要在 Lovable 里重新发布一次。
-- [ ] **3.3 Collaboration Canvas**：原型链接 + 4–6 张图。
+- [x] **3.3 Collaboration Canvas**：原型链接 + 4–6 张图。
 - [ ] **3.4 Voi**：头盔概念图 / App 流程截图（先确认 Voi 允许公开，不确定就跳过）。
 - [ ] **3.5 头像/个人照片**：要不要在关于页放一张照片？（可选）
 
@@ -121,3 +121,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-09-30 · 0.0b / 0.0 · 默认分支已是 main，线上网站能打开（Claude 核实）
 - 2026-09-30 · 1.11 · 可以公开 Revive 的名字和 logo（用户确认），经历里已加 Revive 实习
 - 2026-09-30 · 3.2 · Dossier：从已发布网址的演示模式（虚构孩子 Luca、Lucy）录了 21 秒手机录屏和 3 张截图；事实依据是仓库 README（PRD）和 roadmap.md
+- 2026-09-30 · 3.3 · Collaboration Canvas：在本机运行原型（~/Downloads/Collaboration-canvas，npm run dev），录 55 秒三角色演示 + 9 张截图；事实依据是原型仓库的 spec、CLAUDE.md、演示脚本和 mock 数据
