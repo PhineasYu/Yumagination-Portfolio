@@ -1,5 +1,5 @@
 /* Hero background, "light rails" (after Yunfei's light-rails preset, 2026-10-01): a grid of small cells on
-   a deep teal-black. A band of checkered cells runs along a zigzag rail (the preset's four path points);
+   the page's light grey. A band of checkered cells runs along a zigzag rail (the preset's four path points);
    around it, slow soft regions are drawn as sparse dots, dense dots, large dots and short bars. Every 3.6 s
    the pattern wipes in from the top right, holds while the colours drift through the Tiffany range, and
    dissolves cell by cell. Quiet behind the name. Pauses off-screen and when the tab is hidden; one still
@@ -13,9 +13,9 @@ window.startSilk = function (canvas) {
   const fs = `precision mediump float;
 uniform vec2 r; uniform float t; uniform float cs; uniform float still;
 float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
-const vec3 BG=vec3(.047,.086,.082);                       // deep teal-black
-vec3 pal(float k){                                        // the Tiffany range, looping
-  vec3 c0=vec3(.506,.847,.816), c1=vec3(.753,.922,.906), c2=vec3(.910,.969,.961), c3=vec3(.247,.690,.655);
+const vec3 BG=vec3(.957,.957,.957);                       // the page background (#f4f4f4), so the hero runs into the page
+vec3 pal(float k){                                        // the Tiffany range, looping, from full Tiffany to its deep shade
+  vec3 c0=vec3(.506,.847,.816), c1=vec3(.247,.690,.655), c2=vec3(.039,.522,.502), c3=vec3(.357,.776,.741);
   k=fract(k)*4.;
   return k<1.?mix(c0,c1,k):k<2.?mix(c1,c2,k-1.):k<3.?mix(c2,c3,k-2.):mix(c3,c0,k-3.);
 }
