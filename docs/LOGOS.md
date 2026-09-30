@@ -1,6 +1,6 @@
 # Company logos (assets/logos)
 
-Shown in three places: the strip under the hero, the organiser logo on each award card and the About timeline, and an "Organisations" cell on case pages. The list, display sizes and strip order live in `assets/js/data.js` (`logos`, `logoStrip`); project pages use `orgs` in `projects.js`.
+Shown in three places: the scrolling band that replaces the old tools ticker (above About), the organiser logo on each award card and the About timeline, and an "Organisations" cell on case pages. The list, display sizes and strip order live in `assets/js/data.js` (`logos`, `logoStrip`); project pages use `orgs` in `projects.js`.
 
 Logos are real files from each organisation or a public logo archive, never redrawn. Only the three below were re-coloured, because the owners publish light-on-dark versions only.
 

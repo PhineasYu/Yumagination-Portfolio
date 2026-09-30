@@ -47,7 +47,7 @@
   const badge = (kind) => `<span class="badge ${kind}">${esc(s(kind))}</span>`;
 
   /* company logos: real files in assets/logos, sized by D.logos[id].h */
-  const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px" loading="lazy" decoding="async">` : ""; };
+  const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px" decoding="async">` : ""; };
 
   /* ---------- media ---------- */
   function videoTag(m, extra = "") {
@@ -153,11 +153,6 @@
       </div>
     </section>
 
-    <section class="logos" aria-label="${esc(t(D.ui.logosLbl))}">
-      <p class="logos-lbl rv">${esc(t(D.ui.logosLbl))}</p>
-      <div class="logos-row rv">${D.logoStrip.map((id) => logoImg(id)).join("")}</div>
-    </section>
-
     <section class="section" id="work">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
       <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${esc(t(c))}</button>`).join("")}</div>
@@ -184,7 +179,7 @@
     ${methodBlock()}
     ${galleryTeaser()}
 
-    <div class="tools mono" aria-label="${esc(s("tools"))}"><div class="tools-track">${[...D.tools, ...D.tools].map((x) => `<span>${esc(x)}</span>`).join("")}</div></div>
+    <div class="tools" aria-label="${esc(t(D.ui.logosLbl))}"><div class="tools-track">${[...D.logoStrip, ...D.logoStrip].map((id) => `<span>${logoImg(id)}</span>`).join("")}</div></div>
 
     ${aboutBlock()}
     ${contactBlock()}`;
