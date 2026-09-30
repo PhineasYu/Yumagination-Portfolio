@@ -37,7 +37,7 @@
 
 Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对应的 `verify`。
 
-- [ ] **1.1 旧 Framer 网站**：`yunfeiyu.framer.website` 还挂在简历上吗？（7 月诊断说它有模板残留和陌生人邮箱。）选一个：把简历里的链接换成新站 / 先下线旧站 / 暂时不管。
+- [ ] ⏭ 之后（新网站上线后再做）**1.1 旧 Framer 网站**：`yunfeiyu.framer.website` 还挂在简历上吗？（7 月诊断说它有模板残留和陌生人邮箱。）选一个：把简历里的链接换成新站 / 先下线旧站 / 暂时不管。
 - [x] **1.2 Dossier**：这是哪场比赛？有成绩吗？（没有就写「参赛作品」。）
 - [x] **1.3 Aris & Friends 奖项**：奖项确切名字是什么？（你笔记里写的是 “Thinking outside of the box Prize”。）
 - [x] **1.4 Deloitte Spark 黑客松**：哪一年？第三名确认吗？
