@@ -138,6 +138,7 @@ window.PORTFOLIO = {
       ]
     },
     timeline: [
+      { logo: "revive", when: "2026", what: { en: "UX Intern, Revive Retail (May–Aug)", zh: "Revive Retail UX 实习生（5–8 月）" } },
       { logo: "kth", when: "2024–2026", what: { en: "MSc Integrated Product Design, KTH Royal Institute of Technology", zh: "KTH 皇家理工学院，集成产品设计硕士" } },
       { logo: "kodiak", when: "2025", what: { en: "UI/UX Design Intern, Kodiak Hub, Stockholm", zh: "Kodiak Hub UI/UX 设计实习生，斯德哥尔摩" } },
       { logo: "unilever", when: "2022–2024", what: { en: "Packaging Laboratory Assistant, Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心包装实验室助理，上海" } },
