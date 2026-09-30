@@ -543,3 +543,8 @@ html[lang="zh"] .blk p { max-width: 36em; }
 .gpix:hover .gpix-go { transform: translateY(-2px); }
 .gpix:hover .gpix-go .arrow { transform: translateX(3px); } .gpix-go .arrow { transition: transform var(--dur) var(--ease); }
 .gpix-go .arrow { color: var(--tf); font-weight: 900; font-size: 18px; line-height: 1; -webkit-text-stroke: 1.2px var(--tf); }
+
+/* method page: the second block */
+.method-page #design { margin-top: var(--sec); padding-top: var(--sec); border-top: 1px solid var(--line); }
+.m-figure { padding-top: clamp(32px, 4vw, 56px); }
+.m-links { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 0; }

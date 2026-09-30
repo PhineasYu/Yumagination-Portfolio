@@ -261,10 +261,10 @@
     gpixStop = () => { dead = true; cancelAnimationFrame(raf); ro.disconnect(); vis.disconnect(); };
   }
 
-  function methodBlock() {
-    const M = D.method, last = M.steps.length - 1;
+  function methodBlock(M = D.method, id = "method") {
+    const last = M.steps.length - 1;
     return `
-    <section class="section method" id="method">
+    <section class="section method" id="${id}">
       <div class="m-side">
         <div class="m-stick">
           <h2 class="sec-title rv">${esc(t(M.title))}</h2>
@@ -275,13 +275,15 @@
       <div class="m-main">
         <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
         <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
+        ${M.links ? `<p class="m-links rv">${M.links.map((l) => `<a class="btn-ghost" href="${esc(l.url)}">${esc(t(l.label))} <span aria-hidden="true">→</span></a>`).join("")}</p>` : ""}
         <p class="disclosure rv">${esc(t(M.disclosure))}</p>
       </div>
-    </section>`;
+    </section>
+    ${M.figure ? `<section class="section m-figure"><div class="shot rv">${media({ type: "embed", src: M.figure.src, frame: "browser", ratio: "1/1", open: M.figure.src })}<p class="cap">${esc(t(M.figure.cap))}</p></div></section>` : ""}`;
   }
 
   function methodPage() {
-    return `<article class="case method-page">${methodBlock()}<section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)"><h2>${t(STR.talkTitle)}</h2>${reachRow()}<div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div></section></article>`;
+    return `<article class="case method-page">${methodBlock(D.method, "method")}${methodBlock(D.design, "design")}<section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)"><h2>${t(STR.talkTitle)}</h2>${reachRow()}<div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div></section></article>`;
   }
 
   function moreBlock() {

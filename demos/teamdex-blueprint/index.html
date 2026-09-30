@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teamdex service blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#13222E;--paper:#EEF5F1;--lime:#C8F53C;--mint:#BDF4E0;--pink:#FCD9EF;--sky:#5AAFE3;--line:#DCE5E0;--muted:#5E6B72;--card:#fff;
+  --lane:112px;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0F1B23;--card:#182833;--line:#27404D;--muted:#9FB0B8;--ink:#EAF4EF}}
+:root[data-theme="dark"]{--paper:#0F1B23;--card:#182833;--line:#27404D;--muted:#9FB0B8;--ink:#EAF4EF}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+.wrap{max-width:1920px;margin:0 auto;padding:22px 24px 40px}
+
+/* header */
+header{display:flex;flex-wrap:wrap;align-items:center;gap:18px 28px;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:16px}
+.mark{position:relative;width:46px;height:62px;flex:none;margin-left:12px}
+.mark span{position:absolute;inset:0;border-radius:10px}
+.mark .b1{background:var(--pink);transform:rotate(-20deg) translate(-30%,8%)}
+.mark .b2{background:var(--sky);transform:rotate(-9deg) translate(-14%,3%)}
+.mark .f{padding:4px;background:conic-gradient(#FF7AB8,#C8F53C,#BDF4E0,#5AAFE3,#A86BFF,#FF7AB8);box-shadow:0 10px 20px -10px rgba(19,34,46,.5)}
+.mark .f i{display:flex;height:100%;border-radius:7px;background:#fff;align-items:flex-end;justify-content:center;overflow:hidden}
+.mark svg{height:74%}
+.word{font-size:40px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.titles h1{margin:0;font-size:clamp(28px,4vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.05}
+.titles p{margin:8px 0 0;font-size:18px;color:var(--muted);max-width:60ch}
+.divider{width:2px;align-self:stretch;background:var(--line);border-radius:2px}
+
+/* role chips */
+.roles{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 18px}
+.chip{display:flex;align-items:center;gap:10px;border:2px solid transparent;border-radius:999px;padding:6px 16px 6px 8px;font-size:16px;font-weight:600;cursor:pointer;background:var(--card);min-height:48px}
+.chip .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.chip .av svg{height:28px}
+.chip[aria-pressed="true"]{border-color:var(--ink)}
+.chip:focus-visible,.stagehead:focus-visible,.cell:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.hint{font-size:14px;color:var(--muted);margin:0 0 14px}
+
+/* blueprint grid */
+.scroller{overflow-x:auto;border-radius:28px;background:var(--card);box-shadow:0 20px 50px -30px rgba(19,34,46,.35)}
+/* fits the window: 7 equal columns; only narrow screens (<1000px) scroll */
+.grid{display:grid;grid-template-columns:var(--lane) repeat(7,minmax(0,1fr));min-width:1000px;position:relative}
+.lanelabel{position:sticky;left:0;z-index:3;background:var(--card);display:flex;flex-direction:column;justify-content:center;gap:5px;padding:10px 12px;border-right:2px solid var(--line)}
+.lanelabel b{font-size:15px;font-weight:700;line-height:1.1}
+.lanelabel small{font-size:12px;font-weight:600;color:var(--muted)}
+.lanelabel .av{width:40px;height:40px;border-radius:50%;display:flex;align-items:flex-end;justify-content:center;overflow:hidden}
+.lanelabel .av svg{height:33px}
+
+.stagehead{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:14px 12px 12px;border-bottom:2px solid var(--line);border-left:1px dashed var(--line);min-width:0}
+.stagehead .num{font-size:34px;font-weight:800;letter-spacing:-.04em;line-height:.9}
+.stagehead .name{font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.stagehead .day{font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+.stagehead[aria-selected="true"] .num{color:var(--sky)}
+
+.emotion{grid-column:2 / -1;position:relative;height:108px;border-bottom:2px solid var(--line)}
+.emotion svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.emo-label{position:absolute;transform:translate(-50%,-150%);font-size:12px;font-weight:700;background:var(--ink);color:var(--paper);padding:3px 10px;border-radius:999px;white-space:nowrap}
+
+.cellwrap{padding:8px;border-left:1px dashed var(--line);display:flex;flex-direction:column;gap:7px;justify-content:center;transition:opacity .25s;min-width:0}
+.cell{all:unset;box-sizing:border-box;display:block;cursor:pointer;border-radius:16px;padding:9px 11px;font-size:14px;font-weight:500;line-height:1.3;background:var(--tint);color:#13222E;overflow-wrap:anywhere}
+.cell .tag{display:block;font-size:11px;font-weight:700;letter-spacing:.01em;opacity:.7;margin-bottom:4px}
+.cell.moment{background:var(--sky);color:#13222E;box-shadow:0 0 0 3px #13222E inset;position:relative;font-weight:600}
+.cell.moment .tag{opacity:1}
+.cell.moment::before{content:"";position:absolute;right:10px;top:10px;width:10px;height:10px;background:var(--lime);border-radius:3px;transform:rotate(45deg)}
+.cell.note{background:transparent;border:2px dashed var(--line);color:var(--muted);font-size:13px}
+.empty{height:100%;min-height:40px;display:flex;align-items:center;justify-content:center;color:var(--line);font-size:22px;font-weight:700}
+.sep{grid-column:1 / -1;position:relative;z-index:5;height:0;border-top:2px dashed var(--muted);opacity:.55}
+.sep span{position:sticky;left:14px;display:inline-block;transform:translateY(-55%);background:var(--card);padding:0 10px;font-size:12px;font-weight:700;color:var(--muted)}
+
+.lane-hr{--tint:var(--lime)}.lane-col{--tint:var(--mint)}.lane-new{--tint:var(--pink)}.lane-sys{--tint:#E4ECE8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .lane-sys{--tint:#C9D6CF}}
+.dim{opacity:.18}
+.colsel{background:color-mix(in srgb,var(--sky) 9%,transparent)}
+
+/* detail panel */
+.detail{margin-top:16px;display:grid;grid-template-columns:minmax(220px,1fr) repeat(3,minmax(200px,1fr));gap:12px}
+.detail .panel{border-radius:24px;padding:18px}
+.detail .lead{background:var(--ink);color:var(--paper)}
+.detail .lead .n{font-size:52px;font-weight:800;letter-spacing:-.05em;line-height:.85}
+.detail .lead h2{margin:10px 0 4px;font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.detail .panel.lead p{margin:0;font-size:16px;font-weight:600;opacity:.75;color:var(--paper)}
+.detail .panel h3{margin:0 0 8px;font-size:13px;font-weight:700;color:#13222E;opacity:.7}
+.detail .panel p{margin:0;font-size:16px;font-weight:500;line-height:1.4;color:#13222E}
+.p-touch{background:var(--mint)}.p-intent{background:var(--pink)}.p-risk{background:var(--lime)}
+
+footer{margin-top:28px;font-size:14px;color:var(--muted)}
+
+@media (max-width:760px){
+  :root{--lane:96px}
+  .wrap{padding:18px 12px 40px}
+  .divider{display:none}
+  .word{font-size:32px}
+  .lanelabel{padding:10px}
+  .lanelabel b{font-size:15px}
+  .lanelabel small{display:none}
+  .detail{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion: reduce){.cellwrap{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <div class="mark" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="f"><i id="markSprite"></i></span></div>
+      <div class="word">Teamdex</div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+    <div class="titles">
+      <h1>Service blueprint</h1>
+      <p>How HR, colleagues and a newcomer meet, from the day the hire is confirmed to the end of week one.</p>
+    </div>
+  </header>
+
+  <div class="roles" role="group" aria-label="Focus on a role" id="roles"></div>
+  <p class="hint">Tap a role to focus on its lane. Tap a stage or any step to see its touchpoint, intent and risk.</p>
+
+  <div class="scroller"><div class="grid" id="grid"></div></div>
+
+  <section class="detail" id="detail" aria-live="polite"></section>
+
+  <footer>Teamdex, made for the Uniplay Hackathon in Stockholm. Blue cards with a lime diamond are the moments that matter.</footer>
+</div>
+
+<script>
+(function(){
+const FA=["....hhhh....","...hhhhhh...","...hssssh...","...sesses...","...ssssss...","....smms....","..cccccccc..",".sccccccccs.",".s.cccccc.s.","...cccccc...","...pp..pp...","...pp..pp...","..bbb..bbb.."];
+function sprite(p){let r='';FA.forEach((row,y)=>[...row].forEach((ch,x)=>{if(ch==='.')return;const c=ch==='e'?'#13222E':ch==='m'?'#E0567A':p[ch];r+=`<rect x="${x}" y="${y}" width="1.03" height="1.03" fill="${c}"/>`;}));return `<svg viewBox="0 0 12 13" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;}
+const PAL={
+  new:{h:'#13222E',s:'#F3D1B0',c:'#5AAFE3',p:'#13222E',b:'#C8F53C'},
+  col:{h:'#6B3E26',s:'#F1C6A0',c:'#3DDBB0',p:'#13222E',b:'#13222E'},
+  hr:{h:'#D9B38C',s:'#F6D2B8',c:'#FF8A7A',p:'#13222E',b:'#13222E'},
+  sys:{h:'#9AA8A2',s:'#C3CFC9',c:'#9AA8A2',p:'#5E6B72',b:'#5E6B72'}
+};
+document.getElementById('markSprite').innerHTML=sprite(PAL.new);
+
+const LANES=[
+  {key:'new',name:'Newcomer',sub:'Frontstage',bg:'var(--pink)'},
+  {key:'col',name:'Colleague',sub:'Frontstage',bg:'var(--mint)'},
+  {key:'hr', name:'HR',sub:'Frontstage',bg:'var(--lime)'},
+  {key:'sys',name:'System',sub:'Backstage',bg:'#E4ECE8'}
+];
+
+const STAGES=[
+  {name:'Hire confirmed',day:'Day −7',emo:null,
+   new:[],col:[{t:'Gets notified: you are one of 5 people they will meet first'}],
+   hr:[{t:'Adds the newcomer, picks 5 key colleagues and writes why'}],
+   sys:[{t:'Creates the quest and the newcomer card'}],
+   touch:'HR console: Create onboarding quest',
+   intent:'Meeting people becomes an official part of onboarding, not a favour.',
+   risk:'Colleagues ignore the notice. Show the newcomer\u2019s card right inside it.'},
+  {name:'Colleagues claim cards',day:'Day −5',emo:null,
+   new:[],col:[{t:'Claims their card in 2 minutes: pixel avatar, ask-me-about, fun fact'}],
+   hr:[{t:'Tracks card completion and nudges whoever is missing'}],
+   sys:[{t:'Keeps the fun fact answer private'}],
+   touch:'Card editor with live preview',
+   intent:'Setting up should feel like building your pixel self, not filling in a form.',
+   risk:'\u201CAnother system to fill in.\u201D Keep it under 2 minutes and fun.'},
+  {name:'Meet before you meet',day:'Day −3 to −1',emo:{v:.35,l:'Nervous'},
+   new:[{t:'Opens the invite link'},{t:'Sees the 5 faces and why to meet each',m:true}],
+   col:[],hr:[{t:'Sends the invite link'}],
+   sys:[{t:'Shows key colleagues as silhouettes with reasons'}],
+   touch:'Newcomer Teamdex, before any card is collected',
+   intent:'Anxiety drops when strangers become five named faces.',
+   risk:'Too much information too early. Show only face, role and one reason.'},
+  {name:'First week',day:'Day 1 to 5',emo:{v:.85,l:'Proud'},
+   new:[{t:'Walks up: \u201CI\u2019m doing my Teamdex quest!\u201D'},{t:'Scan, flip, new card!',m:true},{t:'Asks the fun fact face to face and unlocks it',m:true},{t:'Not free? Check open-to-chat and come back later',note:true}],
+   col:[{t:'Shows their card QR'},{t:'Notified and receives the newcomer\u2019s card',m:true}],
+   hr:[{t:'Watches progress in the live feed'}],
+   sys:[{t:'Two-way card exchange'},{t:'Checks the fun fact answer'}],
+   touch:'Scan reveal, card detail, colleague notification, HR live feed',
+   intent:'The game gives the newcomer a reason to start the conversation.',
+   risk:'Scanning without talking. The fun fact only unlocks face to face.'},
+  {name:'Learning check',day:'After 3 cards',emo:{v:.7,l:'Confident'},
+   new:[{t:'\u201CWho do I ask?\u201D quiz'}],col:[],
+   hr:[{t:'Sees the quiz score'}],
+   sys:[{t:'Builds questions from colleagues\u2019 topics'}],
+   touch:'Quiz and results',
+   intent:'Knowing people turns into a work skill: who to ask for what.',
+   risk:'Feels like an exam. Keep it short, instant feedback, no penalties.'},
+  {name:'Onboarding party',day:'All 5 collected',emo:{v:1,l:'Welcomed'},
+   new:[{t:'Pixel party unlocked',m:true}],
+   col:[{t:'Receives the fika invite'}],
+   hr:[{t:'Quest marked complete'}],
+   sys:[{t:'Unlocks when all key colleagues are collected'}],
+   touch:'Party screen and fika invite',
+   intent:'Week one ends with being welcomed, not with getting through it.',
+   risk:'A party nobody attends. The invite goes to the five people already met.'},
+  {name:'Reflection and impact',day:'Day 5',emo:{v:.8,l:'Settled'},
+   new:[{t:'Day 5 pulse: \u201CI know who to ask for help\u201D'}],col:[],
+   hr:[{t:'Impact dashboard: first chat time, facts unlocked, quiz score, pulse change'}],
+   sys:[{t:'Aggregates events into metrics'}],
+   touch:'Pulse question and HR impact dashboard',
+   intent:'HR can finally show that belonging is measurable.',
+   risk:'Turning people into scores. Show progress, never rank newcomers or colleagues.'}
+];
+
+const grid=document.getElementById('grid');
+let sel=3, focus=null;
+
+function el(tag,cls,html){const e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e;}
+
+// header row
+grid.appendChild(el('div','lanelabel','<b>Stage</b><small>Tap to explore</small>'));
+STAGES.forEach((s,i)=>{
+  const b=el('button','stagehead',`<span class="num">${i}</span><span class="name">${s.name}</span><span class="day">${s.day}</span>`);
+  b.setAttribute('role','tab');b.dataset.col=i;b.onclick=()=>select(i);grid.appendChild(b);
+});
+// emotion row
+grid.appendChild(el('div','lanelabel','<b>Newcomer feeling</b><small>Emotion curve</small>'));
+const emo=el('div','emotion');emo.id='emo';grid.appendChild(emo);
+
+// lanes
+LANES.forEach((L,li)=>{
+  if(li===1)grid.appendChild(el('div','sep','<span>Line of interaction</span>'));
+  if(li===3)grid.appendChild(el('div','sep','<span>Line of visibility</span>'));
+  const lab=el('div','lanelabel lane-'+L.key,`<span class="av" style="background:${L.bg}">${sprite(PAL[L.key])}</span><b>${L.name}</b><small>${L.sub}</small>`);
+  lab.dataset.lane=L.key;grid.appendChild(lab);
+  STAGES.forEach((s,i)=>{
+    const w=el('div','cellwrap lane-'+L.key);w.dataset.lane=L.key;w.dataset.col=i;
+    const items=s[L.key];
+    if(!items.length){w.appendChild(el('div','empty','\u2013'));}
+    items.forEach(it=>{
+      const c=el('button','cell'+(it.m?' moment':'')+(it.note?' note':''),(it.m?'<span class="tag">Moment that matters</span>':'')+it.t);
+      c.onclick=()=>select(i);w.appendChild(c);
+    });
+    grid.appendChild(w);
+  });
+});
+
+// role chips
+const roles=document.getElementById('roles');
+LANES.forEach(L=>{
+  const c=el('button','chip',`<span class="av" style="background:${L.bg}">${sprite(PAL[L.key])}</span>${L.name}`);
+  c.setAttribute('aria-pressed','false');
+  c.onclick=()=>{focus=focus===L.key?null:L.key;paint();};
+  c.dataset.lane=L.key;roles.appendChild(c);
+});
+
+function drawEmotion(){
+  const w=emo.clientWidth,h=emo.clientHeight,col=w/STAGES.length,pad=26;
+  const pts=STAGES.map((s,i)=>s.emo?{x:col*i+col/2,y:pad+(1-s.emo.v)*(h-pad*1.6),l:s.emo.l,i}:null).filter(Boolean);
+  let d='';pts.forEach((p,k)=>{if(!k){d=`M${p.x},${p.y}`;return;}const q=pts[k-1],mx=(q.x+p.x)/2;d+=` C${mx},${q.y} ${mx},${p.y} ${p.x},${p.y}`;});
+  emo.innerHTML=`<svg aria-hidden="true"><path d="${d}" fill="none" stroke="#5AAFE3" stroke-width="5" stroke-linecap="round"/>${pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="${p.i===sel?11:8}" fill="${p.i===sel?'#C8F53C':'#fff'}" stroke="#13222E" stroke-width="3"/>`).join('')}</svg>`+
+    pts.map(p=>`<span class="emo-label" style="left:${p.x}px;top:${p.y}px">${p.l}</span>`).join('')+
+    `<span style="position:absolute;left:${col}px;top:50%;transform:translate(-50%,-50%);font-size:14px;color:var(--muted);font-weight:600;text-align:center;width:${col*1.6}px">Newcomer not involved yet</span>`;
+}
+
+function select(i){sel=i;paint();}
+function paint(){
+  document.querySelectorAll('.stagehead').forEach(h=>h.setAttribute('aria-selected',String(+h.dataset.col===sel)));
+  document.querySelectorAll('.cellwrap').forEach(w=>{
+    w.classList.toggle('colsel',+w.dataset.col===sel);
+    w.classList.toggle('dim',!!focus&&w.dataset.lane!==focus);
+  });
+  document.querySelectorAll('.lanelabel[data-lane]').forEach(l=>l.classList.toggle('dim',!!focus&&l.dataset.lane!==focus));
+  document.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c.dataset.lane===focus)));
+  const s=STAGES[sel];
+  document.getElementById('detail').innerHTML=`
+    <div class="panel lead"><div class="n">${sel}</div><h2>${s.name}</h2><p>${s.day}</p></div>
+    <div class="panel p-touch"><h3>Touchpoint</h3><p>${s.touch}</p></div>
+    <div class="panel p-intent"><h3>Design intent</h3><p>${s.intent}</p></div>
+    <div class="panel p-risk"><h3>Risk and response</h3><p>${s.risk}</p></div>`;
+  drawEmotion();
+}
+window.addEventListener('resize',drawEmotion);
+paint();
+const sc=document.querySelector('.scroller');
+if(sc.scrollWidth>sc.clientWidth+40){const hd=document.querySelector('.stagehead[data-col="'+sel+'"]');sc.scrollLeft=hd.offsetLeft-document.querySelector('.lanelabel').offsetWidth-8;}
+if(document.fonts)document.fonts.ready.then(drawEmotion);
+})();
+</script>
+</body>
+</html>

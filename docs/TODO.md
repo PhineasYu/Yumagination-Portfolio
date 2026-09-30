@@ -128,3 +128,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-01 · 第六批 · Voi 加入 Miro 调研（招募帖、亲和图、问卷数据、目标人群）并修正「安全而非价格」的说法；Kodiak 加入 AI 工作流（来自 Notion）；NotchBreak 视频菜单栏改黑；Dove 卡片挪到倒数第二；Community Viewfinder 加摄影彩蛋（仅此项目）
 - 2026-10-01 · 第七批 · Teamdex/Dossier 互换；Collaboration Canvas 在第二行中间；Kodiak 封面换成登录页，登录流程拆成七屏横排；Let Me Die 封面加笑哭 emoji；Gallery 改成无限画布（拖拽/滚轮，照片散落，点击看大图；?demo 可预览）；add-photos 脚本多输出 small 尺寸
 - 2026-10-01 · 第八批 · Let Me Die 的 emoji 挪到标题后并斜 45°；「Show the reasoning」卡片改成 Tiffany→黑的颗粒流动渐变；About 去掉三个按钮、加「Download my CV」（文件待放：assets/Yunfei_Yu_CV.pdf）；郑州大学 logo；首页改为 Work → Awards → 摄影像素窗 → logo 条 → About → Contact，Method 独立成页（#/method）；Awards 卡片翻转出现
+- 2026-10-01 · 第九批 · Method 页加入第二大块「How I design services」（设计思维 + 服务设计：五步、四个反复用的做法、Teamdex 蓝图可点击）；Teamdex 页加入服务蓝图一节

@@ -130,6 +130,42 @@ window.PORTFOLIO = {
     }
   },
 
+  /* The second half of the Method page: how I design services (design thinking + service design). */
+  design: {
+    title: { en: "How I design services", zh: "我如何做服务设计" },
+    lede: {
+      en: "A service is decided at the seams between people, teams and moments. I find where it breaks before I draw anything, then I design the seam.",
+      zh: "一项服务的好坏，取决于人、团队和时刻之间的接缝。我在动手画之前，先找出它在哪里断，然后设计那道接缝。"
+    },
+    lede2: {
+      en: "My method is design thinking with service design's tools: listen on every side, name the tensions, map the whole service, write principles, prototype, and say what was not tested.",
+      zh: "我的方法是设计思维，加上服务设计的工具：在每一方都听、给张力起名、把整个服务画出来、写原则、做原型，并说清楚哪些没有测试过。"
+    },
+    steps: [
+      { n: "01", h: { en: "Listen on every side", zh: "在每一方都听" }, p: { en: "A service has more than one user. I interview the people on each side of a seam. The thesis ran nine interviews across two cases and coded them in two layers; the Voi project added 37 street interviews and 47 survey responses.", zh: "一项服务不止一种用户。我采访接缝两边的人。论文在两个案例里做了九场访谈，并分两层编码；Voi 项目另有 37 场街头访谈和 47 份问卷。" } },
+      { n: "02", h: { en: "Name the tensions", zh: "给张力起名" }, p: { en: "Cluster what people said until the same problem keeps coming back, then give it a name. The thesis ended with five systemic tensions. The Voi board sorted into problems, feelings, suggestions, usage and brand, and three problems rose to the top.", zh: "把人们说的话聚类，直到同一个问题反复出现，然后给它起名字。论文最后得到五个系统性张力。Voi 的画板分成问题、感受、建议、使用情况和品牌，有三个问题浮到最上面。" } },
+      { n: "03", h: { en: "Map the whole service", zh: "把整个服务画出来" }, p: { en: "A blueprint puts every actor, stage and feeling on one page, with the line of interaction and the line of visibility drawn in. Teamdex's has four lanes, seven stages and an emotion curve, and the moments that matter are marked.", zh: "服务蓝图把每个角色、阶段和感受放在同一页，并画出交互线和可见线。Teamdex 的蓝图有四条泳道、七个阶段和一条情绪曲线，关键时刻都做了标记。" } },
+      { n: "04", h: { en: "Turn tensions into principles", zh: "把张力变成原则" }, p: { en: "Write a few principles and make every feature answer one. The thesis distilled four from its tensions, and each of the Canvas's seven components was checked against them. Teamdex did it at hackathon speed: a game to give a reason to talk, and no leaderboard because it would create pressure.", zh: "写几条原则，让每个功能都回应其中一条。论文从张力里提炼出四条，画布的七个组件都对照它们检查过。Teamdex 在黑客松的速度里也这么做：用游戏给人开口的理由，不做排行榜，因为那会制造压力。" } },
+      { n: "05", h: { en: "Prototype, test, be honest", zh: "做原型、测试、说实话" }, p: { en: "Prototype the seam, not the whole system. The Canvas was checked by a walkthrough against its principles, and real-world validation is the stated next step. At Kodiak I ran think-aloud sessions and changed the layout between rounds. I say what was tested and what was not.", zh: "原型做的是接缝，不是整个系统。画布是对照原则做了走查，真实场景的验证是明说的下一步。在 Kodiak，我做了出声思考测试，并在轮次之间调整布局。我会说清楚什么测试过，什么没有。" } }
+    ],
+    principlesTitle: { en: "Moves I keep making", zh: "反复用到的做法" },
+    principles: [
+      { h: { en: "Design the handover, not just the first visit", zh: "设计交接，而不只是第一次到访" }, p: { en: "In the thesis cases, collaboration collapsed when a contact person left. In the Canvas a new partner lands on the handover record, not on a dashboard.", zh: "在论文的案例里，联系人一离开，合作就垮了。在画布里，新来的伙伴落在交接记录上，而不是一个仪表盘。" } },
+      { h: { en: "Make invisible work visible", zh: "让看不见的工作被看见" }, p: { en: "Coordination is usually unseen labour. In the log it is an entry everyone can read, and only the person it served sees 'On your behalf'.", zh: "协调通常是没人看见的劳动。在日志里它是人人可读的一条记录，只有被它服务的那个人会看到「代表你」。" } },
+      { h: { en: "Give people a reason, not a rule", zh: "给人一个理由，而不是一条规定" }, p: { en: "Teamdex does not order colleagues to welcome newcomers. A game gives the newcomer a reason to walk up, and makes talking to newcomers part of a colleague's job.", zh: "Teamdex 没有要求同事欢迎新人。游戏给了新人走上前的理由，也让和新人聊天成为同事工作的一部分。" } },
+      { h: { en: "Write the risk next to the intent", zh: "把风险写在意图旁边" }, p: { en: "Every stage of the Teamdex blueprint states its touchpoint, its design intent, and what could go wrong with the response.", zh: "Teamdex 蓝图的每个阶段，都写明触点、设计意图，以及可能出什么问题和对应的办法。" } }
+    ],
+    figure: { src: "demos/teamdex-blueprint/index.html", cap: { en: "The Teamdex service blueprint, running. Pick a role to focus on its lane; pick a stage to see its touchpoint, design intent and risk.", zh: "Teamdex 服务蓝图，可点击。选一个角色聚焦它的泳道；选一个阶段，看它的触点、设计意图和风险。" } },
+    links: [
+      { label: { en: "The thesis: Collaboration Canvas", zh: "论文：Collaboration Canvas" }, url: "#/work/collaboration-canvas" },
+      { label: { en: "The game: Teamdex", zh: "游戏：Teamdex" }, url: "#/work/teamdex" }
+    ],
+    disclosure: {
+      en: "The thesis was co-authored with Fangjing Fu, split by chapter; I wrote the prototype spec and accepted the build. Teamdex is a one-day hackathon build, so its blueprint is a design plan, not a measured result.",
+      zh: "论文与 Fangjing Fu 合著，按章节分工；我写了原型 spec 并负责验收。Teamdex 是一天完成的黑客松作品，所以它的蓝图是设计方案，不是测出来的结果。"
+    }
+  },
+
   about: {
     title: { en: "About", zh: "关于我" },
     body: {
