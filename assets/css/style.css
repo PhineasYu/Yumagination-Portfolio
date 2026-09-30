@@ -534,6 +534,7 @@ html[lang="zh"] .blk p { max-width: 36em; }
 .gpix-t b { font: 800 clamp(28px, 5.4vw, 76px)/1.02 var(--sans); letter-spacing: -.035em; }
 .gpix-t b:last-child { font-size: clamp(20px, 3.2vw, 44px); letter-spacing: -.025em; }
 .gpix-t b span { background: #fff; padding: .04em .22em .1em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.gpix-go { position: absolute; right: clamp(14px, 2vw, 24px); top: clamp(14px, 2vw, 24px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; background: var(--tf); border-radius: var(--radius-pill); transition: transform var(--dur) var(--ease); }
+.gpix-go { position: absolute; right: clamp(14px, 2vw, 24px); top: clamp(14px, 2vw, 24px); display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; background: #fff; color: var(--ink); border-radius: var(--radius-pill); transition: transform var(--dur) var(--ease); }
 .gpix:hover .gpix-go { transform: translateY(-2px); }
 .gpix:hover .gpix-go .arrow { transform: translateX(3px); } .gpix-go .arrow { transition: transform var(--dur) var(--ease); }
+.gpix-go .arrow { color: var(--tf); font-weight: 900; font-size: 18px; line-height: 1; -webkit-text-stroke: 1.2px var(--tf); }

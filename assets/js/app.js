@@ -196,6 +196,7 @@
   function galleryPixel() {
     return `
     <section class="section" id="gallery">
+      <div class="sec-head rv"><h2 class="sec-title">${esc(s("gallery"))}</h2></div>
       <a class="gpix rv" href="gallery.html" aria-label="${esc(lang === "zh" ? "进入摄影" : "Enter the photography gallery")}">
         <canvas class="gpix-cv" aria-hidden="true"></canvas>
         <span class="gpix-t"><b><span>${esc(lang === "zh" ? "摄影" : "Photography")}</span></b><b><span>${esc(lang === "zh" ? "欢迎来到我的摄影世界" : "Welcome to my photography world")}</span></b></span>
@@ -273,7 +274,7 @@
           const u = tl.a ? Math.max(0, Math.min(1, fade * 1.6 - ((x * 3 + y * 5) % 9) / 9 * .6)) : 1;
           const r = o[0] + (c[0] - o[0]) * u, g = o[1] + (c[1] - o[1]) * u, b = o[2] + (c[2] - o[2]) * u, k = 1 + tw;
           ctx.fillStyle = `rgb(${Math.min(255, r * k) | 0},${Math.min(255, g * k) | 0},${Math.min(255, b * k) | 0})`;
-          ctx.fillRect(px * cell, py * cell, cell - 1, cell - 1);
+          ctx.fillRect(px * cell, py * cell, px === cols - 1 ? cell + 2 : cell - 1, py === rows - 1 ? cell + 2 : cell - 1);
         }
         if (tl.a && fade >= 1) tl.a = null;
       });
