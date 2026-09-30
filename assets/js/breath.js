@@ -1,14 +1,16 @@
 /* Hero: a slow, precise "breathing" aperture (a nod to a camera lens).
    One breath = 10 s: inhale 4 s, hold 0.6 s, exhale 5 s, rest 0.4 s, all eased.
-   Drawn on a full-resolution canvas (device-pixel-ratio aware) so every ring and
-   tick is a crisp hairline. Pauses off-screen / in hidden tabs, and draws one
+   Flat colour only (no gradients): one pale disc, hairline rings, a lens scale.
+   The aperture leans a few pixels toward the pointer and the scale turns a
+   little with it, eased so it never jumps. Drawn on a full-resolution canvas
+   (device-pixel-ratio aware). Pauses off-screen / in hidden tabs, and draws one
    still frame when the visitor prefers reduced motion. */
 window.startBreath = function (canvas) {
   if (!canvas) return;
   const ctx = canvas.getContext("2d", { alpha: true });
   if (!ctx) return;
 
-  const TF = [10, 186, 181], DEEP = [6, 127, 123], LIGHT = [129, 216, 208];
+  const TF = [10, 186, 181], DEEP = [6, 127, 123];
   const rgba = (c, a) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
   const ease = (x) => 0.5 - 0.5 * Math.cos(Math.PI * Math.min(1, Math.max(0, x)));
   const breath = (t) => {
@@ -28,58 +30,65 @@ window.startBreath = function (canvas) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
 
+  // pointer, eased: target (tx, ty) in -1..1, current (px, py)
+  let tx = 0, ty = 0, px = 0, py = 0;
+
   const draw = (t, b) => {
     size();
     ctx.clearRect(0, 0, W, H);
     const wide = W > 900;
-    const cx = wide ? W * 0.8 : W * 0.5;
-    const cy = wide ? H * 0.64 : H * 0.74;
-    const R = (wide ? Math.min(W * 0.3, H * 0.5) : Math.min(W * 0.56, H * 0.3));
+    const k = wide ? 1 : 0.55;                  // quieter on small screens, so text stays clear
+    const cx = (wide ? W * 0.78 : W * 0.5) + px * 14;
+    const cy = (wide ? H * 0.58 : H * 0.8) + py * 10;
+    const R = (wide ? Math.min(W * 0.26, H * 0.42) : Math.min(W * 0.5, H * 0.26));
 
-    // luminous disc that swells and softens with each breath
-    const rd = R * (0.86 + 0.16 * b);
-    const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rd);
-    g.addColorStop(0, "rgba(255,255,255,0.96)");
-    g.addColorStop(0.32, rgba(LIGHT, 0.62 + 0.12 * b));
-    g.addColorStop(0.72, rgba(TF, 0.2 + 0.06 * b));
-    g.addColorStop(1, rgba(TF, 0));
-    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, rd, 0, Math.PI * 2); ctx.fill();
+    // one flat, pale disc that swells with each breath
+    ctx.fillStyle = rgba(TF, 0.07 * k);
+    ctx.beginPath(); ctx.arc(cx, cy, R * (0.9 + 0.12 * b), 0, Math.PI * 2); ctx.fill();
 
     // hairline rings: expand a little more the further out they are
     ctx.lineWidth = 1;
-    for (let i = 0; i < 7; i++) {
-      const base = R * (0.3 + i * 0.125);
+    for (let i = 0; i < 6; i++) {
+      const base = R * (0.3 + i * 0.14);
       const r = base * (1 + 0.05 * b * (0.6 + i * 0.22));
-      const a = 0.42 - i * 0.045;
-      ctx.strokeStyle = rgba(i % 2 ? TF : DEEP, Math.max(0.08, a) * (0.7 + 0.3 * b));
+      const a = (0.36 - i * 0.045) * (0.7 + 0.3 * b) * k;
+      ctx.strokeStyle = rgba(i % 2 ? TF : DEEP, Math.max(0.06, a));
       ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
     }
 
-    // lens scale: 180 fine ticks on the outer ring, long tick every 15
-    const rr = R * (1.2 + 0.06 * b);
-    const rot = t * 0.004;
-    for (let k = 0; k < 180; k++) {
-      const ang = rot + (k / 180) * Math.PI * 2;
-      const long = k % 15 === 0;
+    // lens scale: 120 fine ticks on the outer ring, a long tick every 10
+    const rr = R * (1.2 + 0.05 * b);
+    const rot = t * 0.004 + px * 0.12;
+    for (let j = 0; j < 120; j++) {
+      const ang = rot + (j / 120) * Math.PI * 2;
+      const long = j % 10 === 0;
       const len = (long ? 12 : 5) * (0.75 + 0.5 * b);
-      const x1 = cx + Math.cos(ang) * rr, y1 = cy + Math.sin(ang) * rr;
-      const x2 = cx + Math.cos(ang) * (rr + len), y2 = cy + Math.sin(ang) * (rr + len);
-      ctx.strokeStyle = rgba(DEEP, long ? 0.5 : 0.24);
-      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      ctx.strokeStyle = rgba(DEEP, (long ? 0.42 : 0.18) * k);
+      ctx.beginPath();
+      ctx.moveTo(cx + Math.cos(ang) * rr, cy + Math.sin(ang) * rr);
+      ctx.lineTo(cx + Math.cos(ang) * (rr + len), cy + Math.sin(ang) * (rr + len));
+      ctx.stroke();
     }
 
     // core
-    ctx.fillStyle = rgba(DEEP, 0.9);
+    ctx.fillStyle = rgba(DEEP, 0.85);
     ctx.beginPath(); ctx.arc(cx, cy, 2.5 + 1.5 * b, 0, Math.PI * 2); ctx.fill();
-    ctx.strokeStyle = rgba(DEEP, 0.35); ctx.beginPath(); ctx.arc(cx, cy, 9 + 5 * b, 0, Math.PI * 2); ctx.stroke();
   };
 
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   draw(0, 0.5);
   if (reduce) { addEventListener("resize", () => draw(0, 0.5)); return; }
 
-  let raf = 0, visible = true, t0 = performance.now(), paused = 0;
-  const frame = (now) => { raf = requestAnimationFrame(frame); const t = (now - t0) / 1000; draw(t, breath(t)); };
+  if (matchMedia("(pointer: fine)").matches) {
+    addEventListener("pointermove", (e) => { tx = (e.clientX / innerWidth) * 2 - 1; ty = (e.clientY / innerHeight) * 2 - 1; }, { passive: true });
+  }
+
+  let raf = 0, visible = true, t0 = performance.now(), paused = t0;
+  const frame = (now) => {
+    raf = requestAnimationFrame(frame);
+    px += (tx - px) * 0.04; py += (ty - py) * 0.04;
+    const t = (now - t0) / 1000; draw(t, breath(t));
+  };
   const run = () => { if (!raf && visible && !document.hidden) { t0 += performance.now() - paused; raf = requestAnimationFrame(frame); } };
   const stop = () => { if (raf) { cancelAnimationFrame(raf); raf = 0; paused = performance.now(); } };
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? run() : stop(); }).observe(canvas);

@@ -16,12 +16,12 @@
         `<circle class="m-pulse" cx="110" cy="250" r="34" fill="var(--tf)"/><rect x="102" y="232" width="16" height="26" rx="8" fill="var(--wash)"/>` +
         [0, 1, 2, 3].map(i => `<rect class="m-eq" style="animation-delay:${i * .15}s" x="${74 + i * 20}" y="292" width="6" height="22" fill="var(--tf-deep)"/>`).join("") +
         T(110, 352, 12, "VOICE MEMO · 45s", "mt-mono", "middle") +
-        lane(110, 175, "#0ABAB5", "LEO · MEMORY CARDS + PROFILE") + lane(305, 130, "#F28B7D", "MIA · TIMELINE + PROFILE") +
-        chips.map(([t, y1, k, d]) => `<g class="m-fly" style="--dx:${330}px;--dy:${y1 - 250}px;animation-delay:${d}"><rect x="170" y="234" width="${t.length * 7.6 + 24}" height="32" fill="${k === "a" ? "#0ABAB5" : "#F28B7D"}"/>${T(182, 255, 14, t, "mt-chip")}</g>`).join(""), "m-dossier");
+        lane(110, 175, "#0ABAB5", "LEO · MEMORY CARDS + PROFILE") + lane(305, 130, "#5d6868", "MIA · TIMELINE + PROFILE") +
+        chips.map(([t, y1, k, d]) => `<g class="m-fly" style="--dx:${330}px;--dy:${y1 - 250}px;animation-delay:${d}"><rect x="170" y="234" width="${t.length * 7.6 + 24}" height="32" fill="${k === "a" ? "#0ABAB5" : "#5d6868"}"/>${T(182, 255, 14, t, "mt-chip")}</g>`).join(""), "m-dossier");
     },
     "dossier-theme": () => {
       const ui = (c, name, cls) => `<g class="${cls}"><rect x="220" y="60" width="360" height="380" fill="#fff" stroke="${c}" stroke-width="2"/><rect x="220" y="60" width="360" height="56" fill="${c}"/><circle cx="252" cy="88" r="14" fill="#fff"/>` + T(280, 94, 17, name, "mt-w") + [0, 1, 2, 3].map(i => `<rect x="244" y="${146 + i * 66}" width="312" height="48" fill="${c}" fill-opacity=".12" stroke="${c}" stroke-opacity=".5"/><rect x="258" y="${162 + i * 66}" width="${150 - i * 14}" height="8" fill="${c}"/><rect x="258" y="${176 + i * 66}" width="${210 - i * 20}" height="6" fill="${c}" fill-opacity=".45"/>`).join("") + `</g>`;
-      return svg(ui("#0ABAB5", "Leo", "m-swap-a") + ui("#F28B7D", "Mia", "m-swap-b"), "m-theme");
+      return svg(ui("#0ABAB5", "Leo", "m-swap-a") + ui("#5d6868", "Mia", "m-swap-b"), "m-theme");
     },
     "sushi-flow": () => {
       const nodes = [["Customer", "phone"], ["Site", "RTL · Arabic"], ["Supabase", "orders"], ["Telegram", "bot alert"], ["Owner", "confirms by phone"]];

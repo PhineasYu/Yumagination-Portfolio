@@ -78,9 +78,49 @@
       return `<span class="tile${tl.phone ? " is-phone" : ""}"${bg}>${videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` })}</span>`;
     }
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}</span>`;
-    if (tl.text) return `<span class="tile tile-text"><span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}</span>`;
+    if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}</span>`;
     return `<span class="tile"></span>`;
   }
+
+  /* small drawn glyphs for text tiles: flat shapes, slow ambient motion */
+  function glyph(id) {
+    const G = {
+      "let-me-die": `<circle class="g-thin" cx="100" cy="100" r="78"/><circle class="g-line g-spin" cx="100" cy="100" r="52" stroke-dasharray="18 14"/><path class="g-thin" d="M100 6v48M100 146v48M6 100h48M146 100h48"/><circle class="g-deep g-blink" cx="100" cy="100" r="9"/>`,
+      "disco-fever": [0, 1, 2, 3, 4].map((i) => `<rect class="${i === 2 ? "g-deep" : "g-fill"} g-beat" style="animation-delay:${i * 0.18}s" x="${14 + i * 38}" y="30" width="24" height="160" rx="3"/>`).join(""),
+      "community-viewfinder": `<path class="g-line" d="M10 50V10h40M150 10h40v40M190 150v40h-40M50 190H10v-40"/><rect class="g-fill g-slide" x="48" y="54" width="70" height="56" rx="2"/>`,
+      "notchbreak": `<rect class="g-thin" x="8" y="36" width="184" height="128" rx="12"/><rect class="g-ink" x="70" y="36" width="60" height="16" rx="6"/><circle class="g-fill g-blink" cx="100" cy="112" r="22"/>`,
+      "revive-automation": [0, 1, 2, 3].map((i) => `<rect class="g-thin" x="10" y="${18 + i * 44}" width="30" height="30" rx="3"/><rect class="g-fill g-blink" style="animation-delay:${i * 0.6}s" x="16" y="${24 + i * 44}" width="18" height="18" rx="2"/><rect class="g-deep" x="56" y="${28 + i * 44}" width="${130 - i * 22}" height="10" rx="2"/>`).join(""),
+      "microhack": `<path class="g-thin" d="M40 150L100 50L160 150Z"/>` + [[40, 150], [100, 50], [160, 150]].map(([x, y], i) => `<circle class="${i === 1 ? "g-deep" : "g-fill"} g-blink" style="animation-delay:${i * 0.8}s" cx="${x}" cy="${y}" r="20"/>`).join("")
+    };
+    const inner = G[id] || `<circle class="g-fill g-drift" cx="80" cy="90" r="56"/><rect class="g-deep" x="110" y="100" width="70" height="70" rx="2"/>`;
+    return `<svg class="glyph" viewBox="0 0 200 200" aria-hidden="true">${inner}</svg>`;
+  }
+
+  /* bento: pack the visible cards into rows that always fill the grid.
+     Wide (6 cols): featured cards take 4 of 6 beside a 2, two featured side by side
+     take 3+3, the rest alternate 2+2+2 and 3+3; a single leftover spans the row.
+     Tablet (2 cols): featured cards span both; the rest go in pairs. */
+  const FEATURED = new Set(["let-me-die", "disco-fever", "teamdex", "dossier", "sushi-jerash"]);
+  const SIZES = ["s3", "s4", "s6", "w2", "hm", "hl"];
+  function pack() {
+    const cards = $$(".proj").filter((c) => !c.hidden);
+    const two = matchMedia("(max-width: 900px)").matches;
+    const f = (c) => c && FEATURED.has(c.dataset.id);
+    const set = (c, ...cls) => { c.classList.remove(...SIZES); c.classList.add(...cls.filter(Boolean)); };
+    let i = 0, small = true;
+    while (i < cards.length) {
+      const [a, b, c] = cards.slice(i, i + 3), rem = cards.length - i;
+      if (two) {
+        if (f(a) || !b || f(b)) { set(a, "w2", f(a) ? "hl" : "hm"); i += 1; }
+        else { set(a, "hm"); set(b, "hm"); i += 2; }
+      } else if (rem === 1) { set(a, "s6", "hm"); i += 1; }
+      else if (f(a) && f(b)) { set(a, "s3", "hl"); set(b, "s3", "hl"); i += 2; }
+      else if (f(a) || f(b)) { set(a, f(a) ? "s4" : "", "hl"); set(b, f(b) ? "s4" : "", "hl"); i += 2; }
+      else if (small && rem >= 3 && rem !== 4 && !f(c)) { [a, b, c].forEach((x) => set(x)); i += 3; small = false; }
+      else { set(a, "s3", "hm"); set(b, "s3", "hm"); i += 2; small = true; }
+    }
+  }
+  matchMedia("(max-width: 900px)").addEventListener("change", () => { if ($(".work-grid")) pack(); });
 
   /* ---------- home ---------- */
   function home() {
@@ -99,12 +139,12 @@
     </section>
 
     <section class="section" id="work">
-      <div class="sec-head"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
+      <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
       <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${esc(t(c))}</button>`).join("")}</div>
       <div class="filters tags" role="group" aria-label="${esc(s("tagLbl"))}"><span class="flabel mono">${esc(s("tagLbl"))}</span>${D.tags.map((c) => `<button class="chip" type="button" data-tag="${c.id}" aria-pressed="${c.id === filt.tag}">${esc(t(c))}</button>`).join("")}</div>
       <div class="work-grid">
         ${P.map((p) => `
-          <a class="proj rv" href="#/work/${p.id}" data-zone="${p.zone}" data-tags="${p.tags.join(" ")}">
+          <a class="proj rv" href="#/work/${p.id}" data-id="${p.id}" data-zone="${p.zone}" data-tags="${p.tags.join(" ")}">
             ${tile(p)}
             <span class="proj-cap"><span class="proj-title">${esc(t(p.cap))}</span><span class="proj-meta">${esc(p.meta)}</span></span>
           </a>`).join("")}
@@ -117,7 +157,7 @@
     <div class="tools mono" aria-label="${esc(s("tools"))}"><div class="tools-track">${[...D.tools, ...D.tools].map((x) => `<span>${esc(x)}</span>`).join("")}</div></div>
 
     <section class="section" id="recognition">
-      <div class="sec-head"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
+      <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
       <div class="awards">${D.awards.map((a) => `<div class="award rv"><span class="mono dim">${a.year}</span><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
     </section>
 
@@ -133,11 +173,11 @@
     const pick = ph.slice(0, 4);
     return `
     <section class="section" id="gallery">
-      <div class="sec-head"><h2 class="sec-title">${esc(t(G.title))}</h2><p class="sec-lede">${esc(t(G.statement))}</p></div>
-      <a class="teaser" href="gallery.html" aria-label="${esc(t(G.title))}">
+      <div class="sec-head rv"><h2 class="sec-title">${esc(t(G.title))}</h2><p class="sec-lede">${esc(t(G.statement))}</p></div>
+      <a class="teaser rv" href="gallery.html" aria-label="${esc(t(G.title))}">
         ${pick.map((p) => `<span class="tz"><img src="${esc(p.thumb || p.file)}" alt="" loading="lazy"></span>`).join("")}
       </a>
-      <p style="margin-top:18px"><a class="btn-text" href="gallery.html"><span class="arrow">↳</span> ${esc(t(D.person.role) && (lang === "zh" ? "进入摄影展厅" : "Enter the gallery"))}</a></p>
+      <p class="teaser-go"><a class="btn-text" href="gallery.html"><span class="arrow">↳</span> ${esc(t(D.person.role) && (lang === "zh" ? "进入摄影展厅" : "Enter the gallery"))}</a></p>
     </section>`;
   }
 
@@ -145,11 +185,11 @@
     const M = D.method;
     return `
     <section class="section" id="method">
-      <div class="sec-head"><h2 class="sec-title">${esc(t(M.title))}</h2></div>
-      <p class="lede-lg">${esc(t(M.lede))}</p>
+      <div class="sec-head rv"><h2 class="sec-title">${esc(t(M.title))}</h2></div>
+      <p class="lede-lg rv">${esc(t(M.lede))}</p>
       <div class="steps">${M.steps.map((x) => `<div class="step rv"><span class="mono n">${x.n}</span><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div>`).join("")}</div>
       <div class="principles">${M.principles.map((x) => `<div class="principle rv"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
-      <p class="disclosure">${esc(t(M.disclosure))}</p>
+      <p class="disclosure rv">${esc(t(M.disclosure))}</p>
     </section>`;
   }
 
@@ -157,7 +197,7 @@
     const m = D.more;
     return `
     <section class="section" id="more">
-      <div class="sec-head"><h2 class="sec-title">${esc(t(m.title))}</h2></div>
+      <div class="sec-head rv"><h2 class="sec-title">${esc(t(m.title))}</h2></div>
       <div class="more">${m.items.map((i) => {
         const inner = `<span class="mono dim">${i.year}</span><b>${esc(i.name)}</b><p>${esc(t(i.note))}</p>${DRAFT && i.verify ? `<p class="draft mono">${esc(s("draft"))}: ${esc(t(i.verify))}</p>` : ""}${i.url ? '<span class="go mono">↗</span>' : ""}`;
         return i.url ? `<a class="more-item" href="${esc(i.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="more-item">${inner}</div>`;
@@ -169,8 +209,8 @@
     const A = D.about;
     return `
     <section class="section" id="about">
-      <div class="sec-head"><h2 class="sec-title">${esc(t(A.title))}</h2></div>
-      <div class="about">
+      <div class="sec-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2></div>
+      <div class="about rv">
         <div>${arr(A.body).map((p) => `<p>${esc(p)}</p>`).join("")}</div>
         <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span></li>`).join("")}</ul><p class="langline mono">${esc(t(A.languages))}</p></div>
       </div>
@@ -206,7 +246,7 @@
         <p class="lead">${esc(t(p.lead))}</p>
       </div>
       ${p.hero ? `<div class="hero-shot">${media(p.hero)}` : ""}${p.hero && p.hero.cap ? `<p class="cap">${esc(t(p.hero.cap))}</p>` : ""}${p.hero ? "</div>" : ""}
-      <dl class="meta">
+      <dl class="meta rv">
         <div><dt>${esc(s("role"))}</dt><dd>${esc(t(p.role))}</dd></div>
         <div><dt>${esc(s("when"))}</dt><dd>${esc(p.when)}</dd></div>
         <div><dt>${esc(s("status"))}</dt><dd>${esc(t(p.status))}</dd></div>
@@ -223,7 +263,7 @@
             ${sec.media ? `<div class="shot">${media(sec.media)}${sec.cap ? `<p class="cap">${esc(t(sec.cap))}</p>` : ""}</div>` : ""}
           </section>`).join("")}
       </div>
-      <nav class="pager" aria-label="More work">
+      <nav class="pager rv" aria-label="More work">
         <a href="#/work/${prev.id}"><span class="mono dim">← ${esc(s("prev"))}</span><b>${esc(prev.title)}</b>${prev.sub ? `<span class="mono dim">${esc(t(prev.sub))}</span>` : ""}</a>
         <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b>${next.sub ? `<span class="mono dim">${esc(t(next.sub))}</span>` : ""}</a>
       </nav>
@@ -265,6 +305,7 @@
         r.hidden = !ok; if (ok) n++;
       });
       const e = $(".empty"); if (e) e.hidden = n > 0;
+      pack();
     };
     $$(".chip[data-zone]").forEach((c) => c.addEventListener("click", () => { filt.zone = c.dataset.zone; applyFilter(); }));
     $$(".chip[data-tag]").forEach((c) => c.addEventListener("click", () => { filt.tag = filt.tag === c.dataset.tag ? "" : c.dataset.tag; applyFilter(); }));

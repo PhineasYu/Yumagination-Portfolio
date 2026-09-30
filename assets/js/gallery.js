@@ -6,9 +6,9 @@
 
   /* ?demo: generate sample frames in the browser so the layout can be previewed with no photos */
   if (DEMO) {
-    const tones = [["#0abab5", "#e3f6f3"], ["#81d8d0", "#0d1f1f"], ["#f28b7d", "#fbe9e4"], ["#067f7b", "#d2f0ec"], ["#d9b06a", "#f6fcfb"], ["#0d1f1f", "#81d8d0"]];
+    const tones = [["#0abab5", "#e3f6f3"], ["#81d8d0", "#0d1f1f"], ["#5d6868", "#eef6f5"], ["#067f7b", "#d2f0ec"], ["#0abab5", "#fafbfb"], ["#252c2c", "#81d8d0"]];
     const sizes = [[1600, 1067], [1067, 1600], [1600, 1067], [1200, 1200], [1067, 1600], [1600, 900], [1067, 1600], [1600, 1067]];
-    const mk = (i) => { const [w, h] = sizes[i % sizes.length], [a, b] = tones[i % tones.length]; const c = document.createElement("canvas"); c.width = 800; c.height = Math.round(800 * h / w); const x = c.getContext("2d"); const g = x.createLinearGradient(0, 0, c.width, c.height); g.addColorStop(0, a); g.addColorStop(1, b); x.fillStyle = g; x.fillRect(0, 0, c.width, c.height); return { file: c.toDataURL("image/jpeg", .8), thumb: c.toDataURL("image/jpeg", .8), w, h, title: { en: "Sample frame " + (i + 1), zh: "示例画面 " + (i + 1) }, place: "Stockholm", year: "2026" }; };
+    const mk = (i) => { const [w, h] = sizes[i % sizes.length], [a, b] = tones[i % tones.length]; const c = document.createElement("canvas"); c.width = 800; c.height = Math.round(800 * h / w); const x = c.getContext("2d"); x.fillStyle = b; x.fillRect(0, 0, c.width, c.height); x.fillStyle = a; x.fillRect(c.width * .18, c.height * .22, c.width * .4, c.height * .56); return { file: c.toDataURL("image/jpeg", .8), thumb: c.toDataURL("image/jpeg", .8), w, h, title: { en: "Sample frame " + (i + 1), zh: "示例画面 " + (i + 1) }, place: "Stockholm", year: "2026" }; };
     G = Object.assign({}, G, { series: [{ id: "a", title: { en: "First room", zh: "第一展厅" }, note: { en: "Sample frames to preview the layout.", zh: "用来预览版式的示例画面。" }, photos: [0, 1, 2, 3, 4, 5].map(mk) }, { id: "b", title: { en: "Second room", zh: "第二展厅" }, note: { en: "", zh: "" }, photos: [6, 7, 8, 9].map(mk) }] });
   }
 
@@ -66,7 +66,7 @@
     $$(".plates").forEach((wrap) => {
       const figs = $$(".plate", wrap);
       wrap.innerHTML = "";
-      wrap.style.cssText = "display:grid;gap:0 clamp(20px,3vw,44px);grid-template-columns:repeat(" + cols + ",1fr);align-items:start";
+      wrap.style.cssText = "display:grid;gap:0 var(--gap);grid-template-columns:repeat(" + cols + ",1fr);align-items:start";
       const colEls = Array.from({ length: cols }, () => { const d = document.createElement("div"); wrap.appendChild(d); return d; });
       const heights = new Array(cols).fill(0);
       figs.forEach((f) => {
