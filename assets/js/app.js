@@ -78,7 +78,7 @@
       }
       case "motion": return `<div class="mo-wrap">${window.motion(m.id)}${badge("ill")}</div>`;
       case "stats": return `<div class="stats">${m.items.map(([n, l]) => `<div class="stat"><b>${esc(n)}</b><span>${esc(t(l))}</span></div>`).join("")}</div>`;
-      case "steps": return `<div class="stepl">${m.items.map(([k, l]) => `<div><span class="k">${esc(k)}</span><p>${esc(t(l))}</p></div>`).join("")}</div>`;
+      case "steps": return `<div class="stepl">${m.items.map(([k, l, c]) => `<div><span class="k"${c ? ` style="background:${esc(c)};color:${/^#(F0AB3C|8DB44B)$/i.test(c) ? "var(--ink)" : "#fff"}"` : ""}>${esc(t(k))}</span><p>${esc(t(l))}</p></div>`).join("")}</div>`;
     }
     return "";
   }
