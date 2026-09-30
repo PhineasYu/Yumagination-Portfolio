@@ -235,7 +235,7 @@
       status: L("Jun–Sep 2025, Stockholm", "2025 年 6–9 月，斯德哥尔摩"),
       stack: ["Figma", "Design systems", "Usability testing", "Jira", "AI prompting", "Figma Make", "Lovable", "Uizard"],
       links: [],
-      verify: L("Company work: you confirmed publishing is fine. The AI workflow is written from your Notion pages (AI UI Prompting Process, UI prompts, Competition Analysis); the design-system colour values are not shown. Is the workflow your own design, or shared with someone?", "公司项目：你已确认可以公开。AI 工作流根据你 Notion 里的页面写成（AI UI Prompting Process、UI prompts、Competition Analysis），没有展示设计系统的具体色值。这套工作流完全是你自己设计的，还是和别人一起？"),
+      verify: L("Company work: you confirmed publishing is fine. The AI workflow is your own design (confirmed). Design-system colour values are deliberately not shown.", "公司项目：你已确认可以公开。AI 工作流是你独立设计的（已确认）。设计系统的具体色值有意没有展示。"),
       shape: "wide",
       tile: { img: "assets/shots/kh-bom.jpg" },
       hero: IMG("assets/shots/kh-bom.jpg", "A Bill of Materials page in Kodiak Hub: a table of materials with status colour bars, import, export and request buttons, and a documents table below", { frame: "browser", cap: L("The Bill of Materials page I designed. Demo data.", "我设计的物料清单（BOM）页面。演示数据。") }),

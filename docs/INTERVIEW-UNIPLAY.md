@@ -25,7 +25,7 @@ I'm not a traditional software engineer, and I'll be honest about that. What I b
 | **Source grounding / RAG 概念** | Full Context Canvas：每个卡片能连回原平台，草稿里每句话有可点击的来源；Dossier：问答只基于已保存的数据；LegacyChain：每次「读法」都连着原始文件 | 各项目页 |
 | **Structured generation** | Dossier：服务端把口述抽取成严格 JSON（child_ids、kind、category、title、text、value），带重试；Full Context Canvas：分组结果 | Dossier 页「Tech」段 |
 | **Agents / orchestration** | MicroHack：三个 Foundry agent（需求感知、库存优化、补货）共用一个 Fabric Data Agent，用 Workflow 串起来，人工审批后才下单；会读 trace | MicroHack 页（有截图） |
-| **Test & evaluate** | Full Context Canvas：置信度低于 60% 进复核队列，每次修正都记日志，下一步是用两周自己的数据统计修正次数；MicroHack：5 题评估；LegacyChain：Vitest 测试哈希与签名；Kodiak：比较 Figma Make / Uizard / Lovable | 各项目页 |
+| **Test & evaluate** | Full Context Canvas：置信度低于 60% 进复核队列，每次修正都记日志，下一步是用两周自己的数据统计修正次数；MicroHack：5 题评估；LegacyChain：Vitest 测试哈希与签名；Kodiak：写了测试计划，比较 Figma Make / Uizard / Lovable（故事 E） | 各项目页 |
 | **Extreme drive / fast iterator** | Teamdex 一天做完并拿第一；Disco Fever 用 11 条提示词；NotchBreak 一天；Sushi Jerash 两天上线真实餐厅 | 网站 |
 | **Learning mindset** | Teamdex 本身就是关于「人怎么学会认识同事」；你是 UX 背景，懂怎么研究人；Kodiak 建立了公司第一套结构化可用性测试 | Teamdex、Kodiak |
 | **Technical curiosity（TS / Python / 前端）** | TypeScript/React/Next.js 项目；Revive：Python 脚本核对三个月的数据；Supabase、Chrome MV3 扩展 | 项目 stack |
@@ -55,6 +55,16 @@ I'm not a traditional software engineer, and I'll be honest about that. What I b
 - 业务方要每个零售商的私人销售佣金，并且要和独立来源核对。我把需求拆成 Claude Code 能执行的任务，脚本逐行核对、标出不匹配的行，跑了三个月的数据，做成 7 页汇报。
 - **学到**：对账比生成更难，「标出不匹配」比「看起来对」更有价值。
 - 数据是公司的，所以不要讲具体数字。
+
+### E. Kodiak Hub：我独立设计的一套 AI 工作流（和 JD 最对口的一条）
+- **Situation**：实习时，团队想用 AI 工具做原型，但 AI 会随手发明设计系统里没有的颜色、字体和按钮，输出没法直接用。
+- **Task**：我自己学了提示工程，想做一套让输出「守规矩」的流程。
+- **Action**：先比较 Figma Make、Uizard、Lovable，写了测试计划（两个真实场景、九项评分表、逐字记录每条提示）；然后设计两段式工作流：ChatGPT 给定角色、背景和需求，负责写提示；Figma Make 据此做第一版；再用一条长的「样式规则提示」把设计系统当作约束贴进去（只能用这些 token、不许发明新字体/字号/颜色、间距取 4 的倍数、按钮只有这些状态）；最后引入真实组件，少量打磨。还算了额度：每月约 50–70 次 Make 提示，所以要省着用。写成指南，分享给团队。
+- **Result**：团队采用了这套工作流（PDF 里写的是「设计团队采用」）。**不要编数字**：没有节省多少时间的数据，就说没有。
+- **What I learned**：给 AI 的不是愿望，是约束；测试要逐字记录提示，才看得出哪个工具真的需要「提示工程」。
+- **连到 JD 的哪几条**：「改进提示、模板、评估或内部工具」「测试与评估：在代表性材料上跑原型、比较输出」「AI 工作流里的瓶颈」「独立做过的 AI 实验」。
+- **诚实边界**：这是 **UI 设计方向** 的 AI 工作流，不是 RAG 或 LLM 应用。被问到技术深度时，直说：「这是提示工程和评估的训练，我想把同样的方法用在知识到学习内容的生成上。」
+- **一句话版**：*"On my internship I designed and documented a two-step prompt workflow that keeps AI output inside a design system: one model writes the prompts, another builds the prototype, and the design rules are pasted in as constraints. I tested three tools against a written rubric before choosing."*
 
 ## 4. 你的短板：直接说，并带着计划
 
