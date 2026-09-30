@@ -13,8 +13,8 @@
   }
 
   let lang = "en";
-  try { lang = localStorage.getItem("lang") || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en"); } catch (e) {}
-  const t = (o) => (o == null ? "" : typeof o === "string" ? o : o[lang] ?? o.en ?? "");
+  try { lang = localStorage.getItem("lang") === "zh" ? "zh" : "en"; } catch (e) {}
+  const t = (o) => (o == null ? "" : typeof o === "string" ? o : o[lang] || o.en || "");
   const esc = (x) => String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const N = { work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" } };
   const S = {

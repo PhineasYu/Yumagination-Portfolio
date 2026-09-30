@@ -75,7 +75,7 @@
           p: L(["A warm palette from a reference upload, then Material 3 with layered archive folders, then a neutral 'tech-white' system with 1px frames and a segmented AI signature.", "The last one won because colour finally meant something: child colours and question colours, and nothing else."], ["先是从参考图提取的暖色调，然后是 Material 3 加分层档案夹，最后是中性的「tech-white」：1px 边框、分段式 AI 签名。", "最后一版胜出，因为颜色终于有了含义：孩子的颜色、问题的颜色，除此之外都不用。"]),
           media: { type: "steps", items: [["01", L("Polar subscription section", "Polar 订阅区")], ["02", L("Palette from reference upload", "参考图提取配色")], ["03", L("Document archive, folders", "文件档案夹")], ["04", L("Polish & judging prep", "打磨与评审准备")], ["05", L("Material 3 rebuild", "Material 3 重做")], ["06", L("Two-way voice check-in", "双向语音签到")], ["07", L("Search across timeline & archive", "时间线与档案搜索")], ["08", L("Tech-white design system", "tech-white 设计系统")]] }, cap: L("The eight roadmap milestones, from the project's own roadmap file.", "项目自己的路线图里的八个里程碑。") },
         { h: L("Judging — Ninety seconds and two safety nets", "评审 — 九十秒，两道保险"),
-          p: L(["The judges walk the room. The path is planned to the second: splash, avatar switch, voice dump, search, stats line, and a shimmering QR card that measures real interest.", "Feature freeze at 14:45, then rehearsal and a backup screen recording. The demo had to survive a bad Wi-Fi, not just a good one."], ["评委在展厅里走动。路径规划到秒：开场、切换头像、语音倾倒、搜索、统计句，最后是一张会闪光的二维码卡片，用来测真实兴趣。", "14:45 功能冻结，之后只做排练和备份录屏。演示得扛得住糟糕的网络，而不只是顺利的那一次。"]),
+          p: L(["The judges walk the room. The path is planned to the second: splash, avatar switch, voice dump, search, stats line, and a shimmering QR card that measures real interest.", "Feature freeze at 14:45, then rehearsal and a backup screen recording. The demo had to survive bad Wi-Fi, not just good Wi-Fi."], ["评委在展厅里走动。路径规划到秒：开场、切换头像、语音倾倒、搜索、统计句，最后是一张会闪光的二维码卡片，用来测真实兴趣。", "14:45 功能冻结，之后只做排练和备份录屏。演示得扛得住糟糕的网络，而不只是顺利的那一次。"]),
           media: { type: "steps", items: [["0–10s", L("Splash: the child grows taller", "开场：孩子慢慢长高")], ["10–25s", L("Tap avatars, theme recolours", "切换头像，主题换色")], ["25–45s", L("Voice dump, items fly into lanes", "语音倾倒，条目飞入轨道")], ["45–65s", L("Ask a question, cards float up", "提问，卡片浮现")], ["65–75s", L("Stats line", "统计句")], ["75–90s", L("Shimmering QR card", "闪光二维码卡片")]] }, cap: L("The 90-second judge path, from the PRD.", "PRD 里的 90 秒评委路径。") }
       ]
     },
@@ -141,7 +141,7 @@
       id: "disco-fever", num: "05", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
       title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
       cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
-      h1: L("A one-minute disco rhythm game where every right arrow gets the dance floor moving further out", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
+      h1: L("A one-minute disco rhythm game where every correct arrow spreads the dancing further across the floor", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
       lead: L("Hit the right arrows and the dancers spread out from the centre of the floor. Built at a game hackathon with the BitMagic GDK; it took 2nd place and is live.", "按对箭头，跳舞的人就从舞池中心向外扩散。在游戏黑客松上用 BitMagic GDK 做出来，获二等奖，已上线。"),
       role: L("Idea and visual direction; built with Claude Code", "想法与视觉方向；用 Claude Code 开发"),
       status: L("2nd place · live", "二等奖 · 已上线"),
@@ -152,7 +152,7 @@
       sections: [
         { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
           p: L(["One minute, a stream of arrows, and a dance floor. Every correct arrow sends the dancing further out from the centre.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一分钟、一串箭头、一个舞池。每按对一个箭头，跳舞的范围就从中心向外扩一圈。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]) },
-        { h: L("After the event — A phone version that leaves the web one alone", "赛后 — 做一个不影响网页版的手机版"),
+        { h: L("After the event — A phone version that leaves the web version untouched", "赛后 — 做一个不影响网页版的手机版"),
           p: L(["After the hackathon I made a portrait version for phones. It was adapted separately, with one rule for the agent: the web version must not change."], ["黑客松结束后，我做了手机竖屏版。它是单独适配的，给 AI 的规则只有一条：网页版不能受影响。"]) }
       ]
     },
@@ -222,18 +222,22 @@
       id: "let-me-die", num: "08", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
       title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
       meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
-      cap: L("A game made in one evening with an AI world builder: 1st place at Stone Leap", "用 AI world builder 一个晚上做出的游戏：Stone Leap 第一名"),
-      h1: L("1st place at Stone Leap's Build-a-Game: a playable game made in one evening with an AI world builder", "Stone Leap Build-a-Game 第一名：用 AI world builder 一个晚上做出的可玩游戏"),
-      lead: L("The brief: build something people can actually play, in one evening, using an AI world builder. Let Me Die won first place.", "活动要求：用 AI world builder，一个晚上做出别人真的能玩的游戏。Let Me Die 获得第一名。"),
-      role: L("To be added", "待补充"),
+      cap: L("A first-person game where every death opens a new world: 1st place at Stone Leap", "每死一次就进入一个新世界的第一人称游戏：Stone Leap 第一名"),
+      h1: L("A first-person game where every death opens a new world, and 1st place at Stone Leap's Build-a-Game", "一个每死一次就进入一个新世界的第一人称游戏，获 Stone Leap Build-a-Game 第一名"),
+      lead: L("Find the way out of each world, die, and land in the next one. I built it on Stone Leap in one evening, and it took 1st place at Build-a-Game.", "找到每个世界的出口，死去，然后落进下一个世界。我用一个晚上在 Stone Leap 上把它做出来，获得 Build-a-Game 第一名。"),
+      role: L("Concept and the four worlds", "概念与四个空间的设计"),
       status: L("1st place", "第一名"),
-      stack: ["AI world builder"],
+      stack: ["Stone Leap", "AI world builder"],
       links: [],
-      verify: L("Add the gameplay. It should become the first sentence of the card, the headline and the intro. Also add your role, teammates, and a screenshot or recording.", "补玩法：它应该成为卡片、标题和导语的第一句。另外补你的角色、队友，以及截图或录屏。"),
-      tile: { text: L("1st place", "第一名"), sub: L("Game · built in one evening", "游戏 · 一个晚上完成") },
+      tile: { text: L("1st place", "第一名"), sub: L("First-person game · built in one evening", "第一人称游戏 · 一个晚上完成") },
       sections: [
-        { h: L("Overview — One evening, one AI world builder", "概述 — 一个晚上，一个 AI world builder"),
-          p: L(["Stone Leap's Build-a-Game gave teams a single evening and an AI world builder to make a playable game."], ["Stone Leap 的 Build-a-Game 给每个队伍一个晚上和一个 AI world builder，要求做出一款可玩的游戏。"]) }
+        { h: L("Overview — Dying as a way to see more worlds", "概述 — 用死亡去看更多的世界"),
+          p: L(["I built it as a first-person game on Stone Leap. The Build-a-Game event gave teams a single evening to make something playable.", "The concept: a person dies and ends up in another world, and then in another. The point is to experience different worlds. It isn't a gloomy way of living; it comes from how curious I am about the world."], ["我在 Stone Leap 平台上把它做成了一个第一人称视角的游戏。Build-a-Game 活动给每个队伍一个晚上，做出能玩的东西。", "概念是：一个人死去之后去到另一个世界，然后再去到另一个世界。核心是体验不同的世界。这不是一种消极的活法，而是因为我对这个世界充满好奇。"]) },
+        { h: L("The worlds — Four spaces, in order", "四个空间 — 按顺序"),
+          p: L(["In the first three spaces you look for a way out, and every way out is another death. The last room isn't meant to be scary. It feels like you've just had a lot of dreams."], ["前三个空间都要你找到出口，而每一个出口都是又一次死亡。最后一个房间并不吓人，更像是做了很多梦之后的感觉。"]),
+          media: { type: "steps", items: [["01", L("A dreamlike classroom. Find the exit: that's the first death.", "一间非常梦幻的教室。找到出口，就是第一重死亡。")], ["02", L("A field of man-eating flowers. Find the exit to the next space, and die again.", "食人花区。找到通往下一个空间的出口，出去之后再次死亡。")], ["03", L("Flattened into 2D as a pixel figure. Find the escape point, and die once more.", "被二维化，变成像素小人。找到这个二维空间的逃脱点，再次死亡。")], ["04", L("Your own bedroom. Find the spot where you discover you made it out alive.", "回到自己的卧室。找到一个地方，发现自己顺利存活下来。")]] } },
+        { h: L("The name — Why 'Let Me Die'", "名字 — 为什么叫 Let Me Die"),
+          p: L(["Because it's fun. It has a gloomy-but-funny, absurd ring to it."], ["因为好玩。它有一种丧丧的、但很搞笑的荒谬感。"]) }
       ]
     },
 
@@ -281,7 +285,7 @@
           p: L(["Career Ignite is a selective programme run by SAP with Capgemini, Google and Ericsson: three evening workshops in Stockholm, a business simulation and two team cases.", "The second case: a fictional global furniture retailer needs a digital-transformation roadmap, and our five-person team plays the consultants."], ["Career Ignite 是 SAP 联合 Capgemini、Google、Ericsson 举办的选拔制项目：斯德哥尔摩三场晚间工作坊、一次商业模拟、两次小组案例。", "第二次案例：一家虚构的全球家居零售商需要数字化转型路线图，我们五人小组扮演顾问。"]),
           media: { type: "steps", items: [["14 Apr", L("Evening 1 at SAP: business simulation", "第一晚 @SAP：商业模拟")], ["21 Apr", L("Evening 2 at Google: roadmap case, 1st place", "第二晚 @Google：路线图案例，第一名")], ["28 Apr", L("Evening 3 at SAP with Ericsson: budget case", "第三晚 @SAP 联合 Ericsson：预算案例")]] } },
         { h: L("The bet — A prototype instead of slides", "这次押注 — 用原型代替 PPT")  ,
-          p: L(["I proposed building a clickable supply-chain control tower with AI, and iterated it in about two hours. Region filters, SKU-level AI explanations, alert handling and a one-click 'approve all'.", "The judges clicked it themselves. Seeing the future state beat hearing about it."], ["我提议用 AI 做一个可点击的供应链控制塔，并在约两小时内迭代出来：区域筛选、SKU 级 AI 解释、告警处理、一键「全部批准」。", "评委亲手点了它。「看见」未来的样子，比「听说」更有说服力。"]),
+          p: L(["I proposed building a clickable supply-chain control tower with AI, and iterated on it for about two hours: region filters, SKU-level AI explanations, alert handling and a one-click 'approve all'.", "The judges clicked it themselves. Seeing the future state beat hearing about it."], ["我提议用 AI 做一个可点击的供应链控制塔，并在约两小时内迭代出来：区域筛选、SKU 级 AI 解释、告警处理、一键「全部批准」。", "评委亲手点了它。「看见」未来的样子，比「听说」更有说服力。"]),
           media: { type: "stats", items: [["1st", L("place, round two", "第二轮第一名")], ["~2h", L("to a clickable prototype", "做出可点击原型")], ["5", L("people on the team", "人的小组")], ["24", L("month roadmap (a teammate presented)", "个月路线图（队友讲解）")]] } },
         { h: L("Reflection — The first evening went badly", "反思 — 第一晚并不顺利")  ,
           p: L(["I was under-prepared, got flustered, and my weak spot was teamwork and speaking, not knowledge. Before the second evening I built a framework first, prepared templates, and fixed my role: structure and prototype.", "That loop, from a bad first evening to a result, is the part of this project I trust most."], ["我准备不足，慌了，弱项是协作和表达，而不是知识。第二晚之前，我先搭好框架、备好模板、定好自己的角色：结构和原型。", "从糟糕的第一晚到拿到结果，这个循环是这个项目里我最信任的部分。"]) },
@@ -340,7 +344,7 @@
         { h: L("Speed — No menus, no modals", "速度 — 没有菜单，没有弹窗")  ,
           p: L(["Click a sentence and press a key: the colour is assigned instantly and the selection moves to the next one. Marking a page takes seconds.", "Speed is the feature. If marking feels like work, nobody will do it."], ["点一个句子按一个键：颜色立刻生效，选中移到下一句。标完一页只要几秒。", "速度就是功能。如果标注像干活，就没人会去做。"]) },
         { h: L("Editorial — A well-set book page, not a dashboard", "编辑感 — 像一页排得很好的书，而不是仪表盘")  ,
-          p: L(["Serif body, 680px measure, line-height 2, generous margins, colour with 3px rounded corners.", "Data is stored as segments; rendering reads the reader's own colour first and falls back to an AI label, which I left empty in v1 on purpose."], ["衬线正文、680px 行宽、行高 2、宽松页边距，色块带 3px 圆角。", "数据以句段存储；渲染时先读读者自己的颜色，再回退到 AI 标签，v1 里我有意让它留空。"]) }
+          p: L(["Serif body, a 680px measure, line-height 2, generous margins, and colour blocks with 3px rounded corners.", "Data is stored as segments; rendering reads the reader's own colour first and falls back to an AI label, which I left empty in v1 on purpose."], ["衬线正文、680px 行宽、行高 2、宽松页边距，色块带 3px 圆角。", "数据以句段存储；渲染时先读读者自己的颜色，再回退到 AI 标签，v1 里我有意让它留空。"]) }
       ]
     },
 
@@ -433,7 +437,7 @@
       hero: { type: "motion", id: "breakpoints", cap: L("Illustration of the breakpoint decision: evidence from 1,000+ real users set a desktop-first strategy.", "断点决策示意：1,000+ 真实用户的数据支撑了桌面优先的策略。"), tag: "ill" },
       sections: [
         { h: L("Overview — Two features, end to end", "概述 — 两个功能，端到端")  ,
-          p: L(["I designed two features inside the existing design system: a Bill of Materials and login/authentication.", "The BOM broke into five development tickets and was delivered before the sprint boundary."], ["我在现有设计系统内端到端设计了两个功能：物料清单（BOM）和登录/认证。", "BOM 被拆成五张开发工单，在 sprint 结束前交付。"]),
+          p: L(["I designed two features inside the existing design system: a bill of materials (BOM) and login/authentication.", "The BOM broke into five development tickets and was delivered before the sprint boundary."], ["我在现有设计系统内端到端设计了两个功能：物料清单（BOM）和登录/认证。", "BOM 被拆成五张开发工单，在 sprint 结束前交付。"]),
           media: { type: "stats", items: [["2", L("features, end to end", "个功能端到端")], ["5", L("dev tickets, on time", "张开发工单，按时交付")], ["4", L("modules audited", "个模块审计")], ["1,000+", L("users' data analysed", "用户数据分析")]] } },
         { h: L("System — Audit four modules, write the pattern rules down", "系统 — 审计四个模块，把模式规则写下来")  ,
           p: L(["I audited four product modules and documented reusable rules: table types, column standards, filter behaviour, destructive actions.", "I also built a six-state supplier-lifecycle indicator and extended the badge system."], ["我审计了四个产品模块，并记录下可复用的规则：表格类型、列规范、筛选行为、破坏性操作。", "还做了一个六状态的供应商生命周期指示器，并扩展了徽标体系。"]) },

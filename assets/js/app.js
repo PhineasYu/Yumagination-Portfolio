@@ -7,13 +7,13 @@
   /* ---------- language ---------- */
   let lang = "en";
   try {
-    lang = localStorage.getItem("lang") || ((navigator.language || "").toLowerCase().startsWith("zh") ? "zh" : "en");
+    lang = localStorage.getItem("lang") === "zh" ? "zh" : "en"; // English by default; Chinese only if chosen
   } catch (e) {}
-  const t = (o) => (o == null ? "" : typeof o === "string" ? o : o[lang] ?? o.en ?? "");
+  const t = (o) => (o == null ? "" : typeof o === "string" ? o : o[lang] || o.en || "");
   const arr = (o) => (o && (o[lang] || o.en)) || [];
   const STR = {
     letsTalk: { en: "Let's talk", zh: "聊一聊" }, viewWork: { en: "View work", zh: "看作品" },
-    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "Five areas: UX & UI, service design and research, AI products, building and automating, and games. Filter by area or by tag. Most of them run: watch them move, or open them.", zh: "五个方向：用户体验与界面、服务设计与研究、AI 产品、开发与自动化、游戏。可以按方向或标签筛选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
+    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "Five areas: UX & UI, service design and research, AI products, building and automating, and games. Filter by area or by tag. Most of them actually run: watch them in motion, or open them yourself.", zh: "五个方向：用户体验与界面、服务设计与研究、AI 产品、开发与自动化、游戏。可以按方向或标签筛选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
     zoneLbl: { en: "Area", zh: "方向" }, tagLbl: { en: "Tag", zh: "标签" }, zone: { en: "Area & tags", zh: "方向与标签" },
     empty: { en: "Nothing matches both filters yet.", zh: "暂时没有同时符合这两个条件的作品。" },
     method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" },
@@ -84,7 +84,7 @@
 
   /* ---------- home ---------- */
   function home() {
-    const P = D.projects, h = D.person.headline[lang];
+    const P = D.projects, h = D.person.headline[lang] || D.person.headline.en;
     return `
     <section class="hero" id="top">
       <canvas class="breath" aria-hidden="true"></canvas>

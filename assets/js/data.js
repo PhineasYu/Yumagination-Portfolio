@@ -18,7 +18,7 @@ window.PORTFOLIO = {
       zh: ["把模糊的问题，变成能点开的原型", "用我来定义、指挥、验证的 AI。"]
     },
     intro: {
-      en: "Product designer with an engineering background. I frame the problem, write the spec, set the design system, and direct AI coding agents to build it — then test it with real people. In 2026 I have used this method to ship a live restaurant site and ten-plus working prototypes.",
+      en: "Product designer with an engineering background. I frame the problem, write the spec, set the design system, and direct AI coding agents to build it — then test it with real people. So far in 2026, this way of working has shipped a live restaurant site and more than ten working prototypes.",
       zh: "工科背景的产品设计师。我负责定义问题、写 spec、定设计系统，指挥 AI 编程助手把它做出来，再拿去给真实的人测试。2026 年，我用这套方式做出了一个真实上线的餐厅网站，以及十多个可运行的原型。"
     }
   },
