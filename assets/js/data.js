@@ -19,8 +19,8 @@ window.PORTFOLIO = {
     },
     // hero: the headline's meaning, shorter (two lines under the name)
     tagline: {
-      en: ["From ambiguous problem to working prototype.", "Built with AI I direct and verify."],
-      zh: ["从模糊的问题，到能点开的原型。", "由 AI 搭建，由我指挥和验证。"]
+      en: ["UX designer turned AI builder.", "I research the people, direct the agents, and test what we make."],
+      zh: ["UX 设计师，转身成为 AI builder。", "我研究人，指挥 AI agent，并测试做出来的东西。"]
     },
     intro: {
       en: "UX designer, now AI-native. I frame the problem, write the spec, and direct AI coding agents to build it, then test it with real people. What I have built works with agents and workflows, structured output from speech and documents, answers that cite their sources, and a person reviewing whatever the model is unsure about. So far in 2026, this way of working has shipped a live restaurant site and more than ten working prototypes.",
