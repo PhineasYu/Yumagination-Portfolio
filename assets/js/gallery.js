@@ -1,7 +1,7 @@
-/* Gallery: an endless canvas. Photographs are scattered across a plane that has no edge;
-   drag (or scroll, or use the arrow keys) to move across it. The plane is built from cells,
-   and only the cells near the screen exist in the page, so 100 photographs or 1,000 cost the same.
-   Each cell is laid out from its own coordinates, so the scatter is random-looking but never changes. */
+/* Gallery: an open canvas. Every photograph appears exactly once, scattered evenly outwards from the title on a
+   sunflower spiral; new photographs simply take the next places on the outside, so the canvas grows with the collection.
+   You can wander as far as the photographs go. Only photographs near the screen exist in the page, and each one loads
+   a tiny copy first and a sharper one only when you zoom in; the full-size file loads only when a photograph is opened. */
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const DEMO = /[?&]demo\b/.test(location.search);
@@ -28,52 +28,61 @@
   const all = G.series.flatMap((s) => s.photos);
   const NP = all.length;
 
-  /* ---------- the plane ---------- */
-  const CW = 960, CH = 720;                 // one cell
-  const SLOTS = [[0, 0], [1, 0], [2, 0], [0, 1], [1, 1], [2, 1]]; // 3 x 2 sub-slots per cell
-  const PER = 3;                            // photographs per cell (of 6 slots)
+  /* ---------- the layout: each photograph once, on a sunflower spiral from the title outwards ---------- */
+  const CW = 480, CH = 360;                 // the page only builds the cells (buckets of the plane) near the screen
   function rng(a, b) { let h = (Math.imul(a, 374761393) + Math.imul(b, 668265263)) | 0; return () => { h = Math.imul(h ^ (h >>> 15), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; }; }
-  /* spiral index of a cell: 0 at the start, then outwards, so neighbouring cells take consecutive photographs */
-  function spiral(x, y) {
-    const k = Math.max(Math.abs(x), Math.abs(y)); if (!k) return 0;
-    const m = (2 * k - 1) ** 2;
-    if (x === k && y > -k) return m + y + k - 1;
-    if (y === k) return m + 2 * k - 1 + (k - x);
-    if (x === -k) return m + 4 * k - 1 + (k - y);
-    return m + 6 * k - 1 + (x + k);
-  }
-  // a fixed shuffle, so the order is not the order of the files
-  const perm = Array.from({ length: NP }, (_, i) => i);
-  { const r = rng(7, 11); for (let i = NP - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; } }
+  const hash = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return h >>> 0; };
+  // a fixed order that is not the order of the files, and stays put when photographs are added
+  const order = all.map((_, i) => i).sort((i, j) => hash(all[i].file) - hash(all[j].file));
+  const GOLD = Math.PI * (3 - Math.sqrt(5)), SP = 250, HOLE = 3, SX = 1.2;   // spacing, room for the title, a little wider than tall
+  const X0 = 480, Y0 = 360;                 // the title's centre on the plane (.g-title-card in gallery.css)
+  const spots = new Array(NP), buckets = new Map();
+  let minX = X0, maxX = X0, minY = Y0, maxY = Y0;
+  order.forEach((pi, k) => {
+    const p = all[pi], r = rng(k + 17, 29), ar = p.w && p.h ? p.w / p.h : 1.5;
+    const box = 230 + r() * 80;                                  // long side in px
+    const w = ar >= 1 ? box : box * ar, h = ar >= 1 ? box / ar : box;
+    const rad = SP * Math.sqrt(k + HOLE), th = k * GOLD;
+    const cx = X0 + Math.cos(th) * rad * SX + (r() - .5) * 40, cy = Y0 + Math.sin(th) * rad / SX + (r() - .5) * 40;
+    const s = { pi, x: cx - w / 2, y: cy - h / 2, w, h, rot: (r() - .5) * 5, d: r() * .4 };
+    spots[pi] = s;
+    minX = Math.min(minX, cx); maxX = Math.max(maxX, cx); minY = Math.min(minY, cy); maxY = Math.max(maxY, cy);
+    const key = Math.floor(cx / CW) + "," + Math.floor(cy / CH);
+    if (!buckets.has(key)) buckets.set(key, []); buckets.get(key).push(s);
+  });
 
   const cv = $("#cv"), world = $("#world");
   let ox = 0, oy = 0, Z = 1;                // world position of the screen's top-left corner, and the zoom
   const cells = new Map();
+  const DPR = Math.min(2, devicePixelRatio || 1);
+  const sharp = (s) => s.w * Z * DPR > 380;  // on screen larger than the tiny copy can show
+  const srcFor = (p, s) => (sharp(s) ? p.small || p.file : p.tiny || p.small || p.file);
   function buildCell(cx, cy) {
     const el = document.createElement("div"); el.className = "cell"; el.style.transform = `translate(${cx * CW}px,${cy * CH}px)`;
-    if (NP && !(cx === 0 && cy === 0)) {
-      const r = rng(cx + 1000, cy + 1000), s = spiral(cx, cy);
-      const order = SLOTS.map((_, i) => i).sort(() => r() - .5).slice(0, PER);
-      order.forEach((si, j) => {
-        const pi = perm[(s * PER + j) % NP], p = all[pi], [sx, sy] = SLOTS[si];
-        const ar = p.w && p.h ? p.w / p.h : 1.5;
-        const box = 230 + r() * 100;                       // long side in px
-        const w = ar >= 1 ? box : box * ar, h = ar >= 1 ? box / ar : box;
-        const x = sx * (CW / 3) + (CW / 3 - w) / 2 + (r() - .5) * 60, y = sy * (CH / 2) + (CH / 2 - h) / 2 + (r() - .5) * 50;
-        const a = document.createElement("a"); a.className = "ph"; a.href = "#"; a.dataset.i = pi; a.setAttribute("aria-label", t(p.title) || "Photograph " + (pi + 1));
-        a.style.cssText = `left:${x.toFixed(0)}px;top:${y.toFixed(0)}px;width:${w.toFixed(0)}px;height:${h.toFixed(0)}px;--rot:${((r() - .5) * 5).toFixed(2)}deg;--d:${(r() * 0.4).toFixed(2)}s`;
-        const im = new Image(); im.decoding = "async"; im.alt = t(p.title); im.src = p.small || p.thumb || p.file; im.draggable = false;
-        im.onload = () => im.classList.add("ready"); if (im.complete) im.classList.add("ready");
-        a.appendChild(im);
-        a.insertAdjacentHTML("beforeend", `<span class="cap">${esc(t(p.title))}<small>${esc([p.place, p.year].filter(Boolean).join(" · "))}</small></span>`);
-        el.appendChild(a);
-      });
-    }
+    (buckets.get(cx + "," + cy) || []).forEach((s) => {
+      const p = all[s.pi];
+      const a = document.createElement("a"); a.className = "ph"; a.href = "#"; a.dataset.i = s.pi; a.setAttribute("aria-label", t(p.title) || "Photograph " + (s.pi + 1));
+      a.style.cssText = `left:${(s.x - cx * CW).toFixed(0)}px;top:${(s.y - cy * CH).toFixed(0)}px;width:${s.w.toFixed(0)}px;height:${s.h.toFixed(0)}px;--rot:${s.rot.toFixed(2)}deg;--d:${s.d.toFixed(2)}s`;
+      const im = new Image(); im.decoding = "async"; im.alt = t(p.title); im.src = srcFor(p, s); im.draggable = false;
+      im.onload = () => im.classList.add("ready"); if (im.complete) im.classList.add("ready");
+      a.appendChild(im);
+      a.insertAdjacentHTML("beforeend", `<span class="cap">${esc(t(p.title))}<small>${esc([p.place, p.year].filter(Boolean).join(" · "))}</small></span>`);
+      el.appendChild(a);
+    });
     return el;
   }
+  // zooming in swaps the tiny copies on screen for the sharper ones (never back: what is loaded stays)
+  let lastZ = 0;
+  function sharpen() {
+    if (Z <= lastZ) return; lastZ = Z;
+    world.querySelectorAll(".ph img").forEach((im) => { const s = spots[+im.parentElement.dataset.i], p = all[s.pi]; if (sharp(s) && p.small && !im.src.endsWith(p.small)) { const n = new Image(); n.onload = () => (im.src = p.small); n.src = p.small; } });
+  }
+  // how far you can wander: the photographs plus a margin, so the edge is never lost
+  const M = 420;
+  const clamp = () => { const W = innerWidth / Z, H = innerHeight / Z; ox = Math.max(minX - M - W / 2, Math.min(maxX + M - W / 2, ox)); oy = Math.max(minY - M - H / 2, Math.min(maxY + M - H / 2, oy)); };
   let raf = 0;
   function sync() {
-    raf = 0;
+    raf = 0; clamp(); sharpen();
     const W = innerWidth / Z, H = innerHeight / Z, m = 1;
     const x0 = Math.floor(ox / CW) - m, x1 = Math.floor((ox + W) / CW) + m, y0 = Math.floor(oy / CH) - m, y1 = Math.floor((oy + H) / CH) + m;
     for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const k = x + "," + y; if (!cells.has(k)) { const c = buildCell(x, y); cells.set(k, c); world.appendChild(c); } }
@@ -85,7 +94,9 @@
   const queue = () => { if (!raf) raf = requestAnimationFrame(sync); };
 
   /* ---------- moving and zooming: drag, two-finger scroll, pinch, arrow keys, + and - ---------- */
-  const MINZ = .3, MAXZ = 2.4;
+  const MAXZ = 2.4;
+  let MINZ = .3;                             // or less, so the whole collection fits on the screen
+  const fitZ = () => { MINZ = Math.max(.08, Math.min(.3, innerWidth / (maxX - minX + 2 * M), innerHeight / (maxY - minY + 2 * M))); };
   let vx = 0, vy = 0, moved = 0, glide = 0;
   const pts = new Map();                     // active pointers, for pinch
   let drag = null, pinch = null;
@@ -133,12 +144,12 @@
     else if (e.key === "0") { Z = 1; recentre(); }
   });
   cv.addEventListener("click", (e) => { const el = document.elementFromPoint(e.clientX, e.clientY), a = el && el.closest(".ph"); e.preventDefault(); if (a && moved < 6) open(+a.dataset.i); });
-  addEventListener("resize", queue);
+  addEventListener("resize", () => { fitZ(); queue(); });
 
   /* ---------- page furniture ---------- */
   let hintOn = true;
   function hideHint() { if (hintOn) { hintOn = false; $("#hint").classList.add("off"); } }
-  function recentre() { stop(); Z = 1; ox = -innerWidth / 2 + CW / 2; oy = -innerHeight / 2 + CH / 2; queue(); }
+  function recentre() { stop(); Z = 1; ox = -innerWidth / 2 + X0; oy = -innerHeight / 2 + Y0; queue(); }
   function furniture() {
     $("#title").innerHTML = `<p class="g-kicker mono">${esc(t(G.kicker))}</p><h1>${esc(t(G.title))}</h1><p>${esc(t(G.statement))}</p>`;
     $("#hint").firstElementChild.textContent = NP ? t(S.hint) : t(S.soon);
@@ -156,10 +167,10 @@
   function show(i) {
     cur = (i + NP) % NP; const p = all[cur];
     img.style.animation = "none"; void img.offsetWidth; img.style.animation = "";
-    img.src = p.file || p.thumb; img.alt = t(p.title);
+    img.src = p.file || p.small; img.alt = t(p.title);
     cap.innerHTML = `<b>${esc(t(p.title))}</b>${esc([p.place, p.year].filter(Boolean).join(" · "))}`;
     cnt.textContent = `${String(cur + 1).padStart(2, "0")} / ${String(NP).padStart(2, "0")}`;
-    [cur + 1, cur - 1].forEach((k) => { const q = all[(k + NP) % NP]; if (q) new Image().src = q.file || q.thumb; });
+    [cur + 1, cur - 1].forEach((k) => { const q = all[(k + NP) % NP]; if (q) new Image().src = q.file || q.small; });
   }
   function open(i) { if (!NP) return; lastFocus = document.activeElement; lb.hidden = false; document.body.classList.add("lb-open"); show(i); $("#lb-close").focus(); }
   function close() { lb.hidden = true; document.body.classList.remove("lb-open"); img.src = ""; if (lastFocus) lastFocus.focus(); }
@@ -175,5 +186,5 @@
   $("#lang").addEventListener("click", () => { lang = lang === "zh" ? "en" : "zh"; try { localStorage.setItem("lang", lang); } catch (e) {} relang(); });
   $("#home").addEventListener("click", recentre);
   $("#zin").addEventListener("click", () => zoomAt(1.3, innerWidth / 2, innerHeight / 2)); $("#zout").addEventListener("click", () => zoomAt(1 / 1.3, innerWidth / 2, innerHeight / 2));
-  furniture(); recentre();
+  fitZ(); furniture(); recentre();
 })();

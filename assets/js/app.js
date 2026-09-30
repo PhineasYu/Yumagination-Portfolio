@@ -222,7 +222,9 @@
     };
     const sample = (img) => { const o = document.createElement("canvas"); o.width = TW; o.height = TH; const c = o.getContext("2d"); c.drawImage(img, 0, 0, TW, TH); const d = c.getImageData(0, 0, TW, TH).data, out = []; for (let i = 0; i < d.length; i += 4) out.push(boost([d[i], d[i + 1], d[i + 2]])); return out; };
     const pool = []; let ready = 0;
-    photos.slice(0, 60).forEach((p) => { const im = new Image(); im.onload = () => { try { pool.push(sample(im)); } catch (e) {} if (++ready) fill(); }; im.src = p.small || p.thumb || p.file; });
+    // colours are sampled ahead of time by scripts/add-photos.mjs (p.px: 12 x 8 RGB), so the home page downloads no photographs
+    const unpack = (b64) => { const d = atob(b64), out = []; for (let i = 0; i + 2 < d.length; i += 3) out.push(boost([d.charCodeAt(i), d.charCodeAt(i + 1), d.charCodeAt(i + 2)])); return out; };
+    photos.slice(0, 60).forEach((p) => { if (p.px) { pool.push(unpack(p.px)); return; } const im = new Image(); im.onload = () => { try { pool.push(sample(im)); } catch (e) {} if (++ready) fill(); }; im.src = p.tiny || p.small || p.file; });
     function getTile(i) { return pool.length ? pool[(i * 7 + Math.floor(i / 3)) % pool.length] : fake(i); }
     function layout() {
       const w = box.clientWidth, h = box.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
