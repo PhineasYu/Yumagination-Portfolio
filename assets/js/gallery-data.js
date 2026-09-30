@@ -77,19 +77,6 @@ window.GALLERY = {
           "year": ""
         },
         {
-          "file": "assets/gallery/full/all-img_6335.jpg",
-          "thumb": "assets/gallery/thumbs/all-img_6335.jpg",
-          "small": "assets/gallery/small/all-img_6335.jpg",
-          "w": 1500,
-          "h": 2000,
-          "title": {
-            "en": "",
-            "zh": ""
-          },
-          "place": "",
-          "year": ""
-        },
-        {
           "file": "assets/gallery/full/all-img_6336.jpg",
           "thumb": "assets/gallery/thumbs/all-img_6336.jpg",
           "small": "assets/gallery/small/all-img_6336.jpg",
