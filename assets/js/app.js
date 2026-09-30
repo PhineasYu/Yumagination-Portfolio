@@ -17,7 +17,7 @@
     zoneLbl: { en: "Area", zh: "方向" }, tagLbl: { en: "Tag", zh: "标签" }, zone: { en: "Areas", zh: "方向" },
     empty: { en: "Nothing here yet.", zh: "这个方向暂时还没有作品。" },
     method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" },
-    recog: { en: "Recognition", zh: "获奖与认可" }, tools: { en: "Working with", zh: "常用工具" },
+    recog: { en: "Awards & wins", zh: "获奖" }, tools: { en: "Working with", zh: "常用工具" },
     all: { en: "All", zh: "全部" },
     back: { en: "← All work", zh: "← 全部作品" }, next: { en: "Next", zh: "下一个" }, prev: { en: "Previous", zh: "上一个" },
     role: { en: "Role", zh: "角色" }, when: { en: "Timeline", zh: "时间" }, status: { en: "Status", zh: "状态" }, skills: { en: "Skills & stack", zh: "技能与技术栈" }, links: { en: "Links", zh: "链接" },
@@ -162,7 +162,7 @@
     </section>
 
     <section class="section" id="work">
-      <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
+      <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2></div>
       <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${ic(ZONE_IC[c.id])}${esc(t(c))}</button>`).join("")}</div>
       <div class="work-grid">
         ${P.map((p) => `
@@ -214,6 +214,7 @@
         <div class="m-stick">
           <h2 class="sec-title rv">${esc(t(M.title))}</h2>
           <p class="lede-lg rv">${esc(t(M.lede))}</p>
+          ${M.lede2 ? `<p class="sec-lede rv m-lede2">${esc(t(M.lede2))}</p>` : ""}
         </div>
       </div>
       <div class="m-main">
@@ -247,7 +248,7 @@
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
           <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${ic("mail")}${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
         </div>
-        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p></div>
+        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p></div>
       </div>
     </section>`;
   }

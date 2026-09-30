@@ -12,7 +12,7 @@ window.PORTFOLIO = {
     linkedin: "https://www.linkedin.com/in/yunfeiyu/",
     github: "https://github.com/PhineasYu",
     location: { en: "Stockholm, Sweden", zh: "瑞典 · 斯德哥尔摩" },
-    role: { en: "UX Engineer · Design Technologist", zh: "UX 工程师 · Design Technologist" },
+    role: { en: "AI-native UX Engineer", zh: "AI 原生的 UX 工程师" },
     headline: {
       en: ["I turn ambiguous problems into working prototypes", "with AI I direct and verify."],
       zh: ["把模糊的问题，变成能点开的原型", "用我来定义、指挥、验证的 AI。"]
@@ -23,8 +23,8 @@ window.PORTFOLIO = {
       zh: ["从模糊的问题，到能点开的原型。", "由 AI 搭建，由我指挥和验证。"]
     },
     intro: {
-      en: "Product designer with an engineering background. I frame the problem, write the spec, set the design system, and direct AI coding agents to build it — then test it with real people. So far in 2026, this way of working has shipped a live restaurant site and more than ten working prototypes.",
-      zh: "工科背景的产品设计师。我负责定义问题、写 spec、定设计系统，指挥 AI 编程助手把它做出来，再拿去给真实的人测试。2026 年，我用这套方式做出了一个真实上线的餐厅网站，以及十多个可运行的原型。"
+      en: "UX designer, now AI-native. I frame the problem, write the spec, and direct AI coding agents to build it, then test it with real people. What I have built works with agents and workflows, structured output from speech and documents, answers that cite their sources, and a person reviewing whatever the model is unsure about. So far in 2026, this way of working has shipped a live restaurant site and more than ten working prototypes.",
+      zh: "UX 设计师，现在是 AI 原生的。我负责定义问题、写 spec、指挥 AI 编程助手把它做出来，再拿去给真实的人测试。我做过的东西涉及 agent 与工作流、从语音和文档生成结构化输出、会标明出处的回答，以及由人来复核模型没把握的部分。2026 年，这套方式已经做出了一个真实上线的餐厅网站，以及十多个可运行的原型。"
     }
   },
 
@@ -103,11 +103,15 @@ window.PORTFOLIO = {
   method: {
     title: { en: "How I build with AI", zh: "我如何与 AI 一起做东西" },
     lede: {
-      en: "I don't hand-write production code. I own the parts that decide whether the thing is any good, and I say so up front.",
-      zh: "我不手写生产级代码。我负责那些决定作品好不好的部分，并且一开始就说清楚。"
+      en: "AI can build almost anything now, so taste decides what is worth building.",
+      zh: "现在 AI 几乎什么都能做出来，所以决定做什么、做成什么样的，是品味。"
+    },
+    lede2: {
+      en: "My taste comes from my eye for design and from deep research into how people actually use things. It is what makes the AI products I direct easier and more comfortable to use. I don't hand-write production code; I own the parts that decide whether the thing is any good, and I say so up front.",
+      zh: "我的品味来自我的审美，也来自我对用户体验的深入研究。它让我指挥出来的 AI 产品更易用、更舒服。我不手写生产级代码；我负责那些决定作品好不好的部分，并且一开始就说清楚。"
     },
     steps: [
-      { n: "01", h: { en: "Frame", zh: "定义" }, p: { en: "Turn a vague brief into one person, one moment, one decision. Kikaren's barrier map and Dossier's 90-second judge path came from here.", zh: "把模糊的需求收窄成一个人、一个瞬间、一个决策。Kikaren 的障碍地图、Dossier 的 90 秒路径都出自这里。" } },
+      { n: "01", h: { en: "Frame", zh: "定义" }, p: { en: "Turn a vague brief into one person, one moment, one decision. Dossier's 90-second judge path and Collaboration Canvas's five tensions came from here.", zh: "把模糊的需求收窄成一个人、一个瞬间、一个决策。Dossier 的 90 秒路径、Collaboration Canvas 的五个张力都出自这里。" } },
       { n: "02", h: { en: "Spec", zh: "写 spec" }, p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Teamdex has five spec documents; Beside has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Teamdex 有五份规格文档；Beside 有一份写清所有约束的开发规格。" } },
       { n: "03", h: { en: "Direct", zh: "指挥" }, p: { en: "Give the agent working rules, not wishes: local-first data, always deployable, P0 before P1, 'do not add anything I didn't ask for'.", zh: "给 AI 的是工作守则，不是愿望：本地优先、始终可部署、P0 先于 P1、「没让你加的不要加」。" } },
       { n: "04", h: { en: "Verify", zh: "验证" }, p: { en: "Real people and real loops. A real customer through Sushi Jerash's order-to-Telegram loop; think-aloud sessions at Kodiak; tests for hashing and signatures in LegacyChain.", zh: "真实的人、真实的闭环。Sushi Jerash 用真实顾客跑通下单到 Telegram 通知；Kodiak 做出声思考测试；LegacyChain 给哈希与签名写测试。" } }
@@ -117,7 +121,7 @@ window.PORTFOLIO = {
       { h: { en: "Show the reasoning", zh: "让推理看得见" }, p: { en: "Full Context Canvas gives every placement a reason and a confidence score.", zh: "Full Context Canvas 给每一次归位写明理由和把握度。" } },
       { h: { en: "AI is a reader, not the authority", zh: "AI 是读者，不是权威" }, p: { en: "In LegacyChain, AI output is 'pending' until a person accepts it.", zh: "在 LegacyChain 里，AI 的输出在人接受之前一直是「待确认」。" } },
       { h: { en: "Remove the pressure", zh: "拿掉压力" }, p: { en: "Beside has no reply obligation; Teamdex has no leaderboard.", zh: "Beside 没有回复义务；Teamdex 没有排行榜。" } },
-      { h: { en: "One interaction carries the idea", zh: "一个交互承载整个想法" }, p: { en: "A telescope for Kikaren; keys 1–5 for Chroma Reader; a voice dump for Dossier.", zh: "Kikaren 的望远镜；Chroma Reader 的 1–5 键；Dossier 的语音倾倒。" } }
+      { h: { en: "One interaction carries the idea", zh: "一个交互承载整个想法" }, p: { en: "A voice dump for Dossier; keys 1–5 for Chroma Reader; one handover note for Collaboration Canvas.", zh: "Dossier 的语音倾倒；Chroma Reader 的 1–5 键；Collaboration Canvas 的一条交接记录。" } }
     ],
     disclosure: {
       en: "Disclosure: the code in every AI-native project here was generated by AI coding agents (Claude Code, Lovable). I did the framing, specs, design systems, direction, review and QA. Demo data is fictional unless a project says otherwise.",
@@ -129,20 +133,22 @@ window.PORTFOLIO = {
     title: { en: "About", zh: "关于我" },
     body: {
       en: [
-        "I studied packaging engineering in Zhengzhou, worked in Unilever's Shanghai R&D packaging lab, then moved to Stockholm for a master's in Integrated Product Design at KTH. The engineering background is why I read a spec, a schema or a build log without flinching; the design training is why I ask who it is for first.",
-        "I'm looking for junior roles where a short loop from ambiguous problem to demoable prototype is the job: design technologist, UX engineer, AI-native product designer."
+        "I'm a UX designer, now AI-native: an AI-enhanced designer who frames the problem, writes the spec, directs coding agents to build it, and tests it with real people. What I bring on top is taste, and a habit of researching how people actually use things until the product feels easy.",
+        "I come from packaging engineering, then moved into design: Unilever's R&D packaging lab in Shanghai, and now a master's in Integrated Product Design at KTH in Stockholm. That is why I can read a spec or a build log without flinching, and why I still enjoy making things you can hold, from Arduino devices to 3D-modelled hardware.",
+        "I'm looking for junior roles where a short loop from ambiguous problem to demoable prototype is the job: AI engineer, design technologist, UX engineer, AI-native product designer."
       ],
       zh: [
-        "我本科在郑州学包装工程，在联合利华上海研发中心的包装实验室工作过，然后来到斯德哥尔摩，在 KTH 读集成产品设计硕士。工科背景让我看 spec、数据表和构建日志毫不发怵；设计训练让我总是先问：这是给谁的？",
-        "我在找 junior 岗位：从模糊问题到可演示原型的短周期就是工作本身，例如 design technologist、UX engineer、AI 原生的产品设计师。"
+        "我是一名 UX 设计师，现在是 AI 原生的：一个 AI 增强的设计师，负责定义问题、写 spec、指挥 AI 编程助手把它做出来，再拿去给真实的人测试。在此之上，我带来的是品味，以及把用户怎么真正使用东西研究透、直到产品用起来毫不费力的习惯。",
+        "我出身包装工程，后来转向设计：在联合利华上海研发中心的包装实验室工作过，现在在斯德哥尔摩的 KTH 读集成产品设计硕士。所以我看 spec 和构建日志毫不发怵，也仍然喜欢做能拿在手里的东西，从 Arduino 设备到 3D 建模的硬件。",
+        "我在找 junior 岗位：从模糊问题到可演示原型的短周期就是工作本身，例如 AI engineer、design technologist、UX engineer、AI 原生的产品设计师。"
       ]
     },
     timeline: [
-      { logo: "revive", when: "2026", what: { en: "UX Intern, Revive Retail (May–Aug)", zh: "Revive Retail UX 实习生（5–8 月）" } },
-      { logo: "kth", when: "2024–2026", what: { en: "MSc Integrated Product Design, KTH Royal Institute of Technology", zh: "KTH 皇家理工学院，集成产品设计硕士" } },
-      { logo: "kodiak", when: "2025", what: { en: "UI/UX Design Intern, Kodiak Hub, Stockholm", zh: "Kodiak Hub UI/UX 设计实习生，斯德哥尔摩" } },
-      { logo: "unilever", when: "2022–2024", what: { en: "Packaging Laboratory Assistant, Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心包装实验室助理，上海" } },
-      { when: "2017–2021", what: { en: "BEng Packaging Engineering, Zhengzhou University", zh: "郑州大学，包装工程学士" } }
+      { logo: "revive", when: "2026", role: { en: "UX Intern", zh: "UX 实习生" }, org: { en: "Revive Retail · May–Aug", zh: "Revive Retail · 5–8 月" } },
+      { logo: "kth", when: "2024–2026", role: { en: "MSc Integrated Product Design", zh: "集成产品设计硕士" }, org: { en: "KTH Royal Institute of Technology", zh: "KTH 皇家理工学院" } },
+      { logo: "kodiak", when: "2025", role: { en: "UI/UX Design Intern", zh: "UI/UX 设计实习生" }, org: { en: "Kodiak Hub, Stockholm", zh: "Kodiak Hub，斯德哥尔摩" } },
+      { logo: "unilever", when: "2022–2024", role: { en: "Packaging Laboratory Assistant", zh: "包装实验室助理" }, org: { en: "Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心，上海" } },
+      { when: "2017–2021", role: { en: "BEng Packaging Engineering", zh: "包装工程学士" }, org: { en: "Zhengzhou University", zh: "郑州大学" } }
     ],
     languages: { en: "English (professional) · Chinese (native) · Swedish (learning)", zh: "英语（工作语言）· 中文（母语）· 瑞典语（学习中）" }
   },
@@ -166,7 +172,7 @@ window.PORTFOLIO = {
     status: { en: "Status", zh: "状态" },
     stack: { en: "Stack", zh: "技术栈" },
     links: { en: "Links", zh: "链接" },
-    recognition: { en: "Recognition", zh: "获奖与认可" },
+    recognition: { en: "Awards & wins", zh: "获奖" },
     contactTitle: { en: "Let's build something.", zh: "一起做点什么。" },
     contactLede: { en: "Open to junior roles in Sweden and China. The fastest way to reach me is email.", zh: "接受瑞典与中国的 junior 岗位机会。最快的联系方式是邮件。" },
     draftNote: { en: "To confirm before sharing", zh: "分享前待确认" },

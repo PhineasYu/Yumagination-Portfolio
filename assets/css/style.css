@@ -288,6 +288,10 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .tl li { display: grid; grid-template-columns: 110px 1fr auto; align-items: center; gap: 20px; padding: 16px var(--pad); border-bottom: 1px solid var(--line); font-size: var(--fs-small); line-height: 1.5; }
 .tl li:last-child { border-bottom: 0; }
 .tl li .mono { padding-top: 2px; }
+.tl-what { display: flex; flex-direction: column; gap: 2px; }
+.tl-what b { font-weight: 600; color: var(--ink); }
+.tl-what span { color: var(--ink-muted); }
+.m-lede2 { margin-top: 18px; font-size: var(--fs-small); }
 .about .langline { margin: 20px 0 0; font-size: var(--fs-label); line-height: 1.6; color: var(--ink-muted); }
 .bigfoot { padding: var(--sec) var(--gx) 32px; }
 .bigfoot h2 { margin: 0 0 20px; font: 600 var(--fs-1)/1.05 var(--sans); letter-spacing: -.04em; }

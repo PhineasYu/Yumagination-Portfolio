@@ -92,7 +92,7 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
   Claude 之后问你三件小事：每个展厅叫什么名字（例如「城市」「人」「光」）；有没有想写的说明牌（标题/地点/年份，可以全部留空）；Gallery 页顶部那句话是否满意（现在是：「摄影是我坚持最久的爱好。这里是多年来随身带着相机拍下的照片。」）。
   说明：脚本会把照片缩小成网页尺寸并去掉定位等隐私信息，原图不会上传；预览版式可打开 `gallery.html?demo`。
 
-- [ ] **3.1 Sushi Jerash**：给 Claude 线上网址 + 手机截图 3–5 张（菜单、购物车、结账、Telegram 通知、后台）。
+- [x] **3.1 Sushi Jerash**：给 Claude 线上网址 + 手机截图 3–5 张（菜单、购物车、结账、Telegram 通知、后台）。
 - [x] **3.2 Dossier**：登录后的主界面截图 2 张（时间线、档案）或一段录屏。只用虚构孩子的数据，不要出现真实孩子。另外：Dossier 的 Lovable 已发布网址现在显示 “Build incomplete”，需要在 Lovable 里重新发布一次。
 - [x] **3.3 Collaboration Canvas**：原型链接 + 4–6 张图。
 - [ ] **3.4 Voi**：头盔概念图 / App 流程截图（先确认 Voi 允许公开，不确定就跳过）。
@@ -122,3 +122,5 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-09-30 · 1.11 · 可以公开 Revive 的名字和 logo（用户确认），经历里已加 Revive 实习
 - 2026-09-30 · 3.2 · Dossier：从已发布网址的演示模式（虚构孩子 Luca、Lucy）录了 21 秒手机录屏和 3 张截图；事实依据是仓库 README（PRD）和 roadmap.md
 - 2026-09-30 · 3.3 · Collaboration Canvas：在本机运行原型（~/Downloads/Collaboration-canvas，npm run dev），录 55 秒三角色演示 + 9 张截图；事实依据是原型仓库的 spec、CLAUDE.md、演示脚本和 mock 数据
+- 2026-09-30 · 3.1 · Sushi Jerash：在手机尺寸下录线上网站（到结账页为止，没有提交订单），加英文字幕；网站只有阿拉伯语
+- 2026-10-01 · 第四批 · 时间线改成职位在上/公司在下；Method 讲品味；Recognition 改名 Awards & wins；删掉 Work 说明；About 重写并加 AI engineer；Longevity（录屏 + deck + ASCII）、MicroHack（微软截图）、Community Viewfinder（原始 PDF）、Let Me Die（截图 + 封面）、Sushi Jerash（录屏）、Disco Fever（桌面 + 手机双录屏，iPhone 外框）、LegacyChain（Roll A Page 起点）、Kodiak（PDF 补充）更新；新增「Hardware & 3D prototyping」卡片；Kodiak 与 Revive 提到第三行；新增 docs/INTERVIEW-UNIPLAY.md
