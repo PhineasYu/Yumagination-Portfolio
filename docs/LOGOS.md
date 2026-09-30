@@ -20,7 +20,10 @@ Logos are real files from each organisation or a public logo archive, never redr
 | uniplay.svg | uniplay.io header logo | letters were white on their dark site, now #1A1A1A; icon colours unchanged |
 | stoneleap.png | stoneleap.ai `logo-horizontal-white.png` | white text re-coloured to #141414 |
 | bitmagic.png | bitmagic.ai `Bitmagic_logo_RGB_white.png` | re-coloured to #141414 |
+| accel.svg | Wikimedia Commons, "Accel logo.svg" | the venture firm (confirmed by Yunfei) |
+| pwc.svg | Wikimedia Commons, "PwC 2025 Logo.svg" | used on Kikaren |
+| nebius.svg | nebius.com `logo.svg` | used on LegacyChain (confirmed by Yunfei) |
 | aris-machina.svg | arismachina.com graphite horizontal logotype | |
 
-Not added yet: Accel (unsure it is the same "Accel" as the hackathon), AI Institutet (unsure which organisation), Redpine (only a white version found), Zhengzhou University.
+Not added yet: Redpine (only a white version found), Zhengzhou University. AI Institutet is not used; the LegacyChain logo is Nebius.
 If a company asks for a logo to be removed or replaced, delete its entry in `logos` / `logoStrip` / `orgs` and the file here.

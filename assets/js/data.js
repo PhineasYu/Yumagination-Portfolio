@@ -48,10 +48,13 @@ window.PORTFOLIO = {
     uniplay:   { name: "Uniplay",    file: "uniplay.svg",      h: 26 },
     stoneleap: { name: "Stone Leap", file: "stoneleap.png",    h: 32 },
     bitmagic:  { name: "Bitmagic",   file: "bitmagic.png",     h: 22 },
-    aris:      { name: "Aris Machina", file: "aris-machina.svg", h: 18 }
+    aris:      { name: "Aris Machina", file: "aris-machina.svg", h: 18 },
+    accel:     { name: "Accel",      file: "accel.svg",        h: 30 },
+    pwc:       { name: "PwC",        file: "pwc.svg",          h: 30 },
+    nebius:    { name: "Nebius",     file: "nebius.svg",       h: 30 }
   },
   // order of the logo strip under the hero
-  logoStrip: ["unilever", "kth", "kodiak", "revive", "voi", "sap", "capgemini", "ericsson", "google", "microsoft", "deloitte", "uniplay", "stoneleap", "bitmagic", "aris"],
+  logoStrip: ["unilever", "kth", "kodiak", "revive", "voi", "sap", "capgemini", "ericsson", "google", "microsoft", "deloitte", "uniplay", "stoneleap", "bitmagic", "aris", "accel", "pwc", "nebius"],
 
   /* Zones: every project has exactly one `zone` and any number of `tags`. */
   cats: [
@@ -93,7 +96,7 @@ window.PORTFOLIO = {
     { logo: "uniplay", year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
     { logo: "stoneleap", year: "2026", title: { en: "Stone Leap Build-a-Game: 1st place (Let Me Die)", zh: "Stone Leap Build-a-Game：第一名（Let Me Die）" }, note: { en: "A playable game built in one evening with an AI world builder", zh: "用 AI world builder 一个晚上做出的可玩游戏" } },
     { logo: "bitmagic", year: "2026", title: { en: "BitMagic game hackathon: 2nd place (Disco Fever)", zh: "BitMagic 游戏黑客松：二等奖（Disco Fever）" }, note: { en: "A one-minute disco rhythm game, now playable online", zh: "一分钟的迪斯科节奏游戏，已在线可玩" }, verify: true },
-    { year: "2026", title: { en: "Accel AI Innovate Hackathon: Top 8 and a pitch slot (Dossier)", zh: "Accel AI Innovate 黑客松：Top 8 并获得路演机会（Dossier）" }, note: { en: "Hosted by KTH AI Society", zh: "KTH AI Society 主办" } },
+    { logo: "accel", year: "2026", title: { en: "Accel AI Innovate Hackathon: Top 8 and a pitch slot (Dossier)", zh: "Accel AI Innovate 黑客松：Top 8 并获得路演机会（Dossier）" }, note: { en: "Hosted by KTH AI Society", zh: "KTH AI Society 主办" } },
     { year: "2022–23", title: { en: "Huayang Road community renewal: Excellent Proposal commendation", zh: "华阳路街道社区更新：优秀提案表彰" }, note: { en: "Community Viewfinder, Changning District, Shanghai", zh: "社区取景框，上海长宁区" } }
   ],
 

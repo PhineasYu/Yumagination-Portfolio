@@ -55,7 +55,7 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "dossier", num: "02", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "award", "built-with-ai"],
+      id: "dossier", orgs: ["accel"], num: "02", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "award", "built-with-ai"],
       title: "Dossier", meta: "Dossier · Sep 2026",
       cap: L("A voice-first archive of a child's growing up", "用语音记录孩子成长的档案"),
       h1: L("Turning a parent's 60-second voice memo into a child's timeline and profile", "把家长 60 秒的语音，变成孩子的时间线和档案"),
@@ -195,7 +195,7 @@
 
     /* ------------------------------------------------------------ 07 */
     {
-      id: "legacychain", num: "07", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "built-with-ai"],
+      id: "legacychain", orgs: ["nebius"], num: "07", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "built-with-ai"],
       title: "LegacyChain", meta: "LegacyChain · from MEMO · Sep 2026",
       cap: L("From a memoir app for older people to a family archive where AI reads but never rewrites the record", "从老年人回忆录 App，到 AI 只能阅读、不能改写记录的家族档案"),
       h1: L("A family archive where AI can read the letters but never rewrite the record", "一个家族档案：AI 可以读信，但永远改写不了记录"),
@@ -253,7 +253,7 @@
 
     /* ------------------------------------------------------------ 09 */
     {
-      id: "kikaren", num: "09", year: "2026", when: "Hackathon · 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
+      id: "kikaren", orgs: ["pwc"], num: "09", year: "2026", when: "Hackathon · 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
       title: "Kikaren", meta: "Kikaren · 2026",
       cap: L("A telescope for seeing each party's vision for Järva", "用望远镜看每个政党对 Järva 的愿景"),
       h1: L("Letting first-time voters in Järva look through a telescope at the future each party imagines", "让 Järva 的首投族透过望远镜，看每个政党想象中的未来"),
