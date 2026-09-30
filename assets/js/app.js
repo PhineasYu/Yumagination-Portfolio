@@ -89,7 +89,7 @@
       const v = videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` });
       return p.shape === "tall" ? `<span class="tile is-phone"${bg}>${phone(v, tl.sb)}${go}</span>` : `<span class="tile"${bg}>${v}${go}</span>`;
     }
-    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${tl.emoji ? `<span class="tile-emoji" aria-hidden="true" style="left:${(tl.emojiAt || [50, 50])[0]}%;top:${(tl.emojiAt || [50, 50])[1]}%">${tl.emoji}</span>` : ""}${go}</span>`;
+    if (tl.img) return `<span class="tile${tl.fill ? " fill" : ""}"><img src="${esc(tl.img)}" alt="" loading="lazy">${tl.emoji ? `<span class="tile-emoji" aria-hidden="true" style="left:${(tl.emojiAt || [50, 50])[0]}%;top:${(tl.emojiAt || [50, 50])[1]}%;--rot:${tl.emojiRot == null ? 45 : tl.emojiRot}deg">${tl.emoji}</span>` : ""}${go}</span>`;
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}${go}</span>`;
     if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}${go}</span>`;
     return `<span class="tile">${go}</span>`;
@@ -136,7 +136,7 @@
     const rows = [];
     for (let i = n; i > 0; i = cut[i]) rows.unshift(cards.slice(cut[i], i));
     grid.replaceChildren(...rows.map((row) => {
-      const el = document.createElement("div"); el.className = "brow"; el.append(...row);
+      const el = document.createElement("div"); el.className = "brow"; el.append(...row); row.forEach((c, k) => c.style.setProperty("--k", k));
       // a lone short row (only when very few cards match) keeps its size instead of blowing up
       const sum = row.reduce((a, c) => a + (RATIO[c.dataset.shape] || 1.6), 0);
       if (!one && sum < target * 0.6) { const sp = document.createElement("span"); sp.className = "spacer"; sp.style.setProperty("--r", (target * 0.6 - sum).toFixed(2)); el.append(sp); }
@@ -356,9 +356,9 @@
       ${DRAFT && p.verify ? `<p class="draft mono">${esc(s("draft"))}: ${esc(t(p.verify))}</p>` : ""}
       <div class="body">
         ${p.sections.map((sec) => `
-          <section class="blk rv">
+          <section class="blk rv${sec.split && sec.media ? " split" : ""}">
             <h2>${heading(sec.h)}</h2>
-            ${arr(sec.p).map((x) => `<p>${x}</p>`).join("")}
+            ${sec.split && sec.media ? `<div class="split-t">${arr(sec.p).map((x) => `<p>${x}</p>`).join("")}</div>` : arr(sec.p).map((x) => `<p>${x}</p>`).join("")}
             ${sec.media ? `<div class="shot">${media(sec.media)}${sec.cap ? `<p class="cap">${esc(t(sec.cap))}</p>` : ""}</div>` : ""}
           </section>`).join("")}
       </div>
