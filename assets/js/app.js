@@ -302,6 +302,7 @@
             ${sec.media ? `<div class="shot">${media(sec.media)}${sec.cap ? `<p class="cap">${esc(t(sec.cap))}</p>` : ""}</div>` : ""}
           </section>`).join("")}
       </div>
+      ${p.egg ? `<a class="egg rv" href="${esc(p.egg.url)}"><span class="egg-c c1"></span><span class="egg-c c2"></span><span class="egg-c c3"></span><span class="egg-c c4"></span><span class="egg-rec mono"><i></i>REC</span><span class="egg-t"><b>${esc(t(p.egg.title))}</b><span>${esc(t(p.egg.sub))}</span></span><span class="egg-go">${esc(t(p.egg.go))} <span class="arrow">→</span></span></a>` : ""}
       <nav class="pager rv" aria-label="More work">
         <a href="#/work/${prev.id}"><span class="mono dim">← ${esc(s("prev"))}</span><b>${esc(prev.title)}</b>${prev.sub ? `<span class="mono dim">${esc(t(prev.sub))}</span>` : ""}</a>
         <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b>${next.sub ? `<span class="mono dim">${esc(t(next.sub))}</span>` : ""}</a>

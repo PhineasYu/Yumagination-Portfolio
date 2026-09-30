@@ -483,3 +483,21 @@ html[lang="zh"] .blk p { max-width: 36em; }
   .proj:hover, .proj.rv.in:hover, a.feed-item:hover, .pager a:hover { transform: none; }
   .proj:hover .tile > * { transform: none !important; }
 }
+
+/* easter egg: a viewfinder frame at the end of one case study, linking to the photography gallery */
+.egg { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; max-width: 760px; margin: clamp(40px, 6vw, 72px) auto 0; padding: 34px 40px; color: var(--ink); text-decoration: none; }
+.egg-c { position: absolute; width: 22px; height: 22px; border: 0 solid var(--ink); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+.egg-c.c1 { left: 0; top: 0; border-width: 2px 0 0 2px; } .egg-c.c2 { right: 0; top: 0; border-width: 2px 2px 0 0; }
+.egg-c.c3 { left: 0; bottom: 0; border-width: 0 0 2px 2px; } .egg-c.c4 { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
+.egg:hover .c1 { transform: translate(6px, 6px); } .egg:hover .c2 { transform: translate(-6px, 6px); }
+.egg:hover .c3 { transform: translate(6px, -6px); } .egg:hover .c4 { transform: translate(-6px, -6px); }
+.egg:hover .egg-c { border-color: var(--tf); }
+.egg-rec { position: absolute; left: 40px; top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-muted); }
+.egg-rec i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); animation: egg-blink 1.6s steps(2, jump-none) infinite; }
+@keyframes egg-blink { 50% { opacity: 0; } }
+.egg-t { display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px; }
+.egg-t b { font-size: var(--fs-3, 20px); font-weight: 600; letter-spacing: -.012em; }
+.egg-t span { font-size: var(--fs-small); color: var(--ink-muted); line-height: 1.5; }
+.egg-go { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; background: var(--tf); border-radius: var(--radius-pill); }
+.egg:hover .egg-go .arrow { transform: translateX(3px); } .egg-go .arrow { transition: transform var(--dur) var(--ease); }
+@media (prefers-reduced-motion: reduce) { .egg-rec i { animation: none; } }
