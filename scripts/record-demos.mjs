@@ -44,12 +44,21 @@ const jobs = {
     await click(p, p.locator('a[href*="/certificate/"]').nth(2), 2600);
     await p.mouse.wheel(0,600); await wait(p,1600); await p.mouse.wheel(0,700); await wait(p,1800);
     await click(p, p.getByRole('link',{name:'Provenance'}).first(), 2600); } },
-  meanwhile: { url:'http://127.0.0.1:5402/', vp:[390,844], mobile:true, run: async p => {
-    await wait(p,1600); await p.mouse.wheel(0,500); await wait(p,1300); await p.mouse.wheel(0,-500); await wait(p,700);
-    await p.getByRole('button',{name:'Mei',exact:true}).tap(); await wait(p,1500);
-    await p.getByRole('button',{name:'Add your moment'}).first().tap(); await wait(p,1200);
-    await p.getByText('Send an emoji').tap(); await wait(p,1200);
-    await p.evaluate(()=>{const bs=[...document.querySelectorAll('button')].filter(b=>b.innerText.trim()==='🫶');bs[bs.length-1].click()}); await wait(p,4500); } },
+  meanwhile: { url:'http://127.0.0.1:5402/', vp:[390,844], mobile:true, clock:'2026-09-30T17:40:00+02:00', run: async p => {
+    // Beside, poetic version (github.com/PhineasYu/moment-share-square, run locally with `npx vite dev --port 5402`)
+    await wait(p,2200); await p.mouse.move(195,520);
+    for (let i=0;i<3;i++){ await p.mouse.wheel(0,260); await wait(p,900); }
+    await p.mouse.wheel(0,-780); await wait(p,1100);
+    await p.getByRole('button',{name:'Her',exact:true}).tap(); await wait(p,1700);
+    await p.getByRole('button',{name:'You',exact:true}).tap(); await wait(p,1100);
+    await p.getByRole('button',{name:"Add today's moment"}).tap(); await wait(p,1300);
+    await p.getByText('Send an emoji').tap(); await wait(p,1300);
+    await p.evaluate(()=>{const bs=[...document.querySelectorAll('.emoji-row button')];(bs.find(b=>b.innerText.trim()==='🫶')||bs[0]).click()}); await wait(p,2600);
+    await p.getByText('Start a new one').tap(); await wait(p,1100);
+    await p.getByText('I have time').tap(); await wait(p,1200);
+    const d = p.getByLabel('Call window length'); const bb = await d.boundingBox();
+    if (bb) { await p.mouse.move(bb.x+bb.width/2, bb.y+bb.height/2); await p.mouse.wheel(0,120); await wait(p,700); await p.mouse.wheel(0,120); await wait(p,1100); }
+    await p.getByText(/I.m free for/).tap(); await wait(p,2400); } },
   clock: { url:'http://127.0.0.1:5403/', vp:[1280,800], run: async p => {
     await wait(p,1500); await click(p, p.getByRole('button',{name:'Start'}), 7000); await p.keyboard.press('Space'); await wait(p,1400); await p.keyboard.press('r'); await wait(p,1500); } },
 };
@@ -62,6 +71,7 @@ for (const [name, j] of Object.entries(jobs)) {
   await ctx.addInitScript(CURSOR);
   await ctx.addInitScript("document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='[data-sonner-toaster],[data-sonner-toast],section[aria-label*=\"otification\"]{display:none!important}';document.head.appendChild(s)})");
   const p = await ctx.newPage();
+  if (j.clock) await p.clock.install({ time: new Date(j.clock) });   // a fixed afternoon, so the dates in the app line up
   try { await p.goto(j.url,{waitUntil:'load',timeout:90000}); await j.run(p); } catch(e){ console.log('ERR',name,String(e).slice(0,160)); }
   await ctx.close();
   const webm = dir+'/'+readdirSync(dir).find(f=>f.endsWith('.webm'));

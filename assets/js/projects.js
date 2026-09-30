@@ -261,7 +261,7 @@
 
     /* ------------------------------------------------------------ 07 */
     {
-      id: "kodiak-hub", orgs: ["kodiak"], num: "07", year: "2025", when: "Jun–Sep 2025", zones: ["ux", "ai"], tags: ["built-with-ai"],
+      id: "kodiak-hub", orgs: ["kodiak"], num: "07", year: "2025", when: "Jun–Sep 2025", zones: ["ux", "ai"], tags: ["internship", "built-with-ai"],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
       cap: L("Design work inside a live B2B SaaS design system, and a first AI workflow for the team", "在真实 B2B SaaS 设计系统里做设计，以及给团队的第一套 AI 工作流"),
       h1: L("Designing inside a live B2B design system, and leaving behind a usability-testing process and an AI prompting guide", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程和一份 AI 提示指南"),
@@ -308,7 +308,7 @@
 
     /* ------------------------------------------------------------ 08 */
     {
-      id: "revive-automation", orgs: ["revive"], num: "08", year: "2026", when: "May–Aug 2026", zones: ["ux", "build", "ai"], tags: ["automation", "built-with-ai"],
+      id: "revive-automation", orgs: ["revive"], num: "08", year: "2026", when: "May–Aug 2026", zones: ["ux", "build", "ai"], tags: ["internship", "automation", "built-with-ai"],
       title: "Revive", sub: L("UX audit, checkout redesign and report automation", "UX 审计、结账流程重设计与报表自动化"), meta: "Revive · UX internship · 2026",
       cap: L("A UX internship: auditing a live secondhand platform, redesigning its checkout, and automating a payout reconciliation", "UX 实习：审计一个在线二手平台、重设计它的结账流程，并把对账自动化"),
       h1: L("Auditing a live secondhand platform, fixing its multi-seller checkout, and automating a monthly payout reconciliation", "审计一个在线二手平台、修它的多卖家结账流程，并把每月的佣金对账自动化"),
@@ -619,7 +619,7 @@
       verify: L("The recording and screenshots come from the updated code, run locally. The published link still shows the older black-and-white version until you publish again in Lovable.", "录屏和截图取自更新后的代码（本地运行）。在你于 Lovable 里重新发布之前，线上链接显示的仍是旧的黑白版本。"),
       shape: "tall",
       tile: { video: "meanwhile", poster: "meanwhile-poster", phone: true },
-      hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, the days scrolling past, her side, and a photograph added to today. Recorded from the updated app, running locally.", "新的 Beside：那句诗、一天天滑过、她那一侧，以及给今天添上一张照片。录自更新后的应用（本地运行）。") }),
+      hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("The new Beside: the verse, the days scrolling past, her side, an emoji added to today, and \u201cI have time\u201d on the drum picker. Recorded from the latest code, running locally.", "新的 Beside：那句诗、一天天滑过、她那一侧、给今天添一个 emoji，以及在滚轮上选「I have time」。录自最新代码（本地运行）。") }),
       sections: [
         { h: L("Overview — Removing the pressure to reply", "概述 — 拿掉回复的压力")  ,
           p: L(["A moment is a photo taken right now or one huge emoji. The left square is one person's, the right is the other's. Nothing in the interface asks for a reply.", "Timestamps show each person's local time and city, so distance is part of the picture."], ["一个「瞬间」是此刻拍的照片，或者一个巨大的 emoji。左边是一个人的，右边是另一个人的。界面里没有任何东西催你回复。", "时间戳显示各自的当地时间和城市，让距离本身成为画面的一部分。"]),

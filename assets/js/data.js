@@ -70,6 +70,7 @@ window.PORTFOLIO = {
   tags: [
     { id: "hackathon", en: "Hackathon", zh: "黑客松" },
     { id: "award", en: "Award", zh: "获奖" },
+    { id: "internship", en: "Internship", zh: "实习" },
     { id: "real-users", en: "Real users", zh: "真实用户" },
     { id: "built-with-ai", en: "Built with AI", zh: "用 AI 构建" },
     { id: "automation", en: "Automation & Agents", zh: "自动化与 Agent" },
