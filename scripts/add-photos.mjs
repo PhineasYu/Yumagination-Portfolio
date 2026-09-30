@@ -32,6 +32,23 @@ const readJson = (p, d) => { try { return JSON.parse(readFileSync(p, "utf8")); }
 const CAMERA = /^(IMG|DSC|DSCF|DSCN|PXL|_MG|P\d{3}|KAPI_FUJI)[_ -]?\w*\d+/i;   // camera file names (IMG_5368) get no title
 const pretty = (name) => ({ en: name.replace(/^\d+[-_ ]*/, "").replace(/[-_]+/g, " ").trim(), zh: name.replace(/^\d+[-_ ]*/, "").replace(/[-_]+/g, " ").trim() });
 
+/* the main colour of a photograph: the strongest saturated hue (24 bins of 15°), or null for black-and-white and greys */
+async function mainColour(file) {
+  const d = await sharp(file).resize(48, 48, { fit: "fill" }).removeAlpha().raw().toBuffer();
+  const bins = new Array(24).fill(0), rgb = Array.from({ length: 24 }, () => [0, 0, 0, 0]); let total = 0;
+  for (let i = 0; i < d.length; i += 3) {
+    const r = d[i] / 255, g = d[i + 1] / 255, b = d[i + 2] / 255, mx = Math.max(r, g, b), mn = Math.min(r, g, b), c = mx - mn;
+    if (mx < .12 || c < .045) continue;
+    const h = (c === 0 ? 0 : mx === r ? ((g - b) / c) % 6 : mx === g ? (b - r) / c + 2 : (r - g) / c + 4) * 60, k = Math.floor(((h + 360) % 360) / 15);
+    const w = Math.sqrt(c); bins[k] += w; total += w; const q = rgb[k]; q[0] += d[i] * w; q[1] += d[i + 1] * w; q[2] += d[i + 2] * w; q[3] += w;
+  }
+  if (total / (d.length / 3) < .14) return { hue: null, tone: null };
+  let best = 0; for (let k = 1; k < 24; k++) if (bins[(k + 23) % 24] + bins[k] * 2 + bins[(k + 1) % 24] > bins[(best + 23) % 24] + bins[best] * 2 + bins[(best + 1) % 24]) best = k;
+  let sx = 0, sy = 0; for (const k of [best + 23, best, best + 1]) { const w = bins[k % 24], a = ((k % 24) * 15 + 7.5) * Math.PI / 180; sx += Math.cos(a) * w; sy += Math.sin(a) * w; }
+  const q = rgb[best], hex = "#" + [0, 1, 2].map((j) => Math.round(q[j] / q[3]).toString(16).padStart(2, "0")).join("");
+  return { hue: Math.round(((Math.atan2(sy, sx) * 180 / Math.PI) + 360) % 360), tone: hex };
+}
+
 const series = [];
 for (const room of readdirSync(SRC).filter((d) => statSync(join(SRC, d)).isDirectory()).sort()) {
   const dir = join(SRC, room);
@@ -48,8 +65,9 @@ for (const room of readdirSync(SRC).filter((d) => statSync(join(SRC, d)).isDirec
     }
     const { width: w, height: h } = await sharp(out(FULL)).metadata();
     const px = (await sharp(out(TINY)).resize(12, 8, { fit: "fill" }).removeAlpha().raw().toBuffer()).toString("base64");
+    const { hue, tone } = await mainColour(out(TINY));
     const c = caps[f] || {};
-    photos.push({ file: `assets/gallery/full/${id}.webp`, small: `assets/gallery/small/${id}.webp`, tiny: `assets/gallery/tiny/${id}.webp`, w, h, px, title: c.title || (CAMERA.test(f) ? { en: "", zh: "" } : pretty(basename(f, extname(f)))), place: c.place || "", year: c.year || "" });
+    photos.push({ file: `assets/gallery/full/${id}.webp`, small: `assets/gallery/small/${id}.webp`, tiny: `assets/gallery/tiny/${id}.webp`, w, h, px, hue, tone, title: c.title || (CAMERA.test(f) ? { en: "", zh: "" } : pretty(basename(f, extname(f)))), place: c.place || "", year: c.year || "" });
   }
   if (photos.length) series.push({ id: slug(room), title: meta.title || pretty(room), note: meta.note || { en: "", zh: "" }, photos });
 }

@@ -23,7 +23,9 @@
   const S = {
     hint: { en: "Drag, scroll or pinch to wander and zoom. Click a photograph to look closer.", zh: "拖动、滚动或双指捏合，来闲逛和缩放。点一张照片看大图。" },
     count: { en: "photographs", zh: "张照片" }, zin: { en: "Zoom in", zh: "放大" }, zout: { en: "Zoom out", zh: "缩小" }, home: { en: "Back to the start", zh: "回到起点" },
-    soon: { en: "The walls are being hung. Photographs arrive here soon.", zh: "展墙正在布置，照片很快会挂上来。" }
+    soon: { en: "The walls are being hung. Photographs arrive here soon.", zh: "展墙正在布置，照片很快会挂上来。" },
+    all: { en: "All", zh: "全部" }, spec: { en: "Drag along the colours to see the photographs of one colour", zh: "沿着色带拖动，查看同一种颜色的照片" },
+    bw: { en: "Black & white", zh: "黑白" }, hint2: { en: "Drag, scroll or pinch to wander. Drag the colour bar to see one colour.", zh: "拖动、滚动或双指捏合来闲逛。拖动下方色带，只看一种颜色。" }
   };
   const all = G.series.flatMap((s) => s.photos);
   const NP = all.length;
@@ -61,7 +63,7 @@
     const el = document.createElement("div"); el.className = "cell"; el.style.transform = `translate(${cx * CW}px,${cy * CH}px)`;
     (buckets.get(cx + "," + cy) || []).forEach((s) => {
       const p = all[s.pi];
-      const a = document.createElement("a"); a.className = "ph"; a.href = "#"; a.dataset.i = s.pi; a.setAttribute("aria-label", t(p.title) || "Photograph " + (s.pi + 1));
+      const a = document.createElement("a"); a.className = "ph" + (matches(s.pi) ? "" : " dim"); a.href = "#"; a.dataset.i = s.pi; a.setAttribute("aria-label", t(p.title) || "Photograph " + (s.pi + 1));
       a.style.cssText = `left:${(s.x - cx * CW).toFixed(0)}px;top:${(s.y - cy * CH).toFixed(0)}px;width:${s.w.toFixed(0)}px;height:${s.h.toFixed(0)}px;--rot:${s.rot.toFixed(2)}deg;--d:${s.d.toFixed(2)}s`;
       const im = new Image(); im.decoding = "async"; im.alt = t(p.title); im.src = srcFor(p, s); im.draggable = false;
       im.onload = () => im.classList.add("ready"); if (im.complete) im.classList.add("ready");
@@ -136,7 +138,7 @@
   cv.addEventListener("dblclick", (e) => { if (e.target.closest(".ph")) return; zoomAt(Z < 1.2 ? 1.8 : 1 / Z, e.clientX, e.clientY); });
   const step = (k) => { stop(); ox += k[0] * 220 / Z; oy += k[1] * 220 / Z; hideHint(); queue(); };
   addEventListener("keydown", (e) => {
-    if (!lb.hidden) return;
+    if (!lb.hidden || document.activeElement === track) return;
     const k = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
     if (k) { e.preventDefault(); step(k); }
     else if (e.key === "+" || e.key === "=") zoomAt(1.25, innerWidth / 2, innerHeight / 2);
@@ -146,13 +148,61 @@
   cv.addEventListener("click", (e) => { const el = document.elementFromPoint(e.clientX, e.clientY), a = el && el.closest(".ph"); e.preventDefault(); if (a && moved < 6) open(+a.dataset.i); });
   addEventListener("resize", () => { fitZ(); queue(); });
 
+  /* ---------- the colour bar: each photograph has a main colour (p.hue, or null for black-and-white) ---------- */
+  const track = $("#spec-track"), knob = $("#spec-knob"), spec = $("#spec");
+  const HUES = all.some((p) => "hue" in p);
+  const G0 = .075, H0 = .08;                 // the grey part of the bar, then the spectrum from red round to red
+  let pick = null;                           // null: everything; "bw"; or a hue in degrees
+  const near = (a, b) => { const d = Math.abs(a - b) % 360; return Math.min(d, 360 - d) <= 24; };
+  function matches(pi) { if (pick == null) return true; const h = all[pi].hue; return pick === "bw" ? h == null : h != null && near(h, pick); }
+  const posOf = (v) => (v === "bw" ? G0 / 2 : H0 + (v / 360) * (1 - H0));
+  function paint() {
+    const n = all.filter((_, i) => matches(i)).length;
+    $("#spec-n").textContent = pick == null ? `${NP} ${t(S.count)}` : `${n} / ${NP}${pick === "bw" ? " · " + t(S.bw) : ""}`;
+    spec.classList.toggle("on", pick != null);
+    if (pick != null) { knob.style.left = (posOf(pick) * 100).toFixed(2) + "%"; knob.style.setProperty("--k", pick === "bw" ? "#bdbdbd" : `hsl(${pick} 75% 55%)`); }
+    track.setAttribute("aria-valuenow", pick === "bw" ? 0 : pick == null ? "" : pick);
+    track.setAttribute("aria-valuetext", pick == null ? t(S.all) : pick === "bw" ? t(S.bw) : `${Math.round(pick)}°, ${n}`);
+  }
+  function choose(v) {
+    pick = v; paint();
+    world.querySelectorAll(".ph").forEach((a) => a.classList.toggle("dim", !matches(+a.dataset.i)));
+  }
+  const fromX = (x) => { const b = track.getBoundingClientRect(), f = Math.max(0, Math.min(1, (x - b.left) / b.width)); return f < (G0 + H0) / 2 ? "bw" : ((f - H0) / (1 - H0)) * 360; };
+  // after choosing, if none of those photographs is on screen, glide to the nearest one
+  function findOne() {
+    if (pick == null) return;
+    const W = innerWidth / Z, H = innerHeight / Z, cx = ox + W / 2, cy = oy + H / 2;
+    const hits = spots.filter((s) => matches(s.pi)); if (!hits.length) return;
+    if (hits.some((s) => s.x + s.w > ox && s.x < ox + W && s.y + s.h > oy + 60 / Z && s.y < oy + H - 90 / Z)) return;
+    const s = hits.reduce((a, b) => (Math.hypot(a.x - cx, a.y - cy) < Math.hypot(b.x - cx, b.y - cy) ? a : b));
+    const fx = ox, fy = oy, tx = s.x + s.w / 2 - W / 2, ty = s.y + s.h / 2 - H / 2, t0 = performance.now(); stop();
+    const run = (now) => { const k = Math.min(1, (now - t0) / 900), e = 1 - Math.pow(1 - k, 3); ox = fx + (tx - fx) * e; oy = fy + (ty - fy) * e; queue(); if (k < 1) glide = requestAnimationFrame(run); else glide = 0; };
+    glide = requestAnimationFrame(run);
+  }
+  if (HUES && NP) {
+    spec.hidden = false;
+    $("#spec-ticks").innerHTML = all.map((p) => `<i style="left:${(posOf(p.hue == null ? "bw" : p.hue) * 100).toFixed(2)}%;background:${p.tone || "#9a9a9a"}"></i>`).join("");
+    let sliding = false;
+    track.addEventListener("pointerdown", (e) => { sliding = true; track.setPointerCapture(e.pointerId); hideHint(); choose(fromX(e.clientX)); });
+    track.addEventListener("pointermove", (e) => { if (sliding) choose(fromX(e.clientX)); });
+    const end = () => { if (sliding) { sliding = false; findOne(); } };
+    track.addEventListener("pointerup", end); track.addEventListener("pointercancel", end);
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); const d = e.key === "ArrowRight" ? 1 : -1; choose(pick == null ? (d > 0 ? "bw" : 350) : pick === "bw" ? (d > 0 ? 0 : "bw") : pick + d * 15 < 0 ? "bw" : (pick + d * 15) % 360); findOne(); }
+      else if (e.key === "Escape") choose(null);
+    });
+    $("#spec-all").addEventListener("click", () => choose(null));
+  }
+
   /* ---------- page furniture ---------- */
   let hintOn = true;
   function hideHint() { if (hintOn) { hintOn = false; $("#hint").classList.add("off"); } }
   function recentre() { stop(); Z = 1; ox = -innerWidth / 2 + X0; oy = -innerHeight / 2 + Y0; queue(); }
   function furniture() {
     $("#title").innerHTML = `<p class="g-kicker mono">${esc(t(G.kicker))}</p><h1>${esc(t(G.title))}</h1><p>${esc(t(G.statement))}</p>`;
-    $("#hint").firstElementChild.textContent = NP ? t(S.hint) : t(S.soon);
+    $("#hint").firstElementChild.textContent = NP ? t(HUES ? S.hint2 : S.hint) : t(S.soon);
+    $("#spec-all").textContent = t(S.all); track.setAttribute("aria-label", t(S.spec)); paint();
     $("#count").textContent = NP ? `${NP} ${t(S.count)}` : "";
     $("#home").setAttribute("aria-label", t(S.home)); $("#home").title = t(S.home); $("#zin").title = t(S.zin); $("#zout").title = t(S.zout);
     document.querySelectorAll("[data-t]").forEach((el) => (el.textContent = t(N[el.dataset.t])));
@@ -164,24 +214,27 @@
   /* ---------- lightbox (same photographs, in a fixed order) ---------- */
   const lb = $("#lb"), img = $("#lb-img"), cap = $("#lb-cap"), cnt = $("#lb-count");
   let cur = 0, lastFocus = null;
+  const list = () => { const l = all.map((_, i) => i).filter(matches); return l.length ? l : all.map((_, i) => i); };
+  const step1 = (dir) => { const l = list(), k = l.indexOf(cur); show(l[((k < 0 ? 0 : k + dir) + l.length) % l.length]); };
   function show(i) {
     cur = (i + NP) % NP; const p = all[cur];
     img.style.animation = "none"; void img.offsetWidth; img.style.animation = "";
     img.src = p.file || p.small; img.alt = t(p.title);
     cap.innerHTML = `<b>${esc(t(p.title))}</b>${esc([p.place, p.year].filter(Boolean).join(" · "))}`;
-    cnt.textContent = `${String(cur + 1).padStart(2, "0")} / ${String(NP).padStart(2, "0")}`;
-    [cur + 1, cur - 1].forEach((k) => { const q = all[(k + NP) % NP]; if (q) new Image().src = q.file || q.small; });
+    const l = list(), k = l.indexOf(cur);
+    cnt.textContent = `${String(k + 1).padStart(2, "0")} / ${String(l.length).padStart(2, "0")}`;
+    [l[(k + 1) % l.length], l[(k - 1 + l.length) % l.length]].forEach((j) => { const q = all[j]; if (q) new Image().src = q.file || q.small; });
   }
   function open(i) { if (!NP) return; lastFocus = document.activeElement; lb.hidden = false; document.body.classList.add("lb-open"); show(i); $("#lb-close").focus(); }
   function close() { lb.hidden = true; document.body.classList.remove("lb-open"); img.src = ""; if (lastFocus) lastFocus.focus(); }
   $("#lb-close").addEventListener("click", close);
-  $("#lb-prev").addEventListener("click", () => show(cur - 1));
-  $("#lb-next").addEventListener("click", () => show(cur + 1));
+  $("#lb-prev").addEventListener("click", () => step1(-1));
+  $("#lb-next").addEventListener("click", () => step1(1));
   lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
-  addEventListener("keydown", (e) => { if (lb.hidden) return; if (e.key === "Escape") close(); else if (e.key === "ArrowLeft") show(cur - 1); else if (e.key === "ArrowRight") show(cur + 1); });
+  addEventListener("keydown", (e) => { if (lb.hidden) return; if (e.key === "Escape") close(); else if (e.key === "ArrowLeft") step1(-1); else if (e.key === "ArrowRight") step1(1); });
   let tx = null;
   lb.addEventListener("touchstart", (e) => { tx = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener("touchend", (e) => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1)); tx = null; }, { passive: true });
+  lb.addEventListener("touchend", (e) => { if (tx == null) return; const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) step1(dx < 0 ? 1 : -1); tx = null; }, { passive: true });
 
   $("#lang").addEventListener("click", () => { lang = lang === "zh" ? "en" : "zh"; try { localStorage.setItem("lang", lang); } catch (e) {} relang(); });
   $("#home").addEventListener("click", recentre);
