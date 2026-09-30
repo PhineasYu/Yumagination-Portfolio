@@ -45,16 +45,20 @@ window.PORTFOLIO = {
     { id: "award", en: "Award", zh: "获奖" },
     { id: "real-users", en: "Real users", zh: "真实用户" },
     { id: "built-with-ai", en: "Built with AI", zh: "用 AI 构建" },
-    { id: "automation", en: "Automation & Agents", zh: "自动化与 Agent" }
+    { id: "automation", en: "Automation & Agents", zh: "自动化与 Agent" },
+    { id: "data-viz", en: "Data visualisation", zh: "数据可视化" }
   ],
 
+  /* NOT RENDERED (hidden 2026-09-30). The "Smaller builds & experiments" section
+     is no longer shown; the data stays here so it can come back: add
+     ${moreBlock()} to home() in app.js after the work section. Hidden entries
+     are listed in docs/PARKING.md. Longevity moved to projects.js. */
   more: {
     title: { en: "Smaller builds & experiments", zh: "更小的作品与实验" },
     items: [
       { name: "Chronicool", year: "2026", note: { en: "A Rick & Morty habit tracker. The brief was literally 'improve the prompts first, then build'.", zh: "Rick & Morty 风格的习惯打卡。需求原文就是「先帮我改进提示词，再开始做」。" }, url: "https://chronicool-tracker.lovable.app" },
       { name: "Defense Countdown Clock", year: "2026", note: { en: "A minimal, precise 4-minute timer built for my own thesis defence. Space to start, R to reset.", zh: "为自己的论文答辩做的极简、精确 4 分钟倒计时。空格开始，R 重置。" }, url: "https://github.com/PhineasYu/defense-countdown-clock" },
       { name: "ADHD Stride", year: "2025", note: { en: "Early Lovable experiment: task steps as flows, focus timer, progress ring.", zh: "早期 Lovable 实验：把任务拆成步骤流，含专注计时和进度环。" }, url: "https://adhd-stride.lovable.app" },
-      { name: "Longevity visualisation", year: "2026", note: { en: "Hackathon team work on reversible whole-body cryopreservation, framed as a feasibility study. As the main designer I built a 3D body and a temperature dashboard in Spline, animating cooling, storage and rewarming for the big-screen presentation.", zh: "黑客松团队项目，题目是可逆的全人体冷冻保存，定位为可行性探讨。我是主要设计师，在 Spline 里做了 3D 人体和温度看板，为大屏演示做了降温、储存、复温三个阶段的动画。" }, verify: { en: "Team name, teammates, track and result unknown; add the final video to promote this to a full project.", zh: "团队名、队友、赛道和成绩未知；补上最终视频后可升级为主项目。" } },
       { name: "Personal Daily Grid", year: "2025", note: { en: "Early Lovable experiment: calendar, tasks and profile in one grid.", zh: "早期 Lovable 实验：把日历、任务和个人档案放进同一张网格。" }, url: "https://personal-daily-grid.lovable.app" }
     ]
   },

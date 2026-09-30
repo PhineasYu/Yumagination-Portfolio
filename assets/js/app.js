@@ -92,6 +92,7 @@
       "community-viewfinder": `<path class="g-line" d="M10 50V10h40M150 10h40v40M190 150v40h-40M50 190H10v-40"/><rect class="g-fill g-slide" x="48" y="54" width="70" height="56" rx="2"/>`,
       "notchbreak": `<rect class="g-thin" x="8" y="36" width="184" height="128" rx="12"/><rect class="g-ink" x="70" y="36" width="60" height="16" rx="6"/><circle class="g-fill g-blink" cx="100" cy="112" r="22"/>`,
       "revive-automation": [0, 1, 2, 3].map((i) => `<rect class="g-thin" x="10" y="${18 + i * 44}" width="30" height="30" rx="3"/><rect class="g-fill g-blink" style="animation-delay:${i * 0.6}s" x="16" y="${24 + i * 44}" width="18" height="18" rx="2"/><rect class="g-deep" x="56" y="${28 + i * 44}" width="${130 - i * 22}" height="10" rx="2"/>`).join(""),
+      "longevity-3d": `<path class="g-thin" d="M8 172H192"/><path class="g-line" d="M8 44C48 44 56 138 96 138H112C152 138 160 44 192 44"/><circle class="g-fill g-blink" cx="104" cy="138" r="12"/><circle class="g-ink" cx="8" cy="44" r="5"/><circle class="g-ink" cx="192" cy="44" r="5"/>`,
       "microhack": `<path class="g-thin" d="M40 150L100 50L160 150Z"/>` + [[40, 150], [100, 50], [160, 150]].map(([x, y], i) => `<circle class="${i === 1 ? "g-deep" : "g-fill"} g-blink" style="animation-delay:${i * 0.8}s" cx="${x}" cy="${y}" r="20"/>`).join("")
     };
     const inner = G[id] || `<circle class="g-fill g-drift" cx="80" cy="90" r="56"/><rect class="g-deep" x="110" y="100" width="70" height="70" rx="2"/>`;
@@ -167,8 +168,6 @@
       <p class="empty" hidden>${esc(s("empty"))}</p>
     </section>
 
-    ${moreBlock()}
-
     <section class="section" id="recognition">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
       <div class="awards">${D.awards.map((a) => `<div class="award rv"><span class="mono dim">${a.year}</span><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
@@ -198,14 +197,20 @@
   }
 
   function methodBlock() {
-    const M = D.method;
+    const M = D.method, last = M.steps.length - 1;
     return `
-    <section class="section" id="method">
-      <div class="sec-head rv"><h2 class="sec-title">${esc(t(M.title))}</h2></div>
-      <p class="lede-lg rv">${esc(t(M.lede))}</p>
-      <div class="steps">${M.steps.map((x) => `<div class="step rv"><span class="mono n">${x.n}</span><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div>`).join("")}</div>
-      <div class="principles">${M.principles.map((x) => `<div class="principle rv"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
-      <p class="disclosure rv">${esc(t(M.disclosure))}</p>
+    <section class="section method" id="method">
+      <div class="m-side">
+        <div class="m-stick">
+          <h2 class="sec-title rv">${esc(t(M.title))}</h2>
+          <p class="lede-lg rv">${esc(t(M.lede))}</p>
+        </div>
+      </div>
+      <div class="m-main">
+        <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
+        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
+        <p class="disclosure rv">${esc(t(M.disclosure))}</p>
+      </div>
     </section>`;
   }
 

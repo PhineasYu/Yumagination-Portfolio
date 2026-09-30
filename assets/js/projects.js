@@ -126,11 +126,11 @@
       links: [GH("https://github.com/PhineasYu/TeamDex")],
       shape: "tall",
       tile: { video: "teamdex", poster: "teamdex-poster", phone: true },
-      hero: V("teamdex", { frame: "phone", bg: "#dfe9e2", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
+      hero: V("teamdex", { frame: "phone", bg: "#e8f7f5", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
       sections: [
         { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
           p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
-          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", bg: "#dfe9e2" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
+          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", bg: "#e8f7f5" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
         { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
           p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
         { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
@@ -515,6 +515,38 @@
         { h: L("Stretch — Workflow and evaluation", "进阶 — 工作流与评估"),
           p: L(["The stretch goals added the Workflow and an evaluation: a set of five questions run against the agents.", "The point for me was to learn how the pieces fit together: data in Fabric, agents in Foundry, hosting on Azure, and a person approving before any order goes out."], ["进阶任务加上了 Workflow 和评估：用 5 道题测试这些 agent。", "对我来说，重点是弄清这些部分怎么拼在一起：数据在 Fabric，agent 在 Foundry，运行在 Azure 上，以及在任何订单发出前由人来审批。"]) }
       ]
-    }
+    },
+
+    /* ------------------------------------------------------------ 19 */
+    /* Video slot: put the 3D video in assets/media/longevity/ as longevity.mp4
+       (optional poster: longevity-poster.jpg), then change the one value below
+       from null to "longevity/longevity". Card and case page switch to the video. */
+    (() => {
+      const LONGEVITY_VIDEO = null;
+      return {
+      id: "longevity-3d", num: "19", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "data-viz"],
+      title: "Longevity 3D visualisation", meta: "Hackathon team project · Sep 2026",
+      cap: L("A 3D body that cools, rests and rewarms, animated for a big-screen presentation", "会降温、储存、复温的 3D 人体，为大屏演示而做的动画"),
+      h1: L("A 3D body that cools, rests and rewarms, made for a big-screen presentation", "会降温、储存、复温的 3D 人体，为大屏演示而做"),
+      lead: L("Our team explored reversible whole-body cryopreservation as a feasibility question. I was the main designer: a 3D body and a temperature dashboard, animated through three states.", "我们团队把可逆的全人体冷冻保存当作一个可行性问题来探讨。我是主要设计师：做了 3D 人体和温度看板，并让它经历三个状态的动画。"),
+      role: L("Main designer: 3D models, animation and dashboard in Spline", "主要设计师：在 Spline 里做 3D 模型、动画和看板"),
+      status: L("Animation delivered to the team for the presentation", "动画已交付给团队，用于现场演示"),
+      stack: ["Spline", "3D animation", "Dashboard"],
+      links: [],
+      verify: L("Team name, teammates, track and result are unknown. When the final video is ready, put it in assets/media/longevity/ and set LONGEVITY_VIDEO at the top of this entry.", "团队名、队友、赛道和成绩未知。最终视频备好后，放进 assets/media/longevity/，并改本条目顶部的 LONGEVITY_VIDEO。"),
+      shape: "wide",
+      tile: LONGEVITY_VIDEO
+        ? { video: LONGEVITY_VIDEO, poster: LONGEVITY_VIDEO + "-poster" }
+        : { text: L("Cool. Store. Rewarm.", "降温、储存、复温"), sub: L("3D animation · Spline", "3D 动画 · Spline") },
+      hero: LONGEVITY_VIDEO ? V(LONGEVITY_VIDEO, { cap: L("The three-state animation made for the big-screen presentation.", "为大屏演示做的三态动画。") }) : undefined,
+      sections: [
+        { h: L("Overview — A question framed as a feasibility study", "概述 — 当作可行性探讨的题目"),
+          p: L(["The team's topic was reversible whole-body cryopreservation. It was framed as a research-style feasibility exploration, and the project does not claim it is possible today.", "In Spline I built a 3D body and organ models, then animated three states next to a temperature dashboard."], ["团队的题目是可逆的全人体冷冻保存。它被定位为研究型的可行性探讨，项目并不声称这在今天已经可行。", "我在 Spline 里做了 3D 人体和器官模型，并在温度看板旁边，把三个状态做成动画。"]),
+          media: { type: "steps", items: [["01", L("Cooling", "降温")], ["02", L("Storage", "储存")], ["03", L("Rewarming", "复温")]] } },
+        { h: L("Made for the big screen — Layout and timing", "为大屏而做 — 版面与节奏"),
+          p: L(["I kept adjusting the layout for the big-screen presentation and compressed the simulated time to 35 seconds.", "At the end I packaged the code, models, video, HTML and temperature data and handed them to my teammates."], ["我反复调整版面，让它适合大屏演示，并把模拟的时间压缩到 35 秒。", "最后我把代码、模型、视频、HTML 和温度数据打包，交给队友。"]) }
+      ]
+      };
+    })()
   ];
 })();
