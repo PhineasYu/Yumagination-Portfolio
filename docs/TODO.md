@@ -132,3 +132,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-01 · 第十批 · Beside 换成更新后的版本（录屏取自仓库最新代码本地运行；线上链接要你在 Lovable 重新发布才会更新）；Kodiak：封面铺满、AI 工作流提前、设计系统维护、最终版进度条、短内容改左右分栏；Work 卡片逐张落下；Let Me Die 笑哭转向
 - 2026-10-01 · 第十一批 · Beside 用更新后的应用重新录屏；Award 标签改柠檬黄；About 去掉语言行；Gallery 画布支持缩放（双指捏合/Ctrl+滚轮/+−键/双击）、文案改为 Enjoy；照片放 assets/gallery/originals/all/
 - 2026-10-01 · 第十二批 · Kodiak Hub、Revive 卡片加淡紫色「💼 Internship」标签；Beside 卡片视频按 GitHub 最新代码重新录制（滚动、她那一侧、+ 菜单发 emoji、I have time 滚轮）
+- 2026-10-01 · 第十三批 · Gallery 放入 107 张照片（已去除 GPS / 相机信息；相机文件名不作标题）；首页像素窗随之显示真实照片

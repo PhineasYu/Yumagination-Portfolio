@@ -24,6 +24,7 @@ mkdirSync(FULL, { recursive: true }); mkdirSync(THUMB, { recursive: true }); mkd
 
 const slug = (s) => s.toLowerCase().normalize("NFKD").replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "") || "photo";
 const readJson = (p, d) => { try { return JSON.parse(readFileSync(p, "utf8")); } catch { return d; } };
+const CAMERA = /^(IMG|DSC|DSCF|DSCN|PXL|_MG|P\d{3}|KAPI_FUJI)[_ -]?\w*\d+/i;   // camera file names (IMG_5368) get no title
 const pretty = (name) => ({ en: name.replace(/^\d+[-_ ]*/, "").replace(/[-_]+/g, " ").trim(), zh: name.replace(/^\d+[-_ ]*/, "").replace(/[-_]+/g, " ").trim() });
 
 const series = [];
@@ -39,7 +40,7 @@ for (const room of readdirSync(SRC).filter((d) => statSync(join(SRC, d)).isDirec
     await img.clone().resize({ width: 1000, height: 1000, fit: "inside", withoutEnlargement: true }).jpeg({ quality: 78, mozjpeg: true }).toFile(join(THUMB, id + ".jpg"));
     await img.clone().resize({ width: 640, height: 640, fit: "inside", withoutEnlargement: true }).jpeg({ quality: 74, mozjpeg: true }).toFile(join(SMALL, id + ".jpg"));
     const c = caps[f] || {};
-    photos.push({ file: `assets/gallery/full/${id}.jpg`, thumb: `assets/gallery/thumbs/${id}.jpg`, small: `assets/gallery/small/${id}.jpg`, w: info.width, h: info.height, title: c.title || pretty(basename(f, extname(f))), place: c.place || "", year: c.year || "" });
+    photos.push({ file: `assets/gallery/full/${id}.jpg`, thumb: `assets/gallery/thumbs/${id}.jpg`, small: `assets/gallery/small/${id}.jpg`, w: info.width, h: info.height, title: c.title || (CAMERA.test(f) ? { en: "", zh: "" } : pretty(basename(f, extname(f)))), place: c.place || "", year: c.year || "" });
     console.log("  +", room, f);
   }
   if (photos.length) series.push({ id: slug(room), title: meta.title || pretty(room), note: meta.note || { en: "", zh: "" }, photos });
