@@ -7,7 +7,7 @@ Logos are real files from each organisation or a public logo archive, never redr
 | File | Source | Note |
 |---|---|---|
 | unilever.svg | unilever.com `favicon.svg` | the "U" emblem, brand blue #1F36C7 |
-| kth.svg | Wikimedia Commons, "KTH Logo.svg" | |
+| kth.png | KTH's official emblem (crown and oak wreath), blue version, supplied by Yunfei | replaces the "kth" wordmark from Wikimedia I picked first; black and white versions exist too |
 | kodiak.svg | kodiakhub.com header logo | published in cream only, re-coloured to #141414 |
 | revive.svg | reviveretail.se header logo | assembled from the vector parts on their site |
 | voi.svg | Wikimedia Commons, "Voi Technology Logo 2018.svg" | 2018 version, check it is still current |

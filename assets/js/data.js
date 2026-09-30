@@ -35,7 +35,7 @@ window.PORTFOLIO = {
      Kodiak Hub, Stone Leap and Bitmagic publish light-on-dark versions only, so theirs are re-coloured to one dark tone. */
   logos: {
     unilever:  { name: "Unilever",   file: "unilever.svg",     h: 40 },
-    kth:       { name: "KTH Royal Institute of Technology", file: "kth.svg", h: 28 },
+    kth:       { name: "KTH Royal Institute of Technology", file: "kth.png", h: 52 },
     kodiak:    { name: "Kodiak Hub", file: "kodiak.svg",       h: 26 },
     revive:    { name: "Revive Retail", file: "revive.svg",    h: 26 },
     voi:       { name: "Voi",        file: "voi.svg",          h: 26 },
