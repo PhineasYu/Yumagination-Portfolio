@@ -9,7 +9,7 @@
  *   npm i -D sharp      (once)
  *   node scripts/add-photos.mjs
  *
- * Writes assets/gallery/full/ (2000px) + assets/gallery/thumbs/ (1000px) and regenerates
+ * Writes assets/gallery/full/ (2000px), thumbs/ (1000px) and small/ (640px, used on the canvas) and regenerates
  * assets/js/gallery-data.js (keeps your hand-edited kicker/title/statement).
  * Photos sort by file name inside a room; rooms sort by folder name (prefix with 01-, 02- to order).
  * iPhone HEIC files: export as JPG first. Strips GPS/EXIF: only the resized copies are published.
@@ -18,9 +18,9 @@ import { readdirSync, statSync, mkdirSync, readFileSync, writeFileSync, existsSy
 import { join, extname, basename } from "node:path";
 import sharp from "sharp";
 
-const ROOT = "assets/gallery", SRC = join(ROOT, "originals"), FULL = join(ROOT, "full"), THUMB = join(ROOT, "thumbs");
+const ROOT = "assets/gallery", SRC = join(ROOT, "originals"), FULL = join(ROOT, "full"), THUMB = join(ROOT, "thumbs"), SMALL = join(ROOT, "small");
 if (!existsSync(SRC)) { console.error(`Put photos in ${SRC}/<room-name>/ first.`); process.exit(1); }
-mkdirSync(FULL, { recursive: true }); mkdirSync(THUMB, { recursive: true });
+mkdirSync(FULL, { recursive: true }); mkdirSync(THUMB, { recursive: true }); mkdirSync(SMALL, { recursive: true });
 
 const slug = (s) => s.toLowerCase().normalize("NFKD").replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "") || "photo";
 const readJson = (p, d) => { try { return JSON.parse(readFileSync(p, "utf8")); } catch { return d; } };
@@ -37,8 +37,9 @@ for (const room of readdirSync(SRC).filter((d) => statSync(join(SRC, d)).isDirec
     const img = sharp(join(dir, f)).rotate();           // honour EXIF orientation
     const info = await img.clone().resize({ width: 2000, height: 2000, fit: "inside", withoutEnlargement: true }).jpeg({ quality: 82, mozjpeg: true }).toFile(join(FULL, id + ".jpg"));
     await img.clone().resize({ width: 1000, height: 1000, fit: "inside", withoutEnlargement: true }).jpeg({ quality: 78, mozjpeg: true }).toFile(join(THUMB, id + ".jpg"));
+    await img.clone().resize({ width: 640, height: 640, fit: "inside", withoutEnlargement: true }).jpeg({ quality: 74, mozjpeg: true }).toFile(join(SMALL, id + ".jpg"));
     const c = caps[f] || {};
-    photos.push({ file: `assets/gallery/full/${id}.jpg`, thumb: `assets/gallery/thumbs/${id}.jpg`, w: info.width, h: info.height, title: c.title || pretty(basename(f, extname(f))), place: c.place || "", year: c.year || "" });
+    photos.push({ file: `assets/gallery/full/${id}.jpg`, thumb: `assets/gallery/thumbs/${id}.jpg`, small: `assets/gallery/small/${id}.jpg`, w: info.width, h: info.height, title: c.title || pretty(basename(f, extname(f))), place: c.place || "", year: c.year || "" });
     console.log("  +", room, f);
   }
   if (photos.length) series.push({ id: slug(room), title: meta.title || pretty(room), note: meta.note || { en: "", zh: "" }, photos });

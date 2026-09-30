@@ -56,7 +56,36 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "dossier", orgs: ["accel"], num: "02", year: "2026", zones: ["ai", "ux"], tags: ["hackathon", "award", "built-with-ai"],
+      id: "teamdex", orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
+      title: "Teamdex", meta: "Teamdex · Sep 2026",
+      cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
+      h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
+      lead: L("Companies design the 'learn the material' half of onboarding and leave 'learn the people' to luck. Teamdex designs the second half.", "公司把入职的「学材料」一半设计得很完整，「学人」一半全靠运气。Teamdex 设计的是后一半。"),
+      role: L("Service design, product spec, QA", "服务设计、产品 spec、验收"),
+      status: L("1st place · one-day hackathon build (Uniplay)", "一等奖 · 一天完成的黑客松作品（Uniplay）"),
+      stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
+      links: [GH("https://github.com/PhineasYu/TeamDex")],
+      shape: "tall",
+      tile: { sb: "#eef5f1", video: "teamdex", poster: "teamdex-poster", phone: true },
+      hero: V("teamdex", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
+      sections: [
+        { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
+          p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
+          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
+        { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
+          p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
+        { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
+          p: L(["No leaderboard: it would create social pressure and defeat the point. No chat: the goal is a real conversation, not moving it into the app.", "QR instead of NFC, because iPhone web can't do it; NFC badges live in the vision. And no AI-generated content in v1, so the time went into the experience."], ["不做排行榜：会制造社交压力，违背初衷。不做聊天：目标是促成真实对话，而不是把对话搬进 App。", "用二维码而不是 NFC，因为 iPhone 网页做不到；NFC 工牌放进愿景。第一版也不做 AI 生成内容，时间留给体验打磨。"]),
+          media: { type: "steps", items: [["✕", L("Leaderboard", "排行榜")], ["✕", L("In-app chat", "应用内聊天")], ["✕", L("Real accounts & SSO", "真实账号与 SSO")], ["✕", L("Native iOS / Android", "原生 iOS / Android")], ["✕", L("AI-generated content", "AI 生成内容")]] }, cap: L("The PRD's non-goals table.", "PRD 的「非目标」表。") },
+        { h: L("Spec pack — Five documents before the first line of code", "规格包 — 动第一行代码之前的五份文档"),
+          p: L(["PRD, service design, tech spec, design system, and a build plan with paste-ready prompts, plus a CLAUDE.md of working rules: local-first data adapter, always deployable at the end of each phase, no P1 before P0 is done.", "Claude Code then built against it, and a 51-second pitch film covers the story for the judges."], ["PRD、服务设计、技术方案、设计系统，以及带可直接粘贴指令的开发计划，再加一份 CLAUDE.md 工作守则：本地优先的数据适配层、每个阶段结束都保持可部署、P0 没完成前不做 P1。", "然后由 Claude Code 依此开发；另外做了一支 51 秒的路演短片向评委讲故事。"]),
+          media: { type: "steps", items: [["01", L("PRD", "PRD")], ["02", L("Service design", "服务设计")], ["03", L("Tech spec", "技术方案")], ["04", L("Design system", "设计系统")], ["05", L("Build plan", "开发计划")], ["+", L("CLAUDE.md rules", "CLAUDE.md 守则")]] }, cap: L("The doc pack in the repository's docs folder.", "仓库 docs 目录里的文档包。") }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 03 */
+    {
+      id: "dossier", orgs: ["accel"], num: "03", year: "2026", zones: ["ai", "ux"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Dossier", meta: "Dossier · Sep 2026",
       cap: L("A voice-first archive of a child's growing up", "用语音记录孩子成长的档案"),
       h1: L("Turning a parent's 60-second voice memo into a child's timeline and profile", "把家长 60 秒的语音，变成孩子的时间线和档案"),
@@ -99,9 +128,43 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 03 */
+    /* ------------------------------------------------------------ 04 */
     {
-      id: "collaboration-canvas", orgs: ["kth"], num: "03", year: "2026", when: "MSc thesis · Feb–Jun 2026", zones: ["service", "ux"], tags: ["built-with-ai"],
+      id: "disco-fever", orgs: ["bitmagic"], num: "04", year: "2026", when: "Sep 2026", zones: ["games", "build"], tags: ["hackathon", "award", "built-with-ai"],
+      title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
+      cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
+      h1: L("A one-minute disco rhythm game where every correct arrow spreads the dancing further across the floor", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
+      lead: L("Hit the right arrows and the dancers spread out from the centre of the floor. Built at a game hackathon with the BitMagic GDK; it took 2nd place and is live.", "按对箭头，跳舞的人就从舞池中心向外扩散。在游戏黑客松上用 BitMagic GDK 做出来，获二等奖，已上线。"),
+      role: L("Idea and visual direction; built with Claude Code", "想法与视觉方向；用 Claude Code 开发"),
+      status: L("2nd place · live", "二等奖 · 已上线"),
+      stack: ["BitMagic GDK", "Claude Code"],
+      links: [{ label: L("Play it", "在线试玩"), url: "https://bitmagic.ai/play/disco-fever/" }],
+      verify: L("Official hackathon name; teammates.", "黑客松正式名称；队友。"),
+      shape: "tall",
+      tile: { video: "disco-fever", poster: "disco-fever-poster" },
+      hero: V("disco-desktop", { frame: "browser", tag: "rec", cap: L("The desktop version I built at the hackathon. One round, cut down to a 21-second loop: the floor fills from 1 to 61 dancers, then the mirror ball goes KA-BLING. Recorded from the live game; the arrows were hit by a script, not by hand.", "黑客松上做的桌面版。一局游戏剪成 21 秒的循环：舞池从 1 个舞者填满到 61 个，然后灯球「叮」地亮起。录自正在运行的游戏；箭头是脚本按的，不是手按的。") }),
+      sections: [
+        { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
+          p: L(["One dancer, five lanes of arrows, and a dance floor. Hit the arrows on the beat and the groove spreads out from the centre until the whole 70s disco hall is dancing, then the mirror ball goes KA-BLING.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一个舞者、五条箭头轨道、一个舞池。踩着节拍按对箭头，律动就从中心向外扩散，直到整个 70 年代的迪斯科舞厅都在跳舞，然后灯球「叮」地一声亮起来。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]),
+          media: { type: "stats", items: [["61", L("dancers to wake up", "个舞者等你唤醒")], ["5", L("arrow lanes", "条箭头轨道")], ["1 min", L("per round", "每局")], ["11", L("prompts to build", "条提示词做成")]] } },
+        { h: L("How it plays — From a dark floor to a full one", "玩法 — 从黑暗的舞池到满场"),
+          p: L(["The round starts with one dancer and a floor full of dark silhouettes, 1 of 61 on the floor. Each correct arrow wakes more of them up.", "A minute later the silhouettes are lit in neon colours, the combo counter is at 44, and \u201cPerfect\u201d floats over the lanes."], ["一局开始时，舞池里只有一个舞者，其余都是暗色剪影，「61 个里的第 1 个」。每按对一个箭头，就有更多剪影被唤醒。", "一分钟后，剪影都变成了霓虹色，连击数到了 44，轨道上方飘着「Perfect」。"]),
+          media: IMG("assets/shots/disco-start.jpg", "Disco Fever at the start: one dancer, 1 of 61, on a dark floor", { narrow: true }), cap: L("The start of a round: one dancer lit, 1 of 61.", "一局的开始：只有一个舞者亮着，61 个里的第 1 个。") },
+        { h: L("A minute later — Neon and a 44 combo", "一分钟后 — 霓虹和 44 连击"),
+          p: L(["This is my own round on a phone: 54 of 61 dancers are up, the combo counter reads 44, and the floor has switched from dark to neon."], ["这是我自己在手机上玩的一局：61 个舞者里已经有 54 个在跳舞，连击数 44，舞池从暗色变成了霓虹。"]),
+          media: IMG("assets/shots/disco-play.jpg", "Disco Fever mid-game: 54 of 61 dancers on the floor, a 44 combo", { narrow: true }), cap: L("Mid-game on a phone. Screenshot.", "手机上的游戏中途。截图。") },
+        { h: L("On Bitmagic — Built with 11 prompts", "在 Bitmagic 上 — 用 11 条提示词做成"),
+          p: L(["The game lives on Bitmagic's site, tagged Arcade and Music Game and marked \u201cMade with Bitmagic GDK\u201d. The page credits the build to 11 prompts."], ["游戏发布在 Bitmagic 的网站上，标签是 Arcade 和 Music Game，并标明「Made with Bitmagic GDK」。页面上写着它由 11 条提示词做成。"]),
+          media: IMG("assets/shots/disco-page.jpg", "Disco Fever on the Bitmagic game page", { narrow: true }), cap: L("The game page on Bitmagic, with the Play button.", "Bitmagic 上的游戏页面，右下角是 Play 按钮。") },
+        { h: L("After the event — Desktop first, then a phone version at home", "赛后 — 先做桌面版，回家再做手机版"),
+          p: L(["At the hackathon I built the desktop version. Back home I adapted it for mobile as a separate piece of work. I treat that as part of the design, not a resize: get the core loop right on the big screen first, then rethink it for a portrait screen and thumbs.", "The agent had one rule for the phone work: the web version must not change. Below is the phone version, played and recorded the same way."], ["黑客松上我做的是桌面版。回家后，我把它单独适配成了手机版。我把这件事当作设计的一部分，而不是缩放：先在大屏上把核心玩法做对，再为竖屏和拇指重新思考。", "手机版的工作里，给 AI 的规则只有一条：网页版不能受影响。下面是手机版，用同样的方式玩并录下来。"]),
+          media: V("disco-fever", { frame: "phone", tag: "rec", cap: L("The phone version: the same round, in portrait.", "手机版：同一局，竖屏。") }) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 05 */
+    {
+      id: "collaboration-canvas", orgs: ["kth"], num: "05", year: "2026", when: "MSc thesis · Feb–Jun 2026", zones: ["service", "ux"], tags: ["built-with-ai"],
       title: "Collaboration Canvas", meta: "KTH thesis · 2026",
       cap: L("Why student–industry collaborations break, and a canvas to hold them", "学生—企业合作为什么会散架，以及一张让它们不散的画布"),
       h1: L("Why student–industry–university collaborations break, and a shared canvas that holds them together", "学生—企业—学校的合作为什么会散架，以及一张让它们不散的共享画布"),
@@ -161,72 +224,41 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 04 */
-    {
-      id: "teamdex", orgs: ["uniplay"], num: "04", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
-      title: "Teamdex", meta: "Teamdex · Sep 2026",
-      cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
-      h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
-      lead: L("Companies design the 'learn the material' half of onboarding and leave 'learn the people' to luck. Teamdex designs the second half.", "公司把入职的「学材料」一半设计得很完整，「学人」一半全靠运气。Teamdex 设计的是后一半。"),
-      role: L("Service design, product spec, QA", "服务设计、产品 spec、验收"),
-      status: L("1st place · one-day hackathon build (Uniplay)", "一等奖 · 一天完成的黑客松作品（Uniplay）"),
-      stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
-      links: [GH("https://github.com/PhineasYu/TeamDex")],
-      shape: "tall",
-      tile: { sb: "#eef5f1", video: "teamdex", poster: "teamdex-poster", phone: true },
-      hero: V("teamdex", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
-      sections: [
-        { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
-          p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
-          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
-        { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
-          p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
-        { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
-          p: L(["No leaderboard: it would create social pressure and defeat the point. No chat: the goal is a real conversation, not moving it into the app.", "QR instead of NFC, because iPhone web can't do it; NFC badges live in the vision. And no AI-generated content in v1, so the time went into the experience."], ["不做排行榜：会制造社交压力，违背初衷。不做聊天：目标是促成真实对话，而不是把对话搬进 App。", "用二维码而不是 NFC，因为 iPhone 网页做不到；NFC 工牌放进愿景。第一版也不做 AI 生成内容，时间留给体验打磨。"]),
-          media: { type: "steps", items: [["✕", L("Leaderboard", "排行榜")], ["✕", L("In-app chat", "应用内聊天")], ["✕", L("Real accounts & SSO", "真实账号与 SSO")], ["✕", L("Native iOS / Android", "原生 iOS / Android")], ["✕", L("AI-generated content", "AI 生成内容")]] }, cap: L("The PRD's non-goals table.", "PRD 的「非目标」表。") },
-        { h: L("Spec pack — Five documents before the first line of code", "规格包 — 动第一行代码之前的五份文档"),
-          p: L(["PRD, service design, tech spec, design system, and a build plan with paste-ready prompts, plus a CLAUDE.md of working rules: local-first data adapter, always deployable at the end of each phase, no P1 before P0 is done.", "Claude Code then built against it, and a 51-second pitch film covers the story for the judges."], ["PRD、服务设计、技术方案、设计系统，以及带可直接粘贴指令的开发计划，再加一份 CLAUDE.md 工作守则：本地优先的数据适配层、每个阶段结束都保持可部署、P0 没完成前不做 P1。", "然后由 Claude Code 依此开发；另外做了一支 51 秒的路演短片向评委讲故事。"]),
-          media: { type: "steps", items: [["01", L("PRD", "PRD")], ["02", L("Service design", "服务设计")], ["03", L("Tech spec", "技术方案")], ["04", L("Design system", "设计系统")], ["05", L("Build plan", "开发计划")], ["+", L("CLAUDE.md rules", "CLAUDE.md 守则")]] }, cap: L("The doc pack in the repository's docs folder.", "仓库 docs 目录里的文档包。") }
-      ]
-    },
-
-    /* ------------------------------------------------------------ 05 */
-    {
-      id: "disco-fever", orgs: ["bitmagic"], num: "05", year: "2026", when: "Sep 2026", zones: ["games", "build"], tags: ["hackathon", "award", "built-with-ai"],
-      title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
-      cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
-      h1: L("A one-minute disco rhythm game where every correct arrow spreads the dancing further across the floor", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
-      lead: L("Hit the right arrows and the dancers spread out from the centre of the floor. Built at a game hackathon with the BitMagic GDK; it took 2nd place and is live.", "按对箭头，跳舞的人就从舞池中心向外扩散。在游戏黑客松上用 BitMagic GDK 做出来，获二等奖，已上线。"),
-      role: L("Idea and visual direction; built with Claude Code", "想法与视觉方向；用 Claude Code 开发"),
-      status: L("2nd place · live", "二等奖 · 已上线"),
-      stack: ["BitMagic GDK", "Claude Code"],
-      links: [{ label: L("Play it", "在线试玩"), url: "https://bitmagic.ai/play/disco-fever/" }],
-      verify: L("Official hackathon name; teammates.", "黑客松正式名称；队友。"),
-      shape: "tall",
-      tile: { video: "disco-fever", poster: "disco-fever-poster" },
-      hero: V("disco-desktop", { frame: "browser", tag: "rec", cap: L("The desktop version I built at the hackathon. One round, cut down to a 21-second loop: the floor fills from 1 to 61 dancers, then the mirror ball goes KA-BLING. Recorded from the live game; the arrows were hit by a script, not by hand.", "黑客松上做的桌面版。一局游戏剪成 21 秒的循环：舞池从 1 个舞者填满到 61 个，然后灯球「叮」地亮起。录自正在运行的游戏；箭头是脚本按的，不是手按的。") }),
-      sections: [
-        { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
-          p: L(["One dancer, five lanes of arrows, and a dance floor. Hit the arrows on the beat and the groove spreads out from the centre until the whole 70s disco hall is dancing, then the mirror ball goes KA-BLING.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一个舞者、五条箭头轨道、一个舞池。踩着节拍按对箭头，律动就从中心向外扩散，直到整个 70 年代的迪斯科舞厅都在跳舞，然后灯球「叮」地一声亮起来。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]),
-          media: { type: "stats", items: [["61", L("dancers to wake up", "个舞者等你唤醒")], ["5", L("arrow lanes", "条箭头轨道")], ["1 min", L("per round", "每局")], ["11", L("prompts to build", "条提示词做成")]] } },
-        { h: L("How it plays — From a dark floor to a full one", "玩法 — 从黑暗的舞池到满场"),
-          p: L(["The round starts with one dancer and a floor full of dark silhouettes, 1 of 61 on the floor. Each correct arrow wakes more of them up.", "A minute later the silhouettes are lit in neon colours, the combo counter is at 44, and \u201cPerfect\u201d floats over the lanes."], ["一局开始时，舞池里只有一个舞者，其余都是暗色剪影，「61 个里的第 1 个」。每按对一个箭头，就有更多剪影被唤醒。", "一分钟后，剪影都变成了霓虹色，连击数到了 44，轨道上方飘着「Perfect」。"]),
-          media: IMG("assets/shots/disco-start.jpg", "Disco Fever at the start: one dancer, 1 of 61, on a dark floor", { narrow: true }), cap: L("The start of a round: one dancer lit, 1 of 61.", "一局的开始：只有一个舞者亮着，61 个里的第 1 个。") },
-        { h: L("A minute later — Neon and a 44 combo", "一分钟后 — 霓虹和 44 连击"),
-          p: L(["This is my own round on a phone: 54 of 61 dancers are up, the combo counter reads 44, and the floor has switched from dark to neon."], ["这是我自己在手机上玩的一局：61 个舞者里已经有 54 个在跳舞，连击数 44，舞池从暗色变成了霓虹。"]),
-          media: IMG("assets/shots/disco-play.jpg", "Disco Fever mid-game: 54 of 61 dancers on the floor, a 44 combo", { narrow: true }), cap: L("Mid-game on a phone. Screenshot.", "手机上的游戏中途。截图。") },
-        { h: L("On Bitmagic — Built with 11 prompts", "在 Bitmagic 上 — 用 11 条提示词做成"),
-          p: L(["The game lives on Bitmagic's site, tagged Arcade and Music Game and marked \u201cMade with Bitmagic GDK\u201d. The page credits the build to 11 prompts."], ["游戏发布在 Bitmagic 的网站上，标签是 Arcade 和 Music Game，并标明「Made with Bitmagic GDK」。页面上写着它由 11 条提示词做成。"]),
-          media: IMG("assets/shots/disco-page.jpg", "Disco Fever on the Bitmagic game page", { narrow: true }), cap: L("The game page on Bitmagic, with the Play button.", "Bitmagic 上的游戏页面，右下角是 Play 按钮。") },
-        { h: L("After the event — Desktop first, then a phone version at home", "赛后 — 先做桌面版，回家再做手机版"),
-          p: L(["At the hackathon I built the desktop version. Back home I adapted it for mobile as a separate piece of work. I treat that as part of the design, not a resize: get the core loop right on the big screen first, then rethink it for a portrait screen and thumbs.", "The agent had one rule for the phone work: the web version must not change. Below is the phone version, played and recorded the same way."], ["黑客松上我做的是桌面版。回家后，我把它单独适配成了手机版。我把这件事当作设计的一部分，而不是缩放：先在大屏上把核心玩法做对，再为竖屏和拇指重新思考。", "手机版的工作里，给 AI 的规则只有一条：网页版不能受影响。下面是手机版，用同样的方式玩并录下来。"]),
-          media: V("disco-fever", { frame: "phone", tag: "rec", cap: L("The phone version: the same round, in portrait.", "手机版：同一局，竖屏。") }) }
-      ]
-    },
-
     /* ------------------------------------------------------------ 06 */
     {
-      id: "kodiak-hub", orgs: ["kodiak"], num: "06", year: "2025", when: "Jun–Sep 2025", zones: ["ux", "ai"], tags: ["built-with-ai"],
+      id: "sushi-jerash", num: "06", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
+      title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
+      cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
+      h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
+      lead: L("The first sushi shop in Jerash, Jordan took orders by phone. This is the site, the bot and the admin that replaced that, live in production.", "约旦杰拉什第一家寿司店原来靠电话接单。这是取代它的网站、机器人和后台，已在生产环境上线。"),
+      role: L("Spec, direction, Supabase, Telegram bot, deploy, QA", "spec、指挥、Supabase、Telegram 机器人、部署、验收"),
+      status: L("Live in production", "已上线"),
+      stack: ["Next.js 15", "TypeScript", "Tailwind (RTL)", "Supabase", "Zustand", "Telegram Bot API", "Netlify"],
+      links: [{ label: L("Live site", "线上网站"), url: "https://sushi-jerash.netlify.app/menu" }],
+      verify: L("The live site is Arabic only, so the recording carries English captions. Add a Telegram message and an admin screenshot if the owner allows it. Repo is private. Bilingual (English/Chinese) work is only in the specs, not the site: confirm.", "线上网站只有阿拉伯语，所以录屏加了英文字幕。老板同意的话，补一张 Telegram 通知和后台的截图。仓库为私有。双语（中英）只体现在规格文档里、不在网站里：请确认。"),
+      shape: "tall",
+      tile: { video: "sushi-jerash", poster: "sushi-jerash-poster", sb: "#0d0d0d" },
+      hero: V("sushi-jerash", { frame: "phone", sb: "#0d0d0d", tag: "rec", cap: L("Recorded from the live site on a phone: menu, cart, checkout, delivery fee by area. The site is Arabic only (right to left), so the captions are mine. I stopped before submitting, so no real order was sent.", "在手机上录自线上网站：菜单、购物车、结账、按区域计费的运费。网站只有阿拉伯语（从右到左），所以字幕是我加的。我在提交之前停下，没有发出真实订单。") }),
+      sections: [
+        { h: L("Overview — Arabic first, cash on delivery, no ops burden", "概述 — 阿拉伯语优先、货到付款、没有运维负担"),
+          p: L(["The owner needed something manageable from a phone. So: Arabic-only right-to-left, cash on delivery, and the owner confirms every order by phone before it counts.", "I translated those constraints into a product spec, went through two versions of it, and directed an AI coding agent to build it."], ["老板需要一个能用手机管理的东西。所以：纯阿拉伯语、从右到左、货到付款，每一单都由老板电话确认后才算数。", "我把这些约束翻译成产品 spec，迭代了两版，再指挥 AI 编程助手实现。"]),
+          media: { type: "stats", items: [["~2", L("days to live", "天上线")], ["19", L("delivery areas", "个配送区域")], ["3", L("database migrations", "次数据库迁移")], ["1", L("real customer loop tested", "次真实顾客链路验证")]] } },
+        { h: L("The loop — From a tap to a phone call", "闭环 — 从一次点击到一通电话"),
+          p: L(["A customer orders on the site, the order is saved in the database, a Telegram bot pushes it to the owner, and the owner phones the customer to confirm. Every step has to work on a phone, in Arabic, for someone who has never seen the site."], ["顾客在网站上下单，订单存进数据库，Telegram 机器人推给老板，老板打电话给顾客确认。每一步都要在手机上、用阿拉伯语、对第一次见到这个网站的人也行得通。"]),
+          media: { type: "motion", id: "sushi-flow" }, cap: L("Illustration of the order loop: site, database, Telegram, owner's phone call.", "订单闭环示意：网站、数据库、Telegram、老板电话确认。") },
+        { h: L("Delivery — Fees by area, snapshotted onto each order", "配送 — 按区域计费，并快照进每张订单"),
+          p: L(["Version 1.1 replaced a free-delivery threshold with 19 owner-editable areas after the owner's feedback. The cart shows the fee as 'set at checkout' until an area is chosen.", "Each order stores the area name and fee at that moment, so history never drifts when prices change. Hard delete of areas is disabled on purpose, so old orders always resolve."], ["v1.1 根据老板的反馈，把「满额免运费」换成了 19 个老板可自己编辑的配送区域。选定区域之前，购物车里的运费显示为「结账时确定」。", "每张订单会记下当时的区域名和运费，改价格也不会改动历史。刻意禁用区域的硬删除，保证旧订单永远能追溯。"]),
+          media: { type: "motion", id: "sushi-fees" }, cap: L("Choosing an area sets the fee and total live; the order keeps a snapshot.", "选择区域后运费和总价实时更新；订单保存当时的快照。") },
+        { h: L("Owner tools — Telegram in, admin out", "老板工具 — Telegram 进，后台出"),
+          p: L(["A Telegram bot pushes every order to the owner with inline action buttons, and a WhatsApp deep link lets the customer confirm themselves.", "The admin uses magic-link login with an email allowlist: today's orders, store open or closed, menu prices and availability, delivery areas."], ["Telegram 机器人把每张订单推给老板，附内联操作按钮；顾客可以用 WhatsApp 链接自己确认。", "后台用魔法链接登录，加邮件白名单：今日订单、营业状态、菜单价格与上下架、配送区域。"]) },
+        { h: L("Shipping — Moving Vercel to Netlify after the owner's own test", "上线 — 老板实测后从 Vercel 迁到 Netlify"),
+          p: L(["The owner tested from the shop and hit reachability problems, so I migrated the deployment and re-ran the whole loop with a real customer: order, Telegram message, phone confirmation.", "I handled Supabase, the bot, deployment and QA myself through a pull-request workflow."], ["老板在店里实测后发现访问不稳定，于是我迁移了部署，并用一位真实顾客把整个链路再跑一遍：下单、Telegram 通知、电话确认。", "Supabase、机器人、部署和验收由我亲自完成，采用 PR 工作流。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 07 */
+    {
+      id: "kodiak-hub", orgs: ["kodiak"], num: "07", year: "2025", when: "Jun–Sep 2025", zones: ["ux", "ai"], tags: ["built-with-ai"],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
       cap: L("Design work inside a live B2B SaaS design system, and a first AI workflow for the team", "在真实 B2B SaaS 设计系统里做设计，以及给团队的第一套 AI 工作流"),
       h1: L("Designing inside a live B2B design system, and leaving behind a usability-testing process and an AI prompting guide", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程和一份 AI 提示指南"),
@@ -237,18 +269,15 @@
       links: [],
       verify: L("Company work: you confirmed publishing is fine. The AI workflow is your own design (confirmed). Design-system colour values are deliberately not shown.", "公司项目：你已确认可以公开。AI 工作流是你独立设计的（已确认）。设计系统的具体色值有意没有展示。"),
       shape: "wide",
-      tile: { img: "assets/shots/kh-bom.jpg" },
-      hero: IMG("assets/shots/kh-bom.jpg", "A Bill of Materials page in Kodiak Hub: a table of materials with status colour bars, import, export and request buttons, and a documents table below", { frame: "browser", cap: L("The Bill of Materials page I designed. Demo data.", "我设计的物料清单（BOM）页面。演示数据。") }),
+      tile: { img: "assets/shots/kh-cover.jpg" },
+      hero: IMG("assets/shots/kh-cover.jpg", "The Kodiak Hub sign-in page: a mountain photograph, a purple panel reading Supplier Relationships Reimagined, and the sign-in form", { frame: "browser", cap: L("The sign-in page I designed. Demo content.", "我设计的登录页。演示内容。") }),
       sections: [
         { h: L("Overview — Two features, end to end", "概述 — 两个功能，端到端")  ,
           p: L(["I designed two features inside the existing design system: a bill of materials (BOM) and login/authentication.", "The BOM broke into five development tickets and was delivered before the sprint boundary."], ["我在现有设计系统内端到端设计了两个功能：物料清单（BOM）和登录/认证。", "BOM 被拆成五张开发工单，在 sprint 结束前交付。"]),
           media: { type: "stats", items: [["2", L("features, end to end", "个功能端到端")], ["5", L("dev tickets, on time", "张开发工单，按时交付")], ["4", L("modules audited", "个模块审计")], ["1,000+", L("users' data analysed", "用户数据分析")]] } },
-        { h: L("Login — From a landing page to a password reset", "登录 — 从落地页到重置密码")  ,
-          p: L(["The login work covered a landing page, sign-in (with email, Google, Microsoft or SSO), and a reset flow with its states: request a link, check your inbox, set a new password, done. The landing page is a mountain photograph under a short promise, \u201cSupplier Relationships Reimagined\u201d.", "The password screen lists what a valid password needs and ticks each rule as you meet it, so nobody has to guess why Save is greyed out."], ["登录部分包括落地页、登录（邮箱、Google、Microsoft 或 SSO），以及带各个状态的重置流程：申请链接、查看邮箱、设置新密码、完成。落地页是山景照片配一句短短的承诺：「Supplier Relationships Reimagined」。", "密码页会列出有效密码需要满足的条件，并在你满足时逐条打勾，这样没有人需要猜「保存」为什么是灰的。"]),
-          media: IMG("assets/shots/kh-reset.jpg", "The reset password screen: a mountain panel on the left and a form listing password rules", { narrow: true }) },
-        { h: L("Login — The whole flow on one page", "登录 — 整条流程放在一页上")  ,
-          p: L(["I laid out sign-in, reset request, check-your-inbox, new password and success next to each other, so a developer could read the entire flow at once, and the states in between."], ["我把登录、申请重置、查看邮箱、设置新密码和成功页并排放在一起，让开发者可以一眼读完整个流程以及中间的各个状态。"]),
-          media: IMG("assets/shots/kh-login-flow.jpg", "All login and reset states laid out side by side, with two landing-page layouts underneath", { frame: "browser" }) },
+        { h: L("Login — The whole flow, one screen at a time", "登录 — 整条流程，一屏一步")  ,
+          p: L(["I designed the login as a flow, not a page: sign in (with email, Google, Microsoft or SSO), then what happens when you forget your password. Ask for a link, with the button disabled until there is an email. Check your inbox, which says what happened and what to do if nothing arrives. Choose a new password, with the rules listed and ticked as you meet them. And a last screen that confirms success and leads straight back to sign in.", "The landing page around it is a mountain photograph under one short promise, \u201cSupplier Relationships Reimagined\u201d. The seven screens below show every state a person passes through."], ["我把登录设计成一条流程，而不是一个页面：登录（邮箱、Google、Microsoft 或 SSO），以及忘记密码之后会发生什么。申请链接：没有填邮箱时按钮是禁用的。查看邮箱：说明发生了什么，没收到怎么办。设置新密码：规则列出来，满足一条就打勾一条。最后一屏确认成功，并直接带你回到登录。", "围绕它的落地页，是山景照片配一句短短的承诺：「Supplier Relationships Reimagined」。下面七屏，是一个人会经过的每一个状态。"]),
+          media: IMG("assets/shots/kh-login-steps.jpg", "Seven login screens in two rows: sign in, ask for a link, ready to send, check your inbox, choose a new password, the rules, password reset") },
         { h: L("BOM — Reading a material list, and asking for more", "BOM — 读一张物料清单，也能向别人要数据")  ,
           p: L(["The bill of materials is a table you can add to, import, export, or send as a request to the supplier, and it sits beside the commodity's properties and documents. I designed the request flow from both sides: a template for the person asking, and what the recipient sees, combined with the original data."], ["物料清单是一张可以新增、导入、导出、或作为请求发给供应商的表，旁边是这个商品的属性和文档。我从两端设计了请求流程：发请求的人用的模板，以及收到请求的人看到的页面，并与原始数据结合。"]),
           media: IMG("assets/shots/kh-bom.jpg", "Bill of Materials table with Add new, Import, Export and Request buttons", { frame: "browser" }) },
@@ -272,9 +301,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 07 */
+    /* ------------------------------------------------------------ 08 */
     {
-      id: "revive-automation", orgs: ["revive"], num: "07", year: "2026", when: "May–Aug 2026", zones: ["ux", "build", "ai"], tags: ["automation", "built-with-ai"],
+      id: "revive-automation", orgs: ["revive"], num: "08", year: "2026", when: "May–Aug 2026", zones: ["ux", "build", "ai"], tags: ["automation", "built-with-ai"],
       title: "Revive", sub: L("UX audit, checkout redesign and report automation", "UX 审计、结账流程重设计与报表自动化"), meta: "Revive · UX internship · 2026",
       cap: L("A UX internship: auditing a live secondhand platform, redesigning its checkout, and automating a payout reconciliation", "UX 实习：审计一个在线二手平台、重设计它的结账流程，并把对账自动化"),
       h1: L("Auditing a live secondhand platform, fixing its multi-seller checkout, and automating a monthly payout reconciliation", "审计一个在线二手平台、修它的多卖家结账流程，并把每月的佣金对账自动化"),
@@ -322,9 +351,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 08 */
+    /* ------------------------------------------------------------ 09 */
     {
-      id: "voi", orgs: ["voi"], num: "08", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
+      id: "voi", orgs: ["voi"], num: "09", year: "2025", when: "Aug–Dec 2025", zones: ["ux", "service"], tags: [],
       title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
       cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
       h1: L("Asking why women ride shared e-bikes less, and designing a helmet into the bike and the app", "追问女性为什么少骑共享电单车，再把头盔设计进车和 App"),
@@ -377,9 +406,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 09 */
+    /* ------------------------------------------------------------ 10 */
     {
-      id: "community-viewfinder", num: "09", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service", "ux"], tags: ["award"],
+      id: "community-viewfinder", num: "10", year: "2023", when: "Oct 2022 – Jun 2023", zones: ["service", "ux"], tags: ["award"],
       title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
       cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
       h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
@@ -424,38 +453,6 @@
         { h: L("Viewfinder cards — A take-home version of the frame", "取景卡片 — 可以带走的取景框"),
           p: L(["Alongside the wall, I designed viewfinder cards: paper frames printed with the 2023 community renewal plan and a line that reads \u201cDiscover the good\u201d. Hold one up and the ordinary corner in front of you, a sign, a roof, two chairs, becomes a picture."], ["除了墙，我还设计了取景卡片：纸质的框，印着 2023 年社区更新计划，和一句「发现美好」。举起一张，眼前平常的一角，一块牌子、一个屋顶、两把椅子，就成了一幅画。"]),
           media: IMG("assets/shots/cv-cards.jpg", "Three viewfinder cards held up to a sign, a tiled roof and a pair of chairs") }
-      ]
-    },
-
-    /* ------------------------------------------------------------ 10 */
-    {
-      id: "sushi-jerash", num: "10", year: "2026", when: "May 2026", zones: ["build", "ux"], tags: ["real-users", "built-with-ai"],
-      title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
-      cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
-      h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
-      lead: L("The first sushi shop in Jerash, Jordan took orders by phone. This is the site, the bot and the admin that replaced that, live in production.", "约旦杰拉什第一家寿司店原来靠电话接单。这是取代它的网站、机器人和后台，已在生产环境上线。"),
-      role: L("Spec, direction, Supabase, Telegram bot, deploy, QA", "spec、指挥、Supabase、Telegram 机器人、部署、验收"),
-      status: L("Live in production", "已上线"),
-      stack: ["Next.js 15", "TypeScript", "Tailwind (RTL)", "Supabase", "Zustand", "Telegram Bot API", "Netlify"],
-      links: [{ label: L("Live site", "线上网站"), url: "https://sushi-jerash.netlify.app/menu" }],
-      verify: L("The live site is Arabic only, so the recording carries English captions. Add a Telegram message and an admin screenshot if the owner allows it. Repo is private. Bilingual (English/Chinese) work is only in the specs, not the site: confirm.", "线上网站只有阿拉伯语，所以录屏加了英文字幕。老板同意的话，补一张 Telegram 通知和后台的截图。仓库为私有。双语（中英）只体现在规格文档里、不在网站里：请确认。"),
-      shape: "tall",
-      tile: { video: "sushi-jerash", poster: "sushi-jerash-poster", sb: "#0d0d0d" },
-      hero: V("sushi-jerash", { frame: "phone", sb: "#0d0d0d", tag: "rec", cap: L("Recorded from the live site on a phone: menu, cart, checkout, delivery fee by area. The site is Arabic only (right to left), so the captions are mine. I stopped before submitting, so no real order was sent.", "在手机上录自线上网站：菜单、购物车、结账、按区域计费的运费。网站只有阿拉伯语（从右到左），所以字幕是我加的。我在提交之前停下，没有发出真实订单。") }),
-      sections: [
-        { h: L("Overview — Arabic first, cash on delivery, no ops burden", "概述 — 阿拉伯语优先、货到付款、没有运维负担"),
-          p: L(["The owner needed something manageable from a phone. So: Arabic-only right-to-left, cash on delivery, and the owner confirms every order by phone before it counts.", "I translated those constraints into a product spec, went through two versions of it, and directed an AI coding agent to build it."], ["老板需要一个能用手机管理的东西。所以：纯阿拉伯语、从右到左、货到付款，每一单都由老板电话确认后才算数。", "我把这些约束翻译成产品 spec，迭代了两版，再指挥 AI 编程助手实现。"]),
-          media: { type: "stats", items: [["~2", L("days to live", "天上线")], ["19", L("delivery areas", "个配送区域")], ["3", L("database migrations", "次数据库迁移")], ["1", L("real customer loop tested", "次真实顾客链路验证")]] } },
-        { h: L("The loop — From a tap to a phone call", "闭环 — 从一次点击到一通电话"),
-          p: L(["A customer orders on the site, the order is saved in the database, a Telegram bot pushes it to the owner, and the owner phones the customer to confirm. Every step has to work on a phone, in Arabic, for someone who has never seen the site."], ["顾客在网站上下单，订单存进数据库，Telegram 机器人推给老板，老板打电话给顾客确认。每一步都要在手机上、用阿拉伯语、对第一次见到这个网站的人也行得通。"]),
-          media: { type: "motion", id: "sushi-flow" }, cap: L("Illustration of the order loop: site, database, Telegram, owner's phone call.", "订单闭环示意：网站、数据库、Telegram、老板电话确认。") },
-        { h: L("Delivery — Fees by area, snapshotted onto each order", "配送 — 按区域计费，并快照进每张订单"),
-          p: L(["Version 1.1 replaced a free-delivery threshold with 19 owner-editable areas after the owner's feedback. The cart shows the fee as 'set at checkout' until an area is chosen.", "Each order stores the area name and fee at that moment, so history never drifts when prices change. Hard delete of areas is disabled on purpose, so old orders always resolve."], ["v1.1 根据老板的反馈，把「满额免运费」换成了 19 个老板可自己编辑的配送区域。选定区域之前，购物车里的运费显示为「结账时确定」。", "每张订单会记下当时的区域名和运费，改价格也不会改动历史。刻意禁用区域的硬删除，保证旧订单永远能追溯。"]),
-          media: { type: "motion", id: "sushi-fees" }, cap: L("Choosing an area sets the fee and total live; the order keeps a snapshot.", "选择区域后运费和总价实时更新；订单保存当时的快照。") },
-        { h: L("Owner tools — Telegram in, admin out", "老板工具 — Telegram 进，后台出"),
-          p: L(["A Telegram bot pushes every order to the owner with inline action buttons, and a WhatsApp deep link lets the customer confirm themselves.", "The admin uses magic-link login with an email allowlist: today's orders, store open or closed, menu prices and availability, delivery areas."], ["Telegram 机器人把每张订单推给老板，附内联操作按钮；顾客可以用 WhatsApp 链接自己确认。", "后台用魔法链接登录，加邮件白名单：今日订单、营业状态、菜单价格与上下架、配送区域。"]) },
-        { h: L("Shipping — Moving Vercel to Netlify after the owner's own test", "上线 — 老板实测后从 Vercel 迁到 Netlify"),
-          p: L(["The owner tested from the shop and hit reachability problems, so I migrated the deployment and re-ran the whole loop with a real customer: order, Telegram message, phone confirmation.", "I handled Supabase, the bot, deployment and QA myself through a pull-request workflow."], ["老板在店里实测后发现访问不稳定，于是我迁移了部署，并用一位真实顾客把整个链路再跑一遍：下单、Telegram 通知、电话确认。", "Supabase、机器人、部署和验收由我亲自完成，采用 PR 工作流。"]) }
       ]
     },
 
@@ -512,7 +509,7 @@
       stack: ["Stone Leap", "AI world builder"],
       links: [{ label: L("Play it on Stone Leap", "在 Stone Leap 上试玩"), url: "https://anna.stoneleap.com/let-me-die-2/" }],
       shape: "wide",
-      tile: { img: "assets/shots/lmd-tile.jpg" },
+      tile: { img: "assets/shots/lmd-tile.jpg", emoji: "\u{1F602}" },
       hero: IMG("assets/shots/lmd-waiting.jpg", "Let Me Die, the first world: a vast waiting hall of grey chairs, a NOW SERVING screen, a ticket machine and a wooden door", { tag: "rec", cap: L("The first world: a waiting hall with endless chairs, a ticket machine and a door. Screenshot from the game.", "第一个世界：摆满椅子的候诊大厅、一台取号机和一扇门。游戏截图。") }),
       sections: [
         { h: L("Overview — Dying as a way to see more worlds", "概述 — 用死亡去看更多的世界"),

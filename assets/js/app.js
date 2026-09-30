@@ -89,7 +89,7 @@
       const v = videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` });
       return p.shape === "tall" ? `<span class="tile is-phone"${bg}>${phone(v, tl.sb)}${go}</span>` : `<span class="tile"${bg}>${v}${go}</span>`;
     }
-    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${go}</span>`;
+    if (tl.img) return `<span class="tile"><img src="${esc(tl.img)}" alt="" loading="lazy">${tl.emoji ? `<span class="tile-emoji" aria-hidden="true">${tl.emoji}</span>` : ""}${go}</span>`;
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}${go}</span>`;
     if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}${go}</span>`;
     return `<span class="tile">${go}</span>`;

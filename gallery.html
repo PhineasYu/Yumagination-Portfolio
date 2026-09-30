@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="assets/css/gallery.css">
 </head>
 <body class="gallery-page">
-  <a class="skip" href="#wall">Skip to the photographs</a>
+  <a class="skip" href="#cv">Skip to the photographs</a>
 
   <header class="bar" id="bar">
     <a class="brand" href="index.html" aria-label="Home">Yunfei Yu</a>
@@ -32,7 +32,14 @@
     </div>
   </header>
 
-  <main id="view"></main>
+  <main id="cv" class="cv" aria-label="Photographs on an endless canvas. Drag to move.">
+    <div id="world" class="world"><div id="title" class="g-title-card"></div></div>
+  </main>
+  <div class="g-hud">
+    <p id="hint" class="g-hint mono"><span></span></p>
+    <p id="count" class="g-count mono"></p>
+    <button id="home" class="g-home" type="button">&#8634;</button>
+  </div>
 
   <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Photograph viewer" hidden>
     <button class="lb-close" id="lb-close" type="button" aria-label="Close">✕</button>
@@ -45,7 +52,6 @@
   <noscript><p style="padding:96px 24px">This page needs JavaScript. Contact: phineasyu0812@gmail.com</p></noscript>
 
   <script src="assets/js/gallery-data.js"></script>
-  <script src="assets/js/silk.js"></script>
   <script src="assets/js/gallery.js"></script>
 </body>
 </html>
