@@ -308,7 +308,7 @@
           <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
         </div>
-        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p><a class="btn-pill cv-btn" href="${esc(A.cv.file)}" download>${ic("download")}${esc(t(A.cv.label))}</a></div>
+        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><a class="btn-pill cv-btn" href="${esc(A.cv.file)}" download>${ic("download")}${esc(t(A.cv.label))}</a></div>
       </div>
     </section>`;
   }

@@ -530,7 +530,7 @@ html[lang="zh"] .blk p { max-width: 36em; }
 
 /* about: languages and the CV button sit on the right of the column */
 .about > div:last-child .langline { justify-content: flex-end; max-width: none; width: 100%; text-align: right; }
-.about > div:last-child .cv-btn { display: flex; width: fit-content; margin-left: auto; }
+.about > div:last-child .cv-btn { display: flex; width: fit-content; margin-left: auto; margin-top: 20px; }
 
 /* home: the photography window, in pixels */
 .gpix { position: relative; display: block; height: clamp(300px, 34vw, 440px); border-radius: var(--radius-lg); overflow: hidden; background: #111; color: var(--ink); }
