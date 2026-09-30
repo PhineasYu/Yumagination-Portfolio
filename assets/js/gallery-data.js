@@ -9,8 +9,8 @@ window.GALLERY = {
     "zh": "摄影"
   },
   "statement": {
-    "en": "Photography is the hobby I have kept the longest. Enjoy.",
-    "zh": "摄影是我坚持最久的爱好。慢慢欣赏。"
+    "en": "Photography is the hobby I have kept the longest.",
+    "zh": "摄影是我坚持最久的爱好。"
   },
   "series": [
     {

@@ -36,16 +36,21 @@
   const hash = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619); return h >>> 0; };
   // a fixed order that is not the order of the files, and stays put when photographs are added
   const order = all.map((_, i) => i).sort((i, j) => hash(all[i].file) - hash(all[j].file));
-  const GOLD = Math.PI * (3 - Math.sqrt(5)), SP = 250, HOLE = 3, SX = 1.2;   // spacing, room for the title, a little wider than tall
+  const GOLD = Math.PI * (3 - Math.sqrt(5)), SP = 300, HOLE = 2, SX = 1.2;   // spacing, room for the title, a little wider than tall
   const X0 = 480, Y0 = 360;                 // the title's centre on the plane (.g-title-card in gallery.css)
   const spots = new Array(NP), buckets = new Map();
   let minX = X0, maxX = X0, minY = Y0, maxY = Y0;
+  // nothing may overlap: not the title, not another photograph (GAP covers the white frame, the tilt and some air)
+  const GAP = 36, placed = [{ x: X0 - 250, y: Y0 - 130, w: 500, h: 260 }];
+  const hits = (x, y, w, h) => placed.some((q) => x < q.x + q.w + GAP && x + w + GAP > q.x && y < q.y + q.h + GAP && y + h + GAP > q.y);
   order.forEach((pi, k) => {
     const p = all[pi], r = rng(k + 17, 29), ar = p.w && p.h ? p.w / p.h : 1.5;
-    const box = 230 + r() * 80;                                  // long side in px
+    const box = 300 + r() * 80;                                  // long side in px
     const w = ar >= 1 ? box : box * ar, h = ar >= 1 ? box / ar : box;
-    const rad = SP * Math.sqrt(k + HOLE), th = k * GOLD;
-    const cx = X0 + Math.cos(th) * rad * SX + (r() - .5) * 40, cy = Y0 + Math.sin(th) * rad / SX + (r() - .5) * 40;
+    const th = k * GOLD, jx = (r() - .5) * 40, jy = (r() - .5) * 40;
+    let rad = SP * Math.sqrt(k + HOLE), cx, cy;
+    for (;;) { cx = X0 + Math.cos(th) * rad * SX + jx; cy = Y0 + Math.sin(th) * rad / SX + jy; if (!hits(cx - w / 2, cy - h / 2, w, h)) break; rad += 10; }   // step outwards until free
+    placed.push({ x: cx - w / 2, y: cy - h / 2, w, h });
     const s = { pi, x: cx - w / 2, y: cy - h / 2, w, h, rot: (r() - .5) * 5, d: r() * .4 };
     spots[pi] = s;
     minX = Math.min(minX, cx); maxX = Math.max(maxX, cx); minY = Math.min(minY, cy); maxY = Math.max(maxY, cy);
