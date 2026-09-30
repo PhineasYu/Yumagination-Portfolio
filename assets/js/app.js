@@ -180,7 +180,7 @@
 
     <section class="section" id="recognition">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
-      <div class="awards">${D.awards.map((a, i) => `<div class="award rv" style="--i:${i % 3}"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
+      <div class="awards">${D.awards.map((a, i) => `<div class="award rv" style="--i:${i}"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
     </section>
 
     ${galleryPixel()}

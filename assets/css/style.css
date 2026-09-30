@@ -517,15 +517,22 @@ html[lang="zh"] .blk p { max-width: 36em; }
 .m-idea.i1 h4, .m-idea.i1 p { position: relative; }
 .m-idea.i1 p { color: rgba(255, 255, 255, .86); }
 
-/* Awards & wins: each card turns up like a card being turned over */
-.awards { perspective: 1100px; }
-.awards .award.rv { opacity: 0; transform: rotateX(-72deg) translateY(24px); transform-origin: 50% 0; backface-visibility: hidden; transition: opacity .55s var(--ease), transform .8s cubic-bezier(.2, .9, .25, 1.15); transition-delay: calc(var(--i, 0) * 110ms); }
+/* Awards & wins: the cards are dealt one after another, each opening downwards from its top edge */
+.awards { perspective: 1200px; }
+.awards .award.rv { opacity: 0; transform: translateY(46px) rotateX(-88deg) scale(.94); transform-origin: 50% 0; backface-visibility: hidden; transition: opacity .5s var(--ease), transform 1s cubic-bezier(.2, .95, .25, 1.2); transition-delay: calc(var(--i, 0) * 130ms); }
 .awards .award.rv.in { opacity: 1; transform: none; }
-.awards .award.rv::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--tf); opacity: 0; pointer-events: none; }
-.awards .award.rv.in::after { animation: award-flash .9s var(--ease) calc(var(--i, 0) * 110ms + 120ms) both; }
 .award { position: relative; }
-@keyframes award-flash { 0% { opacity: .55; } 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .awards .award.rv { transform: none; } .awards .award.rv.in::after { animation: none; } }
+.awards .award.rv::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: var(--tf); opacity: 0; pointer-events: none; }
+.awards .award.rv.in::after { animation: award-flash 1s var(--ease) calc(var(--i, 0) * 130ms + 350ms) both; }
+/* what is written on a card arrives a moment after the card has opened */
+.awards .award.rv > * { opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(var(--i, 0) * 130ms + 450ms); }
+.awards .award.rv.in > * { opacity: 1; transform: none; }
+@keyframes award-flash { 0% { opacity: .6; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .awards .award.rv, .awards .award.rv > * { transform: none; } .awards .award.rv.in::after { animation: none; } }
+
+/* about: languages and the CV button sit on the right of the column */
+.about > div:last-child .langline { justify-content: flex-end; max-width: none; width: 100%; text-align: right; }
+.about > div:last-child .cv-btn { display: flex; width: fit-content; margin-left: auto; }
 
 /* home: the photography window, in pixels */
 .gpix { position: relative; display: block; height: clamp(300px, 34vw, 440px); border-radius: var(--radius-lg); overflow: hidden; background: #111; color: var(--ink); }
