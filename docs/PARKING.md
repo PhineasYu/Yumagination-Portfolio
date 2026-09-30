@@ -1,5 +1,7 @@
 # 停车场（Parking lot）
 
+> **2026-09-30：小色点缀放宽。** Tiffany 蓝 #81D8D0 仍是唯一主题色（选中状态、按钮悬停、下划线、方法区的 04）；小的点缀色可以换：奖项标签用珊瑚色 #FF9A8B（Tiffany 的互补色），「Available for work」用黄油黄 #FFE07A。整站不再强制大写（`text-transform: uppercase` 已全部去掉，插图里的标签也改成了正常大小写）。新增图标库 `assets/js/icons.js`（Lucide 线性图标 + Simple Icons 的 GitHub / LinkedIn）。
+>
 > **2026-09-30：第三轮视觉修改（polish 分支）。** 「Smaller builds & experiments」区块从首页移除（不渲染，数据仍在 `data.js` 的 `more`）；Longevity 3D 升级为正式项目；区块间距统一由 `--sec` 控制并缩小；「How I build with AI」重排；配色收成「中性灰 + 纯 Tiffany #81D8D0」，去掉所有发灰的蓝绿色和 Tiffany 文字色。首屏丝绸动画按要求保持原样（它的着色器里仍是旧的 Tiffany 色阶）。
 >
 > **被隐藏的「Smaller builds」条目**（想恢复：在 `app.js` 的 `home()` 里，`work` 区块后加回 `${moreBlock()}`）：

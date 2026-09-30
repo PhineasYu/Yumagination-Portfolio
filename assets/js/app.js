@@ -42,9 +42,14 @@
   /* ---------- helpers ---------- */
   const esc = (x) => String(x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const ext = (u) => /^https?:/.test(u);
-  const link = (l) => `<a href="${esc(l.url)}"${ext(l.url) ? ' target="_blank" rel="noopener"' : ""}>${esc(t(l.label))} ↗</a>`;
+  const link = (l) => `<a href="${esc(l.url)}"${ext(l.url) ? ' target="_blank" rel="noopener"' : ""}>${/github\.com/.test(l.url) ? ic("github") : ""}${esc(t(l.label))} ↗</a>`;
   const heading = (h) => esc(t(h)).replace(" — ", ' <span class="dash">—</span> ');
   const badge = (kind) => `<span class="badge ${kind}">${esc(s(kind))}</span>`;
+
+  /* icons (assets/js/icons.js): one per area and tag, so chips and labels are not just words */
+  const ZONE_IC = { all: "layers", ux: "layout-dashboard", service: "users", ai: "bot", build: "hammer", games: "gamepad-2" };
+  const TAG_IC = { hackathon: "zap", award: "trophy", "real-users": "user", "built-with-ai": "sparkles", automation: "rocket", "data-viz": "chart-column" };
+  const ic = (n, c) => (window.ic ? window.ic(n, c) : "");
 
   /* company logos: real files in assets/logos, sized by D.logos[id].h */
   const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px" decoding="async">` : ""; };
@@ -155,8 +160,8 @@
 
     <section class="section" id="work">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
-      <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${esc(t(c))}</button>`).join("")}</div>
-      <div class="filters tags" role="group" aria-label="${esc(s("tagLbl"))}"><span class="flabel mono">${esc(s("tagLbl"))}</span>${D.tags.map((c) => `<button class="chip" type="button" data-tag="${c.id}" aria-pressed="${c.id === filt.tag}">${esc(t(c))}</button>`).join("")}</div>
+      <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${ic(ZONE_IC[c.id])}${esc(t(c))}</button>`).join("")}</div>
+      <div class="filters tags" role="group" aria-label="${esc(s("tagLbl"))}"><span class="flabel mono">${esc(s("tagLbl"))}</span>${D.tags.map((c) => `<button class="chip" type="button" data-tag="${c.id}" aria-pressed="${c.id === filt.tag}">${ic(TAG_IC[c.id])}${esc(t(c))}</button>`).join("")}</div>
       <div class="work-grid">
         ${P.map((p) => `
           <a class="proj rv ${p.shape || "wide"}" href="#/work/${p.id}" data-id="${p.id}" data-shape="${p.shape || "wide"}" data-zone="${p.zone}" data-tags="${p.tags.join(" ")}">
@@ -164,7 +169,7 @@
             <span class="proj-cap">
               <span class="proj-title">${esc(p.title)}</span>
               <span class="proj-line">${esc(t(p.cap))}</span>
-              <span class="proj-tags"><span>${esc(zoneName(p))}</span>${award && p.tags.includes("award") ? `<span class="pill accent">${esc(t(award))}</span>` : ""}</span>
+              <span class="proj-tags"><span class="zn">${ic(ZONE_IC[p.zone])}${esc(zoneName(p))}</span>${award && p.tags.includes("award") ? `<span class="pill accent">${esc(t(award))}</span>` : ""}</span>
             </span>
           </a>`).join("")}
       </div>
@@ -236,11 +241,11 @@
       <div class="sec-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2></div>
       <div class="about rv">
         <div>
-          <p class="status"><span class="pill accent"><span class="dot" style="background:var(--ink)"></span>${esc(s("available"))}</span><span class="tz-info">${esc(s("tz"))}</span></p>
+          <p class="status"><span class="pill open"><span class="dot" style="background:var(--ink)"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
-          <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">GitHub ↗</a></div>
+          <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${ic("mail")}${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
         </div>
-        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${esc(t(A.languages))}</p></div>
+        <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span>${esc(t(r.what))}</span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><p class="langline mono">${ic("globe")}${esc(t(A.languages))}</p></div>
       </div>
     </section>`;
   }
@@ -252,7 +257,7 @@
       <h2>${t(STR.talkTitle)}</h2>
       <p>${esc(s("talkLede"))}</p>
       <a class="mail" href="mailto:${p.email}">${p.email}</a>
-      <div class="socials"><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">GitHub ↗</a></div>
+      <div class="socials"><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
       <div class="foot mono"><span>© ${new Date().getFullYear()} ${p.name}</span><span>${esc(s("footer"))}</span></div>
     </section>`;
   }
@@ -275,13 +280,13 @@
       </div>
       ${p.hero ? `<div class="hero-shot">${media(p.hero)}` : ""}${p.hero && p.hero.cap ? `<p class="cap">${esc(t(p.hero.cap))}</p>` : ""}${p.hero ? "</div>" : ""}
       <dl class="meta rv">
-        <div><dt>${esc(s("role"))}</dt><dd>${esc(t(p.role))}</dd></div>
-        <div><dt>${esc(s("when"))}</dt><dd>${esc(p.when)}</dd></div>
-        <div><dt>${esc(s("status"))}</dt><dd>${esc(t(p.status))}</dd></div>
-        <div><dt>${esc(s("zone"))}</dt><dd>${esc(zoneLine(p))}</dd></div>
-        ${p.orgs && p.orgs.length ? `<div><dt>${esc(t(D.ui.orgs))}</dt><dd class="orgs">${p.orgs.map((id) => logoImg(id, "sm")).join("")}</dd></div>` : ""}
-        <div><dt>${esc(s("skills"))}</dt><dd>${esc(p.stack.join(" · "))}</dd></div>
-        ${p.links && p.links.length ? `<div><dt>${esc(s("links"))}</dt><dd class="lk">${p.links.map(link).join("")}</dd></div>` : ""}
+        <div><dt>${ic("user")}${esc(s("role"))}</dt><dd>${esc(t(p.role))}</dd></div>
+        <div><dt>${ic("calendar")}${esc(s("when"))}</dt><dd>${esc(p.when)}</dd></div>
+        <div><dt>${ic("flag")}${esc(s("status"))}</dt><dd>${esc(t(p.status))}</dd></div>
+        <div><dt>${ic("layers")}${esc(s("zone"))}</dt><dd>${esc(zoneLine(p))}</dd></div>
+        ${p.orgs && p.orgs.length ? `<div><dt>${ic("building-2")}${esc(t(D.ui.orgs))}</dt><dd class="orgs">${p.orgs.map((id) => logoImg(id, "sm")).join("")}</dd></div>` : ""}
+        <div><dt>${ic("hammer")}${esc(s("skills"))}</dt><dd>${esc(p.stack.join(" · "))}</dd></div>
+        ${p.links && p.links.length ? `<div><dt>${ic("link")}${esc(s("links"))}</dt><dd class="lk">${p.links.map(link).join("")}</dd></div>` : ""}
       </dl>
       ${DRAFT && p.verify ? `<p class="draft mono">${esc(s("draft"))}: ${esc(t(p.verify))}</p>` : ""}
       <div class="body">
