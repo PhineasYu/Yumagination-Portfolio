@@ -236,8 +236,8 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .logo.sm { height: calc(var(--h, 28px) * .72); max-width: 120px; }
 .orgs { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; }
 .award-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 30px; }
-.tl li { min-height: 64px; }
-.tl li .logo { justify-self: end; height: 28px; width: auto; max-width: 120px; }
+.tl li { min-height: 76px; }
+.tl li .logo { justify-self: end; height: var(--th, 28px); width: auto; max-width: 120px; }
 
 /* ---------- tools / awards ---------- */
 .tools { margin-top: var(--sec); overflow: hidden; border-block: 1px solid var(--line); white-space: nowrap; }
@@ -452,7 +452,7 @@ html[lang="zh"] .blk p { max-width: 36em; }
   .m-step { grid-template-columns: 64px minmax(0, 1fr); }
   .meta { grid-template-columns: 1fr 1fr; }
   .tl li { grid-template-columns: 88px 1fr auto; gap: 12px; }
-  .tl li .logo { height: 22px; max-width: 72px; }
+  .tl li .logo { height: calc(var(--th, 28px) * .78); max-width: 72px; }
   .tools-track span { padding: 0 20px; }
   .tools-track .logo { height: calc(var(--h, 28px) * .82); }
   .stats, .stepl { grid-template-columns: repeat(2, 1fr); }

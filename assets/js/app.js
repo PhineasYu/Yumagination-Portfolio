@@ -52,7 +52,7 @@
   const ic = (n, c) => (window.ic ? window.ic(n, c) : "");
 
   /* company logos: real files in assets/logos, sized by D.logos[id].h */
-  const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px" decoding="async">` : ""; };
+  const logoImg = (id, cls = "") => { const l = D.logos && D.logos[id]; return l ? `<img class="logo ${cls}" src="assets/logos/${esc(l.file)}" alt="${esc(l.name)}" title="${esc(l.name)}" style="--h:${l.h}px${l.th ? `;--th:${l.th}px` : ""}" decoding="async">` : ""; };
 
   /* ---------- media ---------- */
   function videoTag(m, extra = "") {
