@@ -26,7 +26,7 @@
     draft: { en: "To confirm before sharing", zh: "分享前待确认" },
     footer: { en: "Designed and built with Claude Code.", zh: "由 Claude Code 协助设计与搭建。" },
     talkTitle: { en: "Let's build <em>something.</em>", zh: "一起做<em>点什么。</em>" },
-    talkLede: { en: "Open to junior roles in Sweden and China. The fastest way to reach me is email.", zh: "接受瑞典与中国的 junior 岗位机会。最快的联系方式是邮件。" },
+    talkLede: { en: "Open to junior roles. The fastest way to reach me is email.", zh: "正在寻找 junior 岗位。最快的联系方式是邮件。" },
     kicker: { en: "Case study", zh: "案例" },
     read: { en: "Read case study", zh: "阅读案例" }, smaller: { en: "Smaller builds, lighter notes.", zh: "更小的作品，更轻的记录。" },
     available: { en: "Available for work", zh: "正在找工作" }, tz: { en: "Stockholm · CET", zh: "斯德哥尔摩 · CET" }, email: { en: "Email", zh: "邮件" }
@@ -58,12 +58,14 @@
   function videoTag(m, extra = "") {
     return `<video src="${esc(m.src)}" poster="${esc(m.poster || "")}" autoplay muted loop playsinline preload="metadata" ${extra}></video>`;
   }
+  /* phones: a drawn iPhone (bezel, Dynamic Island, status bar) around the screen; sb = status-bar colour */
+  const phone = (inner, sb) => `<span class="iphone"${sb ? ` style="--sb:${esc(sb)}"` : ""}><span class="iphone-screen">${inner}</span></span>`;
   function media(m) {
     if (!m) return "";
     const bg = m.bg ? ` style="--bg:${m.bg}"` : "";
-    const wrap = (inner, kind) => {
+    const wrap = (inner, kind, extra = "") => {
       const cls = m.frame === "browser" ? "frame-browser" : m.frame === "phone" ? "frame-phone" : "";
-      return `<div class="media ${cls}"${bg}>${kind ? badge(kind) : ""}${inner}</div>`;
+      return `<div class="media ${cls}"${bg}>${kind ? badge(kind) : ""}${m.frame === "phone" ? phone(inner, m.sb) : inner}${extra}</div>`;
     };
     switch (m.type) {
       case "video": return wrap(videoTag(m), m.tag);
@@ -72,7 +74,7 @@
         const r = m.ratio ? ` style="--r:${m.ratio}"` : "";
         const inner = `<div class="embed embed-ratio"${r}><iframe src="${esc(m.src)}" title="Live demo" loading="lazy" allow="clipboard-write; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"></iframe></div>`;
         const open = m.open ? `<a class="open" href="${esc(m.open)}" target="_blank" rel="noopener">${esc(s("open"))}</a>` : "";
-        return wrap(inner + open, "live");
+        return wrap(inner, "live", open);
       }
       case "motion": return `<div class="mo-wrap">${window.motion(m.id)}${badge("ill")}</div>`;
       case "stats": return `<div class="stats">${m.items.map(([n, l]) => `<div class="stat"><b>${esc(n)}</b><span>${esc(t(l))}</span></div>`).join("")}</div>`;
@@ -85,7 +87,8 @@
     const tl = p.tile || {}, go = `<span class="go">${esc(s("read"))} <span class="arrow">→</span></span>`;
     if (tl.video) {
       const bg = p.hero && p.hero.bg ? ` style="background:${p.hero.bg}"` : "";
-      return `<span class="tile${p.shape === "tall" ? " is-phone" : ""}"${bg}>${videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` })}${go}</span>`;
+      const v = videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` });
+      return p.shape === "tall" ? `<span class="tile is-phone"${bg}>${phone(v, tl.sb)}${go}</span>` : `<span class="tile"${bg}>${v}${go}</span>`;
     }
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}${go}</span>`;
     if (tl.text) return `<span class="tile tile-text">${glyph(p.id)}<span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}${go}</span>`;
@@ -250,15 +253,17 @@
     </section>`;
   }
 
+  /* one row: email (primary) · LinkedIn · GitHub */
+  const reachRow = () => { const p = D.person; return `<div class="reach-row"><a class="btn-pill mail-pill" href="mailto:${p.email}">${ic("mail")}${esc(p.email)}</a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>`; };
+
   function contactBlock() {
     const p = D.person;
     return `
     <section class="bigfoot" id="contact">
       <h2>${t(STR.talkTitle)}</h2>
       <p>${esc(s("talkLede"))}</p>
-      <a class="mail" href="mailto:${p.email}">${p.email}</a>
-      <div class="socials"><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
-      <div class="foot mono"><span>© ${new Date().getFullYear()} ${p.name}</span><span>${esc(s("footer"))}</span></div>
+      ${reachRow()}
+      <div class="foot mono"><span>© ${new Date().getFullYear()} ${p.name}</span></div>
     </section>`;
   }
 
@@ -303,8 +308,8 @@
       </nav>
       <section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)">
         <h2>${t(STR.talkTitle)}</h2>
-        <a class="mail" href="mailto:${D.person.email}">${D.person.email}</a>
-        <div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span><span>${esc(s("footer"))}</span></div>
+        ${reachRow()}
+        <div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div>
       </section>
     </article>`;
   }
