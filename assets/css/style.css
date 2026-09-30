@@ -511,10 +511,8 @@ html[lang="zh"] .blk p { max-width: 36em; }
 /* method is its own page now */
 .method-page { padding-top: calc(var(--bar) + 8px); }
 
-/* the first idea card: a grainy Tiffany-to-black flow */
-.m-idea.i1 { position: relative; overflow: hidden; isolation: isolate; }
-.m-shader { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; image-rendering: auto; }
-.m-idea.i1 h4, .m-idea.i1 p { position: relative; }
+/* the first idea card: a smooth Tiffany-to-black gradient, no border */
+.m-idea.i1 { border: 0; background: radial-gradient(130% 150% at 100% 0%, #81D8D0 0%, #57b0aa 16%, #2c6b68 36%, #0f2b2a 60%, #050808 82%); }
 .m-idea.i1 p { color: rgba(255, 255, 255, .86); }
 
 /* Awards & wins: the cards are dealt one after another, each opening downwards from its top edge */

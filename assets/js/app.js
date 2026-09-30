@@ -204,37 +204,6 @@
       </a>
     </section>`;
   }
-  /* a grainy Tiffany-to-black gradient that slowly flows, drawn per pixel at low resolution */
-  let shStop = null;
-  function startShader() {
-    shStop && shStop(); shStop = null;
-    const cv = $(".m-shader"); if (!cv) return;
-    const ctx = cv.getContext("2d"), box = cv.parentElement, tf = [129, 216, 208];
-    let W = 0, H = 0, img, raf = 0, dead = false, last = 0;
-    const size = () => { W = Math.max(40, Math.round(box.clientWidth / 5)); H = Math.max(24, Math.round(box.clientHeight / 5)); cv.width = W; cv.height = H; img = ctx.createImageData(W, H); };
-    const hash = (x, y) => { const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); };
-    function frame(now) {
-      const tm = now / 1000, d = img.data;
-      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-        const u = x / W, v = y / H;
-        // light gathers in the top-right corner and drifts, fading to black towards the bottom-left
-        let f = 1 - Math.hypot((u - .92) * 1.1, (v - .05) * 1.9) * .95;
-        f += Math.sin(u * 5 + tm * .5) * .08 + Math.sin((u + v) * 7 - tm * .4) * .06 + Math.sin(v * 9 + tm * .3) * .04;
-        f = Math.max(0, Math.min(1, f));
-        f = f * f * (3 - 2 * f);
-        const g = hash(x + Math.floor(tm * 6), y) - .5;      // grain: the light breaks up into particles
-        const k = Math.max(0, Math.min(1, f + g * (.22 + .35 * f * (1 - f) * 2)));
-        const i = (y * W + x) * 4; d[i] = 6 + (tf[0] - 6) * k; d[i + 1] = 10 + (tf[1] - 10) * k; d[i + 2] = 12 + (tf[2] - 12) * k; d[i + 3] = 255;
-      }
-      ctx.putImageData(img, 0, 0);
-    }
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    function loop(now) { if (dead) return; raf = requestAnimationFrame(loop); if (now - last < 50) return; last = now; frame(now); }
-    size(); frame(0);
-    const ro = new ResizeObserver(() => { size(); frame(performance.now()); }); ro.observe(box);
-    const vis = new IntersectionObserver((es) => { const on = es[0].isIntersecting; if (on && !raf && !dead && !reduce) raf = requestAnimationFrame(loop); if (!on) { cancelAnimationFrame(raf); raf = 0; } }, { threshold: 0 }); vis.observe(box);
-    shStop = () => { dead = true; cancelAnimationFrame(raf); ro.disconnect(); vis.disconnect(); };
-  }
   let gpixStop = null;
   function startGpix() {
     gpixStop && gpixStop(); gpixStop = null;
@@ -305,7 +274,7 @@
       </div>
       <div class="m-main">
         <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
-        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}">${i === 0 ? `<canvas class="m-shader" aria-hidden="true"></canvas>` : ""}<h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
+        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
         <p class="disclosure rv">${esc(t(M.disclosure))}</p>
       </div>
     </section>`;
@@ -416,7 +385,6 @@
     document.title = isCase ? `${(D.projects.filter((p) => !p.hidden).find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
     wire();
     startGpix();
-    startShader();
     if (!keepScroll) {
       const el = !isCase && !isMethod && a ? document.getElementById(a) : null;
       if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
