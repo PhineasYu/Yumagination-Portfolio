@@ -14,12 +14,12 @@
   --bg: #f4f4f4;            /* page */
   --card: #ffffff;          /* cards are white on the page */
   --tile: #ececec;          /* media well inside a card */
-  --tf: #81d8d0;            /* Tiffany Blue, the only accent: fills, selected states, tag backgrounds, small shapes, underlines. Never text. */
+  --tf: #81d8d0;            /* Tiffany Blue, the theme colour: fills, selected states, tag backgrounds, small shapes, underlines. Never text. */
   --wash: #e8f7f5;          /* the pale tint of the same hue: text tiles, notes */
-  --tf-soft: #c0ebe7;
+  --tf-soft: #c0ebe7;       /* half-strength Tiffany, same hue: quiet bars in illustrations */
   /* small accents (tag pills, status): clean, saturated, not Tiffany. Tiffany stays the theme. */
   --coral: #ff9a8b;         /* the complement of Tiffany: awards */
-  --butter: #ffe07a;        /* bright, not gold: availability */       /* half-strength Tiffany, same hue: quiet bars in illustrations */
+  --butter: #ffe07a;        /* bright, not gold: availability */
   --ink: #111111;           /* headings, and text on Tiffany (17:1) */
   --ink-body: #2b2b2b;      /* body text (13:1) */
   --ink-muted: #4d4d4d;     /* secondary text (7.9:1) */
@@ -85,7 +85,6 @@ html[lang="zh"] .mono { letter-spacing: .03em; }
 .dim { color: var(--ink-faint); }
 .pill { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; font-size: 13px; font-weight: 600; line-height: 1.3; border-radius: var(--radius-pill); }
 .pill.accent { background: var(--coral); color: var(--ink); }
-.pill.open { background: var(--butter); color: var(--ink); }
 .pill.soft { background: var(--card); color: var(--ink-body); border: 1px solid var(--line); }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--tf); flex: none; }
 
@@ -213,6 +212,8 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .btn-pill .ic, .btn-ghost .ic { width: 18px; height: 18px; }
 .proj-tags .zn { display: inline-flex; align-items: center; gap: 6px; }
 .proj-tags .zn .ic { width: 14px; height: 14px; }
+.avail { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--ink-muted); }
+.avail .dot { width: 8px; height: 8px; background: var(--butter); box-shadow: 0 0 0 3px rgba(255, 224, 122, .35); }
 .tz-info { display: inline-flex; align-items: center; gap: 6px; }
 .tz-info .ic { width: 15px; height: 15px; }
 .langline { display: flex; align-items: center; gap: 8px; }

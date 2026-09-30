@@ -241,7 +241,7 @@
       <div class="sec-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2></div>
       <div class="about rv">
         <div>
-          <p class="status"><span class="pill open"><span class="dot" style="background:var(--ink)"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
+          <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
           <div class="reach"><a class="btn-pill" href="mailto:${p.email}">${ic("mail")}${esc(s("email"))} <span aria-hidden="true">→</span></a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>
         </div>
