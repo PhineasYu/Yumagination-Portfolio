@@ -21,8 +21,8 @@
   const esc = (x) => String(x == null ? "" : x).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const N = { work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" } };
   const S = {
-    hint: { en: "Drag to wander. Scroll works too. Click a photograph to look closer.", zh: "拖动来闲逛，滚轮也可以。点一张照片看大图。" },
-    count: { en: "photographs", zh: "张照片" }, home: { en: "Back to the start", zh: "回到起点" },
+    hint: { en: "Drag, scroll or pinch to wander and zoom. Click a photograph to look closer.", zh: "拖动、滚动或双指捏合，来闲逛和缩放。点一张照片看大图。" },
+    count: { en: "photographs", zh: "张照片" }, zin: { en: "Zoom in", zh: "放大" }, zout: { en: "Zoom out", zh: "缩小" }, home: { en: "Back to the start", zh: "回到起点" },
     soon: { en: "The walls are being hung. Photographs arrive here soon.", zh: "展墙正在布置，照片很快会挂上来。" }
   };
   const all = G.series.flatMap((s) => s.photos);
@@ -47,7 +47,7 @@
   { const r = rng(7, 11); for (let i = NP - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; } }
 
   const cv = $("#cv"), world = $("#world");
-  let ox = 0, oy = 0;                       // world position of the screen's top-left corner
+  let ox = 0, oy = 0, Z = 1;                // world position of the screen's top-left corner, and the zoom
   const cells = new Map();
   function buildCell(cx, cy) {
     const el = document.createElement("div"); el.className = "cell"; el.style.transform = `translate(${cx * CW}px,${cy * CH}px)`;
@@ -74,43 +74,76 @@
   let raf = 0;
   function sync() {
     raf = 0;
-    const W = innerWidth, H = innerHeight, m = 1;
+    const W = innerWidth / Z, H = innerHeight / Z, m = 1;
     const x0 = Math.floor(ox / CW) - m, x1 = Math.floor((ox + W) / CW) + m, y0 = Math.floor(oy / CH) - m, y1 = Math.floor((oy + H) / CH) + m;
     for (let y = y0; y <= y1; y++) for (let x = x0; x <= x1; x++) { const k = x + "," + y; if (!cells.has(k)) { const c = buildCell(x, y); cells.set(k, c); world.appendChild(c); } }
     for (const [k, c] of cells) { const [x, y] = k.split(",").map(Number); if (x < x0 - 1 || x > x1 + 1 || y < y0 - 1 || y > y1 + 1) { c.remove(); cells.delete(k); } }
-    world.style.transform = `translate3d(${-ox}px,${-oy}px,0)`;
-    cv.style.backgroundPosition = `${-ox}px ${-oy}px`;
+    world.style.transform = `scale(${Z}) translate(${-ox}px,${-oy}px)`;
+    cv.style.backgroundSize = `${48 * Z}px ${48 * Z}px`;
+    cv.style.backgroundPosition = `${-ox * Z}px ${-oy * Z}px`;
   }
   const queue = () => { if (!raf) raf = requestAnimationFrame(sync); };
 
-  /* ---------- moving ---------- */
-  let vx = 0, vy = 0, drag = null, moved = 0, glide = 0;
+  /* ---------- moving and zooming: drag, two-finger scroll, pinch, arrow keys, + and - ---------- */
+  const MINZ = .3, MAXZ = 2.4;
+  let vx = 0, vy = 0, moved = 0, glide = 0;
+  const pts = new Map();                     // active pointers, for pinch
+  let drag = null, pinch = null;
   const stop = () => { cancelAnimationFrame(glide); glide = 0; vx = vy = 0; };
-  const go = () => { glide = requestAnimationFrame(() => { ox -= vx; oy -= vy; vx *= .94; vy *= .94; queue(); if (Math.abs(vx) + Math.abs(vy) > .15) go(); else glide = 0; }); };
-  cv.addEventListener("pointerdown", (e) => { if (e.button > 0) return; stop(); drag = { x: e.clientX, y: e.clientY, t: performance.now() }; moved = 0; cv.setPointerCapture(e.pointerId); cv.classList.add("grab"); hideHint(); });
+  const zoomAt = (f, cx, cy) => { const nz = Math.max(MINZ, Math.min(MAXZ, Z * f)); if (nz === Z) return; const wx = ox + cx / Z, wy = oy + cy / Z; Z = nz; ox = wx - cx / Z; oy = wy - cy / Z; queue(); };
+  const go = () => { glide = requestAnimationFrame(() => { ox -= vx / Z; oy -= vy / Z; vx *= .94; vy *= .94; queue(); if (Math.abs(vx) + Math.abs(vy) > .15) go(); else glide = 0; }); };
+  const dist = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y); };
+  const mid = () => { const [a, b] = [...pts.values()]; return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; };
+  cv.addEventListener("pointerdown", (e) => {
+    if (e.button > 0) return; stop(); hideHint();
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); cv.setPointerCapture(e.pointerId);
+    if (pts.size === 2) { drag = null; pinch = { d: dist(), m: mid() }; moved = 99; }
+    else { drag = { x: e.clientX, y: e.clientY, t: performance.now() }; moved = 0; cv.classList.add("grab"); }
+  });
   cv.addEventListener("pointermove", (e) => {
+    if (!pts.has(e.pointerId)) return; pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinch && pts.size >= 2) {
+      const d = dist(), m = mid();
+      ox -= (m.x - pinch.m.x) / Z; oy -= (m.y - pinch.m.y) / Z; zoomAt(d / pinch.d, m.x, m.y); pinch = { d, m }; queue(); return;
+    }
     if (!drag) return;
     const dx = e.clientX - drag.x, dy = e.clientY - drag.y, now = performance.now(), dt = Math.max(1, now - drag.t);
-    ox -= dx; oy -= dy; moved += Math.abs(dx) + Math.abs(dy);
+    ox -= dx / Z; oy -= dy / Z; moved += Math.abs(dx) + Math.abs(dy);
     vx = vx * .6 + (dx / dt * 16) * .4; vy = vy * .6 + (dy / dt * 16) * .4;
     drag = { x: e.clientX, y: e.clientY, t: now }; queue();
   });
-  const up = () => { if (!drag) return; drag = null; cv.classList.remove("grab"); if (moved > 6 && Math.abs(vx) + Math.abs(vy) > 1) go(); };
+  const up = (e) => { pts.delete(e.pointerId); if (pts.size < 2) pinch = null; if (!pts.size) { const was = drag; drag = null; cv.classList.remove("grab"); if (was && moved > 6 && Math.abs(vx) + Math.abs(vy) > 1) go(); } };
   cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
-  cv.addEventListener("wheel", (e) => { e.preventDefault(); if (e.ctrlKey) return; stop(); ox += e.deltaX; oy += e.deltaY; hideHint(); queue(); }, { passive: false });
-  addEventListener("keydown", (e) => { if (!lb.hidden) return; const k = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key]; if (k) { e.preventDefault(); stop(); ox += k[0] * 220; oy += k[1] * 220; hideHint(); queue(); } });
+  // trackpad: two-finger scroll pans; pinch (which arrives as ctrl + wheel) and ctrl + wheel zoom around the pointer
+  cv.addEventListener("wheel", (e) => {
+    e.preventDefault(); stop(); hideHint();
+    if (e.ctrlKey) zoomAt(Math.exp(-e.deltaY * (e.deltaMode ? .05 : .01)), e.clientX, e.clientY);
+    else { ox += e.deltaX / Z; oy += e.deltaY / Z; queue(); }
+  }, { passive: false });
+  // Safari pinch on a trackpad
+  let gz = 1; addEventListener("gesturestart", (e) => { e.preventDefault(); gz = 1; }); addEventListener("gesturechange", (e) => { e.preventDefault(); zoomAt(e.scale / gz, e.clientX || innerWidth / 2, e.clientY || innerHeight / 2); gz = e.scale; }); addEventListener("gestureend", (e) => e.preventDefault());
+  cv.addEventListener("dblclick", (e) => { if (e.target.closest(".ph")) return; zoomAt(Z < 1.2 ? 1.8 : 1 / Z, e.clientX, e.clientY); });
+  const step = (k) => { stop(); ox += k[0] * 220 / Z; oy += k[1] * 220 / Z; hideHint(); queue(); };
+  addEventListener("keydown", (e) => {
+    if (!lb.hidden) return;
+    const k = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[e.key];
+    if (k) { e.preventDefault(); step(k); }
+    else if (e.key === "+" || e.key === "=") zoomAt(1.25, innerWidth / 2, innerHeight / 2);
+    else if (e.key === "-" || e.key === "_") zoomAt(.8, innerWidth / 2, innerHeight / 2);
+    else if (e.key === "0") { Z = 1; recentre(); }
+  });
   cv.addEventListener("click", (e) => { const el = document.elementFromPoint(e.clientX, e.clientY), a = el && el.closest(".ph"); e.preventDefault(); if (a && moved < 6) open(+a.dataset.i); });
-  addEventListener("resize", () => { ox += 0; queue(); });
+  addEventListener("resize", queue);
 
   /* ---------- page furniture ---------- */
   let hintOn = true;
   function hideHint() { if (hintOn) { hintOn = false; $("#hint").classList.add("off"); } }
-  function recentre() { stop(); ox = -innerWidth / 2 + CW / 2; oy = -innerHeight / 2 + CH / 2; queue(); }
+  function recentre() { stop(); Z = 1; ox = -innerWidth / 2 + CW / 2; oy = -innerHeight / 2 + CH / 2; queue(); }
   function furniture() {
     $("#title").innerHTML = `<p class="g-kicker mono">${esc(t(G.kicker))}</p><h1>${esc(t(G.title))}</h1><p>${esc(t(G.statement))}</p>`;
     $("#hint").firstElementChild.textContent = NP ? t(S.hint) : t(S.soon);
     $("#count").textContent = NP ? `${NP} ${t(S.count)}` : "";
-    $("#home").setAttribute("aria-label", t(S.home)); $("#home").title = t(S.home);
+    $("#home").setAttribute("aria-label", t(S.home)); $("#home").title = t(S.home); $("#zin").title = t(S.zin); $("#zout").title = t(S.zout);
     document.querySelectorAll("[data-t]").forEach((el) => (el.textContent = t(N[el.dataset.t])));
     $("#lang").textContent = lang === "zh" ? "EN" : "中文";
     document.documentElement.lang = lang === "zh" ? "zh" : "en";
@@ -141,5 +174,6 @@
 
   $("#lang").addEventListener("click", () => { lang = lang === "zh" ? "en" : "zh"; try { localStorage.setItem("lang", lang); } catch (e) {} relang(); });
   $("#home").addEventListener("click", recentre);
+  $("#zin").addEventListener("click", () => zoomAt(1.3, innerWidth / 2, innerHeight / 2)); $("#zout").addEventListener("click", () => zoomAt(1 / 1.3, innerWidth / 2, innerHeight / 2));
   furniture(); recentre();
 })();

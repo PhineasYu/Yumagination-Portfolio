@@ -63,3 +63,7 @@ body.lb-open { overflow: hidden; }
 }
 
 .gallery-page .bar { background: rgba(244, 244, 244, .82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+
+.g-btns { display: flex; gap: 8px; pointer-events: auto; }
+.cv { touch-action: none; }
+.g-home { font-weight: 500; }

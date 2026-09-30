@@ -10,8 +10,8 @@ window.GALLERY = {
   title: { en: "Gallery", zh: "摄影" },
   // verify: confirm this wording is what you want to say
   statement: {
-    en: "Photography is the hobby I have kept the longest. These are photographs from years of carrying a camera.",
-    zh: "摄影是我坚持最久的爱好。这里是多年来随身带着相机拍下的照片。"
+    en: "Photography is the hobby I have kept the longest. Enjoy.",
+    zh: "摄影是我坚持最久的爱好。慢慢欣赏。"
   },
   series: []
 };
