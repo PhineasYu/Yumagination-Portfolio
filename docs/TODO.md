@@ -26,9 +26,9 @@
 
 ## Phase 0 · 先让它活着（10 分钟）
 
-- [ ] **0.0b 把默认分支改成 main（只有你能点，1 分钟）**：https://github.com/PhineasYu/Yumagination-Portfolio/settings/branches → Default branch 右边的 ⇄ 图标 → 选 `main` → Update。原因：GitHub Pages 只接受默认分支的部署，目前默认分支还是 Claude 的开发分支，所以推到 main 不会更新网站（工作流已临时兼容，但改掉最干净）。
+- [x] **0.0b 把默认分支改成 main（只有你能点，1 分钟）**：https://github.com/PhineasYu/Yumagination-Portfolio/settings/branches → Default branch 右边的 ⇄ 图标 → 选 `main` → Update。原因：GitHub Pages 只接受默认分支的部署，目前默认分支还是 Claude 的开发分支，所以推到 main 不会更新网站（工作流已临时兼容，但改掉最干净）。
 
-- [ ] **0.0 打开 GitHub Pages（只有你能点，1 分钟）**：浏览器打开 https://github.com/PhineasYu/Yumagination-Portfolio/settings/pages → 「Build and deployment」下的 Source 选 **GitHub Actions**（不用选别的，不用保存按钮）。然后打开 https://github.com/PhineasYu/Yumagination-Portfolio/actions ，点最新一条失败的 “Deploy portfolio to GitHub Pages” → 右上角 **Re-run all jobs**。一两分钟后变绿。做完的标志：下面 0.1 的链接能打开。
+- [x] **0.0 打开 GitHub Pages（只有你能点，1 分钟）**：浏览器打开 https://github.com/PhineasYu/Yumagination-Portfolio/settings/pages → 「Build and deployment」下的 Source 选 **GitHub Actions**（不用选别的，不用保存按钮）。然后打开 https://github.com/PhineasYu/Yumagination-Portfolio/actions ，点最新一条失败的 “Deploy portfolio to GitHub Pages” → 右上角 **Re-run all jobs**。一两分钟后变绿。做完的标志：下面 0.1 的链接能打开。
 
 - [ ] **0.1** 打开上面的线上地址，用手机也打开一次。做完的标志：你能在手机上看到首页。
 - [ ] **0.2** 把链接发给自己（微信/邮件均可）。做完的标志：链接在你收件箱里。 *（先不给别人。）*
@@ -46,7 +46,7 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - [ ] **1.7 分工（4 个小问题）**：LegacyChain、Kikaren、Teamdex、SAP，各自是你一个人做的，还是有队友？队友做了什么？（一句话即可；不确定就写「团队项目，我负责 X」。）
 - [x] **1.9 Let Me Die 的玩法**：一句话说清这款游戏怎么玩（它会成为卡片和标题的第一句）。顺便：你一个人做的还是有队友？ ✅ 2026-09-30 已写入四个空间和名字由来（队友问题未提供，页面没写）
 - [ ] **1.10 Disco Fever**：黑客松的正式名称是什么？有队友吗？
-- [ ] **1.11 Revive**：网站上可以出现公司名 Revive 吗？（不行就改成「一家零售公司」。）
+- [x] **1.11 Revive**：网站上可以出现公司名 Revive 吗？（不行就改成「一家零售公司」。）
 - [ ] **1.8 联系方式**：网站上公开的是 phineasyu0812@gmail.com、LinkedIn、GitHub。可以公开吗？要不要加别的（比如小红书/Instagram）？
 
 **Phase 1 完成 = 网站可以安全地发给招聘方了。**
@@ -118,3 +118,5 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 
 ## 进度日志
 （Claude：每完成一项在这里加一行 `日期 · 任务号 · 做了什么`。）
+- 2026-09-30 · 0.0b / 0.0 · 默认分支已是 main，线上网站能打开（Claude 核实）
+- 2026-09-30 · 1.11 · 可以公开 Revive 的名字和 logo（用户确认），经历里已加 Revive 实习
