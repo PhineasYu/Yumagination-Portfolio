@@ -44,13 +44,13 @@
     const empty = `
       <section class="empty"><div class="empty-walls" aria-hidden="true"><div class="ghost"></div><div class="ghost"></div><div class="ghost"></div></div><p class="empty-note">${esc(t(S.soon))}</p></section>`;
     $("#view").innerHTML = `
-      <section class="g-hero"><canvas class="breath" aria-hidden="true"></canvas>
+      <section class="g-hero"><canvas class="silk" aria-hidden="true"></canvas>
         <div class="g-hero-in"><p class="g-kicker mono">${esc(t(G.kicker))}</p><h1 class="g-title">${esc(t(G.title))}</h1><p class="g-statement">${esc(t(G.statement))}</p>${all.length ? `<p class="g-count mono">${all.length} ${esc(t(S.photos))} · ${G.series.length} ${esc(t(S.room)).toLowerCase()}${lang === "zh" ? "" : G.series.length > 1 ? "s" : ""}</p>` : ""}</div>
       </section>
       <div id="wall">${all.length ? rooms : empty}</div>
       <section class="g-foot"><h2>${esc(t(S.talk))}</h2><a class="mail" href="mailto:phineasyu0812@gmail.com">phineasyu0812@gmail.com</a>
         <div class="foot mono"><span>© ${new Date().getFullYear()} Yunfei Yu</span><span>${esc(t(S.footer))}</span></div></section>`;
-    if (window.startBreath) window.startBreath($("canvas.breath"));
+    if (window.startSilk) window.startSilk($("canvas.silk"));
     // photographs fade in as they load (slowly, like an exposure)
     $$(".plate img").forEach((im) => { const ok = () => im.classList.add("ready"); im.complete ? ok() : im.addEventListener("load", ok, { once: true }); });
     layout();

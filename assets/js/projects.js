@@ -4,6 +4,8 @@
 
    zone:  one id from PORTFOLIO.cats;  tags: ids from PORTFOLIO.tags.
    tile:  { video, poster } | { motion } | { text, sub } (typographic tile).
+   shape: "wide" (browser / desktop recordings, 16:10 illustrations) | "tall" (phone
+          screens) | "square" (text tiles). The home bento sizes cards by it; nothing is cropped.
    sub:   optional subtitle shown next to the title.
    media kinds:  video | img | embed | motion | steps | stats
    `verify` = things to confirm before sharing (shown only with ?draft).
@@ -26,6 +28,7 @@
       status: L("Prototype + Chrome extension MVP", "原型 + Chrome 插件 MVP"),
       stack: ["HTML / JS", "Chrome MV3", "Anthropic SDK", "Claude Code"],
       links: [{ label: L("Open the live prototype", "打开可运行原型"), url: "demos/full-context-canvas/index.html" }, GH("https://github.com/PhineasYu/Full-context-canvas")],
+      shape: "wide",
       tile: { video: "fcc", poster: "fcc-poster" },
       hero: V("fcc", { frame: "browser", tag: "rec", cap: L("The built-in 11-step guided tour, recorded from the running prototype.", "内置的 11 步演示导览，录自正在运行的原型。") }),
       sections: [
@@ -62,6 +65,7 @@
       stack: ["TanStack Start", "React", "Supabase", "ElevenLabs", "Polar", "Lovable"],
       links: [GH("https://github.com/PhineasYu/Dossier")],
       verify: L("Add real in-app screenshots (fictional child only). The published Lovable URL currently shows 'Build incomplete'.", "补登录后的真实界面截图（只用虚构孩子）。目前 Lovable 已发布的网址显示 “Build incomplete”。"),
+      shape: "wide",
       tile: { motion: "dossier-dump" },
       hero: { type: "motion", id: "dossier-dump", cap: L("Illustration of the pipeline: a spoken paragraph is split into items that land in each child's lane.", "流程示意：一段口述被拆成条目，落入各个孩子的轨道。"), tag: "ill" },
       sections: [
@@ -92,6 +96,7 @@
       stack: ["Next.js 15", "TypeScript", "Tailwind (RTL)", "Supabase", "Zustand", "Telegram Bot API", "Netlify"],
       links: [],
       verify: L("Add the live URL and 3–5 screenshots or a screen recording (menu, cart, checkout, Telegram message, admin). Repo is private.", "需补线上网址和 3–5 张截图或一段录屏（菜单、购物车、结账、Telegram 通知、后台）。仓库为私有。"),
+      shape: "wide",
       tile: { motion: "sushi-flow" },
       hero: { type: "motion", id: "sushi-flow", cap: L("Illustration of the order loop: site, database, Telegram, owner's phone call.", "订单闭环示意：网站、数据库、Telegram、老板电话确认。"), tag: "ill" },
       sections: [
@@ -119,6 +124,7 @@
       status: L("1st place · one-day hackathon build (Uniplay)", "一等奖 · 一天完成的黑客松作品（Uniplay）"),
       stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
       links: [GH("https://github.com/PhineasYu/TeamDex")],
+      shape: "tall",
       tile: { video: "teamdex", poster: "teamdex-poster", phone: true },
       hero: V("teamdex", { frame: "phone", bg: "#dfe9e2", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
       sections: [
@@ -148,6 +154,7 @@
       stack: ["BitMagic GDK", "Claude Code"],
       links: [{ label: L("Play it", "在线试玩"), url: "https://bitmagic.ai/play/disco-fever/" }],
       verify: L("Official hackathon name; teammates; add a screen recording.", "黑客松正式名称；队友；补一段录屏。"),
+      shape: "square",
       tile: { text: L("2nd place", "二等奖"), sub: L("Rhythm game · playable online", "节奏游戏 · 在线可玩") },
       sections: [
         { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
@@ -169,6 +176,7 @@
       stack: ["Interviews", "Thematic coding", "Service design", "Interactive prototype"],
       links: [],
       verify: L("Add prototype link, 4–6 figures, and the thesis PDF if you want it public.", "如需公开，请补原型链接、4–6 张图和论文 PDF。"),
+      shape: "wide",
       tile: { motion: "funnel" },
       hero: { type: "motion", id: "funnel", cap: L("From data to design: interviews to tensions to principles to the Canvas.", "从数据到设计：访谈 → 张力 → 原则 → 画布。"), tag: "ill" },
       sections: [
@@ -197,6 +205,7 @@
       stack: ["Next.js", "TypeScript", "Solidity", "@noble/post-quantum", "Vitest", "Claude Code"],
       links: [{ label: L("Open the live prototype", "打开可运行原型"), url: "https://legacychain-one.vercel.app/" }, GH("https://github.com/PhineasYu/legacychain")],
       verify: L("Official event name and result; teammates and split of work. MEMO: year, your role, and whether it was a course project. '27 commits' and '3 test suites' were not in the reviewed material. Use one version of the grandparents' story if you tell it.", "赛事正式名称与成绩；队友与分工。MEMO：年份、你的角色、是否为课程项目。「27 次提交」「3 组测试」不在已核对的材料里。如果讲祖辈的故事，只用一个版本。"),
+      shape: "wide",
       tile: { video: "legacychain", poster: "legacychain-poster" },
       hero: V("legacychain", { frame: "browser", tag: "rec", cap: L("Opening the vault, a heritage certificate with its QR, and the provenance view. Recorded from the running app.", "打开保险库、带二维码的传承证书、出处视图。录自正在运行的应用。") }),
       sections: [
@@ -229,6 +238,7 @@
       status: L("1st place", "第一名"),
       stack: ["Stone Leap", "AI world builder"],
       links: [],
+      shape: "square",
       tile: { text: L("1st place", "第一名"), sub: L("First-person game · built in one evening", "第一人称游戏 · 一个晚上完成") },
       sections: [
         { h: L("Overview — Dying as a way to see more worlds", "概述 — 用死亡去看更多的世界"),
@@ -253,6 +263,7 @@
       stack: ["Lovable", "TanStack Start", "React"],
       links: [GH("https://github.com/PhineasYu/vision-telescope")],
       verify: L("Confirm hackathon name, date, team and result.", "需确认黑客松名称、日期、团队和成绩。"),
+      shape: "wide",
       tile: { video: "kikaren", poster: "kikaren-poster" },
       hero: V("kikaren", { frame: "browser", tag: "rec", cap: L("Drag a party card into the lens, the telescope turns, and you see that party's vision for Järva in five years. Recorded from the running app.", "把政党卡片拖进镜头，望远镜转动，你看到这个政党对 Järva 五年后的愿景。录自正在运行的应用。") }),
       sections: [
@@ -278,6 +289,7 @@
       status: L("1st place, case competition round two", "案例赛第二轮第一名"),
       stack: ["Claude", "Interactive prototype", "Case consulting"],
       links: [],
+      shape: "wide",
       tile: { motion: "tower" },
       hero: { type: "motion", id: "tower", cap: L("Illustration of the idea: region filters, SKU-level explanations, one-click approve. The real dashboard used fictional demo data.", "思路示意：区域筛选、SKU 级解释、一键批准。真实的 dashboard 使用虚构的演示数据。"), tag: "ill" },
       sections: [
@@ -305,6 +317,7 @@
       status: L("Front-end prototype, live", "前端原型，已上线"),
       stack: ["Lovable", "TanStack Start", "React"],
       links: [{ label: L("Open the live app", "打开在线应用"), url: "https://moment-share-square.lovable.app" }, GH("https://github.com/PhineasYu/moment-share-square")],
+      shape: "tall",
       tile: { video: "meanwhile", poster: "meanwhile-poster", phone: true },
       hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("Switching person, adding a moment, sending an emoji, and the pairing. Recorded from the running app.", "切换人、添加瞬间、发送 emoji、配对。录自正在运行的应用。") }),
       sections: [
@@ -332,6 +345,7 @@
       status: L("Live app · KTH × Lovable hackathon, Student life track", "在线应用 · KTH × Lovable 黑客松，Student life 赛道"),
       stack: ["Lovable", "TanStack Start", "Lovable Cloud"],
       links: [{ label: L("Open the live app", "打开在线应用"), url: "https://chroma-reader-study-tool.lovable.app" }, GH("https://github.com/PhineasYu/chroma-reader-study-tool")],
+      shape: "wide",
       tile: { video: "chroma", poster: "chroma-poster" },
       hero: V("chroma", { frame: "browser", tag: "rec", cap: L("Opening the sample reading and marking sentences with keys 1 to 5. Recorded from the running app.", "打开示例文章，用 1 到 5 键给句子标色。录自正在运行的应用。") }),
       sections: [
@@ -360,6 +374,7 @@
       stack: ["Field research", "Personas", "Stakeholder map", "Full-scale prototype", "UI design"],
       links: [],
       verify: L("Add publishable photos, the built version next to your proposal, and the hand sketches.", "补可公开的照片、落地版和你的方案的对比，以及手绘稿。"),
+      shape: "square",
       tile: { text: L("Frame the street", "框住街道"), sub: L("Excellent Proposal commendation · Shanghai", "优秀提案表彰 · 上海") },
       sections: [
         { h: L("Overview — A real neighbourhood, a real brief", "概述 — 真实的社区，真实的命题"),
@@ -384,6 +399,7 @@
       stack: ["Swift", "macOS", "Claude Code"],
       links: [],
       verify: L("Add a screen recording or screenshots. Decide whether to publish it. Confirm nobody else worked on it.", "补录屏或截图；决定是否公开发布；确认有没有队友。"),
+      shape: "square",
       tile: { text: L("Notch → break", "刘海 → 休息"), sub: L("Native macOS app · built in one day", "原生 macOS app · 一天完成") },
       sections: [
         { h: L("Overview — The reminder lives where the notch already is", "概述 — 提醒就长在刘海那里"),
@@ -406,6 +422,7 @@
       stack: ["Field research", "Surveys", "Service + UI design", "Business case"],
       links: [],
       verify: L("Add visuals (helmet concept, flow screens) if Voi allows publication.", "如 Voi 允许公开，请补头盔概念与流程截图。"),
+      shape: "wide",
       tile: { motion: "voi-flow" },
       hero: { type: "motion", id: "voi-flow", cap: L("Illustration of the helmet flow: unlock, wear, ride, return.", "头盔流程示意：解锁、佩戴、骑行、归还。"), tag: "ill" },
       sections: [
@@ -433,6 +450,7 @@
       stack: ["Figma", "Design systems", "Usability testing", "Jira"],
       links: [],
       verify: L("Company work: check with Kodiak what visuals are publishable before adding screenshots.", "公司项目：放截图前，先确认 Kodiak 允许公开的范围。"),
+      shape: "wide",
       tile: { motion: "breakpoints" },
       hero: { type: "motion", id: "breakpoints", cap: L("Illustration of the breakpoint decision: evidence from 1,000+ real users set a desktop-first strategy.", "断点决策示意：1,000+ 真实用户的数据支撑了桌面优先的策略。"), tag: "ill" },
       sections: [
@@ -463,6 +481,7 @@
       stack: ["Python", "Claude Code"],
       links: [],
       verify: L("Confirm Revive is fine with being named here. How much time or how many errors did it save? Two or three independent sources?", "确认 Revive 同意在这里出现名字；节省了多少时间或减少了多少错误；对照的是 2 个还是 3 个独立来源。"),
+      shape: "square",
       tile: { text: L("Every row, checked", "逐行核对"), sub: L("Internship · text only", "实习 · 仅文字") },
       sections: [
         { h: L("Overview — A request from the business side", "概述 — 来自业务方的需求"),
@@ -487,6 +506,7 @@
       stack: ["Microsoft Foundry", "Microsoft Fabric", "Azure", "Fabric Data Agent"],
       links: [],
       verify: L("Add the share page link if you still have it. Say which decisions were your own, for example how you got the workflow to finish.", "如果还有分享网页，补上链接；写清哪些判断是你自己做的，例如怎么让 workflow 走完。"),
+      shape: "square",
       tile: { text: L("3 agents, 1 workflow", "3 个 agent，1 个工作流"), sub: L("Microsoft Foundry · Fabric · Azure", "Microsoft Foundry · Fabric · Azure") },
       sections: [
         { h: L("Overview — Three agents, one data source, one workflow", "概述 — 三个 agent、一个数据源、一个工作流"),
