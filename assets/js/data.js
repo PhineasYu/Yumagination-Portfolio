@@ -25,12 +25,22 @@ window.PORTFOLIO = {
 
   tools: ["Claude Code", "Lovable", "Figma", "Supabase", "Next.js", "TypeScript", "Tailwind", "ElevenLabs", "Telegram Bot API", "Chrome Extensions", "Netlify", "Vercel", "Git / PR workflow"],
 
+  /* Zones: every project has exactly one `zone` and any number of `tags`. */
   cats: [
     { id: "all", en: "All", zh: "全部" },
-    { id: "ai", en: "AI-native builds", zh: "AI 原生作品" },
-    { id: "hack", en: "Hackathons", zh: "黑客松" },
-    { id: "real", en: "Shipped for real", zh: "真实上线" },
-    { id: "design", en: "Research & design", zh: "研究与设计" }
+    { id: "ux", en: "UX & UI Design", zh: "用户体验与界面设计" },
+    { id: "service", en: "Service Design & Research", zh: "服务设计与研究" },
+    { id: "ai", en: "AI Products", zh: "AI 产品" },
+    { id: "build", en: "Build, Automate & Ship", zh: "开发、自动化与上线" },
+    { id: "games", en: "Games & Interactive", zh: "游戏与互动体验" }
+  ],
+
+  tags: [
+    { id: "hackathon", en: "Hackathon", zh: "黑客松" },
+    { id: "award", en: "Award", zh: "获奖" },
+    { id: "real-users", en: "Real users", zh: "真实用户" },
+    { id: "built-with-ai", en: "Built with AI", zh: "用 AI 构建" },
+    { id: "automation", en: "Automation & Agents", zh: "自动化与 Agent" }
   ],
 
   more: {
@@ -39,14 +49,20 @@ window.PORTFOLIO = {
       { name: "Chronicool", year: "2026", note: { en: "A Rick & Morty habit tracker. The brief was literally 'improve the prompts first, then build'.", zh: "Rick & Morty 风格的习惯打卡。需求原文就是「先帮我改进提示词，再开始做」。" }, url: "https://chronicool-tracker.lovable.app" },
       { name: "Defense Countdown Clock", year: "2026", note: { en: "A minimal, precise 4-minute timer built for my own thesis defence. Space to start, R to reset.", zh: "为自己的论文答辩做的极简、精确 4 分钟倒计时。空格开始，R 重置。" }, url: "https://github.com/PhineasYu/defense-countdown-clock" },
       { name: "ADHD Stride", year: "2025", note: { en: "Early Lovable experiment: task steps as flows, focus timer, progress ring.", zh: "早期 Lovable 实验：把任务拆成步骤流，含专注计时和进度环。" }, url: "https://adhd-stride.lovable.app" },
+      { name: "Longevity visualisation", year: "2026", note: { en: "Hackathon team work on reversible whole-body cryopreservation, framed as a feasibility study. As the main designer I built a 3D body and a temperature dashboard in Spline, animating cooling, storage and rewarming for the big-screen presentation.", zh: "黑客松团队项目，题目是可逆的全人体冷冻保存，定位为可行性探讨。我是主要设计师，在 Spline 里做了 3D 人体和温度看板，为大屏演示做了降温、储存、复温三个阶段的动画。" }, verify: { en: "Team name, teammates, track and result unknown; add the final video to promote this to a full project.", zh: "团队名、队友、赛道和成绩未知；补上最终视频后可升级为主项目。" } },
       { name: "Personal Daily Grid", year: "2025", note: { en: "Early Lovable experiment: calendar, tasks and profile in one grid.", zh: "早期 Lovable 实验：把日历、任务和个人档案放进同一张网格。" }, url: "https://personal-daily-grid.lovable.app" }
     ]
   },
 
   awards: [
     { year: "2026", title: { en: "SAP Career Ignite: 1st place", zh: "SAP Career Ignite：第一名" }, note: { en: "Case competition, round two, with Capgemini and Google", zh: "案例竞赛第二轮，合作方 Capgemini 与 Google" } },
-    { year: "2026", title: { en: "Aris & Friends Hackathon: 'Thinking outside of the box' prize", zh: "Aris & Friends 黑客松：「跳出框框思考」奖" }, note: { en: "4-hour build with Protos and Redpine, Stockholm", zh: "4 小时现场搭建，使用 Protos 与 Redpine，斯德哥尔摩" }, verify: true },
-    { year: "—", title: { en: "Deloitte Spark Hackathon: 3rd place", zh: "Deloitte Spark 黑客松：第三名" }, note: { en: "Planet-friendlier routing from open deforestation, biodiversity, soil and CO₂ data", zh: "基于森林砍伐、生物多样性、土壤污染与碳排放开放数据的更环保路线建议" }, verify: true }
+    { year: "2026", title: { en: "Aris & Friends Hackathon: 'Thinking outside of the box' prize", zh: "Aris & Friends 黑客松：「跳出框框思考」奖" }, note: { en: "4-hour build with Protos and Redpine, Stockholm", zh: "4 小时现场搭建，使用 Protos 与 Redpine，斯德哥尔摩" } },
+    { year: "2026", title: { en: "Deloitte Spark Hackathon: 3rd place", zh: "Deloitte Spark 黑客松：第三名" }, note: { en: "Planet-friendlier routing from open deforestation, biodiversity, soil and CO₂ data", zh: "基于森林砍伐、生物多样性、土壤污染与碳排放开放数据的更环保路线建议" } },
+    { year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
+    { year: "2026", title: { en: "Stone Leap Build-a-Game: 1st place (Let Me Die)", zh: "Stone Leap Build-a-Game：第一名（Let Me Die）" }, note: { en: "A playable game built in one evening with an AI world builder", zh: "用 AI world builder 一个晚上做出的可玩游戏" } },
+    { year: "2026", title: { en: "BitMagic game hackathon: 2nd place (Disco Fever)", zh: "BitMagic 游戏黑客松：二等奖（Disco Fever）" }, note: { en: "A one-minute disco rhythm game, now playable online", zh: "一分钟的迪斯科节奏游戏，已在线可玩" }, verify: true },
+    { year: "2026", title: { en: "Accel AI Innovate Hackathon: Top 8 and a pitch slot (Dossier)", zh: "Accel AI Innovate 黑客松：Top 8 并获得路演机会（Dossier）" }, note: { en: "Hosted by KTH AI Society", zh: "KTH AI Society 主办" } },
+    { year: "2022–23", title: { en: "Huayang Road community renewal: Excellent Proposal commendation", zh: "华阳路街道社区更新：优秀提案表彰" }, note: { en: "Community Viewfinder, Changning District, Shanghai", zh: "社区取景框，上海长宁区" } }
   ],
 
   method: {
@@ -57,7 +73,7 @@ window.PORTFOLIO = {
     },
     steps: [
       { n: "01", h: { en: "Frame", zh: "定义" }, p: { en: "Turn a vague brief into one person, one moment, one decision. Kikaren's barrier map and Dossier's 90-second judge path came from here.", zh: "把模糊的需求收窄成一个人、一个瞬间、一个决策。Kikaren 的障碍地图、Dossier 的 90 秒路径都出自这里。" } },
-      { n: "02", h: { en: "Spec", zh: "写 spec" }, p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Teamdex has five spec documents; Meanwhile has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Teamdex 有五份规格文档；Meanwhile 有一份写清所有约束的开发规格。" } },
+      { n: "02", h: { en: "Spec", zh: "写 spec" }, p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Teamdex has five spec documents; Beside has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Teamdex 有五份规格文档；Beside 有一份写清所有约束的开发规格。" } },
       { n: "03", h: { en: "Direct", zh: "指挥" }, p: { en: "Give the agent working rules, not wishes: local-first data, always deployable, P0 before P1, 'do not add anything I didn't ask for'.", zh: "给 AI 的是工作守则，不是愿望：本地优先、始终可部署、P0 先于 P1、「没让你加的不要加」。" } },
       { n: "04", h: { en: "Verify", zh: "验证" }, p: { en: "Real people and real loops. A real customer through Sushi Jerash's order-to-Telegram loop; think-aloud sessions at Kodiak; tests for hashing and signatures in LegacyChain.", zh: "真实的人、真实的闭环。Sushi Jerash 用真实顾客跑通下单到 Telegram 通知；Kodiak 做出声思考测试；LegacyChain 给哈希与签名写测试。" } }
     ],
@@ -65,7 +81,7 @@ window.PORTFOLIO = {
     principles: [
       { h: { en: "Show the reasoning", zh: "让推理看得见" }, p: { en: "Full Context Canvas gives every placement a reason and a confidence score.", zh: "Full Context Canvas 给每一次归位写明理由和把握度。" } },
       { h: { en: "AI is a reader, not the authority", zh: "AI 是读者，不是权威" }, p: { en: "In LegacyChain, AI output is 'pending' until a person accepts it.", zh: "在 LegacyChain 里，AI 的输出在人接受之前一直是「待确认」。" } },
-      { h: { en: "Remove the pressure", zh: "拿掉压力" }, p: { en: "Meanwhile has no reply obligation; Teamdex has no leaderboard.", zh: "Meanwhile 没有回复义务；Teamdex 没有排行榜。" } },
+      { h: { en: "Remove the pressure", zh: "拿掉压力" }, p: { en: "Beside has no reply obligation; Teamdex has no leaderboard.", zh: "Beside 没有回复义务；Teamdex 没有排行榜。" } },
       { h: { en: "One interaction carries the idea", zh: "一个交互承载整个想法" }, p: { en: "A telescope for Kikaren; keys 1–5 for Chroma Reader; a voice dump for Dossier.", zh: "Kikaren 的望远镜；Chroma Reader 的 1–5 键；Dossier 的语音倾倒。" } }
     ],
     disclosure: {

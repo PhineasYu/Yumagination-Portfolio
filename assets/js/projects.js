@@ -2,6 +2,9 @@
    Projects. One object per project; the home grid and case pages render
    from it. Add a project = add an object here.
 
+   zone:  one id from PORTFOLIO.cats;  tags: ids from PORTFOLIO.tags.
+   tile:  { video, poster } | { motion } | { text, sub } (typographic tile).
+   sub:   optional subtitle shown next to the title.
    media kinds:  video | img | embed | motion | steps | stats
    `verify` = things to confirm before sharing (shown only with ?draft).
 ------------------------------------------------------------------- */
@@ -14,7 +17,7 @@
   window.PORTFOLIO.projects = [
     /* ------------------------------------------------------------ 01 */
     {
-      id: "full-context-canvas", num: "01", year: "2026", when: "Sep 2026", cats: ["ai", "design"],
+      id: "full-context-canvas", num: "01", year: "2026", when: "Sep 2026", zone: "ai", tags: ["built-with-ai"],
       title: "Full Context Canvas", meta: "Full Context Canvas · Sep 2026",
       cap: L("A whiteboard for every AI chat and every save", "把每个 AI 聊天和每条收藏放上同一张白板"),
       h1: L("A whiteboard that shows every AI conversation and every save in one place, and explains where each one went", "一张白板，把所有 AI 对话和收藏放在一起，并解释每一条被放到了哪里"),
@@ -49,16 +52,16 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "dossier", num: "02", year: "2026", when: "Sep 2026", cats: ["ai", "hack"],
+      id: "dossier", num: "02", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "award", "built-with-ai"],
       title: "Dossier", meta: "Dossier · Sep 2026",
       cap: L("A voice-first archive of a child's growing up", "用语音记录孩子成长的档案"),
       h1: L("Turning a parent's 60-second voice memo into a child's timeline and profile", "把家长 60 秒的语音，变成孩子的时间线和档案"),
       lead: L("One input, two outputs. Parents just talk; AI sorts the feelings into memory cards and the facts into a profile.", "一个输入，两个输出。家长只管说话；AI 把情感变成回忆卡片，把事实变成档案。"),
       role: L("Product, PRD, design direction, QA", "产品、PRD、设计方向、验收"),
-      status: L("Hackathon build · 8 roadmap milestones shipped", "黑客松作品 · 8 个里程碑已完成"),
+      status: L("Top 8 and a pitch slot, Accel AI Innovate Hackathon (KTH AI Society) · 8 roadmap milestones shipped", "Accel AI Innovate 黑客松（KTH AI Society 主办）Top 8 并获得路演机会 · 8 个里程碑已完成"),
       stack: ["TanStack Start", "React", "Supabase", "ElevenLabs", "Polar", "Lovable"],
       links: [GH("https://github.com/PhineasYu/Dossier")],
-      verify: L("Confirm event name and result. Add real in-app screenshots (fictional child only). The published Lovable URL currently shows 'Build incomplete'.", "需确认赛事名称与成绩；补登录后的真实界面截图（只用虚构孩子）。目前 Lovable 已发布的网址显示 “Build incomplete”。"),
+      verify: L("Add real in-app screenshots (fictional child only). The published Lovable URL currently shows 'Build incomplete'.", "补登录后的真实界面截图（只用虚构孩子）。目前 Lovable 已发布的网址显示 “Build incomplete”。"),
       tile: { motion: "dossier-dump" },
       hero: { type: "motion", id: "dossier-dump", cap: L("Illustration of the pipeline: a spoken paragraph is split into items that land in each child's lane.", "流程示意：一段口述被拆成条目，落入各个孩子的轨道。"), tag: "ill" },
       sections: [
@@ -79,7 +82,7 @@
 
     /* ------------------------------------------------------------ 03 */
     {
-      id: "sushi-jerash", num: "03", year: "2026", when: "May 2026", cats: ["ai", "real"],
+      id: "sushi-jerash", num: "03", year: "2026", when: "May 2026", zone: "build", tags: ["real-users", "built-with-ai"],
       title: "Sushi Jerash", meta: "Sushi Jerash · May 2026",
       cap: L("An Arabic ordering site for a real sushi shop", "为真实寿司店做的阿拉伯语点餐网站"),
       h1: L("Putting a real sushi restaurant online in about two days, in Arabic, with orders arriving on Telegram", "两天左右把一家真实的寿司店搬上线：阿拉伯语、订单直接到 Telegram"),
@@ -107,7 +110,56 @@
 
     /* ------------------------------------------------------------ 04 */
     {
-      id: "collaboration-canvas", num: "04", year: "2026", when: "MSc thesis · 2026", cats: ["design", "ai"],
+      id: "teamdex", num: "04", year: "2026", when: "Sep 2026", zone: "service", tags: ["hackathon", "award", "built-with-ai"],
+      title: "Teamdex", meta: "Teamdex · Sep 2026",
+      cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
+      h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
+      lead: L("Companies design the 'learn the material' half of onboarding and leave 'learn the people' to luck. Teamdex designs the second half.", "公司把入职的「学材料」一半设计得很完整，「学人」一半全靠运气。Teamdex 设计的是后一半。"),
+      role: L("Service design, product spec, QA", "服务设计、产品 spec、验收"),
+      status: L("1st place · one-day hackathon build (Uniplay)", "一等奖 · 一天完成的黑客松作品（Uniplay）"),
+      stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
+      links: [GH("https://github.com/PhineasYu/TeamDex")],
+      tile: { video: "teamdex", poster: "teamdex-poster", phone: true },
+      hero: V("teamdex", { frame: "phone", bg: "#dfe9e2", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
+      sections: [
+        { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
+          p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
+          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", bg: "#dfe9e2" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
+        { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
+          p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
+        { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
+          p: L(["No leaderboard: it would create social pressure and defeat the point. No chat: the goal is a real conversation, not moving it into the app.", "QR instead of NFC, because iPhone web can't do it; NFC badges live in the vision. And no AI-generated content in v1, so the time went into the experience."], ["不做排行榜：会制造社交压力，违背初衷。不做聊天：目标是促成真实对话，而不是把对话搬进 App。", "用二维码而不是 NFC，因为 iPhone 网页做不到；NFC 工牌放进愿景。第一版也不做 AI 生成内容，时间留给体验打磨。"]),
+          media: { type: "steps", items: [["✕", L("Leaderboard", "排行榜")], ["✕", L("In-app chat", "应用内聊天")], ["✕", L("Real accounts & SSO", "真实账号与 SSO")], ["✕", L("Native iOS / Android", "原生 iOS / Android")], ["✕", L("AI-generated content", "AI 生成内容")]] }, cap: L("The PRD's non-goals table.", "PRD 的「非目标」表。") },
+        { h: L("Spec pack — Five documents before the first line of code", "规格包 — 动第一行代码之前的五份文档"),
+          p: L(["PRD, service design, tech spec, design system, and a build plan with paste-ready prompts, plus a CLAUDE.md of working rules: local-first data adapter, always deployable at the end of each phase, no P1 before P0 is done.", "Claude Code then built against it, and a 51-second pitch film covers the story for the judges."], ["PRD、服务设计、技术方案、设计系统，以及带可直接粘贴指令的开发计划，再加一份 CLAUDE.md 工作守则：本地优先的数据适配层、每个阶段结束都保持可部署、P0 没完成前不做 P1。", "然后由 Claude Code 依此开发；另外做了一支 51 秒的路演短片向评委讲故事。"]),
+          media: { type: "steps", items: [["01", L("PRD", "PRD")], ["02", L("Service design", "服务设计")], ["03", L("Tech spec", "技术方案")], ["04", L("Design system", "设计系统")], ["05", L("Build plan", "开发计划")], ["+", L("CLAUDE.md rules", "CLAUDE.md 守则")]] }, cap: L("The doc pack in the repository's docs folder.", "仓库 docs 目录里的文档包。") }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 05 */
+    {
+      id: "disco-fever", num: "05", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      title: "Disco Fever", meta: "Disco Fever · BitMagic · Sep 2026",
+      cap: L("A one-minute disco rhythm game: 2nd place, and playable online", "一分钟迪斯科节奏游戏：二等奖，在线可玩"),
+      h1: L("A one-minute disco rhythm game where every right arrow gets the dance floor moving further out", "一分钟迪斯科节奏游戏：每按对一个箭头，舞池里跳舞的人就向外扩散一圈"),
+      lead: L("Hit the right arrows and the dancers spread out from the centre of the floor. Built at a game hackathon with the BitMagic GDK; it took 2nd place and is live.", "按对箭头，跳舞的人就从舞池中心向外扩散。在游戏黑客松上用 BitMagic GDK 做出来，获二等奖，已上线。"),
+      role: L("Idea and visual direction; built with Claude Code", "想法与视觉方向；用 Claude Code 开发"),
+      status: L("2nd place · live", "二等奖 · 已上线"),
+      stack: ["BitMagic GDK", "Claude Code"],
+      links: [{ label: L("Play it", "在线试玩"), url: "https://bitmagic.ai/play/disco-fever/" }],
+      verify: L("Official hackathon name; teammates; add a screen recording.", "黑客松正式名称；队友；补一段录屏。"),
+      tile: { text: L("2nd place", "二等奖"), sub: L("Rhythm game · playable online", "节奏游戏 · 在线可玩") },
+      sections: [
+        { h: L("Overview — The floor fills up as you play", "概述 — 越玩，舞池越满"),
+          p: L(["One minute, a stream of arrows, and a dance floor. Every correct arrow sends the dancing further out from the centre.", "The visual direction was mine: neon figures, a disco ball, and a floor that gets brighter as the combo grows."], ["一分钟、一串箭头、一个舞池。每按对一个箭头，跳舞的范围就从中心向外扩一圈。", "视觉方向由我定：霓虹小人、灯球，以及随 combo 逐渐变亮的舞池。"]) },
+        { h: L("After the event — A phone version that leaves the web one alone", "赛后 — 做一个不影响网页版的手机版"),
+          p: L(["After the hackathon I made a portrait version for phones. It was adapted separately, with one rule for the agent: the web version must not change."], ["黑客松结束后，我做了手机竖屏版。它是单独适配的，给 AI 的规则只有一条：网页版不能受影响。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 06 */
+    {
+      id: "collaboration-canvas", num: "06", year: "2026", when: "MSc thesis · 2026", zone: "service", tags: ["built-with-ai"],
       title: "Collaboration Canvas", meta: "KTH thesis · 2026",
       cap: L("Why student–industry collaborations break, and a canvas to hold them", "学生—企业合作为什么会散架，以及一张让它们不散的画布"),
       h1: L("Why student–industry–university collaborations break, and a shared canvas that holds them together", "学生—企业—学校的合作为什么会散架，以及一张让它们不散的共享画布"),
@@ -133,49 +185,23 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 05 */
+    /* ------------------------------------------------------------ 07 */
     {
-      id: "teamdex", num: "05", year: "2026", when: "Sep 2026", cats: ["ai", "hack"],
-      title: "Teamdex", meta: "Teamdex · Sep 2026",
-      cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
-      h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
-      lead: L("Companies design the 'learn the material' half of onboarding and leave 'learn the people' to luck. Teamdex designs the second half.", "公司把入职的「学材料」一半设计得很完整，「学人」一半全靠运气。Teamdex 设计的是后一半。"),
-      role: L("Service design, product spec, QA", "服务设计、产品 spec、验收"),
-      status: L("One-day hackathon build (Uniplay)", "一天完成的黑客松作品（Uniplay）"),
-      stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
-      links: [GH("https://github.com/PhineasYu/TeamDex")],
-      tile: { video: "teamdex", poster: "teamdex-poster", phone: true },
-      hero: V("teamdex", { frame: "phone", bg: "#dfe9e2", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
-      sections: [
-        { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
-          p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
-          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", bg: "#dfe9e2" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
-        { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
-          p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
-        { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
-          p: L(["No leaderboard: it would create social pressure and defeat the point. No chat: the goal is a real conversation, not moving it into the app.", "QR instead of NFC, because iPhone web can't do it; NFC badges live in the vision. And no AI-generated content in v1, so the time went into the experience."], ["不做排行榜：会制造社交压力，违背初衷。不做聊天：目标是促成真实对话，而不是把对话搬进 App。", "用二维码而不是 NFC，因为 iPhone 网页做不到；NFC 工牌放进愿景。第一版也不做 AI 生成内容，时间留给体验打磨。"]),
-          media: { type: "steps", items: [["✕", L("Leaderboard", "排行榜")], ["✕", L("In-app chat", "应用内聊天")], ["✕", L("Real accounts & SSO", "真实账号与 SSO")], ["✕", L("Native iOS / Android", "原生 iOS / Android")], ["✕", L("AI-generated content", "AI 生成内容")]] }, cap: L("The PRD's non-goals table.", "PRD 的「非目标」表。") },
-        { h: L("Spec pack — Five documents before the first line of code", "规格包 — 动第一行代码之前的五份文档"),
-          p: L(["PRD, service design, tech spec, design system, and a build plan with paste-ready prompts, plus a CLAUDE.md of working rules: local-first data adapter, always deployable at the end of each phase, no P1 before P0 is done.", "Claude Code then built against it, and a 51-second pitch film covers the story for the judges."], ["PRD、服务设计、技术方案、设计系统，以及带可直接粘贴指令的开发计划，再加一份 CLAUDE.md 工作守则：本地优先的数据适配层、每个阶段结束都保持可部署、P0 没完成前不做 P1。", "然后由 Claude Code 依此开发；另外做了一支 51 秒的路演短片向评委讲故事。"]),
-          media: { type: "steps", items: [["01", L("PRD", "PRD")], ["02", L("Service design", "服务设计")], ["03", L("Tech spec", "技术方案")], ["04", L("Design system", "设计系统")], ["05", L("Build plan", "开发计划")], ["+", L("CLAUDE.md rules", "CLAUDE.md 守则")]] }, cap: L("The doc pack in the repository's docs folder.", "仓库 docs 目录里的文档包。") }
-      ]
-    },
-
-    /* ------------------------------------------------------------ 06 */
-    {
-      id: "legacychain", num: "06", year: "2026", when: "Sep 2026", cats: ["ai", "hack"],
-      title: "LegacyChain", meta: "LegacyChain · Sep 2026",
-      cap: L("A family archive where AI reads but never rewrites the record", "AI 只能阅读、不能改写记录的家族档案"),
+      id: "legacychain", num: "07", year: "2026", when: "Sep 2026", zone: "ai", tags: ["hackathon", "built-with-ai"],
+      title: "LegacyChain", meta: "LegacyChain · from MEMO · Sep 2026",
+      cap: L("From a memoir app for older people to a family archive where AI reads but never rewrites the record", "从老年人回忆录 App，到 AI 只能阅读、不能改写记录的家族档案"),
       h1: L("A family archive where AI can read the letters but never rewrite the record", "一个家族档案：AI 可以读信，但永远改写不了记录"),
       lead: L("AI opens the archive. Provenance keeps it honest. Every reading stays attached to the exact bytes it came from.", "AI 打开档案，出处让它保持诚实。每一次「读法」都始终连着它所依据的那份原始文件。"),
-      role: L("Concept, architecture direction, QA", "概念、架构指挥、验收"),
-      status: L("Working prototype", "可运行原型"),
+      role: L("Idea and concept, prototype built with Claude Code, demo and pitch script", "想法与概念、用 Claude Code 开发原型、演示与答辩稿"),
+      status: L("Hackathon prototype, deployed (AI Institutet challenge, Team 7)", "黑客松原型，已部署（AI Institutet 挑战，Team 7）"),
       stack: ["Next.js", "TypeScript", "Solidity", "@noble/post-quantum", "Vitest", "Claude Code"],
-      links: [GH("https://github.com/PhineasYu/legacychain")],
-      verify: L("Confirm the event or theme it was built for, and your role vs teammates.", "需确认参赛主题，以及你与队友的分工。"),
+      links: [{ label: L("Open the live prototype", "打开可运行原型"), url: "https://legacychain-one.vercel.app/" }, GH("https://github.com/PhineasYu/legacychain")],
+      verify: L("Official event name and result; teammates and split of work. MEMO: year, your role, and whether it was a course project. '27 commits' and '3 test suites' were not in the reviewed material. Use one version of the grandparents' story if you tell it.", "赛事正式名称与成绩；队友与分工。MEMO：年份、你的角色、是否为课程项目。「27 次提交」「3 组测试」不在已核对的材料里。如果讲祖辈的故事，只用一个版本。"),
       tile: { video: "legacychain", poster: "legacychain-poster" },
       hero: V("legacychain", { frame: "browser", tag: "rec", cap: L("Opening the vault, a heritage certificate with its QR, and the provenance view. Recorded from the running app.", "打开保险库、带二维码的传承证书、出处视图。录自正在运行的应用。") }),
       sections: [
+        { h: L("Where it started — MEMO, a memoir app for older people", "起点 — MEMO，老年人回忆录"),
+          p: L(["An earlier project, MEMO (Roll A Page): an app plus related physical products for older people's memoirs, set against population ageing and the silver economy, and designed for accessibility. It stopped at high-fidelity screens.", "LegacyChain picks up the same theme, family memory, now that AI can read old letters: how do you keep a family's record honest once a machine is doing the reading?"], ["更早的一个项目 MEMO（Roll A Page）：一个 App 加周边设计，面向老年人的回忆录，背景是人口老龄化和银发经济，并按无障碍设计。它停在了高保真界面。", "LegacyChain 接着做同一个主题：家族记忆。现在 AI 已经能读旧信件了：当读信的是机器，怎样让一个家庭的记录保持真实？"]) },
         { h: L("Overview — A transcript is a reading, not the letter", "概述 — 转写只是一种「读法」，不是信本身"),
           p: L(["AI can read a faded 1982 letter in seconds. But models misread handwriting, fill in faded words and normalise dialect. Two generations on, people will read the convenient transcript and the scan will sit unopened.", "So every reading is stored beside its source and traceable back to it. Anyone can ask to see the exact bytes a transcript was made from."], ["AI 几秒钟就能读懂一封褪色的 1982 年家书。但模型会读错笔迹、补全模糊的字、把方言规范化。两代人之后，大家读的会是方便的转写，扫描件再也没人打开。", "所以每一次读法都存放在原件旁边，并可回溯。任何人都可以要求看到转写所依据的那份原始文件。"]),
           media: IMG("assets/shots/legacychain-vault.png", "The Family Vault with four demo heritage items", { frame: "browser" }), cap: L("The family vault, seeded with four demo items run through the real pipeline.", "家族保险库，四件演示条目都走了真实流程。") },
@@ -191,9 +217,29 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 07 */
+    /* ------------------------------------------------------------ 08 */
     {
-      id: "kikaren", num: "07", year: "2026", when: "Hackathon · 2026", cats: ["hack", "design", "ai"],
+      id: "let-me-die", num: "08", year: "2026", when: "Sep 2026", zone: "games", tags: ["hackathon", "award", "built-with-ai"],
+      title: "Let Me Die", sub: L("1st place · Stone Leap Build-a-Game", "第一名 · Stone Leap Build-a-Game"),
+      meta: "Let Me Die · Stone Leap Build-a-Game · Sep 2026",
+      cap: L("A game made in one evening with an AI world builder: 1st place at Stone Leap", "用 AI world builder 一个晚上做出的游戏：Stone Leap 第一名"),
+      h1: L("1st place at Stone Leap's Build-a-Game: a playable game made in one evening with an AI world builder", "Stone Leap Build-a-Game 第一名：用 AI world builder 一个晚上做出的可玩游戏"),
+      lead: L("The brief: build something people can actually play, in one evening, using an AI world builder. Let Me Die won first place.", "活动要求：用 AI world builder，一个晚上做出别人真的能玩的游戏。Let Me Die 获得第一名。"),
+      role: L("To be added", "待补充"),
+      status: L("1st place", "第一名"),
+      stack: ["AI world builder"],
+      links: [],
+      verify: L("Add the gameplay. It should become the first sentence of the card, the headline and the intro. Also add your role, teammates, and a screenshot or recording.", "补玩法：它应该成为卡片、标题和导语的第一句。另外补你的角色、队友，以及截图或录屏。"),
+      tile: { text: L("1st place", "第一名"), sub: L("Game · built in one evening", "游戏 · 一个晚上完成") },
+      sections: [
+        { h: L("Overview — One evening, one AI world builder", "概述 — 一个晚上，一个 AI world builder"),
+          p: L(["Stone Leap's Build-a-Game gave teams a single evening and an AI world builder to make a playable game."], ["Stone Leap 的 Build-a-Game 给每个队伍一个晚上和一个 AI world builder，要求做出一款可玩的游戏。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 09 */
+    {
+      id: "kikaren", num: "09", year: "2026", when: "Hackathon · 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
       title: "Kikaren", meta: "Kikaren · 2026",
       cap: L("A telescope for seeing each party's vision for Järva", "用望远镜看每个政党对 Järva 的愿景"),
       h1: L("Letting first-time voters in Järva look through a telescope at the future each party imagines", "让 Järva 的首投族透过望远镜，看每个政党想象中的未来"),
@@ -217,9 +263,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 08 */
+    /* ------------------------------------------------------------ 10 */
     {
-      id: "sap-career-ignite", num: "08", year: "2026", when: "Apr 2026", cats: ["ai", "hack", "design"],
+      id: "sap-career-ignite", num: "10", year: "2026", when: "Apr 2026", zone: "ai", tags: ["award", "built-with-ai"],
       title: "SAP Career Ignite", meta: "SAP × Capgemini × Google · Apr 2026",
       cap: L("Winning a consulting case with a clickable prototype", "用可点击的原型赢下咨询案例赛"),
       h1: L("Winning a consulting case by letting the judges click the future instead of reading about it", "让评委亲手点一点未来，而不是读一份 PPT，赢下咨询案例赛"),
@@ -244,10 +290,10 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 09 */
+    /* ------------------------------------------------------------ 11 */
     {
-      id: "meanwhile", num: "09", year: "2026", when: "Sep 2026", cats: ["ai", "design"],
-      title: "Meanwhile", meta: "Meanwhile · Sep 2026",
+      id: "beside", num: "11", year: "2026", when: "Sep 2026", zone: "ux", tags: ["built-with-ai"],
+      title: "Beside", meta: "Beside · Sep 2026",
       cap: L("Two squares for two friends, with no obligation to reply", "两个朋友的两个方格，没有回复的义务"),
       h1: L("Two friends, two squares, and no obligation to reply", "两个朋友，两个方格，没有回复的义务"),
       lead: L("Two friends far apart share one rectangle. Sending is complete on its own; the second square is an invitation, never a debt.", "两个相隔很远的朋友共用一个矩形。发送本身就是完整的；第二个方格是邀请，而不是欠下的债。"),
@@ -255,7 +301,6 @@
       status: L("Front-end prototype, live", "前端原型，已上线"),
       stack: ["Lovable", "TanStack Start", "React"],
       links: [{ label: L("Open the live app", "打开在线应用"), url: "https://moment-share-square.lovable.app" }, GH("https://github.com/PhineasYu/moment-share-square")],
-      verify: L("The UI says 'beside' while the spec says 'Meanwhile'. Pick one name.", "界面里叫 beside、spec 里叫 Meanwhile，需要定一个名字。"),
       tile: { video: "meanwhile", poster: "meanwhile-poster", phone: true },
       hero: V("meanwhile", { frame: "phone", bg: "#efefef", tag: "rec", cap: L("Switching person, adding a moment, sending an emoji, and the pairing. Recorded from the running app.", "切换人、添加瞬间、发送 emoji、配对。录自正在运行的应用。") }),
       sections: [
@@ -272,15 +317,15 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 10 */
+    /* ------------------------------------------------------------ 12 */
     {
-      id: "chroma-reader", num: "10", year: "2026", when: "Sep 2026", cats: ["ai"],
+      id: "chroma-reader", num: "12", year: "2026", when: "Sep 2026", zone: "ux", tags: ["hackathon", "built-with-ai"],
       title: "Chroma Reader", meta: "Chroma Reader · Sep 2026",
       cap: L("A study reader that colours sentences by mastery", "按掌握程度给句子上色的学习阅读器"),
       h1: L("A study reader that colours every sentence by how well you know it, at the speed of a keypress", "一个按掌握程度给每个句子上色的阅读器，快到只需一次按键"),
       lead: L("Highlighting is binary. Chroma Reader shows gradations of mastery across a whole text at a glance.", "划重点是二元的。Chroma Reader 让你一眼看到整篇文字里不同程度的掌握。"),
       role: L("Concept, interaction spec", "概念、交互 spec"),
-      status: L("Live app", "在线应用"),
+      status: L("Live app · KTH × Lovable hackathon, Student life track", "在线应用 · KTH × Lovable 黑客松，Student life 赛道"),
       stack: ["Lovable", "TanStack Start", "Lovable Cloud"],
       links: [{ label: L("Open the live app", "打开在线应用"), url: "https://chroma-reader-study-tool.lovable.app" }, GH("https://github.com/PhineasYu/chroma-reader-study-tool")],
       tile: { video: "chroma", poster: "chroma-poster" },
@@ -299,9 +344,55 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 11 */
+    /* ------------------------------------------------------------ 13 */
     {
-      id: "voi", num: "11", year: "2025", when: "Aug–Dec 2025", cats: ["design"],
+      id: "community-viewfinder", num: "13", year: "2023", when: "Oct 2022 – Jun 2023", zone: "service", tags: ["award"],
+      title: "Community Viewfinder", meta: "Huayang Road, Shanghai · 2022–23",
+      cap: L("A viewfinder for a Shanghai neighbourhood, tested as a full-scale prototype", "为上海一个社区设计的取景框，用 1:1 原型实测"),
+      h1: L("Framing a Shanghai neighbourhood: from walking every street to a full-scale prototype", "给上海一个社区装一个取景框：从走遍每条街到 1:1 原型"),
+      lead: L("A real brief from a community-renewal co-creation workshop in Huayang Road Subdistrict, Changning District. My proposal received an Excellent Proposal commendation.", "来自长宁区华阳路街道社区更新共创工作坊的真实命题。我的方案获得「优秀提案表彰」。"),
+      role: L("Concept author; field research, prototyping, testing, UI", "概念提出者；实地调研、原型、测试、界面"),
+      status: L("Excellent Proposal commendation; a different version was built", "获优秀提案表彰；最终落地的是另一个版本"),
+      stack: ["Field research", "Personas", "Stakeholder map", "Full-scale prototype", "UI design"],
+      links: [],
+      verify: L("Add publishable photos, the built version next to your proposal, and the hand sketches.", "补可公开的照片、落地版和你的方案的对比，以及手绘稿。"),
+      tile: { text: L("Frame the street", "框住街道"), sub: L("Excellent Proposal commendation · Shanghai", "优秀提案表彰 · 上海") },
+      sections: [
+        { h: L("Overview — A real neighbourhood, a real brief", "概述 — 真实的社区，真实的命题"),
+          p: L(["The workshop was co-hosted by the subdistrict and a design studio, and judges came from both. The question was community renewal, so residents, the local government and designers all had a stake.", "I proposed the viewfinder concept and walked every street in the subdistrict before designing anything. The research used personas, a stakeholder map and Passerby Research."], ["工作坊由街道和设计工作室共同举办，评委也来自双方。命题是社区更新，居民、街道和设计方都是相关方。", "取景框的概念是我提出的。动手设计之前，我走遍了街道的每一条街。研究用到了 persona、利益相关者地图和 Passerby Research。"]) },
+        { h: L("Prototype — Full scale, tested twice", "原型 — 1:1 尺寸，测试两轮"),
+          p: L(["I built a 1:1 foam prototype and tested it in two rounds, then designed three high-fidelity interface screens for it."], ["我做了 1:1 的泡沫原型，测试了两轮，然后为它设计了 3 张高保真界面。"]),
+          media: { type: "steps", items: [["01", L("Walk every street", "走遍每一条街")], ["02", L("Personas, stakeholder map, Passerby Research", "Persona、利益相关者地图、Passerby Research")], ["03", L("1:1 foam prototype, two test rounds", "1:1 泡沫原型，两轮测试")], ["04", L("Three high-fidelity screens", "3 张高保真界面")], ["05", L("Excellent Proposal commendation", "优秀提案表彰")]] } },
+        { h: L("Honesty — What was actually built", "诚实 — 最后真正落地的是什么"),
+          p: L(["The final installation was windows cut into an exhibition-hall wall and framed-view greeting cards. The client's product manager chose that direction. It is not my proposal, and I was not part of that decision."], ["最终落地的是展厅墙面上的开窗和框景贺卡，方向由对方的产品经理决定。那不是我的方案，我也没有参与这个决定。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 14 */
+    {
+      id: "notchbreak", num: "14", year: "2026", when: "Sep 2026", zone: "build", tags: ["built-with-ai"],
+      title: "NotchBreak", meta: "NotchBreak · macOS · Sep 2026",
+      cap: L("A break reminder that grows out of the MacBook notch", "从 MacBook 刘海里长出来的休息提醒"),
+      h1: L("A macOS break reminder that grows out of the notch, built in one day", "一个从刘海里长出来的 macOS 休息提醒，一天做完"),
+      lead: L("After a stretch of continuous screen time, a black bar grows out from under the notch. From there you can start a five-minute break countdown.", "连续看屏幕一段时间后，刘海下方会长出一块黑色提醒，可以从这里进入 5 分钟的休息倒计时。"),
+      role: L("Idea, design direction, acceptance testing", "想法、设计方向、验收"),
+      status: L("Native app that runs locally; not published", "本地可运行的原生 app，未公开发布"),
+      stack: ["Swift", "macOS", "Claude Code"],
+      links: [],
+      verify: L("Add a screen recording or screenshots. Decide whether to publish it. Confirm nobody else worked on it.", "补录屏或截图；决定是否公开发布；确认有没有队友。"),
+      tile: { text: L("Notch → break", "刘海 → 休息"), sub: L("Native macOS app · built in one day", "原生 macOS app · 一天完成") },
+      sections: [
+        { h: L("Overview — The reminder lives where the notch already is", "概述 — 提醒就长在刘海那里"),
+          p: L(["I set the idea, the visual direction and the acceptance bar: Apple Human Interface Guidelines style, and a rounded transition where the bar meets the notch.", "Claude Code wrote the Swift. The build script packages a working .app, and the build finishes with zero errors and zero warnings."], ["想法、视觉方向和验收标准由我定：Apple HIG 风格，提醒条和刘海相接的地方做圆角过渡。", "Swift 代码由 Claude Code 编写。构建脚本能打包出可以打开的 .app，编译零错误、零警告。"]) },
+        { h: L("Decisions — Cutting back to the timer", "关键决策 — 砍到只剩计时"),
+          p: L(["I tried a light glass look and went back to black. I also added camera-guided exercises with an illustrated figure, then removed all of it and kept only the time."], ["试过浅色玻璃效果，不喜欢，改回黑色。也加过摄像头跟练和插画小人，后来整段撤掉，只留下时间。"]),
+          media: { type: "steps", items: [["01", L("Black bar grows from the notch", "黑色提醒从刘海长出")], ["02", L("Light glass tried, back to black", "试过浅色玻璃，改回黑色")], ["03", L("Camera-guided exercises tried, removed", "试过摄像头跟练，撤掉")], ["04", L("Only the timer kept", "只留下计时")]] } }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 15 */
+    {
+      id: "voi", num: "15", year: "2025", when: "Aug–Dec 2025", zone: "ux", tags: [],
       title: "Voi Inclusive Design", meta: "KTH × Voi Technology · 2025",
       cap: L("Why women ride less, and a helmet flow designed around it", "女性为什么骑得少，以及围绕它设计的头盔流程"),
       h1: L("Finding that women ride shared scooters less because of safety, not price, then designing the helmet flow around it", "发现女性少骑共享滑板车是因为安全感而不是价格，再围绕它设计头盔流程"),
@@ -326,9 +417,9 @@
       ]
     },
 
-    /* ------------------------------------------------------------ 12 */
+    /* ------------------------------------------------------------ 16 */
     {
-      id: "kodiak-hub", num: "12", year: "2025", when: "Jun–Sep 2025", cats: ["design"],
+      id: "kodiak-hub", num: "16", year: "2025", when: "Jun–Sep 2025", zone: "ux", tags: [],
       title: "Kodiak Hub", meta: "Kodiak Hub · 2025",
       cap: L("Design work inside a live B2B SaaS design system", "在真实 B2B SaaS 设计系统里做设计"),
       h1: L("Designing inside a live B2B design system, and leaving a usability-testing process behind", "在真实的 B2B 设计系统里设计，并留下一套可用性测试流程"),
@@ -353,6 +444,52 @@
           p: L(["With my design mentor I set up the company's first structured usability-testing process for an unreleased AI document-management feature: think-aloud sessions, the layout iterated between rounds, key recommendations adopted.", "The process was embedded into the team's Jira workflow and outlived the internship."], ["我与设计导师一起，为一个尚未发布的 AI 文档管理功能建立了公司第一套结构化可用性测试流程：出声思考、轮次间迭代布局、关键建议被采纳。", "这套流程被嵌入团队的 Jira 工作流，在实习结束后仍在使用。"]) },
         { h: L("AI tools — Evaluating Figma Make, Lovable and Uizard", "AI 工具 — 评估 Figma Make、Lovable、Uizard")  ,
           p: L(["I compared them on output quality, prompt cost, stability and how well they fit the design system, and shared the resulting workflow, which the design team adopted."], ["我从输出质量、提示成本、稳定性以及与设计系统的契合度来比较它们，并分享了由此得出的工作流，设计团队采用了它。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 17 */
+    {
+      id: "revive-automation", num: "17", year: "2026", when: "May–Aug 2026", zone: "build", tags: ["automation", "built-with-ai"],
+      title: "Revive report automation", meta: "Revive · internship · 2026",
+      cap: L("Automating a commission reconciliation during an internship", "实习期间把佣金对账自动化"),
+      h1: L("Turning a manual commission reconciliation into a script that checks every row", "把手工佣金对账变成一个逐行核对的脚本"),
+      lead: L("During my UX internship at Revive, the business side needed each retailer's private-sale commission worked out and checked. I directed Claude Code on the company computer to automate it.", "在 Revive 做 UX 实习时，业务方需要算出并核对每个零售商的私人销售佣金。我在公司电脑上指挥 Claude Code 把它自动化。"),
+      role: L("UX intern; framed the task, directed Claude Code, reported back", "UX 实习生；定义任务、指挥 Claude Code、向业务方汇报"),
+      status: L("Delivered internally: script, reconciliation tables, 7-page report", "内部交付：脚本、对账表、7 页汇报"),
+      stack: ["Python", "Claude Code"],
+      links: [],
+      verify: L("Confirm Revive is fine with being named here. How much time or how many errors did it save? Two or three independent sources?", "确认 Revive 同意在这里出现名字；节省了多少时间或减少了多少错误；对照的是 2 个还是 3 个独立来源。"),
+      tile: { text: L("Every row, checked", "逐行核对"), sub: L("Internship · text only", "实习 · 仅文字") },
+      sections: [
+        { h: L("Overview — A request from the business side", "概述 — 来自业务方的需求"),
+          p: L(["This one wasn't a design task. The business side asked for each retailer's private-sale commission, calculated from the listings export and checked against independent sources.", "This page is text only. The data belongs to the company, so there are no screenshots and no figures here."], ["这不是一个设计任务。业务方需要从 Listings 导出里算出每个零售商的私人销售佣金，并和独立来源交叉核对。", "这一页只有文字。数据属于公司，所以这里没有截图，也没有数字。"]) },
+        { h: L("What I made — Calculate, cross-check, flag", "我做了什么 — 计算、交叉核对、标记"),
+          p: L(["A script that calculates the commission per retailer, cross-checks it automatically against the independent sources and flags every row that doesn't match. I ran it for three months of data and presented the result in a seven-page report."], ["一个脚本：按零售商计算佣金，自动和独立来源交叉核对，并逐行标记对不上的地方。我用它跑了三个月的数据，并做成一份 7 页的汇报。"]),
+          media: { type: "steps", items: [["01", L("Listings export", "Listings 导出")], ["02", L("Commission per retailer", "按零售商计算佣金")], ["03", L("Cross-check with independent sources", "与独立来源交叉核对")], ["04", L("Flag every mismatched row", "逐行标记不一致")], ["05", L("Report to the business side", "向业务方汇报")]] } },
+        { h: L("Where AI comes in — Claude Code wrote it, I directed it", "AI 在哪里 — Claude Code 写，我指挥"),
+          p: L(["Claude Code wrote the code. My part was turning the business request into a task it could carry out, directing it through the build, and reporting the result back to the people who asked."], ["代码由 Claude Code 编写。我的部分是把业务需求翻译成它能执行的任务，指挥它完成，再把结果汇报给提出需求的人。"]) }
+      ]
+    },
+
+    /* ------------------------------------------------------------ 18 */
+    {
+      id: "microhack", num: "18", year: "2026", when: "Sep 2026", zone: "build", tags: ["automation"],
+      title: "MicroHack", meta: "Microsoft MicroHack · Sep 2026",
+      cap: L("Learning Microsoft Foundry, Fabric and Azure by wiring three agents into one workflow", "把三个 agent 串成一个工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
+      h1: L("Learning Microsoft Foundry, Fabric and Azure by building a multi-agent workflow", "通过搭一个多 agent 工作流，学习 Microsoft Foundry、Fabric 和 Azure"),
+      lead: L("This was a learning exercise, not a competition: there was no result and no certificate. The retail-inventory scenario was set by Microsoft.", "这是一次学习，不是比赛：没有成绩，也没有证书。零售库存的场景由 Microsoft 给定。"),
+      role: L("Participant", "参与者"),
+      status: L("Completed Challenges 1–4 and the stretch goals", "完成挑战 1–4 和进阶任务"),
+      stack: ["Microsoft Foundry", "Microsoft Fabric", "Azure", "Fabric Data Agent"],
+      links: [],
+      verify: L("Add the share page link if you still have it. Say which decisions were your own, for example how you got the workflow to finish.", "如果还有分享网页，补上链接；写清哪些判断是你自己做的，例如怎么让 workflow 走完。"),
+      tile: { text: L("3 agents, 1 workflow", "3 个 agent，1 个工作流"), sub: L("Microsoft Foundry · Fabric · Azure", "Microsoft Foundry · Fabric · Azure") },
+      sections: [
+        { h: L("Overview — Three agents, one data source, one workflow", "概述 — 三个 agent、一个数据源、一个工作流"),
+          p: L(["Three Foundry agents: demand sensing, inventory optimisation, and replenishment ordering with a human approval step. All three share one Fabric Data Agent and are chained together in a Workflow."], ["三个 Foundry agent：需求感知、库存优化，以及带人工审批的补货下单。三者共用一个 Fabric Data Agent，并用 Workflow 串起来。"]),
+          media: { type: "steps", items: [["01", L("Demand sensing agent", "需求感知 agent")], ["02", L("Inventory optimisation agent", "库存优化 agent")], ["03", L("Replenishment agent + human approval", "补货 agent + 人工审批")], ["↺", L("Shared Fabric Data Agent", "共用 Fabric Data Agent")], ["+", L("Five-question evaluation", "5 题评估")]] } },
+        { h: L("Stretch — Workflow and evaluation", "进阶 — 工作流与评估"),
+          p: L(["The stretch goals added the Workflow and an evaluation: a set of five questions run against the agents.", "The point for me was to learn how the pieces fit together: data in Fabric, agents in Foundry, hosting on Azure, and a person approving before any order goes out."], ["进阶任务加上了 Workflow 和评估：用 5 道题测试这些 agent。", "对我来说，重点是弄清这些部分怎么拼在一起：数据在 Fabric，agent 在 Foundry，运行在 Azure 上，以及在任何订单发出前由人来审批。"]) }
       ]
     }
   ];

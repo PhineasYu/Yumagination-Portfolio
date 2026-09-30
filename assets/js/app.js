@@ -13,7 +13,9 @@
   const arr = (o) => (o && (o[lang] || o.en)) || [];
   const STR = {
     letsTalk: { en: "Let's talk", zh: "聊一聊" }, viewWork: { en: "View work", zh: "看作品" },
-    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "A selection of work across AI-native products, hackathon prototypes, and research-led design. Most of them run: watch them move, or open them.", zh: "AI 原生产品、黑客松原型和研究型设计的精选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
+    work: { en: "Work", zh: "作品" }, gallery: { en: "Gallery", zh: "摄影" }, workLede: { en: "Five areas: UX & UI, service design and research, AI products, building and automating, and games. Filter by area or by tag. Most of them run: watch them move, or open them.", zh: "五个方向：用户体验与界面、服务设计与研究、AI 产品、开发与自动化、游戏。可以按方向或标签筛选。大多数作品都是能运行的：看它们动起来，或者直接打开。" },
+    zoneLbl: { en: "Area", zh: "方向" }, tagLbl: { en: "Tag", zh: "标签" }, zone: { en: "Area & tags", zh: "方向与标签" },
+    empty: { en: "Nothing matches both filters yet.", zh: "暂时没有同时符合这两个条件的作品。" },
     method: { en: "Method", zh: "方法" }, about: { en: "About", zh: "关于" }, contact: { en: "Contact", zh: "联系" },
     recog: { en: "Recognition", zh: "获奖与认可" }, tools: { en: "Working with", zh: "常用工具" },
     all: { en: "All", zh: "全部" },
@@ -76,6 +78,7 @@
       return `<span class="tile${tl.phone ? " is-phone" : ""}"${bg}>${videoTag({ src: `assets/media/${tl.video}.mp4`, poster: `assets/media/${tl.poster}.jpg` })}</span>`;
     }
     if (tl.motion) return `<span class="tile">${window.motion(tl.motion)}</span>`;
+    if (tl.text) return `<span class="tile tile-text"><span class="tt-big">${esc(t(tl.text))}</span>${tl.sub ? `<span class="tt-sub mono">${esc(t(tl.sub))}</span>` : ""}</span>`;
     return `<span class="tile"></span>`;
   }
 
@@ -97,14 +100,16 @@
 
     <section class="section" id="work">
       <div class="sec-head"><h2 class="sec-title">${esc(s("work"))}</h2><p class="sec-lede">${esc(s("workLede"))}</p></div>
-      <div class="filters" role="group">${D.cats.map((c, i) => `<button class="chip" type="button" data-cat="${c.id}" aria-pressed="${i === 0}">${esc(t(c))}</button>`).join("")}</div>
+      <div class="filters" role="group" aria-label="${esc(s("zoneLbl"))}"><span class="flabel mono">${esc(s("zoneLbl"))}</span>${D.cats.map((c) => `<button class="chip" type="button" data-zone="${c.id}" aria-pressed="${c.id === filt.zone}">${esc(t(c))}</button>`).join("")}</div>
+      <div class="filters tags" role="group" aria-label="${esc(s("tagLbl"))}"><span class="flabel mono">${esc(s("tagLbl"))}</span>${D.tags.map((c) => `<button class="chip" type="button" data-tag="${c.id}" aria-pressed="${c.id === filt.tag}">${esc(t(c))}</button>`).join("")}</div>
       <div class="work-grid">
         ${P.map((p) => `
-          <a class="proj rv" href="#/work/${p.id}" data-cats="${p.cats.join(" ")}">
+          <a class="proj rv" href="#/work/${p.id}" data-zone="${p.zone}" data-tags="${p.tags.join(" ")}">
             ${tile(p)}
             <span class="proj-cap"><span class="proj-title">${esc(t(p.cap))}</span><span class="proj-meta">${esc(p.meta)}</span></span>
           </a>`).join("")}
       </div>
+      <p class="empty" hidden>${esc(s("empty"))}</p>
     </section>
 
     ${galleryTeaser()}
@@ -154,7 +159,7 @@
     <section class="section" id="more">
       <div class="sec-head"><h2 class="sec-title">${esc(t(m.title))}</h2></div>
       <div class="more">${m.items.map((i) => {
-        const inner = `<span class="mono dim">${i.year}</span><b>${esc(i.name)}</b><p>${esc(t(i.note))}</p>${i.url ? '<span class="go mono">↗</span>' : ""}`;
+        const inner = `<span class="mono dim">${i.year}</span><b>${esc(i.name)}</b><p>${esc(t(i.note))}</p>${DRAFT && i.verify ? `<p class="draft mono">${esc(s("draft"))}: ${esc(t(i.verify))}</p>` : ""}${i.url ? '<span class="go mono">↗</span>' : ""}`;
         return i.url ? `<a class="more-item" href="${esc(i.url)}" target="_blank" rel="noopener">${inner}</a>` : `<div class="more-item">${inner}</div>`;
       }).join("")}</div>
     </section>`;
@@ -185,7 +190,10 @@
   }
 
   /* ---------- case study ---------- */
+  const ALIAS = { meanwhile: "beside" };
+  const zoneLine = (p) => [D.cats.find((c) => c.id === p.zone), ...p.tags.map((x) => D.tags.find((c) => c.id === x))].filter(Boolean).map(t).join(" · ");
   function project(id) {
+    id = ALIAS[id] || id;
     const P = D.projects, i = P.findIndex((p) => p.id === id);
     if (i < 0) return `<div class="case-head" style="padding-top:120px"><p>Not found. <a href="#/">Home</a></p></div>`;
     const p = P[i], prev = P[(i - 1 + P.length) % P.length], next = P[(i + 1) % P.length];
@@ -193,15 +201,16 @@
     <article class="case">
       <div class="case-head">
         <a class="back mono" href="#/work">${esc(s("back"))}</a>
-        <p class="kicker mono">${esc(p.meta)}</p>
+        <p class="kicker mono">${esc(p.sub ? `${p.title} — ${t(p.sub)}` : p.meta)}</p>
         <h1>${esc(t(p.h1))}</h1>
         <p class="lead">${esc(t(p.lead))}</p>
       </div>
-      <div class="hero-shot">${media(p.hero)}${p.hero && p.hero.cap ? `<p class="cap">${esc(t(p.hero.cap))}</p>` : ""}</div>
+      ${p.hero ? `<div class="hero-shot">${media(p.hero)}` : ""}${p.hero && p.hero.cap ? `<p class="cap">${esc(t(p.hero.cap))}</p>` : ""}${p.hero ? "</div>" : ""}
       <dl class="meta">
         <div><dt>${esc(s("role"))}</dt><dd>${esc(t(p.role))}</dd></div>
         <div><dt>${esc(s("when"))}</dt><dd>${esc(p.when)}</dd></div>
         <div><dt>${esc(s("status"))}</dt><dd>${esc(t(p.status))}</dd></div>
+        <div><dt>${esc(s("zone"))}</dt><dd>${esc(zoneLine(p))}</dd></div>
         <div><dt>${esc(s("skills"))}</dt><dd>${esc(p.stack.join(" · "))}</dd></div>
         ${p.links && p.links.length ? `<div><dt>${esc(s("links"))}</dt><dd class="lk">${p.links.map(link).join("")}</dd></div>` : ""}
       </dl>
@@ -215,8 +224,8 @@
           </section>`).join("")}
       </div>
       <nav class="pager" aria-label="More work">
-        <a href="#/work/${prev.id}"><span class="mono dim">← ${esc(s("prev"))}</span><b>${esc(prev.title)}</b></a>
-        <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b></a>
+        <a href="#/work/${prev.id}"><span class="mono dim">← ${esc(s("prev"))}</span><b>${esc(prev.title)}</b>${prev.sub ? `<span class="mono dim">${esc(t(prev.sub))}</span>` : ""}</a>
+        <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b>${next.sub ? `<span class="mono dim">${esc(t(next.sub))}</span>` : ""}</a>
       </nav>
       <section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)">
         <h2>${t(STR.talkTitle)}</h2>
@@ -235,7 +244,7 @@
     $("#view").innerHTML = isCase ? project(b) : home();
     $$("[data-t]").forEach((el) => (el.textContent = s(el.dataset.t)));
     $("#lang").textContent = lang === "zh" ? "EN" : "中文";
-    document.title = isCase ? `${(D.projects.find((p) => p.id === b) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
+    document.title = isCase ? `${(D.projects.find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
     wire();
     if (!keepScroll) {
       const el = !isCase && a ? document.getElementById(a) : null;
@@ -243,12 +252,23 @@
     }
   }
 
+  const filt = { zone: "all", tag: "" };
   let io, vio;
   function wire() {
-    $$(".chip").forEach((c) => c.addEventListener("click", () => {
-      $$(".chip").forEach((x) => x.setAttribute("aria-pressed", x === c));
-      $$(".proj").forEach((r) => (r.hidden = !(c.dataset.cat === "all" || r.dataset.cats.split(" ").includes(c.dataset.cat))));
-    }));
+    // zone: pick one (All = none); tag: optional, click again to clear
+    const applyFilter = () => {
+      $$(".chip[data-zone]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.zone === filt.zone));
+      $$(".chip[data-tag]").forEach((x) => x.setAttribute("aria-pressed", x.dataset.tag === filt.tag));
+      let n = 0;
+      $$(".proj").forEach((r) => {
+        const ok = (filt.zone === "all" || r.dataset.zone === filt.zone) && (!filt.tag || r.dataset.tags.split(" ").includes(filt.tag));
+        r.hidden = !ok; if (ok) n++;
+      });
+      const e = $(".empty"); if (e) e.hidden = n > 0;
+    };
+    $$(".chip[data-zone]").forEach((c) => c.addEventListener("click", () => { filt.zone = c.dataset.zone; applyFilter(); }));
+    $$(".chip[data-tag]").forEach((c) => c.addEventListener("click", () => { filt.tag = filt.tag === c.dataset.tag ? "" : c.dataset.tag; applyFilter(); }));
+    if ($(".work-grid")) applyFilter();
     if (window.startBreath) window.startBreath($("canvas.breath"));
 
     // reveal on scroll
