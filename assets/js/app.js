@@ -156,8 +156,8 @@
     <section class="hero" id="top">
       <canvas class="silk" aria-hidden="true"></canvas>
       <div class="hero-in">
-        <h1 class="name">${esc(D.person.name)}<img class="name-mark" src="assets/logo.svg" alt="" aria-hidden="true"></h1>
-        <p class="pos"><span class="p1">${esc(pos[0])}</span><span class="p2">${esc(pos[1])}</span></p>
+        <h1 class="name">${esc(D.person.name)}</h1>
+        <div class="hero-sub"><img class="name-mark" src="assets/logo.svg" alt="" aria-hidden="true"><p class="pos"><span class="p1">${esc(pos[0])}</span><span class="p2">${esc(pos[1])}</span></p></div>
       </div>
     </section>
 
@@ -285,7 +285,7 @@
   }
 
   function methodPage() {
-    return `<article class="case method-page">${methodBlock(D.method, "method")}${methodBlock(D.design, "design")}<section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)"><h2>${t(STR.talkTitle)}</h2>${reachRow()}<div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div></section></article>`;
+    return `<article class="case method-page">${methodBlock(D.method, "method")}${methodBlock(D.design, "design")}<section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)">${talkHead()}${reachRow()}<div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div></section></article>`;
   }
 
   function moreBlock() {
@@ -316,13 +316,15 @@
   }
 
   /* one row: email (primary) · LinkedIn · GitHub */
+  // "Let's build something." with the mark at the right edge of the page
+  const talkHead = () => `<div class="talk-head"><h2>${t(STR.talkTitle)}</h2><img class="foot-mark" src="assets/logo.svg" alt="" aria-hidden="true"></div>`;
   const reachRow = () => { const p = D.person; return `<div class="reach-row"><a class="btn-pill mail-pill" href="mailto:${p.email}">${ic("mail")}${esc(p.email)}</a><a class="btn-ghost" href="${p.linkedin}" target="_blank" rel="noopener">${ic("linkedin")}LinkedIn ↗</a><a class="btn-ghost" href="${p.github}" target="_blank" rel="noopener">${ic("github")}GitHub ↗</a></div>`; };
 
   function contactBlock() {
     const p = D.person;
     return `
     <section class="bigfoot" id="contact">
-      <h2>${t(STR.talkTitle)}</h2>
+      ${talkHead()}
       <p>${esc(s("talkLede"))}</p>
       ${reachRow()}
       <div class="foot mono"><span>© ${new Date().getFullYear()} ${p.name}</span></div>
@@ -370,7 +372,7 @@
         <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b>${next.sub ? `<span class="mono dim">${esc(t(next.sub))}</span>` : ""}</a>
       </nav>
       <section class="bigfoot" id="contact-end" style="padding-top:clamp(48px,7vw,96px)">
-        <h2>${t(STR.talkTitle)}</h2>
+        ${talkHead()}
         ${reachRow()}
         <div class="foot mono"><span>© ${new Date().getFullYear()} ${D.person.name}</span></div>
       </section>

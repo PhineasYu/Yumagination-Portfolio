@@ -424,7 +424,7 @@
       links: [],
       verify: L("Name of the exhibition hall (you wrote it as 包玉缸 / Bao Yugang: confirm the spelling and whether to name it), and who decided the compromise. Workshop organiser names appear in the source pages; decide whether to name them.", "展厅的名字（你写的是「包玉缸」，应是包玉刚？确认写法以及是否写出）；折中方案是谁定的。来源页面里有活动主办方的名字，决定是否写出。"),
       shape: "wide",
-      tile: { img: "assets/shots/cv-built.jpg" },
+      tile: { img: "assets/shots/cv-card.jpg", fill: true },
       hero: IMG("assets/shots/cv-cover.jpg", "Community Viewfinder cover: a camera screen framing laundry on a Shanghai street, and the project title"),
       egg: { title: L("One more frame", "再看一个取景框"), sub: L("This project started with how I look at streets. The photographs are the other half of it.", "这个项目，起于我怎么看街道。我拍的照片，是它的另一半。"), go: L("Look through the gallery", "去看摄影"), url: "gallery.html" },
       sections: [
