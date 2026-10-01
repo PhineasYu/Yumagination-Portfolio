@@ -157,7 +157,7 @@
       <canvas class="silk" aria-hidden="true"></canvas>
       <div class="hero-in">
         <h1 class="name">${esc(D.person.name)}</h1>
-        <div class="hero-sub"><img class="name-mark" src="assets/logo.svg" alt="" aria-hidden="true"><p class="pos"><span class="p1">${esc(pos[0])}</span><span class="p2">${esc(pos[1])}</span></p></div>
+        <div class="hero-sub"><p class="pos"><span class="p1">${esc(pos[0])}</span><span class="p2">${esc(pos[1])}</span></p></div>
       </div>
     </section>
 
