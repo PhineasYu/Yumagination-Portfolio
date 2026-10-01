@@ -64,8 +64,13 @@ const touches = new Map();
 let view = null, lsBeforeStory = null;
 
 const FRAME_TOP = CH + 2.4, FRAME_BOTTOM = -4.6;
-const HOME_Y = (FRAME_TOP + FRAME_BOTTOM) / 2;
-const fitScale = () => Math.min(H / (FRAME_TOP - FRAME_BOTTOM), W / (CW + 3.4));
+// Yunfei's site: the resting view is up to 1.5x the original fit, as long as the glowing top of the curtain stays
+// on screen below the bar and the curtain stays inside the width (on a laptop about 1.3x; a dark strip of reflection stays at the bottom)
+const ORIG_FIT = () => Math.min(H / (FRAME_TOP - FRAME_BOTTOM), W / (CW + 3.4)) * 0.94;   // the template's own framing
+const homeScale = () => H > W ? ORIG_FIT() : Math.min(1.5 * ORIG_FIT(), H / 18.6, W / (CW + 1.6));   // phones (portrait) already fill the width: keep the original
+const HOME_Y_FIT = (FRAME_TOP + FRAME_BOTTOM) / 2;
+const homeY = () => H > W ? HOME_Y_FIT : Math.max(HOME_Y_FIT, CH + 1.6 - H / (2 * homeScale()));   // keep the top of the curtain below the bar; on phones lift the curtain so the bottom stays dark for the guide
+const fitScale = () => homeScale() / 0.94;
 const LS_MIN = () => Math.log(fitScale() * 0.94);
 const LS_MAX = () => Math.log(Math.min(W, H) * 0.55 / PHOTO_W);
 const camDist = () => F * H / (2 * Math.exp(cam.ls));
@@ -286,7 +291,7 @@ function step(dt, now) {
     cam.vx *= Math.exp(-dt * 3.4); cam.vy *= Math.exp(-dt * 3.4);
   }
   const zt = zoomT(), home = 1 - smooth(0, 0.14, zt);
-  cam.x = damp(cam.x, 0, 7 * home, dt); cam.y = damp(cam.y, HOME_Y, 7 * home, dt);
+  cam.x = damp(cam.x, 0, 7 * home, dt); cam.y = damp(cam.y, homeY(), 7 * home, dt);
   cam.x = clamp(cam.x, -CW / 2 - 0.6, CW / 2 + 0.6); cam.y = clamp(cam.y, -2.5, CH + 1.2);
 
   // Time dilation: a waterfall far away, a slow drift up close, almost still behind an open story.
@@ -494,7 +499,7 @@ async function boot() {
   stories = buildStories(photos, catalog.authored, catalog.journal);
   uploadStories();
 
-  cam.x = 0; cam.y = HOME_Y; cam.lsT = LS_MIN(); cam.ls = cam.lsT - 0.25;
+  cam.x = 0; cam.y = homeY(); cam.lsT = LS_MIN(); cam.ls = cam.lsT - 0.25;
   view = new StoryView({ stories, onShow: onStoryShow, onCovered: onStoryCovered, onHide: onStoryHide });
   body.classList.add('ready');
   last = performance.now();

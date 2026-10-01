@@ -12,9 +12,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261001w">
-  <link rel="stylesheet" href="assets/css/undertow.css?v=20261001w">
-  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001w">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001zc">
+  <link rel="stylesheet" href="assets/css/undertow.css?v=20261001zc">
+  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001zc">
 </head>
 <body class="gallery-page">
   <!-- the site's bar, on the dark waterfall -->
@@ -40,6 +40,9 @@
   <div id="meter" aria-hidden="true"><i></i></div>
   <div id="cursor" aria-hidden="true"></div>
   <p id="announce" class="sr-only" aria-live="polite"></p>
+  <!-- a quiet guide for first-time visitors, and zoom buttons -->
+  <p class="wf-hint" id="wf-hint"></p>
+  <div class="wf-zoom" aria-label="Zoom"><button type="button" id="wf-out" aria-label="Zoom out">−</button><button type="button" id="wf-in" aria-label="Zoom in">+</button></div>
 
   <section id="story" role="dialog" aria-modal="true" aria-labelledby="story-title" hidden>
     <div class="story-backdrop" aria-hidden="true"></div>
@@ -58,18 +61,23 @@
   </section>
 
   <noscript><p style="padding:96px 24px;color:#e4e7f6">This page needs JavaScript. Contact: phineasyu0812@gmail.com</p></noscript>
-  <script src="assets/js/gallery-data.js?v=20261001w"></script>
+  <script src="assets/js/gallery-data.js?v=20261001zc"></script>
   <script>
     /* the bar's labels and the language switch (the waterfall itself has no text to translate) */
     (function () {
       var N = { work: ["Work", "作品"], gallery: ["Gallery", "摄影"], method: ["Method", "方法"], about: ["About", "关于"], contact: ["Contact", "联系"] };
       var lang = "en"; try { lang = localStorage.getItem("lang") === "zh" ? "zh" : "en"; } catch (e) {}
-      function paint() { document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = N[el.dataset.t][lang === "zh" ? 1 : 0]; }); document.getElementById("lang").textContent = lang === "zh" ? "EN" : "中文"; document.documentElement.lang = lang; }
+      var touch = matchMedia("(pointer: coarse)").matches;
+      var HINT = touch ? ["Tap a thread, or pinch to zoom in", "点一条线，或双指放大"] : ["Click a thread, or zoom in", "点击一条线，或放大查看"];
+      var zoom = function (d) { if (window.__undertow) window.__undertow.zoomBy(d, innerWidth / 2, innerHeight / 2); };
+      document.getElementById("wf-in").addEventListener("click", function () { zoom(0.7); });
+      document.getElementById("wf-out").addEventListener("click", function () { zoom(-0.7); });
+      function paint() { document.getElementById("wf-hint").textContent = HINT[lang === "zh" ? 1 : 0]; document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = N[el.dataset.t][lang === "zh" ? 1 : 0]; }); document.getElementById("lang").textContent = lang === "zh" ? "EN" : "中文"; document.documentElement.lang = lang; }
       document.getElementById("lang").addEventListener("click", function () { lang = lang === "zh" ? "en" : "zh"; try { localStorage.setItem("lang", lang); } catch (e) {} paint(); });
       paint();
     })();
   </script>
-  <script type="module" src="assets/js/undertow/app.js?v=20261001w"></script>
-  <script src="assets/js/menu.js?v=20261001w"></script>
+  <script type="module" src="assets/js/undertow/app.js?v=20261001zc"></script>
+  <script src="assets/js/menu.js?v=20261001zc"></script>
 </body>
 </html>

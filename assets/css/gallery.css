@@ -13,3 +13,16 @@
 /* inside a story the waterfall has its own back button and title in the top-left: the bar steps aside */
 body.story-open .bar { opacity: 0; pointer-events: none; transition: opacity .4s ease; }
 .gallery-page .bar { transition: opacity .4s ease; }
+
+/* the guide under the waterfall, and the zoom buttons: thin, quiet, in the waterfall's own light */
+.wf-hint { position: fixed; z-index: 10; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: calc(100% - 140px); margin: 0; text-align: center;
+  font: 400 12px/1.6 var(--sans); letter-spacing: .08em; color: rgb(228 231 246 / .7); text-shadow: 0 0 10px #03040a, 0 0 18px #03040a, 0 0 2px #03040a; pointer-events: none; opacity: 0; transition: opacity 1.2s ease .6s; }
+body.ready .wf-hint { opacity: 1; }
+.wf-zoom { position: fixed; z-index: 10; right: max(24px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); display: flex; gap: 8px; opacity: 0; transition: opacity 1s ease .6s; }
+body.ready .wf-zoom { opacity: 1; }
+.wf-zoom button { width: 34px; height: 34px; padding: 0; border: 1px solid rgb(228 231 246 / .28); border-radius: 50%; background: rgb(3 4 10 / .35); color: rgb(228 231 246 / .8); font: 300 18px/1 var(--sans); cursor: pointer; transition: border-color .3s ease, color .3s ease, box-shadow .3s ease; }
+.wf-zoom button:hover, .wf-zoom button:focus-visible { border-color: rgb(125 140 255 / .8); color: #fff; box-shadow: 0 0 12px rgb(125 140 255 / .45); outline: none; }
+body.story-open .wf-hint, body.story-open .wf-zoom { opacity: 0; pointer-events: none; transition-delay: 0s; }
+@media (max-width: 640px) {
+  .wf-hint { font-size: 11px; letter-spacing: .05em; bottom: calc(max(20px, env(safe-area-inset-bottom)) + 50px); max-width: calc(100% - 40px); }
+}
