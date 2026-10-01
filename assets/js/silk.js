@@ -58,7 +58,7 @@ void main(){
   // where the pointer is, every cell shows a dot in a deeper Tiffany, whatever the moment
   float hd=smoothstep(.36*hov+px,.36*hov-px,length(lc))*smoothstep(0.,.3,hov);
   float kh=hd*(1.-.55*zone);
-  col=mix(col,vec3(.961,.769,.0),smoothstep(.04,.35,hov)*.95);   // a deeper lemon (#f5c400), the Award pill's family, so it shows on the light grey
+  col=mix(col,vec3(.016,.373,.357),smoothstep(.04,.35,hov)*.95);   // a deep Tiffany green (#045f5b)
   k=max(k*(1.-.5*smoothstep(.1,.6,hov)),kh);
   vec3 c=mix(BG,col,k)+(hash(gl_FragCoord.xy+fract(t)*91.)-.5)*.02;   // a trace of grain
   gl_FragColor=vec4(c,1.);
