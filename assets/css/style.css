@@ -578,3 +578,31 @@ html[lang="zh"] .blk p { max-width: 36em; }
 @keyframes card-in { from { opacity: 0; transform: translateY(46px) scale(.96); } to { opacity: 1; transform: none; } }
 @keyframes tile-ease { from { transform: scale(1.12); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .proj.rv.in, .proj.rv.in .tile > img, .proj.rv.in .tile > video, .proj.rv.in .tile > svg.mo { animation: none; } }
+
+/* ================= mobile adaptations (phones only; desktop is untouched) ================= */
+/* the small menu button and its panel, shown only where the top navigation is hidden (≤ 640px) */
+.menu-btn { display: none; }
+@media (max-width: 640px) {
+  .menu-btn { display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 38px; height: 38px; padding: 0 9px; margin-left: 4px; border: 1px solid var(--line-strong); border-radius: 50%; background: transparent; cursor: pointer; }
+  .menu-btn span { display: block; height: 1.5px; border-radius: 1px; background: var(--ink); transition: transform var(--dur-s) var(--ease), opacity var(--dur-s) var(--ease); }
+  .bar.menu-open .menu-btn span:first-child { transform: translateY(3.25px) rotate(45deg); }
+  .bar.menu-open .menu-btn span:last-child { transform: translateY(-3.25px) rotate(-45deg); }
+  .bar.menu-open { background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .bar.menu-open nav { display: flex; flex-direction: column; gap: 0; position: fixed; top: var(--bar); left: 0; right: 0; padding: 8px var(--gx) 20px; background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 1px 0 var(--line); }
+  .bar.menu-open nav a { padding: 14px 0; font-size: 20px; font-weight: 600; color: var(--ink); border-bottom: 1px solid var(--line); }
+  .bar.menu-open nav a:last-child { border-bottom: 0; }
+  .bar.menu-open nav a::after { display: none; }
+  .bar .right { gap: 8px; }
+}
+@media (max-width: 720px) {
+  /* Awards: a plain rise instead of the 3D deal (Safari cannot see the folded cards, so half of them never appeared) */
+  .awards .award.rv { transform: translateY(28px); transition-delay: 0s; backface-visibility: visible; }
+  .awards .award.rv > * { transition-delay: .2s; }
+  .awards .award.rv.in::after { animation-delay: .15s; }
+  /* About: calmer text, and the timeline stacks the year above the role so nothing is squeezed */
+  .about p { font-size: 17px; line-height: 1.62; max-width: 30em; padding-right: 6px; }
+  .tl li { grid-template-columns: 1fr auto; grid-template-areas: "when logo" "what logo"; gap: 4px 14px; padding: 16px 18px; min-height: 0; }
+  .tl li > .mono { grid-area: when; padding-top: 0; font-size: 12px; }
+  .tl li > .tl-what { grid-area: what; }
+  .tl li > .logo { grid-area: logo; align-self: center; }
+}

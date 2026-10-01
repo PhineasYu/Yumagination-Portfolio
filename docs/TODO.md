@@ -140,3 +140,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-01 · 第十八批 · Community Viewfinder 卡片换新封面（裁成卡片比例，铺满无灰边）；logo 改到名字下方、两行定位左侧（高度等于两行字）；「Let's build something」一栏右侧加 logo
 - 2026-10-01 · 第十九批 · 首屏鼠标光圈：试过紫色、黄色后定为更深的墨绿（#045f5b），范围缩小；polish 合并进 main 上线
 - 2026-10-01 · 第二十批 · 网站「Download my CV」换成新版简历（Instrument Sans、带作品集链接）
+- 2026-10-01 · 第二十一批 · 移动端适配（桌面不变）：小菜单（首页和 Gallery）；Awards 在 iPhone 上 8 张全显示、无多余留白；About 文字和时间线排版放松；Gallery 双指缩放不再闪退；竖屏 hero 光轨沿长边、节奏放慢；21 个项目页在 iPhone/桌面全部检查通过

@@ -92,3 +92,6 @@ body.lb-open { overflow: hidden; }
   .g-spec-track { flex: 1; width: auto; }
   .g-hint { white-space: normal; width: calc(100% - 32px); text-align: center; }
 }
+
+/* phones and tablets: let the browser repaint the scaled canvas at its current size instead of keeping one huge layer (it ran out of memory when zooming) */
+@media (pointer: coarse) { .world { will-change: auto; } }

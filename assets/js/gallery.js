@@ -103,7 +103,8 @@
   /* ---------- moving and zooming: drag, two-finger scroll, pinch, arrow keys, + and - ---------- */
   const MAXZ = 2.4;
   let MINZ = .3;                             // or less, so the whole collection fits on the screen
-  const fitZ = () => { MINZ = Math.max(.08, Math.min(.3, innerWidth / (maxX - minX + 2 * M), innerHeight / (maxY - minY + 2 * M))); };
+  const COARSE = matchMedia("(pointer: coarse)").matches;   // phones and tablets: a floor on zooming out, so the page never has to paint the whole plane at once
+  const fitZ = () => { MINZ = Math.max(COARSE ? .3 : .08, Math.min(.3, innerWidth / (maxX - minX + 2 * M), innerHeight / (maxY - minY + 2 * M))); };
   let vx = 0, vy = 0, moved = 0, glide = 0;
   const pts = new Map();                     // active pointers, for pinch
   let drag = null, pinch = null;
@@ -114,7 +115,7 @@
   const mid = () => { const [a, b] = [...pts.values()]; return { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }; };
   cv.addEventListener("pointerdown", (e) => {
     if (e.button > 0) return; stop(); hideHint();
-    pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); cv.setPointerCapture(e.pointerId);
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); try { cv.setPointerCapture(e.pointerId); } catch (err) {}
     if (pts.size === 2) { drag = null; pinch = { d: dist(), m: mid() }; moved = 99; }
     else { drag = { x: e.clientX, y: e.clientY, t: performance.now() }; moved = 0; cv.classList.add("grab"); }
   });
@@ -139,7 +140,8 @@
     else { ox += e.deltaX / Z; oy += e.deltaY / Z; queue(); }
   }, { passive: false });
   // Safari pinch on a trackpad
-  let gz = 1; addEventListener("gesturestart", (e) => { e.preventDefault(); gz = 1; }); addEventListener("gesturechange", (e) => { e.preventDefault(); zoomAt(e.scale / gz, e.clientX || innerWidth / 2, e.clientY || innerHeight / 2); gz = e.scale; }); addEventListener("gestureend", (e) => e.preventDefault());
+  // (on iPhone and iPad the same pinch also arrives as two pointers, handled above; zooming twice sent the zoom flying and crashed the page)
+  let gz = 1; addEventListener("gesturestart", (e) => { e.preventDefault(); gz = 1; }); addEventListener("gesturechange", (e) => { e.preventDefault(); if (!pinch && pts.size < 2 && !COARSE) zoomAt(e.scale / gz, e.clientX || innerWidth / 2, e.clientY || innerHeight / 2); gz = e.scale; }); addEventListener("gestureend", (e) => e.preventDefault());
   cv.addEventListener("dblclick", (e) => { if (e.target.closest(".ph")) return; zoomAt(Z < 1.2 ? 1.8 : 1 / Z, e.clientX, e.clientY); });
   const step = (k) => { stop(); ox += k[0] * 220 / Z; oy += k[1] * 220 / Z; hideHint(); queue(); };
   addEventListener("keydown", (e) => {

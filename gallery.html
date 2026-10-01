@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Gallery — Yunfei Yu</title>
   <meta name="description" content="Photographs by Yunfei Yu. A side project.">
   <meta property="og:title" content="Gallery — Yunfei Yu">
@@ -12,15 +12,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261001g">
-  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001g">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001u">
+  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001u">
 </head>
 <body class="gallery-page">
   <a class="skip" href="#cv">Skip to the photographs</a>
 
   <header class="bar" id="bar">
     <a class="brand" href="index.html" aria-label="Home">Yunfei Yu</a>
-    <nav aria-label="Primary">
+    <nav aria-label="Primary" id="bar-nav">
       <a href="index.html#/work" data-t="work"></a>
       <a href="gallery.html" data-t="gallery" aria-current="page"></a>
       <a href="index.html#/method" data-t="method"></a>
@@ -29,6 +29,7 @@
     <div class="right">
       <a href="index.html#/contact" data-t="contact"></a>
       <button class="lang" id="lang" type="button" aria-label="Switch language">中文</button>
+      <button class="menu-btn" id="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="bar-nav"><span></span><span></span></button>
     </div>
   </header>
 
@@ -56,7 +57,8 @@
 
   <noscript><p style="padding:96px 24px">This page needs JavaScript. Contact: phineasyu0812@gmail.com</p></noscript>
 
-  <script src="assets/js/gallery-data.js?v=20261001g"></script>
-  <script src="assets/js/gallery.js?v=20261001g"></script>
+  <script src="assets/js/gallery-data.js?v=20261001u"></script>
+  <script src="assets/js/gallery.js?v=20261001u"></script>
+  <script src="assets/js/menu.js?v=20261001u"></script>
 </body>
 </html>

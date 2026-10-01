@@ -24,7 +24,10 @@ void main(){
   vec2 cell=floor(gl_FragCoord.xy/cs), lc=fract(gl_FragCoord.xy/cs)-.5;
   vec2 n=(cell+.5)*cs/r;                                  // 0..1, y up, at the cell's centre
   float a=r.x/r.y; vec2 q=vec2(n.x*a,n.y);
-  float P=3.6, ph=still>.5?.4:fract(t/P), cyc=still>.5?0.:floor(t/P);
+  float P=3.6;
+  // portrait screens (phones): lay the rail along the long side, so it keeps the same easy curve instead of a cramped zigzag, and breathe a little slower
+  if(a<1.){ a=1./a; q=vec2((1.-n.y)*a,n.x); P=4.6; }
+  float ph=still>.5?.4:fract(t/P), cyc=still>.5?0.:floor(t/P);
   // the rail: a smooth curve through the preset's four path points (x, y from the top), gently breathing
   float x0=.06*a,x1=.34*a,x2=.66*a,x3=.95*a, y0=.15,y1=.78,y2=.22,y3=.85, xa,xb,ya,yb;
   if(q.x<x1){xa=x0;xb=x1;ya=y0;yb=y1;} else if(q.x<x2){xa=x1;xb=x2;ya=y1;yb=y2;} else {xa=x2;xb=x3;ya=y2;yb=y3;}
