@@ -304,7 +304,7 @@
     const A = D.about, p = D.person;
     return `
     <section class="section" id="about">
-      <div class="sec-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2></div>
+      <div class="sec-head about-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2><img class="about-mark" src="assets/logo.svg" alt="" aria-hidden="true"></div>
       <div class="about rv">
         <div>
           <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
@@ -324,7 +324,7 @@
     const p = D.person;
     return `
     <section class="bigfoot" id="contact">
-      ${talkHead()}
+      <h2>${t(STR.talkTitle)}</h2>
       <p>${esc(s("talkLede"))}</p>
       ${reachRow()}
       <div class="foot mono"><span>© ${new Date().getFullYear()} ${p.name}</span></div>

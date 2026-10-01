@@ -301,6 +301,8 @@ a.feed-item:hover .arr { transform: translate(2px, -2px); }
 .m-lede2 { margin-top: 18px; font-size: var(--fs-small); }
 .about .langline { margin: 20px 0 0; font-size: var(--fs-label); line-height: 1.6; color: var(--ink-muted); }
 .bigfoot { padding: var(--sec) var(--gx) 32px; }
+.sec-head.about-head { display: flex; align-items: center; justify-content: space-between; }   /* About, with the mark at the right edge */
+.about-mark { flex: none; height: calc(var(--fs-2) * 1.1); width: auto; }
 .talk-head h2 { margin: 0 !important; }
 .talk-head { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin: 0 0 20px; }
 .talk-head .foot-mark { flex: none; height: calc(var(--fs-1) * 1.05); width: auto; }
