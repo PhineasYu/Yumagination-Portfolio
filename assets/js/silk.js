@@ -38,9 +38,9 @@ void main(){
   g*=1.-smoothstep(h*.55,h*.55+.45,smoothstep(.64,.88,ph));
   // the pointer: a ring of cells around it, and a fading trail behind it
   vec2 cp=(cell+.5)*cs; float hov=0.;
-  for(int i=0;i<12;i++){ float age=t-m[i].z; if(age<0.||age>1.) continue; float dd=distance(cp,m[i].xy)/(cs*4.5); hov=max(hov,(1.-age)*(1.-age)*exp(-dd*dd)); }
+  for(int i=0;i<12;i++){ float age=t-m[i].z; if(age<0.||age>1.) continue; float dd=distance(cp,m[i].xy)/(cs*2.8); hov=max(hov,(1.-age)*(1.-age)*exp(-dd*dd)); }
   float dm=distance(cp,mp.xy)/cs;
-  hov=max(hov,mp.z*(exp(-pow((dm-5.5)/1.1,2.))+.55*exp(-dm*dm/6.)));
+  hov=max(hov,mp.z*(exp(-pow((dm-3.2)/.9,2.))+.55*exp(-dm*dm/2.5)));
   hov=clamp(hov,0.,1.);
   float px=1.4/cs, cover=0., lvl;
   if(d<.06){ lvl=4.; cover=step(.5,mod(cell.x+cell.y,2.))*step(max(abs(lc.x),abs(lc.y)),.5*g); }             // checkered rail
@@ -58,7 +58,7 @@ void main(){
   // where the pointer is, every cell shows a dot in a deeper Tiffany, whatever the moment
   float hd=smoothstep(.36*hov+px,.36*hov-px,length(lc))*smoothstep(0.,.3,hov);
   float kh=hd*(1.-.55*zone);
-  col=mix(col,vec3(.039,.522,.502),smoothstep(.04,.35,hov)*.9);
+  col=mix(col,vec3(.608,.529,.961),smoothstep(.04,.35,hov)*.95);   // lavender (#9b87f5), the Internship pill's family
   k=max(k*(1.-.5*smoothstep(.1,.6,hov)),kh);
   vec3 c=mix(BG,col,k)+(hash(gl_FragCoord.xy+fract(t)*91.)-.5)*.02;   // a trace of grain
   gl_FragColor=vec4(c,1.);
