@@ -188,7 +188,7 @@ window.PORTFOLIO = {
       { logo: "unilever", when: "2022–2024", role: { en: "Packaging Laboratory Assistant", zh: "包装实验室助理" }, org: { en: "Unilever Global R&D Center, Shanghai", zh: "联合利华全球研发中心，上海" } },
       { logo: "zzu", when: "2017–2021", role: { en: "BEng Packaging Engineering", zh: "包装工程学士" }, org: { en: "Zhengzhou University", zh: "郑州大学" } }
     ],
-    cv: { label: { en: "Download my CV", zh: "下载我的简历" }, file: "assets/Yunfei_Yu_CV.pdf" },
+    cv: { label: { en: "Download my CV", zh: "下载我的简历" }, file: "assets/Yunfei_Yu_CV.pdf?v=20261001" },
     languages: { en: "English (professional) · Chinese (native) · Swedish (learning)", zh: "英语（工作语言）· 中文（母语）· 瑞典语（学习中）" }
   },
 
