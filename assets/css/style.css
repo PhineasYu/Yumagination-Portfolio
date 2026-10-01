@@ -497,22 +497,32 @@ html[lang="zh"] .blk p { max-width: 36em; }
 }
 
 /* easter egg: a viewfinder frame at the end of one case study, linking to the photography gallery */
-.egg { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; max-width: 760px; margin: clamp(40px, 6vw, 72px) auto 0; padding: 34px 40px; color: var(--ink); text-decoration: none; }
-.egg-c { position: absolute; width: 22px; height: 22px; border: 0 solid var(--ink); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease); }
-.egg-c.c1 { left: 0; top: 0; border-width: 2px 0 0 2px; } .egg-c.c2 { right: 0; top: 0; border-width: 2px 2px 0 0; }
-.egg-c.c3 { left: 0; bottom: 0; border-width: 0 0 2px 2px; } .egg-c.c4 { right: 0; bottom: 0; border-width: 0 2px 2px 0; }
-.egg:hover .c1 { transform: translate(6px, 6px); } .egg:hover .c2 { transform: translate(-6px, 6px); }
-.egg:hover .c3 { transform: translate(6px, -6px); } .egg:hover .c4 { transform: translate(-6px, -6px); }
+/* the easter egg on Community Viewfinder: a small pixel badge made of the photographs (like the home page window), with viewfinder corners; it leads to the Gallery */
+.egg { display: flex; align-items: center; gap: clamp(20px, 3vw, 36px); max-width: 640px; margin: clamp(40px, 6vw, 72px) auto 0; color: var(--ink); }
+.egg-badge { position: relative; flex: none; width: clamp(120px, 12vw, 168px); aspect-ratio: 1; padding: 10px; perspective: 600px; }
+.egg-cv { display: block; width: 100%; height: 100%; }
+.egg-c { position: absolute; width: 14px; height: 14px; border: 0 solid var(--ink); transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+.egg-c.c1 { left: 0; top: 0; border-width: 1px 0 0 1px; } .egg-c.c2 { right: 0; top: 0; border-width: 1px 1px 0 0; }
+.egg-c.c3 { left: 0; bottom: 0; border-width: 0 0 1px 1px; } .egg-c.c4 { right: 0; bottom: 0; border-width: 0 1px 1px 0; }
+.egg:hover .c1 { transform: translate(4px, 4px); } .egg:hover .c2 { transform: translate(-4px, 4px); }
+.egg:hover .c3 { transform: translate(4px, -4px); } .egg:hover .c4 { transform: translate(-4px, -4px); }
 .egg:hover .egg-c { border-color: var(--tf); }
-.egg-rec { position: absolute; left: 40px; top: 10px; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-muted); }
-.egg-rec i { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); animation: egg-blink 1.6s steps(2, jump-none) infinite; }
-@keyframes egg-blink { 50% { opacity: 0; } }
-.egg-t { display: flex; flex-direction: column; gap: 4px; flex: 1 1 280px; }
+/* the foil: a rainbow sheen and sparkles that slide with the tilt, and a glare that follows the light */
+.egg-card { position: relative; display: block; width: 100%; height: 100%; border-radius: var(--radius-sm, 6px); overflow: hidden; transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transform-style: preserve-3d; will-change: transform;
+  box-shadow: 0 10px 24px -12px rgba(17, 17, 17, .5), 0 0 0 1px rgba(255, 255, 255, .25) inset; }
+.egg-holo { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: color-dodge; opacity: calc(.16 + var(--hyp, 0) * .34);
+  background:
+    radial-gradient(circle at 20% 30%, #fff 0 1px, transparent 1.6px) 0 0 / 23px 19px,
+    radial-gradient(circle at 70% 60%, #fff 0 .8px, transparent 1.4px) 0 0 / 17px 29px,
+    repeating-linear-gradient(115deg, #ff7eb3 0%, #ffd36e 8%, #8af3c5 16%, #7ad7ff 24%, #b48cff 32%, #ff7eb3 40%) var(--mx, 50%) var(--my, 50%) / 300% 300%; }
+.egg-glare { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: overlay; background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 55%); opacity: calc(.4 + var(--hyp, 0) * .5); }
+@media (prefers-reduced-motion: reduce) { .egg-card { transform: none; } }
+.egg-t { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-width: 0; }
 .egg-t b { font-size: var(--fs-3, 20px); font-weight: 600; letter-spacing: -.012em; }
-.egg-t span { font-size: var(--fs-small); color: var(--ink-muted); line-height: 1.5; }
-.egg-go { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; font-size: 13px; font-weight: 600; background: var(--tf); border-radius: var(--radius-pill); }
-.egg:hover .egg-go .arrow { transform: translateX(3px); } .egg-go .arrow { transition: transform var(--dur) var(--ease); }
-@media (prefers-reduced-motion: reduce) { .egg-rec i { animation: none; } }
+.egg-t > span:not(.egg-go) { font-size: var(--fs-small); color: var(--ink-muted); line-height: 1.5; }
+.egg-go { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 14px; font-weight: 600; }
+.egg-go .arrow { color: var(--tf); font-weight: 900; font-size: 18px; line-height: 1; -webkit-text-stroke: 1.2px var(--tf); transition: transform var(--dur) var(--ease); }
+.egg:hover .egg-go .arrow { transform: translateX(3px); }
 
 /* an emoji laid on a card cover, to soften a dark title */
 .tile-emoji { position: absolute; z-index: 2; transform: translate(-50%, -50%) rotate(var(--rot, 45deg)); font-size: clamp(34px, 5.2cqw, 64px); line-height: 1; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35)); pointer-events: none; }

@@ -204,6 +204,61 @@
       </a>
     </section>`;
   }
+  let eggStop = null;
+  function startEggPix() {
+    eggStop && eggStop(); eggStop = null;
+    const cv = $(".egg-cv"); if (!cv) return;
+    const G = window.GALLERY, photos = (G && G.series ? G.series.flatMap((r) => r.photos) : []).filter((p) => p.px);
+    if (!photos.length) return;
+    const ctx = cv.getContext("2d"), TW = 12, TH = 8, COLS = 2, ROWS = 3, N = 24;
+    const unpack = (b64) => { const d = atob(b64), out = []; for (let i = 0; i + 2 < d.length; i += 3) out.push([d.charCodeAt(i), d.charCodeAt(i + 1), d.charCodeAt(i + 2)]); return out; };
+    const pool = photos.map((p) => unpack(p.px));
+    let seed = Math.floor(Math.random() * pool.length);
+    const tiles = Array.from({ length: COLS * ROWS }, (_, k) => ({ a: pool[(seed + k * 7) % pool.length], b: null, born: 0 }));
+    let px = 7, raf = 0, dead = false, next = 0, turn = 0;
+    const size = () => { const w = cv.clientWidth, dpr = Math.min(2, devicePixelRatio || 1); px = w / N; cv.width = Math.round(w * dpr); cv.height = Math.round(w * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    const draw = (now) => {
+      ctx.fillStyle = "#111"; ctx.fillRect(0, 0, N * px, N * px);
+      tiles.forEach((tl, k) => {
+        const tx = (k % COLS) * TW, ty = Math.floor(k / COLS) * TH, f = tl.b ? Math.min(1, (now - tl.born) / 700) : 0;
+        for (let y = 0; y < TH; y++) for (let x = 0; x < TW; x++) {
+          const i = y * TW + x, c0 = tl.a[i], c1 = tl.b ? tl.b[i] : c0;
+          // pixels switch one by one in a diagonal wave, like the home page window
+          const g = f >= (x + y) / (TW + TH) ? 1 : 0, c = g ? c1 : c0;
+          ctx.fillStyle = `rgb(${c[0]},${c[1]},${c[2]})`;
+          ctx.fillRect((tx + x) * px + 0.5, (ty + y) * px + 0.5, px - 1, px - 1);
+        }
+        if (tl.b && f >= 1) { tl.a = tl.b; tl.b = null; }
+      });
+    };
+    const loop = (now) => {
+      if (dead) return;
+      if (now > next) { const k = turn++ % tiles.length; seed = (seed + 11) % pool.length; tiles[(k * 5) % tiles.length].b = pool[seed]; tiles[(k * 5) % tiles.length].born = now; next = now + 1100; }
+      draw(now); raf = requestAnimationFrame(loop);
+    };
+    size(); draw(0);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const vis = new IntersectionObserver((es) => { if (es[0].isIntersecting && !raf && !dead) raf = requestAnimationFrame(loop); else if (!es[0].isIntersecting) { cancelAnimationFrame(raf); raf = 0; } });
+    vis.observe(cv);
+    const onR = () => { size(); draw(performance.now()); }; addEventListener("resize", onR);
+    // the foil card: tilts toward the pointer; with no pointer (phones, or resting) it sways by itself, so the foil always catches the light
+    const egg = cv.closest(".egg"), card = cv.closest(".egg-card");
+    let tx = 0, ty = 0, rx = 0, ry = 0, hovering = false, t0 = performance.now(), tiltRaf = 0;
+    egg.addEventListener("pointermove", (e) => { if (e.pointerType !== "mouse") return; const r = card.getBoundingClientRect(); tx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1)); ty = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1)); hovering = true; });
+    egg.addEventListener("pointerleave", () => { hovering = false; });
+    addEventListener("deviceorientation", (e) => { if (e.gamma == null) return; hovering = true; tx = Math.max(-1, Math.min(1, e.gamma / 25)); ty = Math.max(-1, Math.min(1, (e.beta - 45) / 25)); });   // Android gives this without asking
+    const tilt = (now) => {
+      if (dead) return;
+      if (!hovering) { const k = (now - t0) / 1000; tx = Math.sin(k * 0.9) * 0.55; ty = Math.sin(k * 0.63 + 1) * 0.4; }
+      rx += (tx - rx) * 0.12; ry += (ty - ry) * 0.12;
+      card.style.setProperty("--ry", (rx * 16).toFixed(2) + "deg"); card.style.setProperty("--rx", (-ry * 16).toFixed(2) + "deg");
+      card.style.setProperty("--mx", (50 + rx * 50).toFixed(1) + "%"); card.style.setProperty("--my", (50 + ry * 50).toFixed(1) + "%");
+      card.style.setProperty("--hyp", Math.min(1, Math.hypot(rx, ry)).toFixed(3));
+      tiltRaf = requestAnimationFrame(tilt);
+    };
+    tiltRaf = requestAnimationFrame(tilt);
+    eggStop = () => { dead = true; cancelAnimationFrame(raf); cancelAnimationFrame(tiltRaf); vis.disconnect(); removeEventListener("resize", onR); };
+  }
   let gpixStop = null;
   function startGpix() {
     gpixStop && gpixStop(); gpixStop = null;
@@ -367,7 +422,7 @@
             ${sec.media ? `<div class="shot">${media(sec.media)}${sec.cap ? `<p class="cap">${esc(t(sec.cap))}</p>` : ""}</div>` : ""}
           </section>`).join("")}
       </div>
-      ${p.egg ? `<a class="egg rv" href="${esc(p.egg.url)}"><span class="egg-c c1"></span><span class="egg-c c2"></span><span class="egg-c c3"></span><span class="egg-c c4"></span><span class="egg-rec mono"><i></i>REC</span><span class="egg-t"><b>${esc(t(p.egg.title))}</b><span>${esc(t(p.egg.sub))}</span></span><span class="egg-go">${esc(t(p.egg.go))} <span class="arrow">→</span></span></a>` : ""}
+      ${p.egg ? `<a class="egg rv" href="${esc(p.egg.url)}"><span class="egg-badge"><span class="egg-card"><canvas class="egg-cv" aria-hidden="true"></canvas><span class="egg-holo" aria-hidden="true"></span><span class="egg-glare" aria-hidden="true"></span></span><span class="egg-c c1"></span><span class="egg-c c2"></span><span class="egg-c c3"></span><span class="egg-c c4"></span></span><span class="egg-t"><b>${esc(t(p.egg.title))}</b><span>${esc(t(p.egg.sub))}</span><span class="egg-go">${esc(t(p.egg.go))} <span class="arrow">→</span></span></span></a>` : ""}
       <nav class="pager rv" aria-label="More work">
         <a href="#/work/${prev.id}"><span class="mono dim">← ${esc(s("prev"))}</span><b>${esc(prev.title)}</b>${prev.sub ? `<span class="mono dim">${esc(t(prev.sub))}</span>` : ""}</a>
         <a href="#/work/${next.id}"><span class="mono dim">${esc(s("next"))} →</span><b>${esc(next.title)}</b>${next.sub ? `<span class="mono dim">${esc(t(next.sub))}</span>` : ""}</a>
@@ -392,6 +447,7 @@
     document.title = isCase ? `${(D.projects.filter((p) => !p.hidden).find((p) => p.id === (ALIAS[b] || b)) || {}).title || ""} — Yunfei Yu` : "Yunfei Yu — Yumagination";
     wire();
     startGpix();
+    startEggPix();
     if (!keepScroll) {
       const el = !isCase && !isMethod && a ? document.getElementById(a) : null;
       if (el) el.scrollIntoView(); else window.scrollTo(0, 0);
