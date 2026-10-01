@@ -67,9 +67,9 @@ const FRAME_TOP = CH + 2.4, FRAME_BOTTOM = -4.6;
 // Yunfei's site: the resting view is up to 1.5x the original fit, as long as the glowing top of the curtain stays
 // on screen below the bar and the curtain stays inside the width (on a laptop about 1.3x; a dark strip of reflection stays at the bottom)
 const ORIG_FIT = () => Math.min(H / (FRAME_TOP - FRAME_BOTTOM), W / (CW + 3.4)) * 0.94;   // the template's own framing
-const homeScale = () => H > W ? ORIG_FIT() : Math.min(1.5 * ORIG_FIT(), H / 18.6, W / (CW + 1.6));   // phones (portrait) already fill the width: keep the original
+const homeScale = () => ORIG_FIT();   // back to the original size (the 1.3x trial was undone)
 const HOME_Y_FIT = (FRAME_TOP + FRAME_BOTTOM) / 2;
-const homeY = () => H > W ? HOME_Y_FIT : Math.max(HOME_Y_FIT, CH + 1.6 - H / (2 * homeScale()));   // keep the top of the curtain below the bar; on phones lift the curtain so the bottom stays dark for the guide
+const homeY = () => HOME_Y_FIT;
 const fitScale = () => homeScale() / 0.94;
 const LS_MIN = () => Math.log(fitScale() * 0.94);
 const LS_MAX = () => Math.log(Math.min(W, H) * 0.55 / PHOTO_W);

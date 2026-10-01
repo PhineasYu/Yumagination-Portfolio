@@ -16,7 +16,7 @@ body.story-open .bar { opacity: 0; pointer-events: none; transition: opacity .4s
 
 /* the guide under the waterfall, and the zoom buttons: thin, quiet, in the waterfall's own light */
 .wf-hint { position: fixed; z-index: 10; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: max-content; max-width: calc(100% - 140px); margin: 0; text-align: center;
-  font: 400 12px/1.6 var(--sans); letter-spacing: .08em; color: rgb(228 231 246 / .7); text-shadow: 0 0 10px #03040a, 0 0 18px #03040a, 0 0 2px #03040a; pointer-events: none; opacity: 0; transition: opacity 1.2s ease .6s; }
+  font: 400 12px/1.6 var(--sans); letter-spacing: .08em; color: rgb(228 231 246 / .8); pointer-events: none; opacity: 0; transition: opacity 1.2s ease .6s; }
 body.ready .wf-hint { opacity: 1; }
 .wf-zoom { position: fixed; z-index: 10; right: max(24px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); display: flex; gap: 8px; opacity: 0; transition: opacity 1s ease .6s; }
 body.ready .wf-zoom { opacity: 1; }
@@ -26,3 +26,11 @@ body.story-open .wf-hint, body.story-open .wf-zoom { opacity: 0; pointer-events:
 @media (max-width: 640px) {
   .wf-hint { font-size: 11px; letter-spacing: .05em; bottom: calc(max(20px, env(safe-area-inset-bottom)) + 50px); max-width: calc(100% - 40px); }
 }
+
+/* the neighbouring threads in a story: a line you can pluck (assets/js/pluck.js) */
+.story-side { z-index: 4; -webkit-mask: none; mask: none; touch-action: none; cursor: grab; }   /* above the photo strip, which covered them */
+.story-side.held { cursor: grabbing; }
+.story-side::before { display: none; }
+.story-side svg { position: absolute; top: 0; left: 50%; overflow: visible; pointer-events: none; }
+.story-side path { fill: none; stroke-width: 1; stroke-linecap: round; transition: stroke-opacity .35s ease; filter: drop-shadow(0 0 0 transparent); }
+.story-side:hover path, .story-side.held path, .story-side:focus-visible path { filter: drop-shadow(0 0 5px rgb(var(--c, 125 140 255) / .9)); }
