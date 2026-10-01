@@ -172,12 +172,12 @@ window.PORTFOLIO = {
     body: {
       en: [
         "I'm a UX designer, now AI-native: an AI-enhanced designer who frames the problem, writes the spec, directs coding agents to build it, and tests it with real people. What I bring on top is taste, and a habit of researching how people actually use things until the product feels easy.",
-        "I come from packaging engineering, then moved into design: Unilever's R&D packaging lab in Shanghai, and now a master's in Integrated Product Design at KTH in Stockholm. That is why I can read a spec or a build log without flinching, and why I still enjoy making things you can hold, from Arduino devices to 3D-modelled hardware.",
+        "I come from packaging engineering, then moved into design: Unilever's R&D packaging lab in Shanghai, then a master's in Integrated Product Design at KTH in Stockholm, which I completed in September 2026. That is why I can read a spec or a build log without flinching, and why I still enjoy making things you can hold, from Arduino devices to 3D-modelled hardware.",
         "I'm looking for junior roles where a short loop from ambiguous problem to demoable prototype is the job: AI engineer, design technologist, UX engineer, AI-native product designer."
       ],
       zh: [
         "我是一名 UX 设计师，现在是 AI 原生的：一个 AI 增强的设计师，负责定义问题、写 spec、指挥 AI 编程助手把它做出来，再拿去给真实的人测试。在此之上，我带来的是品味，以及把用户怎么真正使用东西研究透、直到产品用起来毫不费力的习惯。",
-        "我出身包装工程，后来转向设计：在联合利华上海研发中心的包装实验室工作过，现在在斯德哥尔摩的 KTH 读集成产品设计硕士。所以我看 spec 和构建日志毫不发怵，也仍然喜欢做能拿在手里的东西，从 Arduino 设备到 3D 建模的硬件。",
+        "我出身包装工程，后来转向设计：在联合利华上海研发中心的包装实验室工作过，之后在斯德哥尔摩的 KTH 完成了集成产品设计硕士（2026 年 9 月毕业）。所以我看 spec 和构建日志毫不发怵，也仍然喜欢做能拿在手里的东西，从 Arduino 设备到 3D 建模的硬件。",
         "我在找 junior 岗位：从模糊问题到可演示原型的短周期就是工作本身，例如 AI engineer、design technologist、UX engineer、AI 原生的产品设计师。"
       ]
     },
