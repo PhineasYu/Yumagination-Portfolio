@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <title>Gallery — Yunfei Yu</title>
-  <meta name="description" content="Photographs by Yunfei Yu. A side project.">
+  <meta name="description" content="Photographs by Yunfei Yu, as a waterfall of light: every thread is a stream of photographs.">
   <meta property="og:title" content="Gallery — Yunfei Yu">
   <meta property="og:type" content="website">
-  <meta name="theme-color" content="#f4f4f4">
+  <meta name="theme-color" content="#03040a">
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261001u">
-  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001u">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261001w">
+  <link rel="stylesheet" href="assets/css/undertow.css?v=20261001w">
+  <link rel="stylesheet" href="assets/css/gallery.css?v=20261001w">
 </head>
 <body class="gallery-page">
-  <a class="skip" href="#cv">Skip to the photographs</a>
-
+  <!-- the site's bar, on the dark waterfall -->
   <header class="bar" id="bar">
     <a class="brand" href="index.html" aria-label="Home">Yunfei Yu</a>
     <nav aria-label="Primary" id="bar-nav">
@@ -33,32 +33,43 @@
     </div>
   </header>
 
-  <main id="cv" class="cv" aria-label="Photographs on an endless canvas. Drag to move.">
-    <div id="world" class="world"><div id="title" class="g-title-card"></div></div>
-  </main>
-  <div class="g-hud">
-    <p id="hint" class="g-hint mono"><span></span></p>
-    <p id="count" class="g-count mono"></p>
-    <div class="g-spec" id="spec" hidden>
-      <span class="g-spec-n mono" id="spec-n"></span>
-      <div class="g-spec-track" id="spec-track" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="360"><span class="g-spec-ticks" id="spec-ticks" aria-hidden="true"></span><span class="g-spec-knob" id="spec-knob" aria-hidden="true"></span></div>
-      <button class="g-spec-all" id="spec-all" type="button"></button>
+  <!-- Undertow by Haichao Li (MIT licence, see assets/js/undertow/LICENSE), with Yunfei's photographs -->
+  <canvas id="stream" tabindex="0" aria-label="A curtain of light made of Yunfei Yu's photographs. Every thread is a stream of photographs. Use left and right arrows to move between threads and Enter to open one. Scroll or pinch to zoom."></canvas>
+  <p id="error" role="alert" hidden></p>
+  <div id="loader" aria-hidden="true"><i></i></div>
+  <div id="meter" aria-hidden="true"><i></i></div>
+  <div id="cursor" aria-hidden="true"></div>
+  <p id="announce" class="sr-only" aria-live="polite"></p>
+
+  <section id="story" role="dialog" aria-modal="true" aria-labelledby="story-title" hidden>
+    <div class="story-backdrop" aria-hidden="true"></div>
+    <button class="story-side prev" type="button" aria-label="Previous thread"></button>
+    <button class="story-side next" type="button" aria-label="Next thread"></button>
+    <div class="story-thread" aria-hidden="true"></div>
+    <div class="story-flow"><div class="strip"></div></div>
+    <button class="story-back" type="button" aria-label="Back to the waterfall">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"/></svg>
+    </button>
+    <p class="story-title" id="story-title"></p>
+    <div class="lightbox" hidden>
+      <img alt="">
+      <p class="lb-cap"></p>
     </div>
-    <div class="g-btns"><button id="zout" class="g-home" type="button" aria-label="Zoom out">&minus;</button><button id="zin" class="g-home" type="button" aria-label="Zoom in">+</button><button id="home" class="g-home" type="button">&#8634;</button></div>
-  </div>
+  </section>
 
-  <div class="lightbox" id="lb" role="dialog" aria-modal="true" aria-label="Photograph viewer" hidden>
-    <button class="lb-close" id="lb-close" type="button" aria-label="Close">✕</button>
-    <button class="lb-nav lb-prev" id="lb-prev" type="button" aria-label="Previous photograph">←</button>
-    <figure class="lb-fig"><img id="lb-img" alt=""><figcaption id="lb-cap"></figcaption></figure>
-    <button class="lb-nav lb-next" id="lb-next" type="button" aria-label="Next photograph">→</button>
-    <div class="lb-count mono" id="lb-count"></div>
-  </div>
-
-  <noscript><p style="padding:96px 24px">This page needs JavaScript. Contact: phineasyu0812@gmail.com</p></noscript>
-
-  <script src="assets/js/gallery-data.js?v=20261001u"></script>
-  <script src="assets/js/gallery.js?v=20261001u"></script>
-  <script src="assets/js/menu.js?v=20261001u"></script>
+  <noscript><p style="padding:96px 24px;color:#e4e7f6">This page needs JavaScript. Contact: phineasyu0812@gmail.com</p></noscript>
+  <script src="assets/js/gallery-data.js?v=20261001w"></script>
+  <script>
+    /* the bar's labels and the language switch (the waterfall itself has no text to translate) */
+    (function () {
+      var N = { work: ["Work", "作品"], gallery: ["Gallery", "摄影"], method: ["Method", "方法"], about: ["About", "关于"], contact: ["Contact", "联系"] };
+      var lang = "en"; try { lang = localStorage.getItem("lang") === "zh" ? "zh" : "en"; } catch (e) {}
+      function paint() { document.querySelectorAll("[data-t]").forEach(function (el) { el.textContent = N[el.dataset.t][lang === "zh" ? 1 : 0]; }); document.getElementById("lang").textContent = lang === "zh" ? "EN" : "中文"; document.documentElement.lang = lang; }
+      document.getElementById("lang").addEventListener("click", function () { lang = lang === "zh" ? "en" : "zh"; try { localStorage.setItem("lang", lang); } catch (e) {} paint(); });
+      paint();
+    })();
+  </script>
+  <script type="module" src="assets/js/undertow/app.js?v=20261001w"></script>
+  <script src="assets/js/menu.js?v=20261001w"></script>
 </body>
 </html>

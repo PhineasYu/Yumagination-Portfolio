@@ -1,97 +1,15 @@
-/* Photography gallery: an endless canvas of scattered photographs. */
-html.g, body.gallery-page { overflow: hidden; overscroll-behavior: none; }
-.gallery-page { background: var(--bg); }
-.cv { position: fixed; inset: 0; z-index: 1; overflow: hidden; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none;
-  background-image: radial-gradient(circle, rgba(17, 17, 17, .14) 1px, transparent 1.4px); background-size: 48px 48px; }
-.cv.grab { cursor: grabbing; }
-.world { position: absolute; left: 0; top: 0; width: 0; height: 0; will-change: transform; }
-.cell { position: absolute; left: 0; top: 0; width: 960px; height: 720px; }
-.ph { position: absolute; display: block; padding: 8px 8px 8px; background: #fff; border-radius: 4px; box-shadow: 0 1px 2px rgba(17, 17, 17, .08), 0 14px 30px -16px rgba(17, 17, 17, .35); transform: rotate(var(--rot, 0deg)); transition: transform .35s var(--ease), box-shadow .35s var(--ease); box-sizing: content-box; margin: -8px 0 0 -8px; }
-.ph:hover { transform: rotate(0deg) scale(1.04); z-index: 5; box-shadow: 0 2px 4px rgba(17, 17, 17, .1), 0 26px 50px -20px rgba(17, 17, 17, .45); }
-.ph img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 2px; opacity: 0; transition: opacity 1.1s var(--ease) var(--d, 0s); pointer-events: none; }
-.ph img.ready { opacity: 1; }
-.ph .cap { position: absolute; left: 8px; right: 8px; top: calc(100% + 10px); opacity: 0; transition: opacity .25s var(--ease); font: 600 13px/1.3 var(--sans); color: var(--ink); pointer-events: none; }
-.ph .cap small { display: block; font-weight: 400; color: var(--ink-muted); margin-top: 2px; }
-.ph:hover .cap { opacity: 1; }
-.ph:focus-visible { outline: 2px solid var(--tf); outline-offset: 6px; }
-
-/* the title lives on the canvas, at the start */
-.g-title-card { position: absolute; z-index: 2; left: 480px; top: 360px; transform: translate(-50%, -50%); width: 440px; text-align: left; pointer-events: none; }
-.g-title-card h1 { margin: 0; font: 600 84px/1 var(--sans); letter-spacing: -.035em; }
-html[lang="zh"] .g-title-card h1 { letter-spacing: -.01em; }
-.g-title-card p { margin: 18px 0 0; color: var(--ink-body); font-size: var(--fs-body); line-height: 1.55; }
-.g-title-card .g-kicker { margin: 0 0 12px; color: var(--ink-muted); }
-
-.g-hud { position: fixed; z-index: 5; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px var(--gx, 24px); pointer-events: none; }
-.g-hint { margin: 0; padding: 8px 14px; background: rgba(255, 255, 255, .9); border: 1px solid var(--card-line, rgba(17, 17, 17, .06)); border-radius: var(--radius-pill); font-size: 12px; color: var(--ink-muted); transition: opacity .6s var(--ease); }
-.g-hint.off { opacity: 0; }
-.g-count { margin: 0 auto 0 0; padding: 8px 14px; color: var(--ink-muted); font-size: 12px; }
-.g-home { pointer-events: auto; width: 40px; height: 40px; border-radius: 50%; background: var(--tf); color: var(--ink); font-size: 20px; line-height: 1; border: 0; cursor: pointer; }
-.g-home:hover { background: var(--tf-soft); }
-@media (max-width: 720px) { .g-hint { order: 3; } .g-hud { flex-wrap: wrap; } }
-
-/* lightbox */
-.lightbox { position: fixed; inset: 0; z-index: 90; background: #141414; color: #f4f4f4; display: grid; place-items: center; }
-.lightbox[hidden] { display: none; }
-.lb-fig { margin: 0; max-width: min(92vw, 1500px); max-height: 92vh; display: grid; gap: 14px; justify-items: center; }
-.lb-fig img { border-radius: var(--radius-md); max-width: 100%; max-height: calc(92vh - 70px); width: auto; height: auto; object-fit: contain; animation: lbin var(--dur-l) var(--ease) both; }
-@keyframes lbin { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
-.lb-fig figcaption { font-size: 14px; color: rgba(234,250,248,.78); text-align: center; letter-spacing: -.005em; }
-.lb-fig figcaption b { font: 600 17px var(--sans); color: #fff; margin-right: 10px; }
-.lb-close, .lb-nav { border-radius: var(--radius-pill); position: absolute; color: #f4f4f4; font: 400 22px var(--sans); padding: 14px 18px; opacity: .75; transition: opacity var(--dur-s) var(--ease), color var(--dur-s) var(--ease); }
-.lb-close:hover, .lb-nav:hover { opacity: 1; color: var(--tf); }
-.lb-close { top: 8px; right: 10px; }
-.lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
-.lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
-.lb-count { position: absolute; left: 20px; bottom: 16px; color: rgba(234,250,248,.6); }
-body.lb-open { overflow: hidden; }
-
-@media (max-width: 900px) {
-  .room-head { grid-template-columns: 1fr; }
-  .room-head p { grid-column: 1; }
-  .empty-walls { grid-template-columns: 1fr 1fr; }
-  .ghost:nth-child(1) { grid-column: 1 / -1; }
+/* Gallery page: the Undertow waterfall (assets/css/undertow.css) with the site's bar on top.
+   undertow.css redefines --bg / --ink for this page only, so the bar's own rules pick up the light-on-dark colours. */
+.gallery-page .bar { background: linear-gradient(rgb(3 4 10 / .75), rgb(3 4 10 / 0)); font-family: var(--sans); }
+.gallery-page .bar .brand, .gallery-page .bar nav a, .gallery-page .bar .right a { color: rgb(228 231 246 / .82); }
+.gallery-page .bar nav a:hover, .gallery-page .bar .right a:hover, .gallery-page .bar nav a[aria-current] { color: #fff; }
+.gallery-page .lang { color: rgb(228 231 246 / .85); border-color: rgb(228 231 246 / .3); }
+.gallery-page .lang:hover { color: #03040a; }
+.gallery-page .menu-btn { border-color: rgb(228 231 246 / .3); }
+@media (max-width: 640px) {
+  .gallery-page .bar.menu-open, .gallery-page .bar.menu-open nav { background: rgb(3 4 10 / .92); box-shadow: 0 1px 0 rgb(228 231 246 / .1); }
+  .gallery-page .bar.menu-open nav a { color: #e4e7f6; border-color: rgb(228 231 246 / .12); }
 }
-@media (max-width: 720px) {
-  .plates { columns: 1; }
-  .lb-nav { top: auto; bottom: 8px; transform: none; }
-  .lb-prev { left: auto; right: 70px; } .lb-next { right: 8px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .plate img { transition: none; opacity: 1; transform: none; }
-  .lb-fig img { animation: none; }
-}
-
-.gallery-page .bar { background: rgba(244, 244, 244, .82); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
-
-.g-btns { display: flex; gap: 8px; pointer-events: auto; }
-.cv { touch-action: none; }
-.g-home { font-weight: 500; }
-
-/* the colour bar: drag along the spectrum to see the photographs of one colour (grey at the start: black-and-white) */
-.g-hint { position: absolute; left: 50%; bottom: 76px; transform: translateX(-50%); white-space: nowrap; }
-.g-count { display: none; }
-.g-spec { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; padding: 7px 7px 7px 16px; background: rgba(255, 255, 255, .92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid var(--card-line, rgba(17, 17, 17, .06)); border-radius: var(--radius-pill); box-shadow: 0 12px 30px -18px rgba(17, 17, 17, .35); pointer-events: auto; }
-.g-spec[hidden] { display: none; }
-.g-btns { margin-left: auto; }
-.g-spec-n { min-width: 7.5em; font-size: 12px; color: var(--ink-muted); white-space: nowrap; }
-.g-spec-track { position: relative; width: clamp(180px, 28vw, 380px); height: 16px; border-radius: var(--radius-pill); cursor: pointer; touch-action: none; outline: none;
-  background: linear-gradient(90deg, #bdbdbd 0 7.5%, #fff 7.5% 8%, hsl(0 70% 55%) 8.0%, hsl(30 70% 55%) 15.7%, hsl(60 70% 55%) 23.3%, hsl(90 70% 55%) 31.0%, hsl(120 70% 55%) 38.7%, hsl(150 70% 55%) 46.3%, hsl(180 70% 55%) 54.0%, hsl(210 70% 55%) 61.7%, hsl(240 70% 55%) 69.3%, hsl(270 70% 55%) 77.0%, hsl(300 70% 55%) 84.7%, hsl(330 70% 55%) 92.3%, hsl(360 70% 55%) 100.0%); }
-.g-spec-track:focus-visible { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--tf); }
-.g-spec-ticks { position: absolute; inset: -9px 0 auto 0; height: 6px; pointer-events: none; }
-.g-spec-ticks i { position: absolute; top: 0; width: 3px; height: 6px; margin-left: -1.5px; border-radius: 1px; }
-.g-spec-knob { position: absolute; top: 50%; left: 0; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; background: var(--k, #fff); border: 3px solid #fff; box-shadow: 0 2px 8px rgba(17, 17, 17, .3); opacity: 0; transform: scale(.6); transition: opacity .2s var(--ease), transform .2s var(--ease); pointer-events: none; }
-.g-spec.on .g-spec-knob { opacity: 1; transform: none; }
-.g-spec-all { padding: 7px 14px; border: 0; border-radius: var(--radius-pill); background: var(--tf); color: var(--ink); font: 600 13px/1 var(--sans); cursor: pointer; }
-.g-spec:not(.on) .g-spec-all { background: transparent; color: var(--ink-muted); }
-.ph { transition: transform .35s var(--ease), box-shadow .35s var(--ease), opacity .45s var(--ease), filter .45s var(--ease); }
-.ph.dim { opacity: .12; filter: grayscale(1); }
-@media (max-width: 720px) {
-  .g-spec { left: var(--gx, 16px); right: 150px; transform: none; gap: 8px; padding-left: 12px; }
-  .g-spec-n { display: none; }
-  .g-spec-track { flex: 1; width: auto; }
-  .g-hint { white-space: normal; width: calc(100% - 32px); text-align: center; }
-}
-
-/* phones and tablets: let the browser repaint the scaled canvas at its current size instead of keeping one huge layer (it ran out of memory when zooming) */
-@media (pointer: coarse) { .world { will-change: auto; } }
+/* inside a story the waterfall has its own back button and title in the top-left: the bar steps aside */
+body.story-open .bar { opacity: 0; pointer-events: none; transition: opacity .4s ease; }
+.gallery-page .bar { transition: opacity .4s ease; }

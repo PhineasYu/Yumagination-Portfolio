@@ -200,7 +200,7 @@
       <a class="gpix rv" href="gallery.html" aria-label="${esc(lang === "zh" ? "进入摄影" : "Enter the photography gallery")}">
         <canvas class="gpix-cv" aria-hidden="true"></canvas>
         <span class="gpix-t"><b><span>${esc(lang === "zh" ? "摄影" : "Photography")}</span></b><b><span>${esc(lang === "zh" ? "欢迎来到我的摄影世界" : "Welcome to my photography world")}</span></b></span>
-        <span class="gpix-go">${esc(lang === "zh" ? "进入画布" : "Enter the canvas")} <span class="arrow">→</span></span>
+        <span class="gpix-go">${esc(lang === "zh" ? "进入光之瀑布" : "Enter the waterfall")} <span class="arrow">→</span></span>
       </a>
     </section>`;
   }
