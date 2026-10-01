@@ -307,8 +307,8 @@
       <div class="sec-head about-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2><img class="about-mark" src="assets/logo.svg" alt="" aria-hidden="true"></div>
       <div class="about rv">
         <div>
-          ${A.photo ? `<figure class="portrait"><img src="${esc(A.photo.src)}" alt="${esc(t(A.photo.alt))}" width="800" height="1200" loading="lazy"></figure>` : ""}
           <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
+          ${A.photo ? `<figure class="portrait"><img src="${esc(A.photo.src)}" alt="${esc(t(A.photo.alt))}" width="800" height="1200" loading="lazy"></figure>` : ""}
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
         </div>
         <div><ul class="tl">${A.timeline.map((r) => `<li><span class="mono dim">${r.when}</span><span class="tl-what"><b>${esc(t(r.role))}</b><span>${esc(t(r.org))}</span></span>${r.logo ? logoImg(r.logo, "sm") : ""}</li>`).join("")}</ul><a class="btn-pill cv-btn" href="${esc(A.cv.file)}" download>${ic("download")}${esc(t(A.cv.label))}</a></div>
