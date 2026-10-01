@@ -169,6 +169,7 @@ window.PORTFOLIO = {
 
   about: {
     title: { en: "About", zh: "关于我" },
+    photo: { src: "assets/img/portrait.jpg", alt: { en: "Portrait of Yunfei Yu", zh: "于云飞的照片" } },
     body: {
       en: [
         "I'm a UX designer, now AI-native: an AI-enhanced designer who frames the problem, writes the spec, directs coding agents to build it, and tests it with real people. What I bring on top is taste, and a habit of researching how people actually use things until the product feels easy.",

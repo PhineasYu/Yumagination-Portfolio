@@ -7,13 +7,27 @@ export const MAX_CHAPTERS = 8;
 export function buildStories(photos, authored = [], journal = []) {
   const stories = new Array(NF);
   for (const s of authored) stories[s.line] = { ...s };
+  // Yunfei's site: neighbouring threads deal photographs from one shuffled deck in turn, so a photograph comes back
+  // only after the whole library has been dealt (with ~106 photographs, about every 17 threads). Each pass reshuffles.
+  const P = photos.length, deck = [];
+  let pass = 0, at = 0;
+  const deal = () => {
+    if (at >= deck.length) {
+      const r = mulberry(0x9e3779b1 + pass++ * 7919), d = photos.map((_, j) => j);
+      for (let k = d.length - 1; k > 0; k--) { const m = Math.floor(r() * (k + 1)); [d[k], d[m]] = [d[m], d[k]]; }
+      // at the seam between two passes, the photographs dealt last wait until the second half of the new pass
+      const recent = new Set(deck.slice(-Math.floor(P / 2)));
+      deck.push(...d.filter(j => !recent.has(j)), ...d.filter(j => recent.has(j)));
+    }
+    return deck[at++];
+  };
   for (let i = 0; i < NF; i++) {
     if (stories[i]) continue;
-    const r = mulberry(i * 2654435761 + 97), n = Math.min(photos.length, 4 + Math.floor(r() * 5)), pool = photos.map((_, j) => j);
-    const chapters = [];
-    for (let c = 0; c < n; c++) {
-      const j = pool.splice(Math.floor(r() * pool.length), 1)[0];
-      chapters.push({ photo: photos[j].id, caption: photos[j].description });
+    const r = mulberry(i * 2654435761 + 97), n = Math.min(P, 4 + Math.floor(r() * 5));
+    const chapters = [], used = new Set();
+    while (chapters.length < n) {
+      const j = deal(); if (used.has(j)) continue;   // a reshuffle can bring a photograph back inside one story: skip it
+      used.add(j); chapters.push({ photo: photos[j].id, caption: photos[j].description });
     }
     stories[i] = { id: `line-${i + 1}`, line: i, title: `Story ${i + 1}`, chapters };
   }

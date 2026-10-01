@@ -307,6 +307,7 @@
       <div class="sec-head about-head rv"><h2 class="sec-title">${esc(t(A.title))}</h2><img class="about-mark" src="assets/logo.svg" alt="" aria-hidden="true"></div>
       <div class="about rv">
         <div>
+          ${A.photo ? `<figure class="portrait"><img src="${esc(A.photo.src)}" alt="${esc(t(A.photo.alt))}" width="720" height="900" loading="lazy"></figure>` : ""}
           <p class="status"><span class="avail"><span class="dot"></span>${esc(s("available"))}</span><span class="tz-info">${ic("map-pin")}${esc(s("tz"))}</span></p>
           ${arr(A.body).map((x) => `<p>${esc(x)}</p>`).join("")}
         </div>

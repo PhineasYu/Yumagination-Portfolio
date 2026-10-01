@@ -606,3 +606,9 @@ html[lang="zh"] .blk p { max-width: 36em; }
   .tl li > .tl-what { grid-area: what; }
   .tl li > .logo { grid-area: logo; align-self: center; }
 }
+
+/* About: the portrait, small and quiet above the status line; the introduction a size smaller */
+.portrait { width: clamp(150px, 14vw, 200px); aspect-ratio: 4 / 5; margin: 0 0 28px; overflow: hidden; border-radius: var(--radius-lg); background: var(--tile); }
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.about p { font-size: clamp(16px, 1.25vw, 19px); }
+@media (max-width: 720px) { .portrait { width: 132px; margin-bottom: 22px; } .about p { font-size: 16px; } }
