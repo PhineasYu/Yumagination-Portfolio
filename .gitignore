@@ -2,3 +2,5 @@ harvest-output/
 node_modules/
 .DS_Store
 assets/gallery/originals/
+docs/learning/
+tools/intro/
