@@ -180,7 +180,7 @@
 
     <section class="section" id="recognition">
       <div class="sec-head rv"><h2 class="sec-title">${esc(s("recog"))}</h2></div>
-      <div class="awards">${D.awards.map((a, i) => `<div class="award rv" style="--i:${i}"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
+      <div class="awards">${gated(D.awards).map((a, i) => `<div class="award rv" style="--i:${i}"><div class="award-top"><span class="mono dim">${a.year}</span>${a.logo ? logoImg(a.logo, "sm") : ""}</div><b>${esc(t(a.title))}</b><p>${esc(t(a.note))}</p>${DRAFT && a.verify ? `<p class="draft mono">${esc(s("draft"))}</p>` : ""}</div>`).join("")}</div>
     </section>
 
     ${galleryPixel()}
@@ -319,7 +319,7 @@
   }
 
   function methodBlock(M = D.method, id = "method") {
-    const last = M.steps.length - 1;
+    const last = gated(M.steps).length - 1;
     return `
     <section class="section method" id="${id}">
       <div class="m-side">
@@ -330,13 +330,13 @@
         </div>
       </div>
       <div class="m-main">
-        <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
-        <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
-        ${M.links ? `<p class="m-links rv">${M.links.filter((l) => liveLink(l.url)).map((l) => `<a class="btn-ghost" href="${esc(l.url)}">${esc(t(l.label))} <span aria-hidden="true">→</span></a>`).join("")}</p>` : ""}
-        <p class="disclosure rv">${esc(t(M.disclosure))}</p>
+        <ol class="m-steps">${gated(M.steps).map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
+        <div class="m-ideas">${gated(M.principles).map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
+        ${M.links ? `<p class="m-links rv">${gated(M.links).filter((l) => liveLink(l.url)).map((l) => `<a class="btn-ghost" href="${esc(l.url)}">${esc(t(l.label))} <span aria-hidden="true">→</span></a>`).join("")}</p>` : ""}
+        <p class="disclosure rv">${esc(t(gate(M.disclosure)))}</p>
       </div>
     </section>
-    ${M.figure ? `<section class="section m-figure"><div class="shot rv">${media({ type: "embed", src: M.figure.src, frame: "browser", ratio: "1/1", open: M.figure.src })}<p class="cap">${esc(t(M.figure.cap))}</p></div></section>` : ""}`;
+    ${gate(M.figure) ? `<section class="section m-figure"><div class="shot rv">${media({ type: "embed", src: M.figure.src, frame: "browser", ratio: "1/1", open: M.figure.src })}<p class="cap">${esc(t(M.figure.cap))}</p></div></section>` : ""}`;
   }
 
   function methodPage() {
@@ -389,6 +389,11 @@
 
   /* ---------- case study ---------- */
   const ALIAS = { meanwhile: "beside" };
+  // items in data.js that mention a project carry `needs: "<id>"`; while that project is hidden they are
+  // dropped, or swapped for their `without` version. Unhiding the project brings them all back.
+  const HIDDEN = new Set(D.projects.filter((p) => p.hidden).map((p) => p.id));
+  const gate = (x) => { if (!x || !x.needs || ![].concat(x.needs).some((id) => HIDDEN.has(id))) return x; return x.without ? Object.assign({}, x, x.without) : null; };
+  const gated = (a) => (a || []).map(gate).filter(Boolean);
   // a link to a hidden project (`hidden: true` in projects.js) is left out instead of leading to "Not found"
   const liveLink = (u) => { const m = /^#\/work\/([\w-]+)/.exec(u || ""); return !m || D.projects.some((p) => p.id === (ALIAS[m[1]] || m[1]) && !p.hidden); };
   const zoneLine = (p) => p.zones.map((z) => t(D.cats.find((c) => c.id === z))).join(" · ");

@@ -25,6 +25,8 @@ jobs:
           mkdir _site
           cp index.html gallery.html _site/
           cp -R assets demos _site/
+          # demos listed in demos/UNPUBLISHED stay in the repo but are not published
+          if [ -f demos/UNPUBLISHED ]; then grep -vE '^[[:space:]]*(#|$)' demos/UNPUBLISHED | while read -r d; do rm -rf "_site/demos/$d"; done; rm -f _site/demos/UNPUBLISHED; fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

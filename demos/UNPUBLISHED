@@ -1,0 +1,4 @@
+# Demo folders listed here stay in the repo but are not published to the website.
+# To publish one again, delete its line (and set its project back to `hidden: false` in assets/js/projects.js).
+full-context-canvas
+teamdex-blueprint

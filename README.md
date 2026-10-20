@@ -33,3 +33,11 @@ python3 -m http.server 8000   # 然后打开 http://localhost:8000
 node scripts/harvest-claude-code.mjs
 ```
 生成 `harvest-output/claude-code-projects.md`，列出每个项目的路径、仓库、会话数、时间范围、首条提示词。输出已被 `.gitignore`，分享前请自己先看一遍。
+
+## 隐藏 / 还原一个项目
+- 隐藏：在 `assets/js/projects.js` 里给项目加 `hidden: true`。它会从作品墙和案例页消失。
+- 网站其他地方（获奖、Method 页的步骤/原则/蓝图/按钮/声明）凡是提到它的条目，都在 `assets/js/data.js` 里标了 `needs: "<项目 id>"`：项目隐藏时这些条目自动不显示，或换成 `without` 里不提它的版本。
+- 项目自带的演示页如果也不想发布，把文件夹名写进 `demos/UNPUBLISHED`。
+- 还原：把 `hidden: true` 改回 `false`（或删掉），并删掉 `demos/UNPUBLISHED` 里对应的行。其余全部自动回来。
+- 目前隐藏的：Kikaren、Full Context Canvas、Teamdex。
+

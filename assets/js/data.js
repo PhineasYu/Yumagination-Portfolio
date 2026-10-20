@@ -4,6 +4,9 @@
    notes rather than code/CV and should be confirmed before you send the link.
    Add a project = add an object here. Nothing else to touch.
 ------------------------------------------------------------------- */
+/* `needs: "<project-id>"` on any award, step, principle, figure, link or disclosure:
+   while that project is `hidden: true` in projects.js, the item is left out, or replaced by
+   its `without: { … }` fields. Set the project back to `hidden: false` and everything returns. */
 window.PORTFOLIO = {
   person: {
     name: "Yunfei Yu",
@@ -95,7 +98,7 @@ window.PORTFOLIO = {
     { logo: "sap", year: "2026", title: { en: "SAP Career Ignite: 1st place", zh: "SAP Career Ignite：第一名" }, note: { en: "Case competition, round two, with Capgemini and Google", zh: "案例竞赛第二轮，合作方 Capgemini 与 Google" } },
     { logo: "aris", year: "2026", title: { en: "Aris & Friends Hackathon: 'Thinking outside of the box' prize", zh: "Aris & Friends 黑客松：「跳出框框思考」奖" }, note: { en: "4-hour build with Protos and Redpine, Stockholm", zh: "4 小时现场搭建，使用 Protos 与 Redpine，斯德哥尔摩" } },
     { logo: "deloitte", year: "2026", title: { en: "Deloitte Spark Hackathon: 3rd place", zh: "Deloitte Spark 黑客松：第三名" }, note: { en: "Planet-friendlier routing from open deforestation, biodiversity, soil and CO₂ data", zh: "基于森林砍伐、生物多样性、土壤污染与碳排放开放数据的更环保路线建议" } },
-    { logo: "uniplay", year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
+    { needs: "teamdex", logo: "uniplay", year: "2026", title: { en: "Uniplay Hackathon: 1st place (Teamdex)", zh: "Uniplay 黑客松：一等奖（Teamdex）" }, note: { en: "An onboarding game where newcomers collect their colleagues", zh: "把入职做成「收集同事」的游戏" } },
     { logo: "stoneleap", year: "2026", title: { en: "Stone Leap Build-a-Game: 1st place (Let Me Die)", zh: "Stone Leap Build-a-Game：第一名（Let Me Die）" }, note: { en: "A playable game built in one evening with an AI world builder", zh: "用 AI world builder 一个晚上做出的可玩游戏" } },
     { logo: "bitmagic", year: "2026", title: { en: "BitMagic game hackathon: 2nd place (Disco Fever)", zh: "BitMagic 游戏黑客松：二等奖（Disco Fever）" }, note: { en: "A one-minute disco rhythm game, now playable online", zh: "一分钟的迪斯科节奏游戏，已在线可玩" }, verify: true },
     { logo: "accel", year: "2026", title: { en: "Accel AI Innovate Hackathon: Top 8 and a pitch slot (Dossier)", zh: "Accel AI Innovate 黑客松：Top 8 并获得路演机会（Dossier）" }, note: { en: "Hosted by KTH AI Society", zh: "KTH AI Society 主办" } },
@@ -114,15 +117,15 @@ window.PORTFOLIO = {
     },
     steps: [
       { n: "01", h: { en: "Frame", zh: "定义" }, p: { en: "Turn a vague brief into one person, one moment, one decision. Dossier's 90-second judge path and Collaboration Canvas's five tensions came from here.", zh: "把模糊的需求收窄成一个人、一个瞬间、一个决策。Dossier 的 90 秒路径、Collaboration Canvas 的五个张力都出自这里。" } },
-      { n: "02", h: { en: "Spec", zh: "写 spec" }, p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Teamdex has five spec documents; Beside has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Teamdex 有五份规格文档；Beside 有一份写清所有约束的开发规格。" } },
+      { needs: "teamdex", without: { p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Beside has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Beside 有一份写清所有约束的开发规格。" } }, n: "02", h: { en: "Spec", zh: "写 spec" }, p: { en: "Write it down before any code: PRD, non-goals, design tokens, data model. Teamdex has five spec documents; Beside has a build spec with every constraint stated.", zh: "动代码之前先写下来：PRD、非目标、设计 token、数据模型。Teamdex 有五份规格文档；Beside 有一份写清所有约束的开发规格。" } },
       { n: "03", h: { en: "Direct", zh: "指挥" }, p: { en: "Give the agent working rules, not wishes: local-first data, always deployable, P0 before P1, 'do not add anything I didn't ask for'.", zh: "给 AI 的是工作守则，不是愿望：本地优先、始终可部署、P0 先于 P1、「没让你加的不要加」。" } },
       { n: "04", h: { en: "Verify", zh: "验证" }, p: { en: "Real people and real loops. A real customer through Sushi Jerash's order-to-Telegram loop; think-aloud sessions at Kodiak; tests for hashing and signatures in LegacyChain.", zh: "真实的人、真实的闭环。Sushi Jerash 用真实顾客跑通下单到 Telegram 通知；Kodiak 做出声思考测试；LegacyChain 给哈希与签名写测试。" } }
     ],
     principlesTitle: { en: "Ideas that keep coming back", zh: "反复出现的想法" },
     principles: [
-      { h: { en: "Show the reasoning", zh: "让推理看得见" }, p: { en: "Full Context Canvas gives every placement a reason and a confidence score.", zh: "Full Context Canvas 给每一次归位写明理由和把握度。" } },
+      { needs: "full-context-canvas", without: { p: { en: "Chroma Reader marks which colours are AI suggestions, and the reader's own choice always wins.", zh: "Chroma Reader 标明哪些颜色是 AI 建议的，读者自己的选择永远优先。" } }, h: { en: "Show the reasoning", zh: "让推理看得见" }, p: { en: "Full Context Canvas gives every placement a reason and a confidence score.", zh: "Full Context Canvas 给每一次归位写明理由和把握度。" } },
       { h: { en: "AI is a reader, not the authority", zh: "AI 是读者，不是权威" }, p: { en: "In LegacyChain, AI output is 'pending' until a person accepts it.", zh: "在 LegacyChain 里，AI 的输出在人接受之前一直是「待确认」。" } },
-      { h: { en: "Remove the pressure", zh: "拿掉压力" }, p: { en: "Beside has no reply obligation; Teamdex has no leaderboard.", zh: "Beside 没有回复义务；Teamdex 没有排行榜。" } },
+      { needs: "teamdex", without: { p: { en: "Beside has no reply obligation: sending is complete on its own.", zh: "Beside 没有回复义务：发送本身就是完整的。" } }, h: { en: "Remove the pressure", zh: "拿掉压力" }, p: { en: "Beside has no reply obligation; Teamdex has no leaderboard.", zh: "Beside 没有回复义务；Teamdex 没有排行榜。" } },
       { h: { en: "One interaction carries the idea", zh: "一个交互承载整个想法" }, p: { en: "A voice dump for Dossier; keys 1–5 for Chroma Reader; one handover note for Collaboration Canvas.", zh: "Dossier 的语音倾倒；Chroma Reader 的 1–5 键；Collaboration Canvas 的一条交接记录。" } }
     ],
     disclosure: {
@@ -145,23 +148,24 @@ window.PORTFOLIO = {
     steps: [
       { n: "01", h: { en: "Listen on every side", zh: "在每一方都听" }, p: { en: "A service has more than one user. I interview the people on each side of a seam. The thesis ran nine interviews across two cases and coded them in two layers; the Voi project added 37 street interviews and 47 survey responses.", zh: "一项服务不止一种用户。我采访接缝两边的人。论文在两个案例里做了九场访谈，并分两层编码；Voi 项目另有 37 场街头访谈和 47 份问卷。" } },
       { n: "02", h: { en: "Name the tensions", zh: "给张力起名" }, p: { en: "Cluster what people said until the same problem keeps coming back, then give it a name. The thesis ended with five systemic tensions. The Voi board sorted into problems, feelings, suggestions, usage and brand, and three problems rose to the top.", zh: "把人们说的话聚类，直到同一个问题反复出现，然后给它起名字。论文最后得到五个系统性张力。Voi 的画板分成问题、感受、建议、使用情况和品牌，有三个问题浮到最上面。" } },
-      { n: "03", h: { en: "Map the whole service", zh: "把整个服务画出来" }, p: { en: "A blueprint puts every actor, stage and feeling on one page, with the line of interaction and the line of visibility drawn in. Teamdex's has four lanes, seven stages and an emotion curve, and the moments that matter are marked.", zh: "服务蓝图把每个角色、阶段和感受放在同一页，并画出交互线和可见线。Teamdex 的蓝图有四条泳道、七个阶段和一条情绪曲线，关键时刻都做了标记。" } },
-      { n: "04", h: { en: "Turn tensions into principles", zh: "把张力变成原则" }, p: { en: "Write a few principles and make every feature answer one. The thesis distilled four from its tensions, and each of the Canvas's seven components was checked against them. Teamdex did it at hackathon speed: a game to give a reason to talk, and no leaderboard because it would create pressure.", zh: "写几条原则，让每个功能都回应其中一条。论文从张力里提炼出四条，画布的七个组件都对照它们检查过。Teamdex 在黑客松的速度里也这么做：用游戏给人开口的理由，不做排行榜，因为那会制造压力。" } },
+      { needs: "teamdex", without: { p: { en: "A blueprint puts every actor, stage and feeling on one page, with the line of interaction and the line of visibility drawn in.", zh: "服务蓝图把每个角色、阶段和感受放在同一页，并画出交互线和可见线。" } }, n: "03", h: { en: "Map the whole service", zh: "把整个服务画出来" }, p: { en: "A blueprint puts every actor, stage and feeling on one page, with the line of interaction and the line of visibility drawn in. Teamdex's has four lanes, seven stages and an emotion curve, and the moments that matter are marked.", zh: "服务蓝图把每个角色、阶段和感受放在同一页，并画出交互线和可见线。Teamdex 的蓝图有四条泳道、七个阶段和一条情绪曲线，关键时刻都做了标记。" } },
+      { needs: "teamdex", without: { p: { en: "Write a few principles and make every feature answer one. The thesis distilled four from its tensions, and each of the Canvas's seven components was checked against them.", zh: "写几条原则，让每个功能都回应其中一条。论文从张力里提炼出四条，画布的七个组件都对照它们检查过。" } }, n: "04", h: { en: "Turn tensions into principles", zh: "把张力变成原则" }, p: { en: "Write a few principles and make every feature answer one. The thesis distilled four from its tensions, and each of the Canvas's seven components was checked against them. Teamdex did it at hackathon speed: a game to give a reason to talk, and no leaderboard because it would create pressure.", zh: "写几条原则，让每个功能都回应其中一条。论文从张力里提炼出四条，画布的七个组件都对照它们检查过。Teamdex 在黑客松的速度里也这么做：用游戏给人开口的理由，不做排行榜，因为那会制造压力。" } },
       { n: "05", h: { en: "Prototype, test, be honest", zh: "做原型、测试、说实话" }, p: { en: "Prototype the seam, not the whole system. The Canvas was checked by a walkthrough against its principles, and real-world validation is the stated next step. At Kodiak I ran think-aloud sessions and changed the layout between rounds. I say what was tested and what was not.", zh: "原型做的是接缝，不是整个系统。画布是对照原则做了走查，真实场景的验证是明说的下一步。在 Kodiak，我做了出声思考测试，并在轮次之间调整布局。我会说清楚什么测试过，什么没有。" } }
     ],
     principlesTitle: { en: "Moves I keep making", zh: "反复用到的做法" },
     principles: [
       { h: { en: "Design the handover, not just the first visit", zh: "设计交接，而不只是第一次到访" }, p: { en: "In the thesis cases, collaboration collapsed when a contact person left. In the Canvas a new partner lands on the handover record, not on a dashboard.", zh: "在论文的案例里，联系人一离开，合作就垮了。在画布里，新来的伙伴落在交接记录上，而不是一个仪表盘。" } },
       { h: { en: "Make invisible work visible", zh: "让看不见的工作被看见" }, p: { en: "Coordination is usually unseen labour. In the log it is an entry everyone can read, and only the person it served sees 'On your behalf'.", zh: "协调通常是没人看见的劳动。在日志里它是人人可读的一条记录，只有被它服务的那个人会看到「代表你」。" } },
-      { h: { en: "Give people a reason, not a rule", zh: "给人一个理由，而不是一条规定" }, p: { en: "Teamdex does not order colleagues to welcome newcomers. A game gives the newcomer a reason to walk up, and makes talking to newcomers part of a colleague's job.", zh: "Teamdex 没有要求同事欢迎新人。游戏给了新人走上前的理由，也让和新人聊天成为同事工作的一部分。" } },
-      { h: { en: "Write the risk next to the intent", zh: "把风险写在意图旁边" }, p: { en: "Every stage of the Teamdex blueprint states its touchpoint, its design intent, and what could go wrong with the response.", zh: "Teamdex 蓝图的每个阶段，都写明触点、设计意图，以及可能出什么问题和对应的办法。" } }
+      { needs: "teamdex", h: { en: "Give people a reason, not a rule", zh: "给人一个理由，而不是一条规定" }, p: { en: "Teamdex does not order colleagues to welcome newcomers. A game gives the newcomer a reason to walk up, and makes talking to newcomers part of a colleague's job.", zh: "Teamdex 没有要求同事欢迎新人。游戏给了新人走上前的理由，也让和新人聊天成为同事工作的一部分。" } },
+      { needs: "teamdex", h: { en: "Write the risk next to the intent", zh: "把风险写在意图旁边" }, p: { en: "Every stage of the Teamdex blueprint states its touchpoint, its design intent, and what could go wrong with the response.", zh: "Teamdex 蓝图的每个阶段，都写明触点、设计意图，以及可能出什么问题和对应的办法。" } }
     ],
-    figure: { src: "demos/teamdex-blueprint/index.html", cap: { en: "The Teamdex service blueprint, running. Pick a role to focus on its lane; pick a stage to see its touchpoint, design intent and risk.", zh: "Teamdex 服务蓝图，可点击。选一个角色聚焦它的泳道；选一个阶段，看它的触点、设计意图和风险。" } },
+    figure: { needs: "teamdex", src: "demos/teamdex-blueprint/index.html", cap: { en: "The Teamdex service blueprint, running. Pick a role to focus on its lane; pick a stage to see its touchpoint, design intent and risk.", zh: "Teamdex 服务蓝图，可点击。选一个角色聚焦它的泳道；选一个阶段，看它的触点、设计意图和风险。" } },
     links: [
       { label: { en: "The thesis: Collaboration Canvas", zh: "论文：Collaboration Canvas" }, url: "#/work/collaboration-canvas" },
-      { label: { en: "The game: Teamdex", zh: "游戏：Teamdex" }, url: "#/work/teamdex" }
+      { needs: "teamdex", label: { en: "The game: Teamdex", zh: "游戏：Teamdex" }, url: "#/work/teamdex" }
     ],
     disclosure: {
+      needs: "teamdex", without: { en: "The thesis was co-authored with Fangjing Fu, split by chapter; I wrote the prototype spec and accepted the build.", zh: "论文与 Fangjing Fu 合著，按章节分工；我写了原型 spec 并负责验收。" },
       en: "The thesis was co-authored with Fangjing Fu, split by chapter; I wrote the prototype spec and accepted the build. Teamdex is a one-day hackathon build, so its blueprint is a design plan, not a measured result.",
       zh: "论文与 Fangjing Fu 合著，按章节分工；我写了原型 spec 并负责验收。Teamdex 是一天完成的黑客松作品，所以它的蓝图是设计方案，不是测出来的结果。"
     }
