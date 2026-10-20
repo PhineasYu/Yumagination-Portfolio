@@ -332,7 +332,7 @@
       <div class="m-main">
         <ol class="m-steps">${M.steps.map((x, i) => `<li class="m-step rv${i === last ? " key" : ""}"><span class="n" aria-hidden="true">${x.n}</span><div><h3>${esc(t(x.h))}</h3><p>${esc(t(x.p))}</p></div></li>`).join("")}</ol>
         <div class="m-ideas">${M.principles.map((x, i) => `<div class="m-idea rv i${i + 1}"><h4>${esc(t(x.h))}</h4><p>${esc(t(x.p))}</p></div>`).join("")}</div>
-        ${M.links ? `<p class="m-links rv">${M.links.map((l) => `<a class="btn-ghost" href="${esc(l.url)}">${esc(t(l.label))} <span aria-hidden="true">→</span></a>`).join("")}</p>` : ""}
+        ${M.links ? `<p class="m-links rv">${M.links.filter((l) => liveLink(l.url)).map((l) => `<a class="btn-ghost" href="${esc(l.url)}">${esc(t(l.label))} <span aria-hidden="true">→</span></a>`).join("")}</p>` : ""}
         <p class="disclosure rv">${esc(t(M.disclosure))}</p>
       </div>
     </section>
@@ -389,6 +389,8 @@
 
   /* ---------- case study ---------- */
   const ALIAS = { meanwhile: "beside" };
+  // a link to a hidden project (`hidden: true` in projects.js) is left out instead of leading to "Not found"
+  const liveLink = (u) => { const m = /^#\/work\/([\w-]+)/.exec(u || ""); return !m || D.projects.some((p) => p.id === (ALIAS[m[1]] || m[1]) && !p.hidden); };
   const zoneLine = (p) => p.zones.map((z) => t(D.cats.find((c) => c.id === z))).join(" · ");
   function project(id) {
     id = ALIAS[id] || id;

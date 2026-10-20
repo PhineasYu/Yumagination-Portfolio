@@ -20,7 +20,7 @@
   window.PORTFOLIO.projects = [
     /* ------------------------------------------------------------ 01 */
     {
-      id: "full-context-canvas", num: "01", year: "2026", when: "Sep 2026", zones: ["ai", "ux"], tags: ["built-with-ai"],
+      id: "full-context-canvas", hidden: true, num: "01", year: "2026", when: "Sep 2026", zones: ["ai", "ux"], tags: ["built-with-ai"],
       title: "Full Context Canvas", meta: "Full Context Canvas · Sep 2026",
       cap: L("A whiteboard for every AI chat and every save", "把每个 AI 聊天和每条收藏放上同一张白板"),
       h1: L("A whiteboard that shows every AI conversation and every save in one place, and explains where each one went", "一张白板，把所有 AI 对话和收藏放在一起，并解释每一条被放到了哪里"),
@@ -56,7 +56,7 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "teamdex", orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
+      id: "teamdex", hidden: true, orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Teamdex", meta: "Teamdex · Sep 2026",
       cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
       h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),

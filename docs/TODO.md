@@ -144,3 +144,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-01 · 第二十二批 · Gallery 换成 Undertow 光之瀑布（MIT，Haichao Li 的 stream-implement-3d 模板）：2400 根光线，每根是一组真实照片，不加虚构文字；手机端纹理减半、加载小图；站点导航保留在上方；旧的无限画布和色带停用（代码在 git 历史里）
 - 2026-10-01 · 第二十三批 · Gallery 引导语、+/− 按钮、可拨动的相邻光线、照片按牌堆分发减少重复；About 加肖像照（文字环绕）、字号缩小；手机实机检查通过后合并上线
 - 2026-10-02 · 第二十四批 · 顶栏名字前加 logo、去掉首屏两行旁的 logo；Community Viewfinder 彩蛋改为像素闪卡（全息箔、随鼠标倾斜/自动摇晃）
+- 2026-10-20 · 隐藏 Full Context Canvas 和 Teamdex（`hidden: true`，作品墙和案例页都不显示；改回 false 即恢复）；指向已隐藏项目的按钮自动不显示（Method 页的「游戏：Teamdex」）。其他地方对它们的文字提及（Uniplay 获奖、Method 页 Teamdex 蓝图和原则、Full Context Canvas 一条原则）保留未动
