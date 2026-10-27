@@ -56,7 +56,7 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      // Short version while the idea is developed into a startup (2026-10-27). Full case: git tag teamdex-full, see README.
+      // Short version while the idea is developed into a startup (2026-10-27). Full case: commit 57bb988, see README.
       id: "teamdex", orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Teamdex", meta: "Teamdex · Sep 2026",
       cap: L("1st place at the Uniplay hackathon", "Uniplay 黑客松一等奖"),
