@@ -179,7 +179,7 @@ window.PORTFOLIO = {
       ]
     },
     timeline: [
-      { logo: "uniplay", when: "2026", role: { en: "AI Product Design Intern", zh: "AI 产品设计实习生" }, org: { en: "Uniplay", zh: "Uniplay" } },
+      { logo: "uniplay", when: "2026", role: { en: "AI Product Design Intern", zh: "AI 产品设计实习生" }, org: { en: "Uniplay · Oct–present", zh: "Uniplay · 10 月至今" } },
       { logo: "revive", when: "2026", role: { en: "UX Intern", zh: "UX 实习生" }, org: { en: "Revive Retail · May–Aug", zh: "Revive Retail · 5–8 月" } },
       { logo: "kth", when: "2024–2026", role: { en: "MSc Integrated Product Design", zh: "集成产品设计硕士" }, org: { en: "KTH Royal Institute of Technology", zh: "KTH 皇家理工学院" } },
       { logo: "kodiak", when: "2025", role: { en: "UI/UX Design Intern", zh: "UI/UX 设计实习生" }, org: { en: "Kodiak Hub, Stockholm", zh: "Kodiak Hub，斯德哥尔摩" } },

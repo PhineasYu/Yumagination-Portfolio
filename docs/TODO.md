@@ -147,4 +147,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-20 · 隐藏 Full Context Canvas 和 Teamdex（`hidden: true`，作品墙和案例页都不显示；改回 false 即恢复）；指向已隐藏项目的按钮自动不显示（Method 页的「游戏：Teamdex」）。其他地方对它们的文字提及（Uniplay 获奖、Method 页 Teamdex 蓝图和原则、Full Context Canvas 一条原则）保留未动
 - 2026-10-20 · 其他提及一起去掉（可还原）：Uniplay 获奖、Method 页 Teamdex 蓝图/两条原则/按钮、Full Context Canvas 原则（换成 Chroma Reader 的同类例子）、Teamdex 相关步骤与声明（改成不提它的版本）；两个演示页不再发布（demos/UNPUBLISHED）。还原方法见 README「隐藏 / 还原一个项目」
 - 2026-10-22 · 恢复 Full Context Canvas 和 Teamdex：去掉 `hidden`，演示页重新发布；所有 `needs` 标记的提及自动回来
-- 2026-10-27 · About 时间线加 Uniplay「AI Product Design Intern」（2026，起止月份待补）；Teamdex 改成精简版，只留获奖，细节、录屏、截图、蓝图演示、GitHub 链接从仓库删除，完整版在提交 `57bb988`（还原见 README）
+- 2026-10-27 · About 时间线加 Uniplay「AI Product Design Intern」（2026 年 10 月至今）；Teamdex 改成精简版，只留获奖，细节、录屏、截图、蓝图演示、GitHub 链接从仓库删除，完整版在提交 `57bb988`（还原见 README）
