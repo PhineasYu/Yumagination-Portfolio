@@ -49,7 +49,7 @@ window.PORTFOLIO = {
     google:    { name: "Google",     file: "google.svg",       h: 30 },
     microsoft: { name: "Microsoft",  file: "microsoft.svg",    h: 26 },
     deloitte:  { name: "Deloitte",   file: "deloitte.svg",     h: 22 },
-    uniplay:   { name: "Uniplay",    file: "uniplay.svg",      h: 26 },
+    uniplay:   { name: "Uniplay",    file: "uniplay.svg",      h: 26, th: 18 },
     stoneleap: { name: "Stone Leap", file: "stoneleap.png",    h: 32 },
     bitmagic:  { name: "Bitmagic",   file: "bitmagic.png",     h: 22 },
     aris:      { name: "Aris Machina", file: "aris-machina.svg", h: 18 },

@@ -149,3 +149,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-22 · 恢复 Full Context Canvas 和 Teamdex：去掉 `hidden`，演示页重新发布；所有 `needs` 标记的提及自动回来
 - 2026-10-27 · About 时间线加 Uniplay「AI Product Design Intern」（2026 年 10 月至今）；Teamdex 改成精简版，只留获奖，细节、录屏、截图、蓝图演示、GitHub 链接从仓库删除，完整版在提交 `57bb988`（还原见 README）
 - 2026-10-27 · 删除 Uniplay 面试准备文档（docs/INTERVIEW-UNIPLAY*.md），不属于作品集
+- 2026-10-27 · About 时间线里 Uniplay logo 缩小（th: 18），和 Revive、Kodiak 一致
