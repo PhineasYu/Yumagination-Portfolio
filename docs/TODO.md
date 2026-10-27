@@ -123,7 +123,7 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-09-30 · 3.2 · Dossier：从已发布网址的演示模式（虚构孩子 Luca、Lucy）录了 21 秒手机录屏和 3 张截图；事实依据是仓库 README（PRD）和 roadmap.md
 - 2026-09-30 · 3.3 · Collaboration Canvas：在本机运行原型（~/Downloads/Collaboration-canvas，npm run dev），录 55 秒三角色演示 + 9 张截图；事实依据是原型仓库的 spec、CLAUDE.md、演示脚本和 mock 数据
 - 2026-09-30 · 3.1 · Sushi Jerash：在手机尺寸下录线上网站（到结账页为止，没有提交订单），加英文字幕；网站只有阿拉伯语
-- 2026-10-01 · 第四批 · 时间线改成职位在上/公司在下；Method 讲品味；Recognition 改名 Awards & wins；删掉 Work 说明；About 重写并加 AI engineer；Longevity（录屏 + deck + ASCII）、MicroHack（微软截图）、Community Viewfinder（原始 PDF）、Let Me Die（截图 + 封面）、Sushi Jerash（录屏）、Disco Fever（桌面 + 手机双录屏，iPhone 外框）、LegacyChain（Roll A Page 起点）、Kodiak（PDF 补充）更新；新增「Hardware & 3D prototyping」卡片；Kodiak 与 Revive 提到第三行；新增 docs/INTERVIEW-UNIPLAY.md
+- 2026-10-01 · 第四批 · 时间线改成职位在上/公司在下；Method 讲品味；Recognition 改名 Awards & wins；删掉 Work 说明；About 重写并加 AI engineer；Longevity（录屏 + deck + ASCII）、MicroHack（微软截图）、Community Viewfinder（原始 PDF）、Let Me Die（截图 + 封面）、Sushi Jerash（录屏）、Disco Fever（桌面 + 手机双录屏，iPhone 外框）、LegacyChain（Roll A Page 起点）、Kodiak（PDF 补充）更新；新增「Hardware & 3D prototyping」卡片；Kodiak 与 Revive 提到第三行
 - 2026-10-01 · 第五批 · Revive 合并为一个项目（UX 审计、多卖家结账重设计 + 可点击原型、佣金对账自动化的方法示意）；Voi（Figma：头盔流程动画、服务蓝图、构想、商业计划书页面）；新增 Dove serum bottle、Planet Intelligence Maps（Deloitte 第三名）卡片；Kodiak Hub 用真实界面重写（登录、BOM、进程条、徽标、断点图、AI 工具对比）；SAP Career Ignite 加入当晚演示的 dashboard（可点击）；NotchBreak 加原生菜单图和动画（注意：是按代码画的动画，不是录屏）；Community Viewfinder 加落地版（展厅墙）和取景卡片；「Read case study」按钮改成 Tiffany 底黑字
 - 2026-10-01 · 第六批 · Voi 加入 Miro 调研（招募帖、亲和图、问卷数据、目标人群）并修正「安全而非价格」的说法；Kodiak 加入 AI 工作流（来自 Notion）；NotchBreak 视频菜单栏改黑；Dove 卡片挪到倒数第二；Community Viewfinder 加摄影彩蛋（仅此项目）
 - 2026-10-01 · 第七批 · Teamdex/Dossier 互换；Collaboration Canvas 在第二行中间；Kodiak 封面换成登录页，登录流程拆成七屏横排；Let Me Die 封面加笑哭 emoji；Gallery 改成无限画布（拖拽/滚轮，照片散落，点击看大图；?demo 可预览）；add-photos 脚本多输出 small 尺寸
@@ -148,3 +148,4 @@ Claude：这些每项只问一个问题，答完立刻改 `data.js` 并删掉对
 - 2026-10-20 · 其他提及一起去掉（可还原）：Uniplay 获奖、Method 页 Teamdex 蓝图/两条原则/按钮、Full Context Canvas 原则（换成 Chroma Reader 的同类例子）、Teamdex 相关步骤与声明（改成不提它的版本）；两个演示页不再发布（demos/UNPUBLISHED）。还原方法见 README「隐藏 / 还原一个项目」
 - 2026-10-22 · 恢复 Full Context Canvas 和 Teamdex：去掉 `hidden`，演示页重新发布；所有 `needs` 标记的提及自动回来
 - 2026-10-27 · About 时间线加 Uniplay「AI Product Design Intern」（2026 年 10 月至今）；Teamdex 改成精简版，只留获奖，细节、录屏、截图、蓝图演示、GitHub 链接从仓库删除，完整版在提交 `57bb988`（还原见 README）
+- 2026-10-27 · 删除 Uniplay 面试准备文档（docs/INTERVIEW-UNIPLAY*.md），不属于作品集
