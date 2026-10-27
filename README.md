@@ -41,3 +41,8 @@ node scripts/harvest-claude-code.mjs
 - 还原：把 `hidden: true` 改回 `false`（或删掉），并删掉 `demos/UNPUBLISHED` 里对应的行。其余全部自动回来。
 - 目前隐藏的：Kikaren。
 
+## Teamdex 精简版（2026-10-27，防止创业想法外泄）
+- 网站上的 Teamdex 只保留获奖信息：作品页只有一段说明，录屏、截图、服务蓝图演示、GitHub 链接、Method 页里讲 Teamdex 设计的内容都已从仓库删除（不是隐藏，因为网页代码本身也能被人打开看）。
+- 完整版保存在 git tag `teamdex-full`。还原：`git revert <精简版那次提交>`，或从 tag 取回：`git checkout teamdex-full -- assets/js/data.js assets/js/projects.js assets/media/teamdex.mp4 assets/media/teamdex-poster.jpg assets/shots/teamdex-m.png demos/teamdex-blueprint`（取回 data.js 前先看一下这之后的其他改动，比如 Uniplay 实习）。
+- 注意：仓库是公开的，旧版本在 git 历史里仍然看得到。
+

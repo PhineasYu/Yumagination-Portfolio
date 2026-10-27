@@ -56,33 +56,21 @@
 
     /* ------------------------------------------------------------ 02 */
     {
-      id: "teamdex", orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux", "games"], tags: ["hackathon", "award", "built-with-ai"],
+      // Short version while the idea is developed into a startup (2026-10-27). Full case: git tag teamdex-full, see README.
+      id: "teamdex", orgs: ["uniplay"], num: "02", year: "2026", when: "Sep 2026", zones: ["service", "ux"], tags: ["hackathon", "award", "built-with-ai"],
       title: "Teamdex", meta: "Teamdex · Sep 2026",
-      cap: L("An onboarding game where you collect your colleagues", "把入职做成「收集同事」的游戏"),
-      h1: L("Making onboarding a card game, so shy newcomers have a reason to say hello", "把入职做成卡牌游戏，让社恐新人有一个开口的理由"),
-      lead: L("Companies design the 'learn the material' half of onboarding and leave 'learn the people' to luck. Teamdex designs the second half.", "公司把入职的「学材料」一半设计得很完整，「学人」一半全靠运气。Teamdex 设计的是后一半。"),
+      cap: L("1st place at the Uniplay hackathon", "Uniplay 黑客松一等奖"),
+      h1: L("Teamdex: 1st place at the Uniplay hackathon", "Teamdex：Uniplay 黑客松一等奖"),
+      lead: L("A one-day hackathon build that won first place. I am developing the idea further, so the details are private for now.", "一天完成的黑客松作品，拿了一等奖。这个想法我还在继续做，所以细节暂不公开。"),
       role: L("Service design, product spec, QA", "服务设计、产品 spec、验收"),
       status: L("1st place · one-day hackathon build (Uniplay)", "一等奖 · 一天完成的黑客松作品（Uniplay）"),
-      stack: ["Vite", "React", "TypeScript", "Tailwind", "framer-motion", "Supabase realtime", "Claude Code"],
-      links: [GH("https://github.com/PhineasYu/TeamDex")],
+      stack: ["Claude Code"],
+      links: [],
       shape: "tall",
-      tile: { sb: "#eef5f1", video: "teamdex", poster: "teamdex-poster", phone: true },
-      hero: V("teamdex", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5", tag: "rec", cap: L("Joining a team with a code, meeting colleagues, opening a card, the 'Who do I ask?' quiz. Recorded from the running app.", "用邀请码加入团队、认识同事、打开卡片、「该找谁」小测验。录自正在运行的应用。") }),
+      tile: { text: L("1st place", "一等奖"), sub: L("Uniplay hackathon · details private", "Uniplay 黑客松 · 细节暂不公开") },
       sections: [
-        { h: L("Overview — Onboarding has two halves", "概述 — 入职有两半"),
-          p: L(["Companies do the material half well: handbooks, processes, training. The people half is left to luck. Shy newcomers lack a legitimate reason to walk up to someone, and HR can't see who has really integrated.", "The insight: a game gives a newcomer a reason to start a conversation, and makes talking to newcomers part of a colleague's job."], ["公司把材料那一半做得很完整：手册、流程、培训。人那一半全靠运气。社恐新人缺一个正当的搭话理由，HR 也看不到谁真正融入了。", "洞察：游戏给新人一个开口的理由，也让「和新人聊天」成为同事的正当工作内容。"]),
-          media: IMG("assets/shots/teamdex-m.png", "Teamdex start screen: your new team, as a card collection", { frame: "phone", sb: "#eef5f1", bg: "#e8f7f5" }), cap: L("The start screen: a team as a card collection.", "起始页：把团队变成一副卡牌。") },
-        { h: L("The loop — Meet, scan, unlock, quiz, party", "闭环 — 见面、扫码、解锁、测验、派对"),
-          p: L(["A newcomer meets a colleague in person, scans their card QR, and unlocks a fun fact that can only be learned face to face. Collect the key colleagues, pass the 'Who do I ask?' quiz, unlock the onboarding party.", "Colleagues set up a pixel-avatar card in under two minutes and get a notification when someone scans them. HR sees progress live."], ["新人当面认识同事，扫描对方员工卡上的二维码，解锁只有当面才知道的 fun fact。集齐关键同事，通过「遇到问题该找谁」小测验，解锁入职派对。", "同事两分钟内设置好像素头像卡片，被扫码时收到通知。HR 实时查看进度。"]) },
-        { h: L("Service blueprint — Four lanes, seven stages, one emotion curve", "服务蓝图 — 四条泳道、七个阶段、一条情绪曲线"),
-          p: L(["Before building anything I drew the whole service: the newcomer, the colleague, HR and the system, from the day the hire is confirmed to the end of week one. The line of interaction and the line of visibility are drawn in, the newcomer's feelings run across the top, and the moments that matter are marked. Each stage states its touchpoint, its design intent, and its risk with a response.", "Try it: pick a role to focus on its lane, or a stage to read its intent and risk."], ["在动手做之前，我先把整个服务画了出来：新人、同事、HR 和系统，从确认录用那天到第一周结束。交互线和可见线画在图里，新人的感受贯穿上方，关键时刻做了标记。每个阶段都写明触点、设计意图，以及风险和对应的办法。", "可以试试：选一个角色聚焦它的泳道，或选一个阶段，读它的意图和风险。"]),
-          media: { type: "embed", src: "demos/teamdex-blueprint/index.html", frame: "browser", ratio: "1/1", open: "demos/teamdex-blueprint/index.html" }, cap: L("The Teamdex service blueprint, running.", "Teamdex 服务蓝图，可点击。") },
-        { h: L("Non-goals — What I refused to build", "非目标 — 我拒绝做的东西"),
-          p: L(["No leaderboard: it would create social pressure and defeat the point. No chat: the goal is a real conversation, not moving it into the app.", "QR instead of NFC, because iPhone web can't do it; NFC badges live in the vision. And no AI-generated content in v1, so the time went into the experience."], ["不做排行榜：会制造社交压力，违背初衷。不做聊天：目标是促成真实对话，而不是把对话搬进 App。", "用二维码而不是 NFC，因为 iPhone 网页做不到；NFC 工牌放进愿景。第一版也不做 AI 生成内容，时间留给体验打磨。"]),
-          media: { type: "steps", items: [["✕", L("Leaderboard", "排行榜")], ["✕", L("In-app chat", "应用内聊天")], ["✕", L("Real accounts & SSO", "真实账号与 SSO")], ["✕", L("Native iOS / Android", "原生 iOS / Android")], ["✕", L("AI-generated content", "AI 生成内容")]] }, cap: L("The PRD's non-goals table.", "PRD 的「非目标」表。") },
-        { h: L("Spec pack — Five documents before the first line of code", "规格包 — 动第一行代码之前的五份文档"),
-          p: L(["PRD, service design, tech spec, design system, and a build plan with paste-ready prompts, plus a CLAUDE.md of working rules: local-first data adapter, always deployable at the end of each phase, no P1 before P0 is done.", "Claude Code then built against it, and a 51-second pitch film covers the story for the judges."], ["PRD、服务设计、技术方案、设计系统，以及带可直接粘贴指令的开发计划，再加一份 CLAUDE.md 工作守则：本地优先的数据适配层、每个阶段结束都保持可部署、P0 没完成前不做 P1。", "然后由 Claude Code 依此开发；另外做了一支 51 秒的路演短片向评委讲故事。"]),
-          media: { type: "steps", items: [["01", L("PRD", "PRD")], ["02", L("Service design", "服务设计")], ["03", L("Tech spec", "技术方案")], ["04", L("Design system", "设计系统")], ["05", L("Build plan", "开发计划")], ["+", L("CLAUDE.md rules", "CLAUDE.md 守则")]] }, cap: L("The doc pack in the repository's docs folder.", "仓库 docs 目录里的文档包。") }
+        { h: L("Why this page is short", "为什么这一页很短"),
+          p: L(["Teamdex won first place at Uniplay's one-day hackathon in September 2026. I am taking the idea further, so the recording, screens and design documents are offline for now.", "Happy to walk through the full case in an interview."], ["Teamdex 在 2026 年 9 月 Uniplay 的一天黑客松上拿了一等奖。这个想法我还在继续做，所以录屏、截图和设计文档暂时下线。", "面试时可以当面完整讲。"]) }
       ]
     },
 
